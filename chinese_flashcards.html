@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>汉字 · Chinese Flashcards</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1008;
+    --paper: #f5f0e8;
+    --paper-dark: #ece5d3;
+    --vermillion: #c0392b;
+    --vermillion-light: #e74c3c;
+    --gold: #b8860b;
+    --muted: #7a6a55;
+    --known: #2e7d52;
+    --unknown: #c0392b;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: var(--paper);
+    font-family: 'Lato', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 16px 48px;
+    background-image:
+      radial-gradient(ellipse at 10% 20%, rgba(192,57,43,0.04) 0%, transparent 60%),
+      radial-gradient(ellipse at 90% 80%, rgba(184,134,11,0.05) 0%, transparent 60%);
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+
+  .logo {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 2.2rem;
+    color: var(--vermillion);
+    letter-spacing: 0.18em;
+    line-height: 1;
+  }
+
+  .subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin-top: 4px;
+    letter-spacing: 0.06em;
+  }
+
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    margin: 14px auto 0;
+  }
+
+  /* Progress bar */
+  .progress-wrap {
+    width: 100%;
+    max-width: 480px;
+    margin-bottom: 28px;
+  }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .progress-bar {
+    height: 3px;
+    background: var(--paper-dark);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(to right, var(--vermillion), var(--gold));
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+
+  /* Dot indicators */
+  .dots {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    flex-wrap: wrap;
+    max-width: 480px;
+    margin-bottom: 28px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--paper-dark);
+    transition: background 0.3s;
+    cursor: pointer;
+  }
+
+  .dot.active { background: var(--vermillion); transform: scale(1.3); }
+  .dot.known { background: var(--known); }
+  .dot.unknown { background: var(--unknown); }
+
+  /* Card scene */
+  .scene {
+    width: 100%;
+    max-width: 400px;
+    height: 300px;
+    perspective: 1000px;
+    cursor: pointer;
+    margin-bottom: 28px;
+  }
+
+  .card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1);
+    border-radius: 4px;
+  }
+
+  .card.flipped { transform: rotateY(180deg); }
+
+  .card-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    background: var(--paper);
+    border: 1px solid var(--paper-dark);
+    box-shadow:
+      0 2px 4px rgba(0,0,0,0.05),
+      0 8px 24px rgba(0,0,0,0.08),
+      inset 0 0 0 6px var(--paper),
+      inset 0 0 0 7px var(--paper-dark);
+  }
+
+  .card-back { transform: rotateY(180deg); }
+
+  .card-number {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    font-size: 0.68rem;
+    color: var(--muted);
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    opacity: 0.6;
+  }
+
+  .card-tag {
+    position: absolute;
+    top: 14px;
+    left: 18px;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--vermillion);
+    font-weight: 400;
+    opacity: 0.7;
+  }
+
+  .hanzi {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 5rem;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .hint {
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-top: 16px;
+  }
+
+  .pinyin {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.7rem;
+    color: var(--vermillion);
+    margin-bottom: 10px;
+  }
+
+  .english {
+    font-size: 1.1rem;
+    color: var(--ink);
+    font-weight: 300;
+    letter-spacing: 0.04em;
+  }
+
+  .example {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 14px;
+    text-align: center;
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  /* Controls */
+  .controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .btn {
+    border: none;
+    cursor: pointer;
+    font-family: 'Lato', sans-serif;
+    transition: all 0.2s;
+    letter-spacing: 0.06em;
+  }
+
+  .btn-nav {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--paper-dark);
+    color: var(--ink);
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-nav:hover { background: var(--ink); color: var(--paper); }
+  .btn-nav:disabled { opacity: 0.3; cursor: default; }
+
+  .btn-flip {
+    padding: 12px 28px;
+    background: var(--vermillion);
+    color: var(--paper);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    border-radius: 2px;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+  }
+
+  .btn-flip:hover { background: var(--vermillion-light); transform: translateY(-1px); }
+
+  /* Known/Unknown row */
+  .feedback {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .btn-known {
+    flex: 1;
+    max-width: 160px;
+    padding: 10px 0;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    border-radius: 2px;
+    border: 1px solid;
+  }
+
+  .btn-yes {
+    background: transparent;
+    color: var(--known);
+    border-color: var(--known);
+  }
+
+  .btn-yes:hover { background: var(--known); color: white; }
+
+  .btn-no {
+    background: transparent;
+    color: var(--unknown);
+    border-color: var(--unknown);
+  }
+
+  .btn-no:hover { background: var(--unknown); color: white; }
+
+  /* Summary */
+  .summary {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 400px;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .summary.visible { display: flex; }
+
+  .summary-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 2.4rem;
+    color: var(--vermillion);
+    margin-bottom: 8px;
+  }
+
+  .summary-sub {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 24px;
+    font-size: 0.9rem;
+  }
+
+  .score-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    width: 100%;
+    margin-bottom: 28px;
+  }
+
+  .score-box {
+    padding: 20px;
+    border: 1px solid var(--paper-dark);
+    border-radius: 2px;
+    background: var(--paper);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+
+  .score-num {
+    font-size: 2.2rem;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+  }
+
+  .score-num.green { color: var(--known); }
+  .score-num.red { color: var(--unknown); }
+
+  .score-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .btn-restart {
+    padding: 13px 36px;
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    border-radius: 2px;
+  }
+
+  .btn-restart:hover { background: var(--vermillion); }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+  .card-enter { animation: cardSlide 0.35s ease forwards; }
+  @keyframes cardSlide { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+
+  .mode-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .btn-mode {
+    padding: 6px 16px;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: 2px;
+    border: 1px solid var(--paper-dark);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-mode.active {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">汉字入门</div>
+  <div class="subtitle">Beginner Chinese · 20 Essential Words</div>
+  <div class="divider"></div>
+</header>
+
+<div class="progress-wrap" id="progressWrap">
+  <div class="progress-label">
+    <span id="progressText">Card 1 of 20</span>
+    <span id="knownCount">Known: 0</span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:5%"></div></div>
+</div>
+
+<div class="dots" id="dots"></div>
+
+<div class="mode-row" id="modeRow">
+  <button class="btn-mode active" onclick="setMode('zh')" id="modeZh">Chinese → English</button>
+  <button class="btn-mode" onclick="setMode('en')" id="modeEn">English → Chinese</button>
+</div>
+
+<div class="scene" id="scene" onclick="flipCard()">
+  <div class="card" id="card">
+    <div class="card-face card-front" id="front">
+      <span class="card-tag" id="frontTag">Chinese</span>
+      <span class="card-number" id="cardNum">1 / 20</span>
+      <div class="hanzi" id="frontText">你好</div>
+      <div class="hint">tap to reveal</div>
+    </div>
+    <div class="card-face card-back" id="back">
+      <span class="card-tag" id="backTag">English</span>
+      <span class="card-number">1 / 20</span>
+      <div class="pinyin" id="backPinyin">nǐ hǎo</div>
+      <div class="english" id="backEnglish">Hello</div>
+      <div class="example" id="backExample">Common greeting</div>
+    </div>
+  </div>
+</div>
+
+<div class="controls" id="controls">
+  <button class="btn btn-nav" id="prevBtn" onclick="prevCard()" disabled>←</button>
+  <button class="btn btn-flip" onclick="flipCard()">Flip Card</button>
+  <button class="btn btn-nav" id="nextBtn" onclick="nextCard()">→</button>
+</div>
+
+<div class="feedback" id="feedback">
+  <button class="btn btn-known btn-yes" onclick="markCard(true)">✓ Got it</button>
+  <button class="btn btn-known btn-no" onclick="markCard(false)">✗ Not yet</button>
+</div>
+
+<!-- Summary screen -->
+<div class="summary" id="summary">
+  <div class="summary-title">完成！</div>
+  <div class="summary-sub">You finished the deck — well done!</div>
+  <div class="score-grid">
+    <div class="score-box">
+      <div class="score-num green" id="knownFinal">0</div>
+      <div class="score-label">Known</div>
+    </div>
+    <div class="score-box">
+      <div class="score-num red" id="unknownFinal">0</div>
+      <div class="score-label">Still learning</div>
+    </div>
+  </div>
+  <button class="btn btn-restart" onclick="restart()">↺ Study Again</button>
+</div>
+
+<script>
+const words = [
+  { zh: "你好",   pinyin: "nǐ hǎo",    en: "Hello",        note: "Common greeting" },
+  { zh: "谢谢",   pinyin: "xiè xiè",   en: "Thank you",    note: "Very common politeness" },
+  { zh: "再见",   pinyin: "zài jiàn",  en: "Goodbye",      note: "Lit. 'see again'" },
+  { zh: "是",     pinyin: "shì",       en: "Yes / to be",  note: "Also means 'is, are, am'" },
+  { zh: "不",     pinyin: "bù",        en: "No / not",     note: "Basic negation" },
+  { zh: "我",     pinyin: "wǒ",        en: "I / me",       note: "First person singular" },
+  { zh: "你",     pinyin: "nǐ",        en: "You",          note: "Second person singular" },
+  { zh: "他",     pinyin: "tā",        en: "He / him",     note: "Third person male" },
+  { zh: "她",     pinyin: "tā",        en: "She / her",    note: "Third person female" },
+  { zh: "好",     pinyin: "hǎo",       en: "Good / well",  note: "Also used in 你好" },
+  { zh: "大",     pinyin: "dà",        en: "Big / large",  note: "Common adjective" },
+  { zh: "小",     pinyin: "xiǎo",      en: "Small / little", note: "Opposite of 大" },
+  { zh: "水",     pinyin: "shuǐ",      en: "Water",        note: "Essential noun" },
+  { zh: "吃",     pinyin: "chī",       en: "To eat",       note: "Common daily verb" },
+  { zh: "喝",     pinyin: "hē",        en: "To drink",     note: "Common daily verb" },
+  { zh: "一",     pinyin: "yī",        en: "One (1)",      note: "First number" },
+  { zh: "人",     pinyin: "rén",       en: "Person",       note: "Very common character" },
+  { zh: "爱",     pinyin: "ài",        en: "Love",         note: "Powerful word" },
+  { zh: "来",     pinyin: "lái",       en: "To come",      note: "Common direction verb" },
+  { zh: "去",     pinyin: "qù",        en: "To go",        note: "Opposite of 来" },
+];
+
+let current = 0;
+let flipped = false;
+let known = new Array(20).fill(null);
+let mode = 'zh'; // 'zh' or 'en'
+
+function setMode(m) {
+  mode = m;
+  document.getElementById('modeZh').classList.toggle('active', m === 'zh');
+  document.getElementById('modeEn').classList.toggle('active', m === 'en');
+  updateCard();
+  if (flipped) { document.getElementById('card').classList.remove('flipped'); flipped = false; }
+}
+
+function buildDots() {
+  const d = document.getElementById('dots');
+  d.innerHTML = '';
+  words.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === current ? ' active' : '') + (known[i] === true ? ' known' : known[i] === false ? ' unknown' : '');
+    dot.onclick = () => goTo(i);
+    d.appendChild(dot);
+  });
+}
+
+function updateCard() {
+  const w = words[current];
+  const num = `${current + 1} / 20`;
+  document.getElementById('cardNum').textContent = num;
+
+  if (mode === 'zh') {
+    document.getElementById('frontTag').textContent = 'Chinese';
+    document.getElementById('backTag').textContent = 'English';
+    document.getElementById('frontText').textContent = w.zh;
+    document.getElementById('frontText').style.fontSize = '5rem';
+    document.getElementById('backPinyin').textContent = w.pinyin;
+    document.getElementById('backEnglish').textContent = w.en;
+    document.getElementById('backExample').textContent = w.note;
+  } else {
+    document.getElementById('frontTag').textContent = 'English';
+    document.getElementById('backTag').textContent = 'Chinese';
+    document.getElementById('frontText').textContent = w.en;
+    document.getElementById('frontText').style.fontSize = '1.9rem';
+    document.getElementById('backPinyin').textContent = w.pinyin;
+    document.getElementById('backEnglish').textContent = w.zh;
+    document.getElementById('backExample').textContent = w.note;
+  }
+
+  const pct = ((current + 1) / 20) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = `Card ${current + 1} of 20`;
+  const k = known.filter(x => x === true).length;
+  document.getElementById('knownCount').textContent = `Known: ${k}`;
+
+  document.getElementById('prevBtn').disabled = current === 0;
+  document.getElementById('nextBtn').disabled = current === 19;
+
+  document.getElementById('card').classList.add('card-enter');
+  setTimeout(() => document.getElementById('card').classList.remove('card-enter'), 350);
+  buildDots();
+}
+
+function flipCard() {
+  flipped = !flipped;
+  document.getElementById('card').classList.toggle('flipped', flipped);
+}
+
+function prevCard() {
+  if (current > 0) { current--; flipped = false; document.getElementById('card').classList.remove('flipped'); updateCard(); }
+}
+
+function nextCard() {
+  if (current < 19) { current++; flipped = false; document.getElementById('card').classList.remove('flipped'); updateCard(); }
+  else showSummary();
+}
+
+function goTo(i) {
+  current = i; flipped = false;
+  document.getElementById('card').classList.remove('flipped');
+  updateCard();
+}
+
+function markCard(isKnown) {
+  known[current] = isKnown;
+  buildDots();
+  const k = known.filter(x => x === true).length;
+  document.getElementById('knownCount').textContent = `Known: ${k}`;
+  if (current < 19) nextCard();
+  else showSummary();
+}
+
+function showSummary() {
+  const k = known.filter(x => x === true).length;
+  const u = known.filter(x => x === false).length;
+  document.getElementById('knownFinal').textContent = k;
+  document.getElementById('unknownFinal').textContent = u;
+  document.getElementById('scene').style.display = 'none';
+  document.getElementById('controls').style.display = 'none';
+  document.getElementById('feedback').style.display = 'none';
+  document.getElementById('modeRow').style.display = 'none';
+  document.getElementById('progressWrap').style.display = 'none';
+  document.getElementById('dots').style.display = 'none';
+  document.getElementById('summary').classList.add('visible');
+}
+
+function restart() {
+  current = 0; flipped = false; known = new Array(20).fill(null);
+  document.getElementById('card').classList.remove('flipped');
+  document.getElementById('scene').style.display = '';
+  document.getElementById('controls').style.display = '';
+  document.getElementById('feedback').style.display = '';
+  document.getElementById('modeRow').style.display = '';
+  document.getElementById('progressWrap').style.display = '';
+  document.getElementById('dots').style.display = '';
+  document.getElementById('summary').classList.remove('visible');
+  updateCard();
+}
+
+// Init
+updateCard();
+</script>
+</body>
+</html>
