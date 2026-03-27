@@ -403,6 +403,20 @@
     color: var(--paper);
     border-color: var(--ink);
   }
+  /* Audio button */
+  .btn-audio {
+    background: none;
+    border: 1px solid var(--paper-dark);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+    cursor: pointer;
+    color: var(--muted);
+    margin-top: 12px;
+    transition: all 0.2s;
+}
+.btn-audio:hover { background: var(--vermillion); color: white; border-color: var(--vermillion); }
 </style>
 </head>
 <body>
@@ -435,6 +449,7 @@
       <span class="card-number" id="cardNum">1 / 20</span>
       <div class="hanzi" id="frontText">你好</div>
       <div class="hint">tap to reveal</div>
+      <button class="btn-audio" onclick="event.stopPropagation(); speak(words[current].zh)">🔊</button>
     </div>
     <div class="card-face card-back" id="back">
       <span class="card-tag" id="backTag">English</span>
@@ -497,7 +512,12 @@ const words = [
   { zh: "来",     pinyin: "lái",       en: "To come",      note: "Common direction verb" },
   { zh: "去",     pinyin: "qù",        en: "To go",        note: "Opposite of 来" },
 ];
-
+function speak(text) {
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = 'zh-CN'; // tells the browser: speak in Mandarin
+  utterance.rate = 0.85;    // slightly slower than default
+  speechSynthesis.speak(utterance);
+}
 let current = 0;
 let flipped = false;
 let known = new Array(20).fill(null);
