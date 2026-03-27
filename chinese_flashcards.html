@@ -513,10 +513,8 @@ const words = [
   { zh: "去",     pinyin: "qù",        en: "To go",        note: "Opposite of 来" },
 ];
 function speak(text) {
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = 'zh-CN'; // tells the browser: speak in Mandarin
-  utterance.rate = 0.85;    // slightly slower than default
-  speechSynthesis.speak(utterance);
+  const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(text)}&tl=zh-CN&client=tw-ob`;
+  new Audio(url).play().catch(e => console.log('Audio blocked:', e));
 }
 let current = 0;
 let flipped = false;
