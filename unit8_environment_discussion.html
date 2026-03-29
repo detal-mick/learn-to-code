@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discussion Cards — Unit 8: The Environment</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest: #1e4d35;
+    --forest-mid: #2d6e4e;
+    --forest-light: #3d9068;
+    --teal-deep: #134a54;
+    --teal-mid: #1b6b7a;
+    --teal-light: #2a9ab0;
+    --sage: #7aab8a;
+    --mint: #c8e6d5;
+    --mist: #e6f3ee;
+    --ocean: #d0edf5;
+    --bg: #f0f6f2;
+    --card-bg: #ffffff;
+    --text-dark: #162d22;
+    --text-mid: #3a5a47;
+    --text-muted: #7a9c87;
+    --border: rgba(30,77,53,0.12);
+    --border-mid: rgba(30,77,53,0.22);
+    --shadow-card: 0 2px 16px rgba(30,77,53,0.10), 0 1px 3px rgba(30,77,53,0.07);
+    --shadow-btn: 0 1px 4px rgba(30,77,53,0.13);
+    --radius: 14px;
+    --radius-sm: 8px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text-dark);
+    min-height: 100vh;
+    padding: 2rem 1rem 4rem;
+  }
+
+  /* subtle leaf pattern background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse at 10% 20%, rgba(45,110,78,0.07) 0%, transparent 50%),
+      radial-gradient(ellipse at 90% 80%, rgba(27,107,122,0.07) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+    z-index: 1;
+  }
+
+  /* ── header ── */
+  .header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--mint);
+    color: var(--forest);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 99px;
+    margin-bottom: 0.75rem;
+  }
+  .header-badge svg { width: 12px; height: 12px; }
+  .header h1 {
+    font-family: 'Lora', serif;
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--forest);
+    line-height: 1.2;
+  }
+  .header p {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 0.4rem;
+  }
+
+  /* ── topic card ── */
+  .card-wrapper { perspective: 800px; margin-bottom: 1.25rem; }
+  .topic-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem 2rem 1.75rem;
+    box-shadow: var(--shadow-card);
+    position: relative;
+    overflow: hidden;
+    transition: opacity 0.22s ease, transform 0.22s ease;
+  }
+  .topic-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--forest-light), var(--teal-light));
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+  .topic-card.fade { opacity: 0; transform: translateY(10px) scale(0.98); }
+
+  .card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+  }
+  .card-tag {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--teal-mid);
+  }
+  .card-index {
+    font-size: 11px;
+    color: var(--text-muted);
+    background: var(--mist);
+    padding: 3px 10px;
+    border-radius: 99px;
+  }
+
+  .topic-quote {
+    font-family: 'Lora', serif;
+    font-size: 19px;
+    font-style: italic;
+    color: var(--text-dark);
+    line-height: 1.6;
+    padding-left: 1rem;
+    border-left: 3px solid var(--mint);
+  }
+
+  .card-nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 1.25rem;
+  }
+  .nav-btn {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    border: 1px solid var(--border-mid);
+    background: var(--mist);
+    color: var(--forest-mid);
+    font-size: 16px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s, transform 0.1s;
+    flex-shrink: 0;
+  }
+  .nav-btn:hover { background: var(--mint); transform: scale(1.05); }
+  .nav-btn:active { transform: scale(0.96); }
+
+  .progress-bar {
+    flex: 1;
+    height: 4px;
+    background: var(--mist);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--forest-light), var(--teal-light));
+    border-radius: 99px;
+    transition: width 0.3s ease;
+  }
+
+  .shuffle-btn {
+    padding: 0 14px;
+    height: 38px;
+    border-radius: 99px;
+    border: 1px solid var(--border-mid);
+    background: var(--mist);
+    color: var(--forest-mid);
+    font-size: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex; align-items: center; gap: 5px;
+    transition: background 0.15s;
+    flex-shrink: 0;
+  }
+  .shuffle-btn:hover { background: var(--mint); }
+  .shuffle-btn svg { width: 13px; height: 13px; }
+
+  /* ── timer ── */
+  .timer-card {
+    background: var(--forest);
+    border-radius: var(--radius);
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 20px rgba(30,77,53,0.25);
+  }
+  .timer-left {}
+  .timer-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 0.3rem;
+  }
+  .timer-display {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 44px;
+    font-weight: 300;
+    color: #ffffff;
+    letter-spacing: 0.03em;
+    font-variant-numeric: tabular-nums;
+    transition: color 0.3s;
+    line-height: 1;
+  }
+  .timer-display.running { color: #6ee8b0; }
+
+  .timer-btns { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
+  .t-btn {
+    min-width: 90px;
+    padding: 8px 16px;
+    border-radius: 99px;
+    border: 1px solid rgba(255,255,255,0.15);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .t-btn:active { transform: scale(0.97); }
+  .t-btn-primary {
+    background: rgba(255,255,255,0.12);
+    color: #ffffff;
+  }
+  .t-btn-primary:hover { background: rgba(255,255,255,0.2); }
+  .t-btn-primary.active { background: rgba(110,232,176,0.2); color: #6ee8b0; border-color: rgba(110,232,176,0.3); }
+  .t-btn-ghost {
+    background: transparent;
+    color: var(--sage);
+  }
+  .t-btn-ghost:hover { background: rgba(255,255,255,0.06); }
+
+  /* ── techniques ── */
+  .section-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-card);
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-title {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .section-title svg { width: 14px; height: 14px; color: var(--forest-mid); }
+
+  .badge-count {
+    background: var(--mist);
+    color: var(--forest);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 99px;
+    border: 1px solid var(--border-mid);
+    transition: background 0.3s;
+  }
+  .badge-count.all-done { background: var(--mint); color: var(--forest); }
+
+  .technique-list { display: flex; flex-direction: column; gap: 7px; }
+
+  .technique-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: #fafcfb;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+    user-select: none;
+  }
+  .technique-item:hover { background: var(--mist); border-color: var(--border-mid); }
+  .technique-item.checked {
+    background: linear-gradient(135deg, rgba(200,230,213,0.4), rgba(208,237,245,0.4));
+    border-color: var(--sage);
+  }
+
+  .check-circle {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border-mid);
+    background: #fff;
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .technique-item.checked .check-circle {
+    background: var(--forest-light);
+    border-color: var(--forest-light);
+  }
+  .check-icon { display: none; }
+  .technique-item.checked .check-icon { display: block; }
+
+  .t-content {}
+  .t-phrase {
+    font-family: 'Lora', serif;
+    font-size: 13.5px;
+    font-style: italic;
+    color: var(--text-dark);
+    line-height: 1.4;
+  }
+  .technique-item.checked .t-phrase { color: var(--forest); }
+  .t-hint {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+  .technique-item.checked .t-hint { color: var(--forest-mid); }
+
+  .clear-row {
+    text-align: right;
+    margin-top: 0.75rem;
+  }
+  .clear-btn {
+    background: none;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--text-muted);
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
+  }
+  .clear-btn:hover { color: var(--text-mid); }
+
+  /* ── congrats state ── */
+  .congrats {
+    display: none;
+    text-align: center;
+    padding: 0.5rem 0 0;
+    font-size: 13px;
+    color: var(--forest-mid);
+    font-weight: 500;
+  }
+  .congrats.show { display: block; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- header -->
+  <div class="header">
+    <div class="header-badge">
+      <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 1C3.8 1 2 2.8 2 5c0 3 4 6 4 6s4-3 4-6c0-2.2-1.8-4-4-4z" fill="#1e4d35"/>
+        <circle cx="6" cy="5" r="1.5" fill="#c8e6d5"/>
+      </svg>
+      Unit 8 · The Environment
+    </div>
+    <h1>Agree or Disagree?</h1>
+    <p>Free Practice · Extended Discussion · Cambridge Global English</p>
+  </div>
+
+  <!-- topic card -->
+  <div class="card-wrapper">
+    <div class="topic-card" id="topicCard">
+      <div class="card-meta">
+        <span class="card-tag">Discussion statement</span>
+        <span class="card-index" id="cardIndex">1 / 5</span>
+      </div>
+      <div class="topic-quote" id="topicText"></div>
+      <div class="card-nav">
+        <button class="nav-btn" onclick="navigate(-1)" title="Previous">&#8592;</button>
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <button class="nav-btn" onclick="navigate(1)" title="Next">&#8594;</button>
+        <button class="shuffle-btn" onclick="shuffleTopics()">
+          <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 4h8.5M9.5 4l-2-2M9.5 4l-2 2M1 10h4M7 10h2.5M9.5 10l-2-2M9.5 10l-2 2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+          </svg>
+          Shuffle
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- timer -->
+  <div class="timer-card">
+    <div class="timer-left">
+      <div class="timer-label">Speaking timer</div>
+      <div class="timer-display" id="timerDisplay">00:00</div>
+    </div>
+    <div class="timer-btns">
+      <button class="t-btn t-btn-primary" id="startBtn" onclick="toggleTimer()">▶ Start</button>
+      <button class="t-btn t-btn-ghost" onclick="resetTimer()">↺ Reset</button>
+    </div>
+  </div>
+
+  <!-- technique tracker -->
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-title">
+        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="1" y="1" width="12" height="12" rx="3" stroke="#2d6e4e" stroke-width="1.2"/>
+          <path d="M4 7l2 2 4-4" stroke="#2d6e4e" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Techniques used this session
+      </div>
+      <span class="badge-count" id="usedBadge">0 / 6</span>
+    </div>
+
+    <div class="technique-list" id="techniqueList"></div>
+    <div class="congrats" id="congrats">All 6 techniques used — excellent discussion!</div>
+    <div class="clear-row"><button class="clear-btn" onclick="resetChecks()">Clear all</button></div>
+  </div>
+
+</div>
+
+<script>
+const topics = [
+  "Cities should ban petrol cars completely.",
+  "Individuals can't really make a difference — only governments can solve climate change.",
+  "Urban farming is a realistic solution to food problems in cities like Jakarta.",
+  "People throw away too much food. It's one of the biggest environmental problems.",
+  "We are running out of time to save the planet."
+];
+
+const techniques = [
+  { phrase: '"That\'s an interesting point. Let me think about that..."', hint: 'Buy thinking time', checked: false },
+  { phrase: '"It depends on... / Up to a point, but..."', hint: 'Add nuance to your argument', checked: false },
+  { phrase: '"Going back to what I said earlier..."', hint: 'Return to a previous point', checked: false },
+  { phrase: '"You may be right, but..."', hint: 'Concede and redirect', checked: false },
+  { phrase: '"That\'s all very well, but..."', hint: 'Push back politely · p. 177', checked: false },
+  { phrase: '"I\'m not convinced that..."', hint: 'Express doubt · p. 177', checked: false }
+];
+
+let currentIndex = 0;
+let seconds = 0;
+let running = false;
+let timerInterval = null;
+
+function renderTopic() {
+  const card = document.getElementById('topicCard');
+  card.classList.add('fade');
+  setTimeout(() => {
+    document.getElementById('topicText').textContent = topics[currentIndex];
+    document.getElementById('cardIndex').textContent = (currentIndex + 1) + ' / ' + topics.length;
+    const pct = ((currentIndex + 1) / topics.length) * 100;
+    document.getElementById('progressFill').style.width = pct + '%';
+    card.classList.remove('fade');
+  }, 200);
+}
+
+function navigate(dir) {
+  currentIndex = (currentIndex + dir + topics.length) % topics.length;
+  renderTopic();
+}
+
+function shuffleTopics() {
+  for (let i = topics.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [topics[i], topics[j]] = [topics[j], topics[i]];
+  }
+  currentIndex = 0;
+  renderTopic();
+}
+
+function toggleTimer() {
+  const btn = document.getElementById('startBtn');
+  const display = document.getElementById('timerDisplay');
+  if (!running) {
+    running = true;
+    btn.textContent = '⏸ Pause';
+    btn.classList.add('active');
+    display.classList.add('running');
+    timerInterval = setInterval(() => { seconds++; updateDisplay(); }, 1000);
+  } else {
+    running = false;
+    btn.textContent = '▶ Resume';
+    btn.classList.remove('active');
+    display.classList.remove('running');
+    clearInterval(timerInterval);
+  }
+}
+
+function resetTimer() {
+  clearInterval(timerInterval);
+  running = false;
+  seconds = 0;
+  const btn = document.getElementById('startBtn');
+  btn.textContent = '▶ Start';
+  btn.classList.remove('active');
+  document.getElementById('timerDisplay').classList.remove('running');
+  updateDisplay();
+}
+
+function updateDisplay() {
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  document.getElementById('timerDisplay').textContent =
+    String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+}
+
+function renderTechniques() {
+  const list = document.getElementById('techniqueList');
+  list.innerHTML = '';
+  let count = 0;
+  techniques.forEach((t, i) => {
+    if (t.checked) count++;
+    const el = document.createElement('div');
+    el.className = 'technique-item' + (t.checked ? ' checked' : '');
+    el.innerHTML = `
+      <div class="check-circle">
+        <svg class="check-icon" width="10" height="10" viewBox="0 0 10 10" fill="none">
+          <path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="t-content">
+        <div class="t-phrase">${t.phrase}</div>
+        <div class="t-hint">${t.hint}</div>
+      </div>`;
+    el.onclick = () => { t.checked = !t.checked; renderTechniques(); };
+    list.appendChild(el);
+  });
+  const badge = document.getElementById('usedBadge');
+  badge.textContent = count + ' / 6';
+  badge.className = 'badge-count' + (count === 6 ? ' all-done' : '');
+  const cong = document.getElementById('congrats');
+  cong.className = 'congrats' + (count === 6 ? ' show' : '');
+}
+
+function resetChecks() {
+  techniques.forEach(t => t.checked = false);
+  renderTechniques();
+}
+
+renderTopic();
+renderTechniques();
+</script>
+</body>
+</html>
