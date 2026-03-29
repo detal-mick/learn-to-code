@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grammar Focus — Unit 8: The Environment</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0e1c15;
+  --surface: #142b1e;
+  --card: #1a3526;
+  --card-hover: #1f3f30;
+  --accent: #3dbe7a;
+  --accent-dim: rgba(61,190,122,0.15);
+  --teal: #28c4d8;
+  --teal-dim: rgba(40,196,216,0.13);
+  --amber: #f0b429;
+  --amber-dim: rgba(240,180,41,0.13);
+  --text: #dff0e8;
+  --text-muted: #6fa882;
+  --text-dim: #3d6b52;
+  --border: rgba(61,190,122,0.1);
+  --border-bright: rgba(61,190,122,0.25);
+  --radius: 14px;
+  --radius-sm: 8px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 15px;
+}
+
+/* ── top bar ── */
+.topbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.topbar-left { display: flex; flex-direction: column; }
+.topbar-unit {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.topbar-title {
+  font-family: 'Lora', serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text);
+}
+.tabs {
+  display: flex;
+  gap: 6px;
+}
+.tab {
+  padding: 8px 18px;
+  border-radius: 99px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.18s;
+}
+.tab:hover { border-color: var(--border-bright); color: var(--text); }
+.tab.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #0e1c15;
+}
+
+/* ── content ── */
+.content { max-width: 860px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+.section { display: none; }
+.section.active { display: block; }
+
+/* ── section headers ── */
+.sec-title {
+  font-family: 'Lora', serif;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 0.4rem;
+}
+.sec-sub {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2.5rem 0;
+}
+
+/* ── ADVERBS: frequency scale ── */
+.scale-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem 2rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.scale-label-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.scale-track {
+  position: relative;
+  height: 8px;
+  border-radius: 99px;
+  background: linear-gradient(90deg,
+    #3a5a47 0%,
+    #2a7a55 25%,
+    #28b870 55%,
+    #3dbe7a 80%,
+    #6ed4a0 100%
+  );
+  margin-bottom: 1.25rem;
+}
+.scale-needle {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid var(--accent);
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: left 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow: 0 0 12px rgba(61,190,122,0.5);
+  pointer-events: none;
+}
+
+.adverb-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.adverb-chip {
+  padding: 7px 16px;
+  border-radius: 99px;
+  border: 1px solid var(--border-bright);
+  background: var(--card);
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Lora', serif;
+  font-style: italic;
+  transition: all 0.18s;
+}
+.adverb-chip:hover { border-color: var(--accent); color: var(--text); }
+.adverb-chip.active {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.examples-box {
+  margin-top: 1rem;
+  background: var(--card);
+  border: 1px solid var(--border-bright);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem 1.5rem;
+  animation: fadeUp 0.22s ease;
+  display: none;
+}
+.examples-box.show { display: block; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.example-label {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+}
+.example-sentence {
+  font-family: 'Lora', serif;
+  font-size: 16px;
+  color: var(--text);
+  line-height: 1.7;
+  margin-bottom: 0.5rem;
+}
+.example-sentence:last-child { margin-bottom: 0; }
+.example-sentence mark {
+  background: transparent;
+  color: var(--accent);
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* ── ADVERBS: position rule ── */
+.rule-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+.rule-title {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 1rem;
+}
+.rule-formula {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.formula-block {
+  padding: 7px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 500;
+  font-family: 'Lora', serif;
+}
+.fb-sub { background: var(--teal-dim); color: var(--teal); border: 1px solid rgba(40,196,216,0.2); }
+.fb-adv { background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(61,190,122,0.25); }
+.fb-verb { background: var(--amber-dim); color: var(--amber); border: 1px solid rgba(240,180,41,0.2); }
+.fb-be { background: rgba(40,196,216,0.08); color: var(--teal); border: 1px solid rgba(40,196,216,0.15); }
+.fb-plus { color: var(--text-dim); font-size: 16px; }
+
+.rule-example {
+  font-family: 'Lora', serif;
+  font-size: 14px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ── ADVERBS: comparative ── */
+.comp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+@media (max-width: 560px) { .comp-grid { grid-template-columns: 1fr; } }
+
+.comp-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  text-align: center;
+  position: relative;
+  transition: border-color 0.2s;
+}
+.comp-card:hover { border-color: var(--border-bright); }
+.comp-badge {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 99px;
+  display: inline-block;
+  margin-bottom: 0.75rem;
+}
+.badge-base { background: var(--teal-dim); color: var(--teal); }
+.badge-comp { background: var(--accent-dim); color: var(--accent); }
+.badge-sup { background: var(--amber-dim); color: var(--amber); }
+.comp-word {
+  font-family: 'Lora', serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+.comp-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+.comp-eg {
+  font-family: 'Lora', serif;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+.comp-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  font-size: 20px;
+  margin-top: 1.5rem;
+}
+@media (max-width: 560px) { .comp-arrow { display: none; } }
+
+/* ── MULTI-WORD VERBS ── */
+.mvv-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.mvv-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  cursor: pointer;
+  transition: border-color 0.18s, background 0.18s;
+  position: relative;
+  overflow: hidden;
+}
+.mvv-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.mvv-card.c-green::before { background: var(--accent); }
+.mvv-card.c-teal::before { background: var(--teal); }
+.mvv-card.c-amber::before { background: var(--amber); }
+.mvv-card:hover { border-color: var(--border-bright); background: var(--card); }
+.mvv-card:hover::before { opacity: 1; }
+.mvv-card.open { border-color: var(--border-bright); background: var(--card); }
+.mvv-card.open::before { opacity: 1; }
+
+.verb-parts {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-bottom: 0.9rem;
+}
+.vp-main {
+  font-family: 'Lora', serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+}
+.vp-particle {
+  font-family: 'Lora', serif;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 0 3px;
+}
+.c-green .vp-particle { color: var(--accent); }
+.c-teal .vp-particle { color: var(--teal); }
+.c-amber .vp-particle { color: var(--amber); }
+
+.mvv-meaning {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.mvv-detail {
+  display: none;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  animation: fadeUp 0.2s ease;
+}
+.mvv-card.open .mvv-detail { display: block; }
+
+.detail-example {
+  font-family: 'Lora', serif;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+}
+.detail-example mark {
+  background: transparent;
+  font-style: normal;
+  font-weight: 600;
+}
+.c-green .detail-example mark { color: var(--accent); }
+.c-teal .detail-example mark { color: var(--teal); }
+.c-amber .detail-example mark { color: var(--amber); }
+
+.detail-tip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 5px 10px;
+}
+
+.tip-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.c-green .tip-dot { background: var(--accent); }
+.c-teal .tip-dot { background: var(--teal); }
+.c-amber .tip-dot { background: var(--amber); }
+
+.toggle-hint {
+  position: absolute;
+  bottom: 1rem; right: 1rem;
+  font-size: 11px;
+  color: var(--text-dim);
+  transition: color 0.2s;
+}
+.mvv-card:hover .toggle-hint { color: var(--text-muted); }
+.mvv-card.open .toggle-hint { color: var(--text-dim); }
+
+/* ── separable callout ── */
+.sep-callout {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--teal);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 1rem 1.25rem;
+  margin-top: 1.5rem;
+}
+.sep-title {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 0.5rem;
+}
+.sep-text {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.sep-text code {
+  font-family: monospace;
+  background: var(--card);
+  color: var(--accent);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 13px;
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <span class="topbar-unit">Unit 8 · The Environment</span>
+    <span class="topbar-title">Grammar Focus</span>
+  </div>
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('adverbs', this)">Adverbs of Frequency</button>
+    <button class="tab" onclick="switchTab('verbs', this)">Multi-word Verbs</button>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- ══════════════════ ADVERBS TAB ══════════════════ -->
+  <div class="section active" id="sec-adverbs">
+
+    <div class="sec-title">Adverbs of Frequency</div>
+    <div class="sec-sub">These adverbs tell us how often something happens. They form a scale from 0% (never) to 100% (always). Tap any adverb below to see it in context.</div>
+
+    <div class="scale-wrap">
+      <div class="scale-label-row">
+        <span>0% — never</span>
+        <span>50% — sometimes</span>
+        <span>100% — always</span>
+      </div>
+      <div class="scale-track">
+        <div class="scale-needle" id="needle" style="left: 0%;"></div>
+      </div>
+      <div class="adverb-chips" id="chipRow"></div>
+      <div class="examples-box" id="examplesBox">
+        <div class="example-label">Example sentences</div>
+        <div id="exampleContent"></div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Comparative forms -->
+    <div class="sec-title" style="font-size:18px; margin-bottom:0.3rem;">Comparative forms</div>
+    <div class="sec-sub">"More often" and "most often" are used to compare frequency across people, places, or situations — not just to say how often something happens.</div>
+
+    <div class="comp-grid">
+      <div class="comp-card">
+        <span class="comp-badge badge-base">Base form</span>
+        <div class="comp-word">often</div>
+        <div class="comp-desc">How frequently someone does something — no comparison</div>
+        <div class="comp-eg">"She <strong>often</strong> recycles her bottles."</div>
+      </div>
+      <div class="comp-card">
+        <span class="comp-badge badge-comp">Comparative</span>
+        <div class="comp-word">more often</div>
+        <div class="comp-desc">Comparing two people, places, or habits</div>
+        <div class="comp-eg">"I recycle <strong>more often</strong> than my neighbour."</div>
+      </div>
+      <div class="comp-card">
+        <span class="comp-badge badge-sup">Superlative</span>
+        <div class="comp-word">most often</div>
+        <div class="comp-desc">The highest frequency in a group of three or more</div>
+        <div class="comp-eg">"Of us all, Sari recycles <strong>most often</strong>."</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Position rule -->
+    <div class="sec-title" style="font-size:18px; margin-bottom:0.3rem;">Position in a sentence</div>
+    <div class="sec-sub">Adverbs of frequency have a fixed position depending on the verb type.</div>
+
+    <div class="rule-box" style="margin-bottom:0.75rem;">
+      <div class="rule-title">Rule 1 — with most verbs</div>
+      <div class="rule-formula">
+        <div class="formula-block fb-sub">Subject</div>
+        <span class="fb-plus">+</span>
+        <div class="formula-block fb-adv">adverb</div>
+        <span class="fb-plus">+</span>
+        <div class="formula-block fb-verb">main verb</div>
+      </div>
+      <div class="rule-example">"People <mark style="background:transparent;color:var(--accent);">often</mark> throw away plastic without thinking." &nbsp; ✓</div>
+    </div>
+
+    <div class="rule-box">
+      <div class="rule-title">Rule 2 — with the verb "be"</div>
+      <div class="rule-formula">
+        <div class="formula-block fb-sub">Subject</div>
+        <span class="fb-plus">+</span>
+        <div class="formula-block fb-be">be</div>
+        <span class="fb-plus">+</span>
+        <div class="formula-block fb-adv">adverb</div>
+      </div>
+      <div class="rule-example">"Droughts are <mark style="background:transparent;color:var(--accent);">usually</mark> caused by long dry seasons." &nbsp; ✓</div>
+    </div>
+
+  </div><!-- /adverbs -->
+
+
+  <!-- ══════════════════ MULTI-WORD VERBS TAB ══════════════════ -->
+  <div class="section" id="sec-verbs">
+
+    <div class="sec-title">Multi-word Verbs</div>
+    <div class="sec-sub">These verbs combine a base verb with one or two particles to create a new meaning. Tap any card to see the definition, an example sentence, and a usage tip.</div>
+
+    <div class="mvv-grid" id="mvvGrid"></div>
+
+    <div class="sep-callout">
+      <div class="sep-title">Separable vs. inseparable</div>
+      <div class="sep-text">
+        Some multi-word verbs can be separated by an object. For example:
+        <br><br>
+        <code>throw away plastic</code> &nbsp;=&nbsp; <code>throw plastic away</code> &nbsp; ✓ &nbsp;(separable)
+        <br><br>
+        But with a pronoun, you <strong>must</strong> separate:
+        &nbsp;<code>throw it away</code> &nbsp; ✓ &nbsp;&nbsp; <code>throw away it</code> &nbsp; ✗
+        <br><br>
+        Inseparable verbs (like <code>run out of</code>, <code>look after</code>) must always stay together: &nbsp;<code>look after the planet</code> &nbsp; ✓
+      </div>
+    </div>
+
+  </div><!-- /verbs -->
+
+</div><!-- /content -->
+
+<script>
+// ── DATA ─────────────────────────────────────────────────────────────────────
+
+const adverbs = [
+  {
+    word: "never", pct: 0,
+    examples: [
+      "She has <mark>never</mark> used a single-use plastic bag.",
+      "He <mark>never</mark> leaves his car engine running unnecessarily."
+    ]
+  },
+  {
+    word: "hardly ever", pct: 12,
+    examples: [
+      "People in this area <mark>hardly ever</mark> experience flooding.",
+      "He <mark>hardly ever</mark> takes a shower longer than five minutes."
+    ]
+  },
+  {
+    word: "occasionally", pct: 32,
+    examples: [
+      "We <mark>occasionally</mark> find sea turtles nesting on this beach.",
+      "She <mark>occasionally</mark> forgets to separate her household waste."
+    ]
+  },
+  {
+    word: "sometimes", pct: 45,
+    examples: [
+      "Factories <mark>sometimes</mark> release harmful gases into the atmosphere.",
+      "I <mark>sometimes</mark> bring a reusable bag when I go shopping."
+    ]
+  },
+  {
+    word: "often", pct: 60,
+    examples: [
+      "Deforestation <mark>often</mark> destroys the habitats of endangered species.",
+      "People in Jakarta <mark>often</mark> experience flooding during the rainy season."
+    ]
+  },
+  {
+    word: "frequently", pct: 70,
+    examples: [
+      "Scientists <mark>frequently</mark> record higher global temperatures than ever before.",
+      "Plastic waste <mark>frequently</mark> ends up in the ocean."
+    ]
+  },
+  {
+    word: "usually", pct: 82,
+    examples: [
+      "Droughts are <mark>usually</mark> caused by long periods without rain.",
+      "Communities that recycle <mark>usually</mark> produce less landfill waste."
+    ]
+  },
+  {
+    word: "always", pct: 100,
+    examples: [
+      "The sun <mark>always</mark> rises — we should use solar energy more.",
+      "Healthy forests <mark>always</mark> play a key role in regulating the climate."
+    ]
+  }
+];
+
+const verbs = [
+  {
+    verb: "cut", particle: "down on",
+    color: "c-green",
+    meaning: "To reduce the amount of something you use or do.",
+    example: "We should <mark>cut down on</mark> plastic use in our daily lives.",
+    tip: "Used with things we consume or do too much of.",
+    sep: false
+  },
+  {
+    verb: "run", particle: "out of",
+    color: "c-teal",
+    meaning: "To use all of something until none is left.",
+    example: "The world is <mark>running out of</mark> clean water in many regions.",
+    tip: "Common with natural resources and supplies.",
+    sep: false
+  },
+  {
+    verb: "use", particle: "up",
+    color: "c-amber",
+    meaning: "To finish or exhaust a supply of something completely.",
+    example: "Factories <mark>use up</mark> huge amounts of energy every single day.",
+    tip: "Similar to 'run out of', but focuses on the act of consuming.",
+    sep: true
+  },
+  {
+    verb: "wipe", particle: "out",
+    color: "c-green",
+    meaning: "To destroy or eliminate something completely.",
+    example: "Deforestation can <mark>wipe out</mark> entire animal species forever.",
+    tip: "Strong and dramatic — implies total, irreversible destruction.",
+    sep: true
+  },
+  {
+    verb: "throw", particle: "away",
+    color: "c-teal",
+    meaning: "To discard something — put it in the bin instead of reusing or recycling.",
+    example: "Don't <mark>throw away</mark> plastic bottles — recycle them instead.",
+    tip: "Separable: 'throw it away' but not 'throw away it'.",
+    sep: true
+  },
+  {
+    verb: "look", particle: "after",
+    color: "c-amber",
+    meaning: "To take care of something or someone.",
+    example: "We have a responsibility to <mark>look after</mark> our planet for future generations.",
+    tip: "Positive meaning — about care and responsibility. Inseparable.",
+    sep: false
+  },
+  {
+    verb: "cool", particle: "down",
+    color: "c-green",
+    meaning: "To become or make less hot.",
+    example: "Planting more trees helps <mark>cool down</mark> city temperatures naturally.",
+    tip: "Also used figuratively — emotions can 'cool down' too.",
+    sep: true
+  }
+];
+
+// ── BUILD ADVERB CHIPS ───────────────────────────────────────────────────────
+const chipRow = document.getElementById('chipRow');
+const needle = document.getElementById('needle');
+const examplesBox = document.getElementById('examplesBox');
+const exampleContent = document.getElementById('exampleContent');
+let activeChip = null;
+
+adverbs.forEach((adv, i) => {
+  const chip = document.createElement('div');
+  chip.className = 'adverb-chip';
+  chip.textContent = adv.word;
+  chip.addEventListener('click', () => {
+    if (activeChip) activeChip.classList.remove('active');
+    chip.classList.add('active');
+    activeChip = chip;
+    needle.style.left = adv.pct + '%';
+    examplesBox.classList.remove('show');
+    setTimeout(() => {
+      exampleContent.innerHTML = adv.examples.map(e =>
+        `<div class="example-sentence">${e}</div>`
+      ).join('');
+      examplesBox.classList.add('show');
+    }, 50);
+  });
+  chipRow.appendChild(chip);
+});
+
+// ── BUILD MULTI-WORD VERB CARDS ──────────────────────────────────────────────
+const grid = document.getElementById('mvvGrid');
+
+verbs.forEach(v => {
+  const card = document.createElement('div');
+  card.className = `mvv-card ${v.color}`;
+  card.innerHTML = `
+    <div class="verb-parts">
+      <span class="vp-main">${v.verb}</span>
+      <span class="vp-particle">${v.particle}</span>
+    </div>
+    <div class="mvv-meaning">${v.meaning}</div>
+    <div class="mvv-detail">
+      <div class="detail-example">"${v.example}"</div>
+      <div class="detail-tip">
+        <div class="tip-dot"></div>
+        <span>${v.tip}</span>
+      </div>
+    </div>
+    <span class="toggle-hint">tap to expand</span>
+  `;
+  card.addEventListener('click', () => {
+    const isOpen = card.classList.contains('open');
+    card.classList.toggle('open');
+    card.querySelector('.toggle-hint').textContent = isOpen ? 'tap to expand' : 'tap to close';
+  });
+  grid.appendChild(card);
+});
+
+// ── TAB SWITCHING ────────────────────────────────────────────────────────────
+function switchTab(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
