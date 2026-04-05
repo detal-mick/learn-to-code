@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 2 Worksheet — Unit 8: The Environment</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue: #1a3a6b;
+  --blue-mid: #2255a4;
+  --blue-light: #e8eef8;
+  --yellow: #f5c518;
+  --yellow-light: #fff9e0;
+  --orange: #f07c1e;
+  --orange-light: #fff3e6;
+  --teal: #0e9f8e;
+  --teal-light: #e5f7f5;
+  --red: #d63031;
+  --red-light: #fdecea;
+  --green: #00b894;
+  --green-light: #e6f9f5;
+  --bg: #f0f3fa;
+  --white: #fff;
+  --text: #1a1a2e;
+  --text-muted: #5a6a7e;
+  --border: #dde3ef;
+  --radius: 14px;
+  --radius-sm: 8px;
+  --shadow: 0 4px 20px rgba(26,58,107,0.10);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body { font-family:'Lato',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; font-size:15px; line-height:1.6; }
+
+/* ── HEADER ── */
+.site-header {
+  background: var(--blue);
+  padding: 0;
+  position: sticky; top:0; z-index:200;
+  box-shadow: 0 2px 16px rgba(26,58,107,0.3);
+}
+.header-top {
+  display:flex; align-items:center; justify-content:space-between;
+  padding: 14px 2rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.header-brand { display:flex; align-items:center; gap:12px; }
+.hb-badge {
+  background:var(--yellow); color:var(--blue);
+  font-family:'Nunito',sans-serif; font-weight:900; font-size:18px;
+  padding:4px 12px; border-radius:var(--radius-sm); line-height:1;
+}
+.hb-text { color:var(--white); }
+.hb-title { font-family:'Nunito',sans-serif; font-weight:900; font-size:18px; line-height:1.1; }
+.hb-sub { font-size:11px; color:rgba(255,255,255,0.55); }
+.header-score {
+  display:flex; align-items:center; gap:10px;
+}
+.score-pill {
+  background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.15);
+  border-radius:99px; padding:6px 16px;
+  font-family:'Nunito',sans-serif; font-weight:800; font-size:13px; color:var(--yellow);
+}
+.phase-nav {
+  display:flex; overflow-x:auto; padding: 0 2rem;
+  gap:0; scrollbar-width:none;
+}
+.phase-nav::-webkit-scrollbar { display:none; }
+.phase-btn {
+  padding: 10px 18px;
+  border:none; background:none;
+  font-family:'Nunito',sans-serif; font-weight:700; font-size:12px;
+  color:rgba(255,255,255,0.5);
+  border-bottom:3px solid transparent;
+  cursor:pointer; white-space:nowrap;
+  transition: color 0.15s, border-color 0.15s;
+  letter-spacing:0.04em;
+}
+.phase-btn:hover { color:rgba(255,255,255,0.8); }
+.phase-btn.active { color:var(--yellow); border-bottom-color:var(--yellow); }
+
+/* ── LAYOUT ── */
+.page-content { max-width:860px; margin:0 auto; padding:2rem 1.25rem 5rem; }
+.phase-section { display:none; }
+.phase-section.active { display:block; }
+
+/* ── PHASE HEADER ── */
+.phase-header {
+  display:flex; align-items:center; gap:14px;
+  margin-bottom:1.75rem;
+  padding-bottom:1.25rem;
+  border-bottom:2px solid var(--border);
+}
+.phase-icon {
+  width:52px; height:52px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:24px; flex-shrink:0;
+}
+.ph-blue { background:var(--blue-light); }
+.ph-yellow { background:var(--yellow-light); }
+.ph-orange { background:var(--orange-light); }
+.ph-teal { background:var(--teal-light); }
+.phase-meta {}
+.phase-name { font-family:'Nunito',sans-serif; font-weight:900; font-size:22px; color:var(--blue); line-height:1.1; }
+.phase-time { font-size:12px; color:var(--text-muted); margin-top:2px; }
+
+/* ── ACTIVITY BLOCK ── */
+.activity-block {
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  margin-bottom:1.25rem;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.activity-top {
+  display:flex; align-items:center; gap:12px;
+  padding:14px 18px;
+  border-bottom:1px solid var(--border);
+}
+.act-num {
+  width:30px; height:30px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Nunito',sans-serif; font-weight:900; font-size:14px;
+  flex-shrink:0;
+}
+.an-blue { background:var(--blue); color:var(--white); }
+.an-yellow { background:var(--yellow); color:var(--blue); }
+.an-orange { background:var(--orange); color:var(--white); }
+.an-teal { background:var(--teal); color:var(--white); }
+.act-label {
+  font-family:'Nunito',sans-serif; font-weight:800; font-size:14px;
+  color:var(--blue); flex:1; line-height:1.3;
+}
+.act-tag {
+  font-size:10px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;
+  padding:3px 10px; border-radius:99px;
+}
+.tag-creative { background:var(--orange-light); color:var(--orange); border:1px solid var(--orange); }
+.tag-book { background:var(--blue-light); color:var(--blue-mid); border:1px solid var(--blue-mid); }
+.tag-speaking { background:var(--teal-light); color:var(--teal); border:1px solid var(--teal); }
+.tag-writing { background:var(--yellow-light); color:#b07c00; border:1px solid var(--yellow); }
+
+.activity-body { padding:18px; }
+
+/* ── INSTRUCTION BOX ── */
+.instr {
+  font-size:13.5px; color:var(--text-muted);
+  background:var(--bg); border-radius:var(--radius-sm);
+  padding:10px 14px; margin-bottom:1rem;
+  border-left:4px solid var(--blue-mid);
+  font-style:italic; line-height:1.6;
+}
+
+/* ── BROKEN SENTENCES (Warmer) ── */
+.broken-list { display:flex; flex-direction:column; gap:12px; }
+.broken-item {
+  background:var(--bg); border:1px solid var(--border);
+  border-radius:var(--radius-sm); padding:14px 16px;
+}
+.broken-stem {
+  font-family:'Nunito',sans-serif; font-weight:700;
+  font-size:15px; color:var(--blue);
+  margin-bottom:8px;
+}
+.broken-stem span { color:var(--orange); }
+.answer-input {
+  width:100%; border:2px solid var(--border);
+  border-radius:var(--radius-sm); padding:9px 12px;
+  font-family:'Lato',sans-serif; font-size:14px; color:var(--text);
+  background:var(--white); resize:none; outline:none;
+  transition:border-color 0.18s;
+}
+.answer-input:focus { border-color:var(--blue-mid); }
+.answer-input.correct-ans { border-color:var(--teal); background:var(--teal-light); }
+.answer-input.wrong-ans  { border-color:var(--red);  background:var(--red-light); }
+.check-row {
+  display:flex; align-items:center; gap:10px; margin-top:8px;
+}
+.check-btn {
+  padding:6px 16px; border-radius:99px; border:none;
+  font-family:'Nunito',sans-serif; font-weight:700; font-size:12px;
+  cursor:pointer; transition:all 0.15s;
+}
+.cb-blue { background:var(--blue); color:var(--white); }
+.cb-blue:hover { background:var(--blue-mid); }
+.cb-ghost { background:transparent; border:1.5px solid var(--border); color:var(--text-muted); }
+.cb-ghost:hover { border-color:var(--blue); color:var(--blue); }
+.check-fb { font-size:12px; color:var(--text-muted); font-style:italic; }
+
+/* ── GAP FILL ── */
+.gapfill-list { display:flex; flex-direction:column; gap:10px; }
+.gf-item {
+  background:var(--bg); border:1px solid var(--border);
+  border-radius:var(--radius-sm); padding:12px 16px;
+  display:flex; align-items:flex-start; gap:10px;
+}
+.gf-letter {
+  font-family:'Nunito',sans-serif; font-weight:900;
+  font-size:14px; color:var(--blue); min-width:20px; padding-top:2px;
+}
+.gf-content { flex:1; }
+.gf-sentence {
+  font-size:14px; line-height:1.7; margin-bottom:6px;
+}
+.gap-input {
+  display:inline-block;
+  border:none; border-bottom:2.5px solid var(--orange);
+  background:transparent; outline:none;
+  font-family:'Lato',sans-serif; font-size:14px; color:var(--blue);
+  min-width:120px; padding:0 4px; text-align:center;
+  transition:border-color 0.18s;
+}
+.gap-input:focus { border-bottom-color:var(--blue); }
+.gap-input.gf-correct { border-bottom-color:var(--teal); color:var(--teal); font-weight:700; }
+.gap-input.gf-wrong   { border-bottom-color:var(--red);  color:var(--red); }
+.gf-hint { font-size:12px; color:var(--text-muted); font-style:italic; margin-top:4px; }
+
+/* ── EXPAND THE NOUN ── */
+.noun-builder {
+  background:var(--bg); border:1px solid var(--border);
+  border-radius:var(--radius); padding:16px;
+  margin-bottom:10px;
+}
+.nb-prompt {
+  font-family:'Nunito',sans-serif; font-weight:900;
+  font-size:20px; color:var(--blue); text-align:center;
+  margin-bottom:12px;
+  padding:12px; background:var(--blue-light); border-radius:var(--radius-sm);
+}
+.nb-fields { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+@media(max-width:500px){ .nb-fields{grid-template-columns:1fr;} }
+.nb-field {}
+.nb-field-label {
+  font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;
+  font-family:'Nunito',sans-serif; margin-bottom:4px;
+  padding:3px 8px; border-radius:99px; display:inline-block;
+}
+.nfl-pre  { background:var(--blue-light); color:var(--blue); }
+.nfl-post { background:var(--teal-light); color:var(--teal); }
+.nfl-ing  { background:var(--orange-light); color:var(--orange); }
+.nfl-full { background:var(--yellow-light); color:#b07c00; }
+.nb-input {
+  width:100%; border:2px solid var(--border);
+  border-radius:var(--radius-sm); padding:8px 12px;
+  font-family:'Lato',sans-serif; font-size:13.5px; outline:none;
+  transition:border-color 0.18s; background:var(--white);
+}
+.nb-input:focus { border-color:var(--blue-mid); }
+.nb-full { grid-column:1/-1; }
+.nb-display {
+  margin-top:12px; padding:12px 16px;
+  background:var(--white); border:2px dashed var(--border);
+  border-radius:var(--radius-sm); min-height:44px;
+  font-family:'Nunito',sans-serif; font-weight:700; font-size:15px;
+  color:var(--text-muted); font-style:italic;
+  transition:border-color 0.2s;
+}
+.nb-display.filled { border-color:var(--blue-mid); border-style:solid; color:var(--blue); font-style:normal; }
+.nb-display .nb-pre  { color:var(--blue-mid); }
+.nb-display .nb-head { color:var(--blue); font-weight:900; background:var(--yellow); padding:1px 4px; border-radius:3px; }
+.nb-display .nb-post { color:var(--teal); }
+.nb-display .nb-ing  { color:var(--orange); }
+
+.nb-controls { display:flex; gap:8px; margin-top:8px; justify-content:flex-end; }
+
+/* ── TRUE / FALSE ── */
+.tf-grid { display:flex; flex-direction:column; gap:10px; }
+.tf-item {
+  display:flex; align-items:flex-start; gap:12px;
+  background:var(--bg); border:1.5px solid var(--border);
+  border-radius:var(--radius-sm); padding:12px 14px;
+  transition:border-color 0.18s;
+}
+.tf-item.tf-correct { border-color:var(--teal); background:var(--teal-light); }
+.tf-item.tf-wrong   { border-color:var(--red);  background:var(--red-light); }
+.tf-num { font-family:'Nunito',sans-serif; font-weight:900; font-size:13px; color:var(--blue); min-width:22px; padding-top:2px; }
+.tf-stmt { flex:1; font-size:13.5px; line-height:1.55; }
+.tf-stmt mark { background:var(--yellow); color:var(--blue); padding:1px 3px; border-radius:3px; font-style:normal; }
+.tf-stmt .is-wrong-part { color:var(--red); font-weight:700; text-decoration:line-through; }
+.tf-btns-wrap { display:flex; flex-direction:column; gap:6px; align-items:flex-end; flex-shrink:0; }
+.tf-btn {
+  padding:5px 14px; border-radius:99px;
+  border:1.5px solid var(--border); background:var(--white);
+  font-family:'Nunito',sans-serif; font-weight:700; font-size:12px;
+  cursor:pointer; transition:all 0.15s; min-width:64px; text-align:center;
+}
+.tf-btn:hover { border-color:var(--blue-mid); }
+.tf-btn.selected-t { background:var(--teal); border-color:var(--teal); color:var(--white); }
+.tf-btn.selected-f { background:var(--red);  border-color:var(--red);  color:var(--white); }
+.tf-feedback { font-size:11px; margin-top:4px; font-style:italic; }
+.tf-feedback.ok  { color:var(--teal); }
+.tf-feedback.bad { color:var(--red); }
+
+/* ── SPEAKING CARDS ── */
+.speak-cards { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+@media(max-width:520px){ .speak-cards{grid-template-columns:1fr;} }
+.speak-card {
+  border-radius:var(--radius); padding:16px;
+  border:2px solid transparent; cursor:pointer;
+  transition:all 0.18s; position:relative;
+}
+.sc-blue   { background:var(--blue-light); border-color:rgba(34,85,164,0.3); }
+.sc-yellow { background:var(--yellow-light); border-color:rgba(245,197,24,0.5); }
+.sc-orange { background:var(--orange-light); border-color:rgba(240,124,30,0.4); }
+.sc-teal   { background:var(--teal-light); border-color:rgba(14,159,142,0.3); }
+.speak-card:hover { transform:translateY(-2px); box-shadow:0 4px 16px rgba(26,58,107,0.12); }
+.speak-card.done { opacity:0.55; }
+.speak-card.done::after {
+  content:'✓ done';
+  position:absolute; top:8px; right:10px;
+  font-family:'Nunito',sans-serif; font-weight:900; font-size:10px;
+  color:var(--teal); letter-spacing:0.05em;
+}
+.speak-q { font-family:'Nunito',sans-serif; font-weight:800; font-size:14px; color:var(--blue); line-height:1.45; }
+.speak-hint { font-size:12px; color:var(--text-muted); margin-top:6px; font-style:italic; }
+
+/* ── OPINION PARAGRAPH ── */
+.opinion-form {}
+.opinion-prompt {
+  background:var(--blue); color:var(--white);
+  border-radius:var(--radius-sm); padding:14px 18px;
+  font-family:'Nunito',sans-serif; font-weight:800; font-size:15px;
+  line-height:1.45; margin-bottom:1rem;
+}
+.opinion-prompt span { color:var(--yellow); }
+.opinion-targets {
+  display:flex; flex-wrap:wrap; gap:8px; margin-bottom:1rem;
+}
+.otag {
+  font-size:11px; font-weight:700; letter-spacing:0.06em;
+  text-transform:uppercase; padding:4px 12px; border-radius:99px;
+  font-family:'Nunito',sans-serif;
+}
+.ot-ing  { background:var(--teal-light); color:var(--teal); border:1px solid var(--teal); }
+.ot-cnp  { background:var(--yellow-light); color:#b07c00; border:1px solid var(--yellow); }
+.ot-str  { background:var(--blue-light); color:var(--blue-mid); border:1px solid var(--blue-mid); }
+.structure-guide {
+  display:grid; grid-template-columns:repeat(5,1fr); gap:6px;
+  margin-bottom:1rem;
+}
+@media(max-width:560px){ .structure-guide{grid-template-columns:1fr 1fr;} }
+.sg-box {
+  border-radius:var(--radius-sm); padding:8px 10px; text-align:center;
+  border:1.5px solid var(--border);
+}
+.sg-num { font-family:'Nunito',sans-serif; font-weight:900; font-size:18px; }
+.sg-label { font-size:10px; color:var(--text-muted); font-weight:700; letter-spacing:0.05em; text-transform:uppercase; margin-top:2px; }
+.sg-1 { background:var(--blue-light); border-color:var(--blue-mid); }
+.sg-1 .sg-num { color:var(--blue); }
+.sg-2 { background:var(--teal-light); border-color:var(--teal); }
+.sg-2 .sg-num { color:var(--teal); }
+.sg-3 { background:var(--yellow-light); border-color:#e0b000; }
+.sg-3 .sg-num { color:#b07c00; }
+.sg-4 { background:var(--orange-light); border-color:var(--orange); }
+.sg-4 .sg-num { color:var(--orange); }
+.sg-5 { background:var(--blue-light); border-color:var(--blue-mid); }
+.sg-5 .sg-num { color:var(--blue); }
+.opinion-textarea {
+  width:100%; min-height:220px;
+  border:2px solid var(--border); border-radius:var(--radius-sm);
+  padding:14px 16px;
+  font-family:'Lato',sans-serif; font-size:14px; color:var(--text);
+  resize:vertical; outline:none; line-height:1.75;
+  transition:border-color 0.18s;
+}
+.opinion-textarea:focus { border-color:var(--blue-mid); }
+.opinion-footer {
+  display:flex; align-items:center; justify-content:space-between;
+  margin-top:8px;
+}
+.word-count { font-size:12px; color:var(--text-muted); }
+.word-count span { color:var(--blue); font-weight:700; }
+.wc-ok { color:var(--teal) !important; }
+.wc-warn { color:var(--orange) !important; }
+
+/* ── TWO TRUTHS ONE LIE ── */
+.ttol-wrap { display:flex; flex-direction:column; gap:10px; margin-bottom:1rem; }
+.ttol-item {
+  display:flex; align-items:flex-start; gap:12px;
+  padding:14px 16px; border-radius:var(--radius-sm);
+  border:2px solid var(--border); background:var(--white);
+  cursor:pointer; transition:all 0.18s;
+}
+.ttol-item:hover:not(.revealed) { border-color:var(--blue-mid); transform:translateY(-1px); box-shadow:0 4px 12px rgba(26,58,107,0.1); }
+.ttol-item.revealed.truth { border-color:var(--teal); background:var(--teal-light); cursor:default; }
+.ttol-item.revealed.lie   { border-color:var(--red);  background:var(--red-light);  cursor:default; }
+.ttol-alpha { font-family:'Nunito',sans-serif; font-weight:900; font-size:15px; color:var(--blue); min-width:22px; }
+.ttol-text { flex:1; font-size:14px; line-height:1.55; }
+.ttol-badge {
+  font-size:10px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;
+  padding:3px 10px; border-radius:99px; display:none; flex-shrink:0;
+  font-family:'Nunito',sans-serif; align-self:flex-start; margin-top:2px;
+}
+.truth .ttol-badge { display:inline-block; background:var(--teal); color:var(--white); }
+.lie   .ttol-badge { display:inline-block; background:var(--red);  color:var(--white); }
+.ttol-correction {
+  display:none; margin-top:8px; padding:8px 12px;
+  background:var(--white); border-radius:var(--radius-sm);
+  font-size:13px; font-style:italic; color:var(--red);
+  border-left:3px solid var(--red); line-height:1.5;
+}
+.lie .ttol-correction { display:block; }
+.ttol-submit {
+  width:100%; padding:11px;
+  background:var(--orange); color:var(--white); border:none;
+  border-radius:var(--radius-sm);
+  font-family:'Nunito',sans-serif; font-weight:800; font-size:14px;
+  cursor:pointer; transition:background 0.15s;
+}
+.ttol-submit:hover { background:#d4691a; }
+.ttol-submit:disabled { opacity:0.4; cursor:not-allowed; }
+
+/* ── SCORE TRACKER ── */
+.score-tracker {
+  position:fixed; bottom:1.5rem; right:1.5rem;
+  background:var(--blue); color:var(--white);
+  border-radius:var(--radius); padding:12px 18px;
+  box-shadow:0 4px 24px rgba(26,58,107,0.35);
+  font-family:'Nunito',sans-serif;
+  z-index:500;
+  min-width:140px;
+}
+.st-label { font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.55); margin-bottom:2px; }
+.st-score { font-size:22px; font-weight:900; color:var(--yellow); }
+.st-pts { font-size:11px; color:rgba(255,255,255,0.55); }
+
+/* ── MISC ── */
+.answer-reveal {
+  display:none; margin-top:8px; padding:8px 12px;
+  background:var(--teal-light); border-left:3px solid var(--teal);
+  border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  font-size:13px; color:var(--teal); font-style:italic;
+}
+.answer-reveal.show { display:block; }
+.divider { border:none; border-top:1px solid var(--border); margin:1.25rem 0; }
+.pts-badge {
+  font-size:10px; font-weight:700; letter-spacing:0.06em;
+  padding:2px 8px; border-radius:99px;
+  background:rgba(245,197,24,0.15); color:var(--yellow); border:1px solid rgba(245,197,24,0.3);
+  font-family:'Nunito',sans-serif;
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="site-header">
+  <div class="header-top">
+    <div class="header-brand">
+      <div class="hb-badge">S2</div>
+      <div class="hb-text">
+        <div class="hb-title">Session 2 Worksheet</div>
+        <div class="hb-sub">Unit 8 · The Environment · Verbs + -ing &amp; Complex Noun Phrases</div>
+      </div>
+    </div>
+    <div class="header-score">
+      <div class="score-pill">⭐ <span id="headerScore">0</span> pts</div>
+    </div>
+  </div>
+  <div class="phase-nav">
+    <button class="phase-btn active" onclick="switchPhase('warmer',this)">🔥 Warmer</button>
+    <button class="phase-btn" onclick="switchPhase('practice',this)">✏️ Controlled Practice</button>
+    <button class="phase-btn" onclick="switchPhase('free',this)">💬 Free Practice</button>
+    <button class="phase-btn" onclick="switchPhase('production',this)">📝 Production</button>
+    <button class="phase-btn" onclick="switchPhase('consolidation',this)">🔁 Consolidation</button>
+  </div>
+</div>
+
+<div class="page-content">
+
+<!-- ═══════════════════════ WARMER ═══════════════════════ -->
+<div class="phase-section active" id="phase-warmer">
+  <div class="phase-header">
+    <div class="phase-icon ph-yellow">🔥</div>
+    <div class="phase-meta">
+      <div class="phase-name">Warmer</div>
+      <div class="phase-time">10 minutes · Activate prior knowledge</div>
+    </div>
+  </div>
+
+  <!-- Activity 1: Broken Sentences -->
+  <div class="activity-block">
+    <div class="activity-top">
+      <div class="act-num an-yellow">1</div>
+      <div class="act-label">Broken Sentences — Complete each sentence using a verb + -ing structure. Any logical answer is correct.</div>
+      <span class="act-tag tag-creative">Creative</span>
+    </div>
+    <div class="activity-body">
+      <div class="instr">Each sentence is about the environment but cut off halfway. Finish it with a verb + -ing form. There's no single right answer — be creative! <span style="color:var(--orange);font-weight:700;">+5 pts each</span></div>
+      <div class="broken-list" id="brokenList"></div>
+      <div style="margin-top:14px; display:flex; gap:8px;">
+        <button class="check-btn cb-blue" onclick="checkAllBroken()">Check all answers</button>
+        <button class="check-btn cb-ghost" onclick="revealBrokenHints()">Show example answers</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════ CONTROLLED PRACTICE ═══════════════════════ -->
+<div class="phase-section" id="phase-practice">
+  <div class="phase-header">
+    <div class="phase-icon ph-blue">✏️</div>
+    <div class="phase-meta">
+      <div class="phase-name">Controlled Practice</div>
+      <div class="phase-time">15 minutes · Accuracy focus</div>
+    </div>
+  </div>
+
+  <!-- Activity 2: Expand the Noun -->
+  <div class="activity-block">
+    <div class="activity-top">
+      <div class="act-num an-blue">2</div>
+      <div class="act-label">Expand the Noun — Build each bare noun into a full complex noun phrase.</div>
+      <span class="act-tag tag-creative">Creative</span>
+    </div>
+    <div class="activity-body">
+      <div class="instr">For each head noun, add a pre-modifier (adjective/article), a post-modifier, and an -ing phrase. Then write the complete phrase in the last field. <span style="color:var(--orange);font-weight:700;">+5 pts each</span></div>
+      <div id="nounBuilders"></div>
+    </div>
+  </div>
+
+  <!-- Activity 3: Fix the Verb Gap-fill -->
+  <div class="activity-block">
+    <div class="activity-top">
+      <div class="act-num an-orange">3</div>
+      <div class="act-label">Fix the Verb — Fill in each blank with a verb + -ing form. Use the word bank.</div>
+      <span class="act-tag tag-book">Book-based</span>
+    </div>
+    <div class="activity-body">
+      <div class="instr">Choose the correct verb from the word bank and put it in the -ing form. Some verbs may be used more than once. <span style="color:var(--orange);font-weight:700;">+10 pts each</span></div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1rem;">
+        <div style="font-size:12px;font-weight:700;color:var(--blue-mid);padding-top:4px;letter-spacing:0.06em;text-transform:uppercase;font-family:'Nunito',sans-serif;">Word bank:</div>
+        <span id="wordBankDisplay"></span>
+      </div>
+      <div class="gapfill-list" id="gapfillList"></div>
+      <div style="margin-top:14px; display:flex; gap:8px;">
+        <button class="check-btn cb-blue" onclick="checkGapFill()">Check answers</button>
+        <button class="check-btn cb-ghost" onclick="resetGapFill()">Reset</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════ FREE PRACTICE ═══════════════════════ -->
+<div class="phase-section" id="phase-free">
+  <div class="phase-header">
+    <div class="phase-icon ph-teal">💬</div>
+    <div class="phase-meta">
+      <div class="phase-name">Free Practice</div>
+      <div class="phase-time">15 minutes · Fluency focus</div>
+    </div>
+  </div>
+
+  <!-- Activity 4: Speaking -->
+  <div class="activity-block">
+    <div class="activity-top">
+      <div class="act-num an-teal">4</div>
+      <div class="act-label">Environmental Pitch — Discuss each question. Tick the card when you've answered it.</div>
+      <span class="act-tag tag-speaking">Speaking</span>
+    </div>
+    <div class="activity-body">
+      <div class="instr">Answer each question in at least 3 sentences. Try to use a verb + -ing AND a complex noun phrase naturally in your answer. Tap the card to mark it done. <span style="color:var(--orange);font-weight:700;">+10 pts each</span></div>
+      <div class="speak-cards" id="speakCards"></div>
+    </div>
+  </div>
+
+  <!-- Activity 5: True / False about structures -->
+  <div class="activity-block">
+    <div class="activity-top">
+      <div class="act-num an-blue">5</div>
+      <div class="act-label">Correct or Incorrect? — Read each sentence. Is the grammar correct? Select True or False.</div>
+      <span class="act-tag tag-book">Book-based</span>
+    </div>
+    <div class="activity-body">
+      <div class="instr">Decide if the sentence uses verb + -ing or complex noun phrases correctly. Select True (correct) or False (incorrect). If false, the correction will appear. <span style="color:var(--orange);font-weight:700;">+10 pts each</span></div>
+      <div class="tf-grid" id="tfGrid"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════ PRODUCTION ═══════════════════════ -->
+<div class="phase-section" id="phase-production">
+  <div class="phase-header">
+    <div class="phase-icon ph-orange">📝</div>
+    <div class="phase-meta">
+      <div class="phase-name">Production</div>
+      <div class="phase-time">20 minutes · Extended writing</div>
+    </div>
+  </div>
+
+  <!-- Activity 6: Opinion paragraph -->
+  <div class="activity-block">
+    <div class="activity-top">
+      <div class="act-num an-orange">6</div>
+      <div class="act-label">Opinion Paragraph — Write 100–130 words responding to the prompt below.</div>
+      <span class="act-tag tag-writing">Writing</span>
+    </div>
+    <div class="activity-body">
+      <div class="opinion-form">
+        <div class="opinion-prompt">
+          "What is the single most important thing <span>individuals</span> can do to help the environment? Explain your choice."
+        </div>
+        <div class="opinion-targets">
+          <span class="otag ot-ing">✓ At least 2 verb + -ing</span>
+          <span class="otag ot-cnp">✓ At least 2 complex noun phrases</span>
+          <span class="otag ot-str">✓ Clear structure: 5 parts</span>
+        </div>
+        <div class="structure-guide">
+          <div class="sg-box sg-1"><div class="sg-num">①</div><div class="sg-label">Topic sentence</div></div>
+          <div class="sg-box sg-2"><div class="sg-num">②</div><div class="sg-label">Point 1 + example</div></div>
+          <div class="sg-box sg-3"><div class="sg-num">③</div><div class="sg-label">Point 2 + example</div></div>
+          <div class="sg-box sg-4"><div class="sg-num">④</div><div class="sg-label">Counter-argument</div></div>
+          <div class="sg-box sg-5"><div class="sg-num">⑤</div><div class="sg-label">Conclusion</div></div>
+        </div>
+        <textarea class="opinion-textarea" id="opinionText" placeholder="Start writing your opinion paragraph here..." oninput="updateWordCount()"></textarea>
+        <div class="opinion-footer">
+          <div class="word-count">Word count: <span id="wcDisplay">0</span> / 100–130 words</div>
+          <button class="check-btn cb-blue" onclick="submitOpinion()">Submit for review +20 pts</button>
+        </div>
+        <div class="answer-reveal" id="opinionFb"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════ CONSOLIDATION ═══════════════════════ -->
+<div class="phase-section" id="phase-consolidation">
+  <div class="phase-header">
+    <div class="phase-icon ph-blue">🔁</div>
+    <div class="phase-meta">
+      <div class="phase-name">Consolidation</div>
+      <div class="phase-time">10 minutes · Reflect and review</div>
+    </div>
+  </div>
+
+  <!-- Activity 7: Two Truths One Lie -->
+  <div class="activity-block">
+    <div class="activity-top">
+      <div class="act-num an-blue">7</div>
+      <div class="act-label">Two Truths, One Lie — Find the grammatically incorrect sentence in each set.</div>
+      <span class="act-tag tag-creative">Creative</span>
+    </div>
+    <div class="activity-body">
+      <div class="instr">Each set has three sentences. Two are grammatically correct, one contains an error with verb + -ing or a complex noun phrase. Tap the sentence you think is the LIE. <span style="color:var(--orange);font-weight:700;">+15 pts each set</span></div>
+      <div id="ttolSets"></div>
+    </div>
+  </div>
+
+  <!-- Activity 8: Self-reflection -->
+  <div class="activity-block">
+    <div class="activity-top">
+      <div class="act-num an-teal">8</div>
+      <div class="act-label">Self-reflection — Rate your confidence after today's session.</div>
+      <span class="act-tag tag-speaking">Learning to Learn</span>
+    </div>
+    <div class="activity-body">
+      <div class="instr">Be honest — this helps your teacher plan the next session.</div>
+      <div id="reflectionForm"></div>
+    </div>
+  </div>
+
+</div>
+</div><!-- /page-content -->
+
+<!-- Score tracker -->
+<div class="score-tracker">
+  <div class="st-label">Session score</div>
+  <div class="st-score" id="scoreDisplay">0</div>
+  <div class="st-pts">points earned</div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════
+
+const brokenSentences = [
+  { stem: "Scientists recommend", hint: "e.g. … reducing carbon emissions by 50% before 2030." },
+  { stem: "Many people avoid", hint: "e.g. … buying products with excessive packaging." },
+  { stem: "Governments keep", hint: "e.g. … delaying action on climate change." },
+  { stem: "Young people are starting to consider", hint: "e.g. … switching to plant-based diets." },
+  { stem: "This environmental programme involves", hint: "e.g. … training local communities to separate waste." },
+];
+
+const nounPrompts = [
+  { noun:"method", eg:"an effective method for reducing carbon emissions" },
+  { noun:"bag",    eg:"a lightweight reusable bag made from recycled cotton" },
+  { noun:"programme", eg:"a community-based programme for collecting rainwater" },
+  { noun:"strategy",  eg:"a long-term government strategy for protecting biodiversity" },
+  { noun:"device",    eg:"a small solar-powered device for charging mobile phones" },
+];
+
+const gapfillData = [
+  {
+    sentence: "Many families are now considering [GAP] their own vegetables at home.",
+    answers: ["growing"],
+    verb: "consider",
+    hint: "consider + ___ your own vegetables"
+  },
+  {
+    sentence: "Environmentalists suggest [GAP] single-use plastics immediately.",
+    answers: ["banning","eliminating","removing","reducing"],
+    verb: "suggest",
+    hint: "suggest + ___ single-use plastics"
+  },
+  {
+    sentence: "The government keeps [GAP] the issue without taking real action.",
+    answers: ["avoiding","delaying","ignoring","discussing"],
+    verb: "keep",
+    hint: "keep + ___ the issue"
+  },
+  {
+    sentence: "Some people avoid [GAP] products with too much packaging.",
+    answers: ["buying","purchasing","choosing"],
+    verb: "avoid",
+    hint: "avoid + ___ products"
+  },
+  {
+    sentence: "This recycling programme involves [GAP] waste into four separate categories.",
+    answers: ["sorting","separating","dividing","organising"],
+    verb: "involve",
+    hint: "involve + ___ waste"
+  },
+  {
+    sentence: "Imagine [GAP] in a city with no clean air at all.",
+    answers: ["living","working","breathing"],
+    verb: "imagine",
+    hint: "imagine + ___ in a city"
+  },
+];
+
+const wordBank = ["avoid","consider","suggest","recommend","keep","involve","imagine","finish","practise","enjoy"];
+
+const tfData = [
+  {
+    sentence: "She <mark>suggested to buy</mark> reusable bags instead of plastic ones.",
+    correct: false,
+    correction: "Correction: 'suggested buying' — 'suggest' takes verb + -ing, not the infinitive."
+  },
+  {
+    sentence: "A long-term <mark>method for reducing</mark> carbon emissions is planting more trees.",
+    correct: true,
+    correction: ""
+  },
+  {
+    sentence: "Many scientists <mark>recommend cutting down on</mark> fossil fuel use immediately.",
+    correct: true,
+    correction: ""
+  },
+  {
+    sentence: "This is <mark>a bin separate for household waste</mark> collection.",
+    correct: false,
+    correction: "Correction: The modifier order is wrong. It should be 'a separate bin for collecting household waste' — pre-modifier before head noun."
+  },
+  {
+    sentence: "I <mark>enjoy to volunteer</mark> at local beach clean-up events every month.",
+    correct: false,
+    correction: "Correction: 'enjoy volunteering' — 'enjoy' always takes verb + -ing."
+  },
+  {
+    sentence: "We need <mark>an effective community-based solution for protecting</mark> local biodiversity.",
+    correct: true,
+    correction: ""
+  },
+];
+
+const speakQuestions = [
+  { q:"What is ONE practical thing you personally do — or could do — to help the environment at home? Use a complex noun phrase to name it.", color:"sc-blue", hint:"Use: 'a method for…' or 'a system for…'" },
+  { q:"If you could recommend ONE change for the Indonesian government to make, what would it be? Why?", color:"sc-yellow", hint:"Use: 'I recommend…ing' and a complex noun phrase" },
+  { q:"What environmental problem do you think people in Jakarta avoid thinking about the most? Why?", color:"sc-orange", hint:"Use: 'People avoid thinking about…'" },
+  { q:"Imagine living in Jakarta 50 years from now if nothing changes. Describe what you see.", color:"sc-teal", hint:"Use: 'Imagine living…' and 'a city without…'" },
+];
+
+const ttolSets = [
+  {
+    items: [
+      { text: "She considered starting a programme for reducing plastic in her neighbourhood.", lie: false },
+      { text: "He recommend to switch to solar energy at his next job.", lie: true, correction: "Should be 'recommended switching' — 'recommend' takes verb + -ing, not the infinitive." },
+      { text: "A long-term strategy for protecting marine biodiversity is now being developed.", lie: false },
+    ]
+  },
+  {
+    items: [
+      { text: "They finished building a new recycling centre on the edge of the city.", lie: false },
+      { text: "This involves sort plastic from paper before collection.", lie: true, correction: "Should be 'involves sorting' — after 'involve', the verb must be in -ing form." },
+      { text: "An effective government-funded initiative for cutting carbon emissions was launched last year.", lie: false },
+    ]
+  },
+  {
+    items: [
+      { text: "Can you imagine living in a world where the ocean is completely polluted?", lie: false },
+      { text: "A community-based system for collect rainwater from rooftops has been installed.", lie: true, correction: "Should be 'for collecting' — after a preposition (for), use verb + -ing." },
+      { text: "Many experts suggest reducing our reliance on single-use plastic packaging.", lie: false },
+    ]
+  },
+];
+
+const reflectionItems = [
+  { label:"Verbs + -ing", key:"ing" },
+  { label:"Complex noun phrases", key:"cnp" },
+  { label:"Combining both in a sentence", key:"both" },
+  { label:"Using these in speaking", key:"speak" },
+  { label:"Using these in writing", key:"write" },
+];
+
+// ═══════════════════════════════════════════
+// SCORE
+// ═══════════════════════════════════════════
+let totalScore = 0;
+function addScore(pts) {
+  totalScore += pts;
+  document.getElementById('scoreDisplay').textContent = totalScore;
+  document.getElementById('headerScore').textContent = totalScore;
+}
+
+// ═══════════════════════════════════════════
+// BUILD BROKEN SENTENCES
+// ═══════════════════════════════════════════
+function buildBroken() {
+  const wrap = document.getElementById('brokenList');
+  brokenSentences.forEach((s, i) => {
+    const el = document.createElement('div');
+    el.className = 'broken-item';
+    el.innerHTML = `
+      <div class="broken-stem">${s.stem} <span>+ ???</span></div>
+      <textarea class="answer-input" id="broken-${i}" rows="2" placeholder="Complete the sentence with verb + -ing…"></textarea>
+      <div class="answer-reveal" id="broken-hint-${i}">${s.hint}</div>
+    `;
+    wrap.appendChild(el);
+  });
+}
+
+function checkAllBroken() {
+  brokenSentences.forEach((s, i) => {
+    const input = document.getElementById(`broken-${i}`);
+    const val = input.value.trim();
+    if (val.length > 8) {
+      const hasIng = /\w+ing\b/i.test(val);
+      input.classList.remove('correct-ans','wrong-ans');
+      if (hasIng) { input.classList.add('correct-ans'); addScore(5); }
+      else         { input.classList.add('wrong-ans'); }
+    }
+  });
+}
+
+function revealBrokenHints() {
+  brokenSentences.forEach((_, i) => {
+    document.getElementById(`broken-hint-${i}`).classList.add('show');
+  });
+}
+
+// ═══════════════════════════════════════════
+// BUILD NOUN BUILDERS
+// ═══════════════════════════════════════════
+function buildNounBuilders() {
+  const wrap = document.getElementById('nounBuilders');
+  nounPrompts.forEach((n, i) => {
+    const el = document.createElement('div');
+    el.className = 'noun-builder';
+    el.innerHTML = `
+      <div class="nb-prompt">${n.noun}</div>
+      <div class="nb-fields">
+        <div class="nb-field">
+          <div class="nb-field-label nfl-pre">Pre-modifier (article + adjective)</div>
+          <input class="nb-input" id="nb-pre-${i}" placeholder="e.g. a practical" oninput="updateNbDisplay(${i})">
+        </div>
+        <div class="nb-field">
+          <div class="nb-field-label nfl-post">Post-modifier (phrase)</div>
+          <input class="nb-input" id="nb-post-${i}" placeholder="e.g. used in cities" oninput="updateNbDisplay(${i})">
+        </div>
+        <div class="nb-field nb-full">
+          <div class="nb-field-label nfl-ing">-ing phrase (for / of + verb-ing…)</div>
+          <input class="nb-input" id="nb-ing-${i}" placeholder="e.g. for reducing plastic waste" oninput="updateNbDisplay(${i})">
+        </div>
+        <div class="nb-field nb-full">
+          <div class="nb-field-label nfl-full">Full noun phrase (write the complete phrase)</div>
+          <input class="nb-input" id="nb-full-${i}" placeholder="Write the complete noun phrase here" oninput="updateNbDisplay(${i})">
+        </div>
+      </div>
+      <div class="nb-display" id="nb-display-${i}">Your noun phrase will appear as you type...</div>
+      <div class="nb-controls">
+        <button class="check-btn cb-ghost" onclick="revealNbEg(${i})">Show example</button>
+        <button class="check-btn cb-blue" onclick="scoreNb(${i})">Mark done +5 pts</button>
+      </div>
+      <div class="answer-reveal" id="nb-eg-${i}">${n.eg}</div>
+    `;
+    wrap.appendChild(el);
+    if (i < nounPrompts.length - 1) {
+      const hr = document.createElement('div');
+      hr.className = 'divider';
+      wrap.appendChild(hr);
+    }
+  });
+}
+
+function updateNbDisplay(i) {
+  const pre  = document.getElementById(`nb-pre-${i}`).value.trim();
+  const post = document.getElementById(`nb-post-${i}`).value.trim();
+  const ing  = document.getElementById(`nb-ing-${i}`).value.trim();
+  const full = document.getElementById(`nb-full-${i}`).value.trim();
+  const display = document.getElementById(`nb-display-${i}`);
+  if (!pre && !post && !ing && !full) {
+    display.className = 'nb-display';
+    display.textContent = 'Your noun phrase will appear as you type...';
+    return;
+  }
+  display.className = 'nb-display filled';
+  let parts = '';
+  if (pre)  parts += `<span class="nb-pre">${pre}</span> `;
+  parts += `<span class="nb-head" style="margin:0 2px;">★noun★</span> `;
+  if (post) parts += `<span class="nb-post">${post}</span> `;
+  if (ing)  parts += `<span class="nb-ing">${ing}</span>`;
+  if (full) parts = `<span style="color:var(--blue);font-weight:700;">${full}</span>`;
+  display.innerHTML = parts;
+}
+
+function revealNbEg(i) { document.getElementById(`nb-eg-${i}`).classList.add('show'); }
+const nbScored = new Set();
+function scoreNb(i) {
+  if (nbScored.has(i)) return;
+  const full = document.getElementById(`nb-full-${i}`).value.trim();
+  if (full.length > 5) { nbScored.add(i); addScore(5); }
+}
+
+// ═══════════════════════════════════════════
+// BUILD GAP FILL
+// ═══════════════════════════════════════════
+function buildGapFill() {
+  // word bank chips
+  const wbWrap = document.getElementById('wordBankDisplay');
+  wordBank.forEach(w => {
+    const chip = document.createElement('span');
+    chip.style.cssText = 'background:var(--blue);color:#fff;font-family:Nunito,sans-serif;font-weight:700;font-size:12px;padding:3px 12px;border-radius:99px;display:inline-block;';
+    chip.textContent = w;
+    wbWrap.appendChild(chip);
+  });
+
+  const wrap = document.getElementById('gapfillList');
+  gapfillData.forEach((item, i) => {
+    const el = document.createElement('div');
+    el.className = 'gf-item';
+    const letter = String.fromCharCode(97 + i);
+    const sentHtml = item.sentence.replace('[GAP]',
+      `<input class="gap-input" id="gf-${i}" placeholder="___" autocomplete="off">`
+    );
+    el.innerHTML = `
+      <div class="gf-letter">${letter}.</div>
+      <div class="gf-content">
+        <div class="gf-sentence">${sentHtml}</div>
+        <div class="gf-hint" id="gf-hint-${i}">${item.hint}</div>
+      </div>
+    `;
+    wrap.appendChild(el);
+  });
+}
+
+function checkGapFill() {
+  gapfillData.forEach((item, i) => {
+    const input = document.getElementById(`gf-${i}`);
+    const val = input.value.trim().toLowerCase().replace(/\s+/g,'');
+    input.classList.remove('gf-correct','gf-wrong');
+    const isCorrect = item.answers.some(a => {
+      const clean = a.toLowerCase().replace(/\s+/g,'');
+      return val === clean || val === clean + 'ing' ||
+             (a.endsWith('ing') && val === a) ||
+             val === a.replace(/e$/,'') + 'ing';
+    });
+    if (isCorrect) { input.classList.add('gf-correct'); addScore(10); }
+    else           { input.classList.add('gf-wrong'); }
+  });
+}
+
+function resetGapFill() {
+  gapfillData.forEach((_, i) => {
+    const input = document.getElementById(`gf-${i}`);
+    input.value = '';
+    input.classList.remove('gf-correct','gf-wrong');
+  });
+}
+
+// ═══════════════════════════════════════════
+// BUILD SPEAKING CARDS
+// ═══════════════════════════════════════════
+function buildSpeakCards() {
+  const wrap = document.getElementById('speakCards');
+  speakQuestions.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = `speak-card ${q.color}`;
+    card.innerHTML = `<div class="speak-q">${q.q}</div><div class="speak-hint">${q.hint}</div>`;
+    card.addEventListener('click', () => {
+      card.classList.toggle('done');
+      if (card.classList.contains('done')) addScore(10);
+    });
+    wrap.appendChild(card);
+  });
+}
+
+// ═══════════════════════════════════════════
+// BUILD TRUE / FALSE
+// ═══════════════════════════════════════════
+const tfAnswered = new Set();
+function buildTF() {
+  const wrap = document.getElementById('tfGrid');
+  tfData.forEach((item, i) => {
+    const el = document.createElement('div');
+    el.className = 'tf-item';
+    el.id = `tf-${i}`;
+    el.innerHTML = `
+      <div class="tf-num">${i+1}.</div>
+      <div class="tf-stmt" style="flex:1;">${item.sentence}${item.correction ? `<div class="answer-reveal" id="tf-fb-${i}">${item.correction}</div>` : ''}</div>
+      <div class="tf-btns-wrap">
+        <button class="tf-btn" onclick="answerTF(${i},true)">True</button>
+        <button class="tf-btn" onclick="answerTF(${i},false)">False</button>
+        <div class="tf-feedback" id="tf-result-${i}"></div>
+      </div>
+    `;
+    wrap.appendChild(el);
+  });
+}
+
+function answerTF(i, selected) {
+  if (tfAnswered.has(i)) return;
+  tfAnswered.add(i);
+  const item = tfData[i];
+  const el = document.getElementById(`tf-${i}`);
+  const res = document.getElementById(`tf-result-${i}`);
+  const btns = el.querySelectorAll('.tf-btn');
+  btns.forEach(b => b.style.pointerEvents = 'none');
+  const isCorrect = selected === item.correct;
+  if (isCorrect) {
+    el.classList.add('tf-correct');
+    btns[selected ? 0 : 1].classList.add('selected-t');
+    res.className = 'tf-feedback ok'; res.textContent = '✓ Correct!';
+    addScore(10);
+  } else {
+    el.classList.add('tf-wrong');
+    btns[selected ? 0 : 1].classList.add('selected-f');
+    res.className = 'tf-feedback bad'; res.textContent = '✗ Not quite.';
+    if (item.correction) document.getElementById(`tf-fb-${i}`).classList.add('show');
+  }
+}
+
+// ═══════════════════════════════════════════
+// WORD COUNT + OPINION
+// ═══════════════════════════════════════════
+function updateWordCount() {
+  const text = document.getElementById('opinionText').value.trim();
+  const wc = text ? text.split(/\s+/).length : 0;
+  const el = document.getElementById('wcDisplay');
+  el.textContent = wc;
+  el.className = wc >= 100 && wc <= 130 ? 'wc-ok' : wc > 130 ? 'wc-warn' : '';
+}
+
+let opinionSubmitted = false;
+function submitOpinion() {
+  if (opinionSubmitted) return;
+  const text = document.getElementById('opinionText').value.trim();
+  const wc = text ? text.split(/\s+/).length : 0;
+  const fb = document.getElementById('opinionFb');
+  if (wc < 80) {
+    fb.className = 'answer-reveal show';
+    fb.style.borderLeftColor = 'var(--red)'; fb.style.color = 'var(--red)';
+    fb.style.background = 'var(--red-light)';
+    fb.textContent = 'Your paragraph is too short — aim for at least 100 words.';
+    return;
+  }
+  opinionSubmitted = true;
+  fb.className = 'answer-reveal show';
+  fb.style.borderLeftColor = 'var(--teal)'; fb.style.color = 'var(--teal)';
+  fb.style.background = 'var(--teal-light)';
+  fb.textContent = '✓ Paragraph submitted! Your teacher will review it. +20 pts awarded.';
+  addScore(20);
+}
+
+// ═══════════════════════════════════════════
+// BUILD TWO TRUTHS ONE LIE
+// ═══════════════════════════════════════════
+function buildTTOL() {
+  const wrap = document.getElementById('ttolSets');
+  ttolSets.forEach((set, si) => {
+    const setEl = document.createElement('div');
+    setEl.style.marginBottom = '1.25rem';
+    const setLabel = document.createElement('div');
+    setLabel.style.cssText = 'font-family:Nunito,sans-serif;font-weight:800;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px;';
+    setLabel.textContent = `Set ${si + 1}`;
+    setEl.appendChild(setLabel);
+
+    const listEl = document.createElement('div');
+    listEl.className = 'ttol-wrap';
+    let setRevealed = false;
+
+    set.items.forEach((item, ii) => {
+      const alpha = ['a','b','c'][ii];
+      const itemEl = document.createElement('div');
+      itemEl.className = 'ttol-item';
+      itemEl.innerHTML = `
+        <div class="ttol-alpha">${alpha}.</div>
+        <div class="ttol-text">
+          ${item.text}
+          ${item.lie ? `<div class="ttol-correction">${item.correction}</div>` : ''}
+        </div>
+        <div class="ttol-badge">${item.lie ? 'LIE' : 'TRUTH'}</div>
+      `;
+      itemEl.addEventListener('click', () => {
+        if (setRevealed) return;
+        setRevealed = true;
+        set.items.forEach((it, idx) => {
+          const els = listEl.querySelectorAll('.ttol-item');
+          els[idx].classList.add('revealed', it.lie ? 'lie' : 'truth');
+          els[idx].style.cursor = 'default';
+        });
+        if (item.lie) addScore(15);
+        submitBtn.disabled = true;
+      });
+      listEl.appendChild(itemEl);
+    });
+
+    const submitBtn = document.createElement('button');
+    submitBtn.className = 'ttol-submit';
+    submitBtn.textContent = 'Tap the sentence you think is the LIE';
+    submitBtn.disabled = true;
+    submitBtn.style.display = 'none';
+
+    setEl.appendChild(listEl);
+    if (si < ttolSets.length - 1) {
+      const hr = document.createElement('div');
+      hr.className = 'divider';
+      setEl.appendChild(hr);
+    }
+    wrap.appendChild(setEl);
+  });
+}
+
+// ═══════════════════════════════════════════
+// BUILD REFLECTION
+// ═══════════════════════════════════════════
+function buildReflection() {
+  const wrap = document.getElementById('reflectionForm');
+  const levels = ['Not yet','Nearly there','Confident!'];
+  reflectionItems.forEach(item => {
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);flex-wrap:wrap;';
+    const lbl = document.createElement('div');
+    lbl.style.cssText = 'font-size:14px;font-weight:700;color:var(--blue);font-family:Nunito,sans-serif;flex:1;min-width:150px;';
+    lbl.textContent = item.label;
+    row.appendChild(lbl);
+    const btnGroup = document.createElement('div');
+    btnGroup.style.cssText = 'display:flex;gap:6px;';
+    levels.forEach((lv, li) => {
+      const colors = ['cb-ghost','an-orange','an-teal'];
+      const btn = document.createElement('button');
+      btn.className = 'check-btn cb-ghost';
+      btn.textContent = lv;
+      btn.style.cssText = 'font-size:12px;padding:5px 12px;';
+      btn.addEventListener('click', () => {
+        btnGroup.querySelectorAll('button').forEach(b => {
+          b.style.background=''; b.style.color=''; b.style.borderColor='';
+        });
+        const bgColors = ['var(--red-light)','var(--orange-light)','var(--teal-light)'];
+        const txColors = ['var(--red)','var(--orange)','var(--teal)'];
+        const bdColors = ['var(--red)','var(--orange)','var(--teal)'];
+        btn.style.background = bgColors[li];
+        btn.style.color = txColors[li];
+        btn.style.borderColor = bdColors[li];
+      });
+      btnGroup.appendChild(btn);
+    });
+    row.appendChild(btnGroup);
+    wrap.appendChild(row);
+  });
+}
+
+// ═══════════════════════════════════════════
+// TAB SWITCH
+// ═══════════════════════════════════════════
+function switchPhase(id, btn) {
+  document.querySelectorAll('.phase-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.phase-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('phase-'+id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// INIT
+buildBroken();
+buildNounBuilders();
+buildGapFill();
+buildSpeakCards();
+buildTF();
+buildTTOL();
+buildReflection();
+</script>
+</body>
+</html>
