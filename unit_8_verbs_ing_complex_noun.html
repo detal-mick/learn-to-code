@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grammar Focus — Unit 8 Session 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue: #1a3a6b;
+  --blue-mid: #2255a4;
+  --blue-light: #e8eef8;
+  --yellow: #f5c518;
+  --yellow-light: #fff9e0;
+  --orange: #f07c1e;
+  --orange-light: #fff3e6;
+  --teal: #0e9f8e;
+  --teal-light: #e5f7f5;
+  --red: #d63031;
+  --red-light: #fdecea;
+  --white: #fff;
+  --bg: #f0f3fa;
+  --text: #1a1a2e;
+  --text-muted: #556;
+  --border: #dde3ef;
+  --radius: 14px;
+  --radius-sm: 8px;
+  --shadow: 0 4px 20px rgba(26,58,107,0.12);
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+
+body {
+  font-family: 'Lato', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 15px;
+}
+
+/* ── TOP BAR ── */
+.topbar {
+  background: var(--blue);
+  padding: 0 2rem;
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(26,58,107,0.25);
+}
+.topbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 0;
+  flex: 1;
+}
+.brand-badge {
+  background: var(--yellow);
+  color: var(--blue);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 20px;
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  line-height: 1;
+}
+.brand-text {
+  color: var(--white);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 17px;
+  line-height: 1.2;
+}
+.brand-sub {
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.6);
+  font-family: 'Lato', sans-serif;
+}
+.tabs {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+.tab {
+  padding: 0 22px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  transition: color 0.18s, border-color 0.18s;
+  letter-spacing: 0.03em;
+}
+.tab:hover { color: rgba(255,255,255,0.85); }
+.tab.active { color: var(--yellow); border-bottom-color: var(--yellow); }
+
+/* ── CONTENT ── */
+.content { max-width: 820px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+.section { display: none; }
+.section.active { display: block; }
+
+/* ── HERO PILL ── */
+.hero-pill {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.75rem;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+.hero-icon {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+.hero-icon.blue { background: var(--blue-light); }
+.hero-icon.orange { background: var(--orange-light); }
+.hero-title {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 20px;
+  color: var(--blue);
+  line-height: 1.2;
+}
+.hero-sub {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* ── VERB WHEEL ── */
+.verb-section-title {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--blue-mid);
+  margin-bottom: 1rem;
+}
+
+.verb-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+  margin-bottom: 1.5rem;
+}
+.verb-chip {
+  background: var(--white);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.18s;
+  position: relative;
+}
+.verb-chip:hover { border-color: var(--blue-mid); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(26,58,107,0.12); }
+.verb-chip.active { border-color: var(--blue); background: var(--blue); color: var(--white); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(26,58,107,0.25); }
+.verb-chip.active .vc-text { color: var(--white); }
+.verb-chip.active .vc-sub { color: rgba(255,255,255,0.7); }
+.vc-text { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 16px; color: var(--blue); transition: color 0.18s; }
+.vc-sub { font-size: 10px; color: var(--text-muted); margin-top: 2px; transition: color 0.18s; }
+
+/* verb detail panel */
+.verb-panel {
+  display: none;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 5px solid var(--blue);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+  animation: slideIn 0.2s ease;
+  box-shadow: var(--shadow);
+}
+.verb-panel.show { display: block; }
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.panel-verb {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 22px;
+  color: var(--blue);
+  margin-bottom: 0.3rem;
+}
+.panel-verb span { color: var(--blue-mid); font-size: 15px; font-weight: 700; }
+.panel-meaning {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+.panel-examples {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.panel-eg {
+  background: var(--blue-light);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.6;
+}
+.panel-eg mark {
+  background: var(--yellow);
+  color: var(--blue);
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+/* contrast box */
+.contrast-box {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow);
+}
+.contrast-title {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.contrast-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 520px) { .contrast-grid { grid-template-columns: 1fr; } }
+.contrast-col-head {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  text-align: center;
+}
+.col-ing { background: var(--teal); color: var(--white); }
+.col-inf { background: var(--orange); color: var(--white); }
+.contrast-list {
+  background: var(--bg);
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.contrast-verb {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--blue);
+  padding: 6px 10px;
+  background: var(--white);
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+/* position rule */
+.pos-rule {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 0.75rem;
+  box-shadow: var(--shadow);
+}
+.pos-title {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+.formula-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+.fb {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  padding: 7px 14px;
+  border-radius: var(--radius-sm);
+}
+.fb-subj { background: var(--blue-light); color: var(--blue); }
+.fb-verb { background: var(--yellow-light); color: var(--blue); border: 2px solid var(--yellow); }
+.fb-ing  { background: var(--teal-light); color: var(--teal); border: 2px solid var(--teal); }
+.fb-obj  { background: var(--orange-light); color: var(--orange); border: 2px solid var(--orange); }
+.fb-plus { color: var(--text-muted); font-size: 18px; }
+.formula-eg {
+  font-size: 14px;
+  font-style: italic;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.formula-eg mark {
+  background: var(--yellow);
+  color: var(--blue);
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+/* ── COMPLEX NOUN PHRASES ── */
+.builder-wrap {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow);
+}
+.builder-title {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 1.25rem;
+}
+.builder-display {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  min-height: 52px;
+  background: var(--bg);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-bottom: 1.25rem;
+  transition: border-color 0.2s;
+}
+.builder-display.has-content { border-color: var(--blue-mid); border-style: solid; }
+.bd-part {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  animation: popIn 0.2s cubic-bezier(0.34,1.56,0.64,1);
+}
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.bd-pre  { background: var(--blue-light); color: var(--blue); }
+.bd-head { background: var(--yellow); color: var(--blue); border: 2px solid var(--blue); }
+.bd-post { background: var(--teal-light); color: var(--teal); }
+.bd-ing  { background: var(--orange-light); color: var(--orange); }
+.bd-label {
+  font-size: 10px;
+  font-weight: 400;
+  opacity: 0.7;
+  display: block;
+  margin-bottom: 1px;
+  font-family: 'Lato', sans-serif;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.builder-placeholder {
+  color: var(--text-muted);
+  font-size: 14px;
+  font-style: italic;
+}
+
+.builder-controls {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+@media (max-width: 520px) { .builder-controls { grid-template-columns: 1fr 1fr; } }
+.bc-col-label {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  text-align: center;
+  padding: 4px 0;
+  border-radius: var(--radius-sm);
+}
+.bc-pre  { color: var(--blue); background: var(--blue-light); }
+.bc-head { color: var(--blue); background: var(--yellow-light); border: 1px solid var(--yellow); }
+.bc-post { color: var(--teal); background: var(--teal-light); }
+.bc-ing  { color: var(--orange); background: var(--orange-light); }
+.bc-options {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.bc-btn {
+  font-family: 'Lato', sans-serif;
+  font-size: 12.5px;
+  padding: 7px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--white);
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s;
+  color: var(--text);
+}
+.bc-btn:hover { transform: scale(1.03); }
+.bc-btn.sel-pre  { background: var(--blue-light); border-color: var(--blue); color: var(--blue); font-weight: 700; }
+.bc-btn.sel-head { background: var(--yellow); border-color: var(--blue); color: var(--blue); font-weight: 700; }
+.bc-btn.sel-post { background: var(--teal-light); border-color: var(--teal); color: var(--teal); font-weight: 700; }
+.bc-btn.sel-ing  { background: var(--orange-light); border-color: var(--orange); color: var(--orange); font-weight: 700; }
+.builder-reset {
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 9px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  border-radius: var(--radius-sm);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.builder-reset:hover { border-color: var(--blue); color: var(--blue); }
+
+/* examples carousel */
+.cnp-examples {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow);
+}
+.cnp-ex-title {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--blue-mid);
+  margin-bottom: 1.25rem;
+}
+.cnp-cards-track {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+.cnp-card {
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  min-width: 200px;
+  max-width: 220px;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+.cnp-card:hover { border-color: var(--blue-mid); box-shadow: 0 4px 12px rgba(26,58,107,0.1); }
+.cnp-card.active { border-color: var(--orange); background: var(--orange-light); }
+.cnp-card-phrase {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--blue);
+  line-height: 1.4;
+  margin-bottom: 0.6rem;
+}
+.cnp-card.active .cnp-card-phrase { color: var(--orange); }
+.cnp-parts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.cnp-part {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 99px;
+  font-family: 'Nunito', sans-serif;
+  letter-spacing: 0.05em;
+}
+.cnp-p-pre  { background: var(--blue-light); color: var(--blue); }
+.cnp-p-head { background: var(--yellow); color: var(--blue); }
+.cnp-p-post { background: var(--teal-light); color: var(--teal); }
+.cnp-p-ing  { background: var(--orange-light); color: var(--orange); border: 1px solid var(--orange); }
+
+/* ── CONNECTION SECTION ── */
+.connection-wrap {
+  background: var(--blue);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 20px rgba(26,58,107,0.25);
+}
+.conn-title {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 15px;
+  color: var(--yellow);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.conn-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 1.25rem;
+  line-height: 1.6;
+}
+.conn-examples {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.conn-eg {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  font-size: 14px;
+  font-style: italic;
+  color: rgba(255,255,255,0.9);
+  line-height: 1.6;
+}
+.conn-eg .hl-ing  { color: var(--teal); font-style: normal; font-weight: 700; }
+.conn-eg .hl-cnp  { color: var(--yellow); font-style: normal; font-weight: 700; border-bottom: 2px solid var(--yellow); }
+.conn-eg .hl-both { color: #f8b4f8; font-style: normal; font-weight: 700; }
+.conn-legend {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+.conn-dot {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.7);
+}
+.dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.dot-ing  { background: var(--teal); }
+.dot-cnp  { background: var(--yellow); }
+
+/* ── QUIZ ── */
+.quiz-wrap {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  margin-bottom: 1.5rem;
+}
+.quiz-header {
+  background: var(--blue);
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.quiz-header-title {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 16px;
+  color: var(--white);
+}
+.quiz-progress {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--yellow);
+}
+.quiz-body { padding: 1.5rem; }
+.quiz-q {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--blue);
+  margin-bottom: 1.25rem;
+  line-height: 1.5;
+}
+.quiz-q .blank-q {
+  display: inline-block;
+  min-width: 100px;
+  border-bottom: 3px solid var(--orange);
+  margin: 0 4px;
+  vertical-align: bottom;
+}
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 1.25rem;
+}
+.quiz-opt {
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--border);
+  background: var(--bg);
+  font-size: 14px;
+  cursor: pointer;
+  font-family: 'Lato', sans-serif;
+  transition: all 0.15s;
+  text-align: left;
+}
+.quiz-opt:hover { border-color: var(--blue-mid); background: var(--blue-light); }
+.quiz-opt.correct { border-color: var(--teal); background: var(--teal-light); color: var(--teal); font-weight: 700; }
+.quiz-opt.wrong { border-color: var(--red); background: var(--red-light); color: var(--red); }
+.quiz-opt.disabled { cursor: default; }
+.quiz-feedback {
+  display: none;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+.quiz-feedback.show { display: block; }
+.quiz-feedback.ok { background: var(--teal-light); color: var(--teal); border-left: 4px solid var(--teal); }
+.quiz-feedback.bad { background: var(--red-light); color: var(--red); border-left: 4px solid var(--red); }
+.quiz-next {
+  display: none;
+  width: 100%;
+  padding: 10px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: var(--blue);
+  color: var(--white);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.quiz-next:hover { background: var(--blue-mid); }
+.quiz-next.show { display: block; }
+.quiz-score {
+  display: none;
+  text-align: center;
+  padding: 2rem;
+}
+.quiz-score.show { display: block; }
+.score-big {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 52px;
+  color: var(--blue);
+}
+.score-label { font-size: 14px; color: var(--text-muted); margin-bottom: 1.5rem; }
+.score-retry {
+  padding: 10px 28px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: var(--yellow);
+  color: var(--blue);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-brand">
+    <div class="brand-badge">S2</div>
+    <div>
+      <div class="brand-text">Grammar Focus</div>
+      <div class="brand-sub">Unit 8 · The Environment · Session 2</div>
+    </div>
+  </div>
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('verbs',this)">Verbs + -ing</button>
+    <button class="tab" onclick="switchTab('cnp',this)">Complex Noun Phrases</button>
+    <button class="tab" onclick="switchTab('connect',this)">The Connection</button>
+    <button class="tab" onclick="switchTab('quiz',this)">Quick Quiz</button>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ═══════════════ TAB 1: VERBS + ING ═══════════════ -->
+<div class="section active" id="sec-verbs">
+
+  <div class="hero-pill">
+    <div class="hero-icon blue">🔄</div>
+    <div>
+      <div class="hero-title">Verbs followed by -ing</div>
+      <div class="hero-sub">These verbs always take a gerund (-ing form), never the infinitive. Tap any verb to explore it.</div>
+    </div>
+  </div>
+
+  <div class="verb-section-title">Tap a verb to see how it works</div>
+
+  <div class="verb-grid" id="verbGrid"></div>
+  <div class="verb-panel" id="verbPanel">
+    <div class="panel-verb" id="panelVerb"></div>
+    <div class="panel-meaning" id="panelMeaning"></div>
+    <div class="panel-examples" id="panelExamples"></div>
+  </div>
+
+  <div class="verb-section-title" style="margin-top:1.75rem;">Position in a sentence</div>
+
+  <div class="pos-rule" style="margin-bottom:0.75rem;">
+    <div class="pos-title">Basic pattern</div>
+    <div class="formula-row">
+      <div class="fb fb-subj">Subject</div>
+      <span class="fb-plus">+</span>
+      <div class="fb fb-verb">verb</div>
+      <span class="fb-plus">+</span>
+      <div class="fb fb-ing">verb + -ing</div>
+      <span class="fb-plus">+</span>
+      <div class="fb fb-obj">(object)</div>
+    </div>
+    <div class="formula-eg">Many scientists <mark>recommend reducing</mark> plastic use immediately.</div>
+  </div>
+
+  <div class="pos-rule">
+    <div class="pos-title">With an object between verb and -ing</div>
+    <div class="formula-row">
+      <div class="fb fb-subj">Subject</div>
+      <span class="fb-plus">+</span>
+      <div class="fb fb-verb">verb</div>
+      <span class="fb-plus">+</span>
+      <div class="fb fb-obj">object</div>
+      <span class="fb-plus">+</span>
+      <div class="fb fb-ing">verb + -ing</div>
+    </div>
+    <div class="formula-eg">The government <mark>suggested companies switching</mark> to renewable energy sources.</div>
+  </div>
+
+  <div style="margin-top:1.5rem;">
+    <div class="contrast-box">
+      <div class="contrast-title">⚠ Don't confuse these — they change meaning!</div>
+      <div class="contrast-grid">
+        <div>
+          <div class="contrast-col-head col-ing">Verb + -ing ✓</div>
+          <div class="contrast-list" id="ingList"></div>
+        </div>
+        <div>
+          <div class="contrast-col-head col-inf">Verb + infinitive ✓</div>
+          <div class="contrast-list" id="infList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════ TAB 2: COMPLEX NOUN PHRASES ═══════════════ -->
+<div class="section" id="sec-cnp">
+
+  <div class="hero-pill">
+    <div class="hero-icon orange">🧱</div>
+    <div>
+      <div class="hero-title">Complex Noun Phrases</div>
+      <div class="hero-sub">A head noun + modifiers before and after it. Build one using the controls below.</div>
+    </div>
+  </div>
+
+  <div class="builder-wrap">
+    <div class="builder-title">Noun Phrase Builder — click to build</div>
+    <div class="builder-display" id="builderDisplay">
+      <span class="builder-placeholder">Your noun phrase will appear here...</span>
+    </div>
+    <div class="builder-controls">
+      <div>
+        <div class="bc-col-label bc-pre">Pre-modifier</div>
+        <div class="bc-options" id="bcPre"></div>
+      </div>
+      <div>
+        <div class="bc-col-label bc-head">Head noun ★</div>
+        <div class="bc-options" id="bcHead"></div>
+      </div>
+      <div>
+        <div class="bc-col-label bc-post">Post-modifier</div>
+        <div class="bc-options" id="bcPost"></div>
+      </div>
+      <div>
+        <div class="bc-col-label bc-ing">-ing phrase</div>
+        <div class="bc-options" id="bcIng"></div>
+      </div>
+    </div>
+    <button class="builder-reset" onclick="resetBuilder()">↺ Clear and start again</button>
+  </div>
+
+  <div class="cnp-examples">
+    <div class="cnp-ex-title">Real examples from environmental writing — scroll to explore</div>
+    <div class="cnp-cards-track" id="cnpTrack"></div>
+  </div>
+
+</div>
+
+<!-- ═══════════════ TAB 3: THE CONNECTION ═══════════════ -->
+<div class="section" id="sec-connect">
+
+  <div class="hero-pill">
+    <div class="hero-icon blue">🔗</div>
+    <div>
+      <div class="hero-title">The Connection</div>
+      <div class="hero-sub">Verb + -ing forms can live <em>inside</em> complex noun phrases. These two grammar points are not separate — they combine.</div>
+    </div>
+  </div>
+
+  <div class="connection-wrap">
+    <div class="conn-title">⚡ The key insight</div>
+    <div class="conn-sub">When a verb + -ing appears after a preposition inside a noun phrase, it becomes the post-modifier. This is one of the most common patterns in formal environmental writing.</div>
+    <div class="conn-examples" id="connExamples"></div>
+    <div class="conn-legend">
+      <div class="conn-dot"><div class="dot dot-ing"></div> verb + -ing</div>
+      <div class="conn-dot"><div class="dot dot-cnp"></div> complex noun phrase (whole)</div>
+    </div>
+  </div>
+
+  <div class="pos-rule">
+    <div class="pos-title">The combined formula</div>
+    <div class="formula-row">
+      <div class="fb fb-subj">article/adj</div>
+      <span class="fb-plus">+</span>
+      <div class="fb fb-verb">head noun</div>
+      <span class="fb-plus">+</span>
+      <div class="fb fb-obj">for / of / in</div>
+      <span class="fb-plus">+</span>
+      <div class="fb fb-ing">verb + -ing</div>
+    </div>
+    <div class="formula-eg" style="margin-top:0.5rem;">
+      "a practical <mark>method</mark> for <mark>reducing</mark> plastic waste at home" — entire phrase = complex noun phrase
+    </div>
+  </div>
+
+  <div style="margin-top:1rem;">
+    <div class="pos-rule">
+      <div class="pos-title">Now used inside a sentence with another verb + -ing</div>
+      <div class="formula-eg">
+        "I <mark>recommend</mark> using <mark>a community programme for separating recyclable materials</mark> in every neighbourhood."
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:0.75rem;">
+        <span style="background:var(--teal-light);color:var(--teal);font-size:12px;font-weight:700;padding:4px 10px;border-radius:99px;font-family:'Nunito',sans-serif;">recommend + -ing</span>
+        <span style="background:var(--yellow-light);color:var(--blue);font-size:12px;font-weight:700;padding:4px 10px;border-radius:99px;border:1px solid var(--yellow);font-family:'Nunito',sans-serif;">complex noun phrase as object</span>
+        <span style="background:var(--orange-light);color:var(--orange);font-size:12px;font-weight:700;padding:4px 10px;border-radius:99px;border:1px solid var(--orange);font-family:'Nunito',sans-serif;">separating = -ing inside CNP</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════ TAB 4: QUIZ ═══════════════ -->
+<div class="section" id="sec-quiz">
+
+  <div class="hero-pill">
+    <div class="hero-icon orange">⚡</div>
+    <div>
+      <div class="hero-title">Quick Quiz</div>
+      <div class="hero-sub">8 questions — both grammar points. Choose the correct answer for each one.</div>
+    </div>
+  </div>
+
+  <div class="quiz-wrap">
+    <div class="quiz-header">
+      <div class="quiz-header-title">Check your understanding</div>
+      <div class="quiz-progress" id="quizProgress">1 / 8</div>
+    </div>
+    <div class="quiz-body">
+      <div id="quizQuestion"></div>
+      <div class="quiz-score" id="quizScore">
+        <div class="score-big" id="scoreBig"></div>
+        <div class="score-label" id="scoreLabel"></div>
+        <button class="score-retry" onclick="startQuiz()">Try again</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</div><!-- /content -->
+
+<script>
+// ══════════════════════════════════════════════════════════════
+// DATA
+// ══════════════════════════════════════════════════════════════
+
+const verbData = [
+  { verb:"avoid", hint:"to stay away from something", color:"blue",
+    examples:[
+      "Many people <mark>avoid using</mark> single-use plastics once they understand the impact.",
+      "We should <mark>avoid buying</mark> products with excessive packaging."
+    ]
+  },
+  { verb:"consider", hint:"to think carefully about doing something", color:"blue",
+    examples:[
+      "The government is <mark>considering introducing</mark> a plastic bag tax.",
+      "Have you ever <mark>considered switching</mark> to solar energy at home?"
+    ]
+  },
+  { verb:"suggest", hint:"to propose or recommend an idea", color:"blue",
+    examples:[
+      "Scientists <mark>suggest reducing</mark> carbon emissions by 50% before 2030.",
+      "She <mark>suggested planting</mark> more trees along the city's main roads."
+    ]
+  },
+  { verb:"recommend", hint:"to advise someone to do something", color:"blue",
+    examples:[
+      "Experts <mark>recommend using</mark> reusable bags instead of plastic ones.",
+      "The report <mark>recommends cutting</mark> down on industrial waste immediately."
+    ]
+  },
+  { verb:"keep", hint:"to continue doing something", color:"blue",
+    examples:[
+      "Factories keep <mark>releasing</mark> harmful gases into the atmosphere.",
+      "We need to <mark>keep working</mark> together to find sustainable solutions."
+    ]
+  },
+  { verb:"enjoy", hint:"to get pleasure from an activity", color:"blue",
+    examples:[
+      "Many families <mark>enjoy growing</mark> their own vegetables at home.",
+      "She <mark>enjoys volunteering</mark> for local beach clean-up events."
+    ]
+  },
+  { verb:"imagine", hint:"to form a mental picture of something", color:"blue",
+    examples:[
+      "<mark>Imagine living</mark> in a city with no clean air — that's the reality for millions.",
+      "Can you <mark>imagine reducing</mark> your household waste to zero?"
+    ]
+  },
+  { verb:"involve", hint:"to include something as a necessary part", color:"blue",
+    examples:[
+      "This recycling programme <mark>involves sorting</mark> waste into five separate categories.",
+      "Sustainable farming <mark>involves using</mark> natural methods to protect the soil."
+    ]
+  },
+  { verb:"finish", hint:"to complete an action", color:"blue",
+    examples:[
+      "Have you <mark>finished reading</mark> the environmental impact report?",
+      "They <mark>finished building</mark> the new solar panel facility last month."
+    ]
+  },
+  { verb:"practise", hint:"to do something repeatedly to improve", color:"blue",
+    examples:[
+      "She <mark>practises composting</mark> every day to reduce household waste.",
+      "Students <mark>practise separating</mark> recyclables during the school programme."
+    ]
+  },
+];
+
+const ingVerbs  = ["avoid","consider","suggest","recommend","keep","enjoy","imagine","involve","finish","practise","mind","risk"];
+const infVerbs  = ["want","hope","decide","plan","need","choose","wish","promise","offer","agree","expect","manage"];
+
+const cnpExamples = [
+  {
+    phrase: "a reusable bag made from recycled cotton",
+    parts: [
+      { label:"pre", text:"a reusable" },
+      { label:"head", text:"bag" },
+      { label:"post", text:"made from recycled cotton" },
+    ]
+  },
+  {
+    phrase: "an effective method for reducing carbon emissions",
+    parts: [
+      { label:"pre", text:"an effective" },
+      { label:"head", text:"method" },
+      { label:"ing", text:"for reducing carbon emissions" },
+    ]
+  },
+  {
+    phrase: "a colour-coded bin for separating household waste",
+    parts: [
+      { label:"pre", text:"a colour-coded" },
+      { label:"head", text:"bin" },
+      { label:"ing", text:"for separating household waste" },
+    ]
+  },
+  {
+    phrase: "a long-term solution for protecting biodiversity",
+    parts: [
+      { label:"pre", text:"a long-term" },
+      { label:"head", text:"solution" },
+      { label:"ing", text:"for protecting biodiversity" },
+    ]
+  },
+  {
+    phrase: "a community programme for collecting rainwater",
+    parts: [
+      { label:"pre", text:"a community" },
+      { label:"head", text:"programme" },
+      { label:"ing", text:"for collecting rainwater" },
+    ]
+  },
+  {
+    phrase: "a small solar-powered device for charging phones",
+    parts: [
+      { label:"pre", text:"a small solar-powered" },
+      { label:"head", text:"device" },
+      { label:"ing", text:"for charging phones" },
+    ]
+  },
+  {
+    phrase: "a government-funded initiative for planting urban trees",
+    parts: [
+      { label:"pre", text:"a government-funded" },
+      { label:"head", text:"initiative" },
+      { label:"ing", text:"for planting urban trees" },
+    ]
+  },
+];
+
+const builderOptions = {
+  pre:  ["a simple","an effective","a long-term","a community-based","a small solar-powered","a colour-coded","a government-funded"],
+  head: ["method","programme","solution","device","bin","initiative","system","container","strategy"],
+  post: ["used in schools","found in most households","designed for urban areas","approved by scientists"],
+  ing:  ["for reducing plastic waste","for separating recyclables","for collecting rainwater","for protecting wildlife","for growing food at home","for cutting carbon emissions"],
+};
+
+const connData = [
+  {
+    html: '"We need <span class="hl-cnp">a practical method <span class="hl-ing">for reducing</span> plastic waste</span> now."',
+    note: "The -ing phrase is the post-modifier inside the CNP"
+  },
+  {
+    html: 'Governments <span class="hl-ing">suggest adopting</span> <span class="hl-cnp">a community-based system <span class="hl-ing">for separating</span> household waste</span>.',
+    note: "Two -ing forms: one as the main verb pattern, one inside the CNP"
+  },
+  {
+    html: 'Scientists <span class="hl-ing">recommend building</span> <span class="hl-cnp">a long-term infrastructure <span class="hl-ing">for managing</span> carbon emissions</span> globally.',
+    note: "recommend + -ing, then CNP containing another -ing"
+  },
+  {
+    html: '"Have you considered <span class="hl-cnp">a solar-powered device <span class="hl-ing">for charging</span> your phone</span>?"',
+    note: "considered + -ing form (the whole CNP is the object)"
+  },
+];
+
+const quizData = [
+  {
+    q: "Many families are now considering ___ their own vegetables at home.",
+    opts: ["to grow","growing","grow","grown"],
+    ans: 1,
+    fb: "✓ 'consider' always takes verb + -ing. 'Considering growing' is correct."
+  },
+  {
+    q: "Which word is the HEAD NOUN in: 'a practical method for reducing carbon emissions'?",
+    opts: ["practical","method","reducing","emissions"],
+    ans: 1,
+    fb: "✓ The head noun is 'method'. The rest are modifiers around it."
+  },
+  {
+    q: "Scientists recommend ___ industrial waste before 2030.",
+    opts: ["to reduce","reducing","reduce","reduced"],
+    ans: 1,
+    fb: "✓ 'recommend' + -ing. We say 'recommend reducing', not 'recommend to reduce'."
+  },
+  {
+    q: "Which of these is a correctly formed complex noun phrase?",
+    opts: [
+      "a bin separate for waste",
+      "a colour-coded bin for separating household waste",
+      "bin for separating the waste colour-coded",
+      "a bin household waste separating"
+    ],
+    ans: 1,
+    fb: "✓ The structure is: pre-modifier + head noun + post-modifier (-ing phrase). 'A colour-coded bin for separating household waste' follows this exactly."
+  },
+  {
+    q: "I ___ buying products with too much packaging whenever I go shopping.",
+    opts: ["avoid","avoids to","am avoiding to","avoided to"],
+    ans: 0,
+    fb: "✓ 'avoid' + -ing. 'I avoid buying' is the correct form."
+  },
+  {
+    q: "The post-modifier in 'an effective solution for protecting biodiversity' is:",
+    opts: ["an effective","solution","for protecting biodiversity","effective solution"],
+    ans: 2,
+    fb: "✓ 'for protecting biodiversity' comes after the head noun 'solution' and gives more detail — it's the post-modifier."
+  },
+  {
+    q: "I suggest ___ a community-based programme for reducing plastic use.",
+    opts: ["to introduce","introducing","introduce","introduced"],
+    ans: 1,
+    fb: "✓ 'suggest' takes -ing. Notice the object is also a complex noun phrase: 'a community-based programme for reducing plastic use'."
+  },
+  {
+    q: "Which sentence uses BOTH a verb + -ing pattern AND a complex noun phrase correctly?",
+    opts: [
+      "She considered to start a programme reduce plastic.",
+      "She considered starting a programme for reducing plastic.",
+      "She considering starting a programme for reduce plastic.",
+      "She consider start a programme to reducing plastic."
+    ],
+    ans: 1,
+    fb: "✓ 'considered starting' (verb + -ing) + 'a programme for reducing plastic' (complex noun phrase with -ing post-modifier)."
+  },
+];
+
+// ══════════════════════════════════════════════════════════════
+// BUILD VERB GRID
+// ══════════════════════════════════════════════════════════════
+let activeVerbIdx = null;
+
+function buildVerbGrid() {
+  const grid = document.getElementById('verbGrid');
+  verbData.forEach((v, i) => {
+    const chip = document.createElement('div');
+    chip.className = 'verb-chip';
+    chip.innerHTML = `<div class="vc-text">${v.verb}</div><div class="vc-sub">+ -ing</div>`;
+    chip.addEventListener('click', () => selectVerb(i, chip));
+    grid.appendChild(chip);
+  });
+
+  // contrast lists
+  const il = document.getElementById('ingList');
+  const il2 = document.getElementById('infList');
+  ingVerbs.forEach(v => {
+    const d = document.createElement('div');
+    d.className = 'contrast-verb';
+    d.textContent = v;
+    il.appendChild(d);
+  });
+  infVerbs.forEach(v => {
+    const d = document.createElement('div');
+    d.className = 'contrast-verb';
+    d.textContent = v;
+    il2.appendChild(d);
+  });
+}
+
+function selectVerb(i, chip) {
+  document.querySelectorAll('.verb-chip').forEach(c => c.classList.remove('active'));
+  const panel = document.getElementById('verbPanel');
+  if (activeVerbIdx === i) {
+    activeVerbIdx = null;
+    panel.classList.remove('show');
+    return;
+  }
+  activeVerbIdx = i;
+  chip.classList.add('active');
+  const v = verbData[i];
+  document.getElementById('panelVerb').innerHTML = `${v.verb} <span>+ -ing</span>`;
+  document.getElementById('panelMeaning').textContent = v.hint;
+  document.getElementById('panelExamples').innerHTML = v.examples.map(e =>
+    `<div class="panel-eg">${e}</div>`
+  ).join('');
+  panel.classList.remove('show');
+  setTimeout(() => panel.classList.add('show'), 10);
+}
+
+// ══════════════════════════════════════════════════════════════
+// BUILD CNP BUILDER
+// ══════════════════════════════════════════════════════════════
+const builderState = { pre: null, head: null, post: null, ing: null };
+
+function buildBuilder() {
+  const cols = { pre:'bcPre', head:'bcHead', post:'bcPost', ing:'bcIng' };
+  Object.entries(cols).forEach(([key, id]) => {
+    const wrap = document.getElementById(id);
+    builderOptions[key].forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'bc-btn';
+      btn.textContent = opt;
+      btn.addEventListener('click', () => selectBuilderPart(key, opt, btn));
+      wrap.appendChild(btn);
+    });
+  });
+  updateBuilderDisplay();
+}
+
+function selectBuilderPart(key, val, btn) {
+  document.querySelectorAll(`#bc${key.charAt(0).toUpperCase()+key.slice(1)} .bc-btn`).forEach(b => {
+    b.classList.remove(`sel-${key}`);
+  });
+  if (builderState[key] === val) {
+    builderState[key] = null;
+  } else {
+    builderState[key] = val;
+    btn.classList.add(`sel-${key}`);
+  }
+  updateBuilderDisplay();
+}
+
+function updateBuilderDisplay() {
+  const d = document.getElementById('builderDisplay');
+  const { pre, head, post, ing } = builderState;
+  if (!pre && !head && !post && !ing) {
+    d.classList.remove('has-content');
+    d.innerHTML = '<span class="builder-placeholder">Your noun phrase will appear here...</span>';
+    return;
+  }
+  d.classList.add('has-content');
+  let html = '';
+  if (pre)  html += `<div class="bd-part bd-pre"><span class="bd-label">pre-modifier</span>${pre}</div>`;
+  if (head) html += `<div class="bd-part bd-head"><span class="bd-label">head noun ★</span>${head}</div>`;
+  if (post) html += `<div class="bd-part bd-post"><span class="bd-label">post-modifier</span>${post}</div>`;
+  if (ing)  html += `<div class="bd-part bd-ing"><span class="bd-label">-ing phrase</span>${ing}</div>`;
+  d.innerHTML = html;
+}
+
+function resetBuilder() {
+  Object.keys(builderState).forEach(k => builderState[k] = null);
+  document.querySelectorAll('.bc-btn').forEach(b => {
+    b.classList.remove('sel-pre','sel-head','sel-post','sel-ing');
+  });
+  updateBuilderDisplay();
+}
+
+function buildCNPCards() {
+  const track = document.getElementById('cnpTrack');
+  cnpExamples.forEach((ex, i) => {
+    const card = document.createElement('div');
+    card.className = 'cnp-card';
+    const labelMap = { pre:'pre-mod', head:'head noun', post:'post-mod', ing:'-ing phrase' };
+    const colorMap = { pre:'cnp-p-pre', head:'cnp-p-head', post:'cnp-p-post', ing:'cnp-p-ing' };
+    card.innerHTML = `
+      <div class="cnp-card-phrase">${ex.phrase}</div>
+      <div class="cnp-parts">
+        ${ex.parts.map(p => `<span class="cnp-part ${colorMap[p.label]}">${labelMap[p.label]}</span>`).join('')}
+      </div>`;
+    card.addEventListener('click', () => card.classList.toggle('active'));
+    track.appendChild(card);
+  });
+}
+
+// ══════════════════════════════════════════════════════════════
+// BUILD CONNECTION
+// ══════════════════════════════════════════════════════════════
+function buildConnection() {
+  const wrap = document.getElementById('connExamples');
+  connData.forEach(c => {
+    const el = document.createElement('div');
+    el.className = 'conn-eg';
+    el.innerHTML = `<div>${c.html}</div><div style="font-size:12px;color:rgba(255,255,255,0.5);margin-top:6px;font-style:normal;">${c.note}</div>`;
+    wrap.appendChild(el);
+  });
+}
+
+// ══════════════════════════════════════════════════════════════
+// QUIZ
+// ══════════════════════════════════════════════════════════════
+let qIndex = 0, score = 0, answered = false;
+
+function startQuiz() {
+  qIndex = 0; score = 0;
+  document.getElementById('quizScore').classList.remove('show');
+  showQuestion();
+}
+
+function showQuestion() {
+  const q = quizData[qIndex];
+  document.getElementById('quizProgress').textContent = `${qIndex+1} / ${quizData.length}`;
+  const body = document.getElementById('quizQuestion');
+  body.innerHTML = `
+    <div class="quiz-q">${q.q.replace('___','<span class="blank-q">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>')}</div>
+    <div class="quiz-options" id="qOpts">
+      ${q.opts.map((o,i) => `<button class="quiz-opt" onclick="selectAnswer(${i})">${o}</button>`).join('')}
+    </div>
+    <div class="quiz-feedback" id="qFb"></div>
+    <button class="quiz-next" id="qNext" onclick="nextQuestion()">${qIndex < quizData.length-1 ? 'Next question →' : 'See results'}</button>
+  `;
+  answered = false;
+}
+
+function selectAnswer(i) {
+  if (answered) return;
+  answered = true;
+  const q = quizData[qIndex];
+  const opts = document.querySelectorAll('.quiz-opt');
+  const fb = document.getElementById('qFb');
+  const next = document.getElementById('qNext');
+  opts.forEach((btn, idx) => {
+    btn.classList.add('disabled');
+    if (idx === q.ans) btn.classList.add('correct');
+    else if (idx === i && i !== q.ans) btn.classList.add('wrong');
+  });
+  const correct = i === q.ans;
+  if (correct) score++;
+  fb.textContent = q.fb;
+  fb.className = `quiz-feedback show ${correct ? 'ok' : 'bad'}`;
+  next.classList.add('show');
+}
+
+function nextQuestion() {
+  qIndex++;
+  if (qIndex >= quizData.length) {
+    document.getElementById('quizQuestion').innerHTML = '';
+    const sc = document.getElementById('quizScore');
+    document.getElementById('scoreBig').textContent = `${score}/${quizData.length}`;
+    const pct = Math.round(score/quizData.length*100);
+    document.getElementById('scoreLabel').textContent =
+      pct >= 88 ? 'Excellent! Both grammar points are solid.' :
+      pct >= 62 ? 'Good work — review the ones you missed.' :
+      'Keep practising — revisit the verb and CNP tabs.';
+    sc.classList.add('show');
+    document.getElementById('quizProgress').textContent = `Done`;
+  } else {
+    showQuestion();
+  }
+}
+
+// ══════════════════════════════════════════════════════════════
+// TAB SWITCH
+// ══════════════════════════════════════════════════════════════
+function switchTab(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// INIT
+buildVerbGrid();
+buildBuilder();
+buildCNPCards();
+buildConnection();
+startQuiz();
+</script>
+</body>
+</html>
