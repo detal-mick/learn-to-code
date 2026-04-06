@@ -4,444 +4,434 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Discussion Cards — Unit 8: The Environment</title>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,400&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --forest: #1e4d35;
-    --forest-mid: #2d6e4e;
-    --forest-light: #3d9068;
-    --teal-deep: #134a54;
-    --teal-mid: #1b6b7a;
-    --teal-light: #2a9ab0;
-    --sage: #7aab8a;
-    --mint: #c8e6d5;
-    --mist: #e6f3ee;
-    --ocean: #d0edf5;
-    --bg: #f0f6f2;
-    --card-bg: #ffffff;
-    --text-dark: #162d22;
-    --text-mid: #3a5a47;
-    --text-muted: #7a9c87;
-    --border: rgba(30,77,53,0.12);
-    --border-mid: rgba(30,77,53,0.22);
-    --shadow-card: 0 2px 16px rgba(30,77,53,0.10), 0 1px 3px rgba(30,77,53,0.07);
-    --shadow-btn: 0 1px 4px rgba(30,77,53,0.13);
-    --radius: 14px;
-    --radius-sm: 8px;
-  }
+:root {
+  --blue: #1a3a6b;
+  --blue-mid: #2255a4;
+  --blue-light: #e8eef8;
+  --yellow: #f5c518;
+  --yellow-light: #fff9e0;
+  --teal: #0e9f8e;
+  --teal-light: #e5f7f5;
+  --orange: #f07c1e;
+  --orange-light: #fff3e6;
+  --bg: #f0f3fa;
+  --white: #fff;
+  --text: #1a1a2e;
+  --muted: #5a6a7e;
+  --dim: #9aabba;
+  --border: #dde3ef;
+  --border-mid: rgba(26,58,107,0.22);
+  --radius: 14px;
+  --radius-sm: 8px;
+  --shadow: 0 4px 20px rgba(26,58,107,0.10);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 0 0 4rem;
+}
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+/* ── TOP BAR ── */
+.topbar {
+  background: var(--blue);
+  padding: 0 2rem;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 16px rgba(26,58,107,0.3);
+}
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 0;
+}
+.tb-badge {
+  background: var(--yellow);
+  color: var(--blue);
+  font-weight: 900;
+  font-size: 16px;
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  line-height: 1;
+  flex-shrink: 0;
+}
+.tb-unit {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  display: block;
+}
+.tb-title {
+  font-family: 'Lora', serif;
+  font-size: 17px;
+  font-weight: 500;
+  color: #fff;
+  display: block;
+  margin-top: 1px;
+}
+.topbar-right {
+  display: flex;
+  align-items: center;
+}
+.timer-inline {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 22px;
+  color: var(--yellow);
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+  min-width: 60px;
+  text-align: right;
+}
+.timer-inline.running { color: #6ee8b0; }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text-dark);
-    min-height: 100vh;
-    padding: 2rem 1rem 4rem;
-  }
+/* ── MAIN ── */
+.main {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
 
-  /* subtle leaf pattern background */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      radial-gradient(ellipse at 10% 20%, rgba(45,110,78,0.07) 0%, transparent 50%),
-      radial-gradient(ellipse at 90% 80%, rgba(27,107,122,0.07) 0%, transparent 50%);
-    pointer-events: none;
-    z-index: 0;
-  }
+/* ── TOPIC CARD ── */
+.topic-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: opacity 0.2s, transform 0.2s;
+}
+.topic-card.fade { opacity: 0; transform: translateY(8px) scale(0.98); }
+.topic-card-top {
+  background: var(--blue);
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.topic-label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+.topic-index {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--yellow);
+}
+.topic-body { padding: 1.75rem 2rem 1.5rem; }
+.topic-quote {
+  font-family: 'Lora', serif;
+  font-size: 20px;
+  font-style: italic;
+  color: var(--blue);
+  line-height: 1.6;
+  padding-left: 1rem;
+  border-left: 4px solid var(--yellow);
+}
+.card-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 1.25rem 1.25rem;
+}
+.nav-btn {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border-mid);
+  background: var(--bg);
+  color: var(--blue-mid);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s, transform 0.1s;
+  flex-shrink: 0;
+}
+.nav-btn:hover { background: var(--blue-light); transform: scale(1.05); }
+.nav-btn:active { transform: scale(0.96); }
+.progress-bar {
+  flex: 1; height: 4px;
+  background: var(--bg);
+  border-radius: 99px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--blue-mid), var(--teal));
+  border-radius: 99px;
+  transition: width 0.3s ease;
+}
+.shuffle-btn {
+  padding: 0 14px; height: 36px;
+  border-radius: 99px;
+  border: 1.5px solid var(--border-mid);
+  background: var(--bg);
+  color: var(--blue-mid);
+  font-size: 12px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex; align-items: center; gap: 5px;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.shuffle-btn:hover { background: var(--blue-light); }
 
-  .container {
-    position: relative;
-    max-width: 600px;
-    margin: 0 auto;
-    z-index: 1;
-  }
+/* ── TIMER ── */
+.timer-card {
+  background: var(--blue);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 20px rgba(26,58,107,0.25);
+}
+.timer-lbl {
+  font-size: 10px; font-weight: 800;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.45); margin-bottom: 4px;
+}
+.timer-big {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 300; font-size: 48px;
+  color: #fff;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1; transition: color 0.3s;
+}
+.timer-big.running { color: #6ee8b0; }
+.timer-btns { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
+.t-btn {
+  min-width: 96px; padding: 8px 16px;
+  border-radius: 99px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px; font-weight: 800;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  text-align: center;
+}
+.t-btn:active { transform: scale(0.97); }
+.t-primary {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.18);
+}
+.t-primary:hover { background: rgba(255,255,255,0.22); }
+.t-primary.active { background: rgba(110,232,176,0.18); color: #6ee8b0; border-color: rgba(110,232,176,0.3); }
+.t-ghost {
+  background: transparent;
+  color: rgba(255,255,255,0.45);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.t-ghost:hover { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.7); }
 
-  /* ── header ── */
-  .header {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-  .header-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--mint);
-    color: var(--forest);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 5px 14px;
-    border-radius: 99px;
-    margin-bottom: 0.75rem;
-  }
-  .header-badge svg { width: 12px; height: 12px; }
-  .header h1 {
-    font-family: 'Lora', serif;
-    font-size: 26px;
-    font-weight: 600;
-    color: var(--forest);
-    line-height: 1.2;
-  }
-  .header p {
-    font-size: 13px;
-    color: var(--text-muted);
-    margin-top: 0.4rem;
-  }
+/* ── EXPRESSIONS ── */
+.expr-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.expr-header {
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.expr-tabs { display: flex; gap: 6px; }
+.etab {
+  padding: 5px 14px;
+  border-radius: 99px;
+  font-size: 12px; font-weight: 800;
+  cursor: pointer;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  font-family: 'Nunito', sans-serif;
+  transition: all 0.15s;
+}
+.etab:hover { border-color: var(--border-mid); color: var(--blue); }
+.etab.on-agree    { background: var(--teal);   border-color: var(--teal);   color: #fff; }
+.etab.on-disagree { background: var(--blue);   border-color: var(--blue);   color: #fff; }
+.etab.on-partial  { background: var(--yellow); border-color: var(--yellow); color: var(--blue); }
+.used-badge {
+  font-size: 12px; font-weight: 800;
+  color: var(--muted);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 3px 12px;
+  transition: background 0.3s;
+}
+.used-badge.all { background: var(--teal-light); color: var(--teal); border-color: var(--teal); }
 
-  /* ── topic card ── */
-  .card-wrapper { perspective: 800px; margin-bottom: 1.25rem; }
-  .topic-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 2rem 2rem 1.75rem;
-    box-shadow: var(--shadow-card);
-    position: relative;
-    overflow: hidden;
-    transition: opacity 0.22s ease, transform 0.22s ease;
-  }
-  .topic-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--forest-light), var(--teal-light));
-    border-radius: var(--radius) var(--radius) 0 0;
-  }
-  .topic-card.fade { opacity: 0; transform: translateY(10px) scale(0.98); }
+.expr-body { padding: 14px 16px; }
+.expr-group { display: none; flex-direction: column; gap: 7px; }
+.expr-group.show { display: flex; }
 
-  .card-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.25rem;
-  }
-  .card-tag {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--teal-mid);
-  }
-  .card-index {
-    font-size: 11px;
-    color: var(--text-muted);
-    background: var(--mist);
-    padding: 3px 10px;
-    border-radius: 99px;
-  }
+.group-label {
+  font-size: 10px; font-weight: 800;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0 0 8px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2px;
+}
+.gl-agree    { color: var(--teal); }
+.gl-disagree { color: var(--blue-mid); }
+.gl-partial  { color: #9a6800; }
 
-  .topic-quote {
-    font-family: 'Lora', serif;
-    font-size: 19px;
-    font-style: italic;
-    color: var(--text-dark);
-    line-height: 1.6;
-    padding-left: 1rem;
-    border-left: 3px solid var(--mint);
-  }
+.expr-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: var(--bg);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  user-select: none;
+}
+.expr-item:hover { background: var(--blue-light); border-color: var(--border-mid); }
+.expr-item.chk-agree    { background: var(--teal-light);   border-color: var(--teal); }
+.expr-item.chk-disagree { background: var(--blue-light);   border-color: var(--blue-mid); }
+.expr-item.chk-partial  { background: var(--yellow-light); border-color: var(--yellow); }
 
-  .card-nav {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 1.25rem;
-  }
-  .nav-btn {
-    width: 38px; height: 38px;
-    border-radius: 50%;
-    border: 1px solid var(--border-mid);
-    background: var(--mist);
-    color: var(--forest-mid);
-    font-size: 16px;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    transition: background 0.15s, transform 0.1s;
-    flex-shrink: 0;
-  }
-  .nav-btn:hover { background: var(--mint); transform: scale(1.05); }
-  .nav-btn:active { transform: scale(0.96); }
+.check-ring {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--border-mid);
+  background: var(--white);
+  flex-shrink: 0; margin-top: 1px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 900;
+  color: transparent;
+  transition: all 0.18s;
+}
+.chk-agree    .check-ring { background: var(--teal);   border-color: var(--teal);   color: #fff; }
+.chk-disagree .check-ring { background: var(--blue);   border-color: var(--blue);   color: #fff; }
+.chk-partial  .check-ring { background: var(--yellow); border-color: var(--yellow); color: var(--blue); }
 
-  .progress-bar {
-    flex: 1;
-    height: 4px;
-    background: var(--mist);
-    border-radius: 99px;
-    overflow: hidden;
-  }
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--forest-light), var(--teal-light));
-    border-radius: 99px;
-    transition: width 0.3s ease;
-  }
+.expr-phrase {
+  font-family: 'Lora', serif;
+  font-size: 14px; font-style: italic;
+  color: var(--text); line-height: 1.45;
+}
+.chk-agree    .expr-phrase { color: var(--teal); }
+.chk-disagree .expr-phrase { color: var(--blue); }
+.chk-partial  .expr-phrase { color: #9a6800; }
+.expr-note {
+  font-size: 11px; color: var(--dim); margin-top: 2px;
+}
+.chk-agree    .expr-note { color: rgba(14,159,142,0.7); }
+.chk-disagree .expr-note { color: rgba(26,58,107,0.55); }
+.chk-partial  .expr-note { color: rgba(154,104,0,0.65); }
 
-  .shuffle-btn {
-    padding: 0 14px;
-    height: 38px;
-    border-radius: 99px;
-    border: 1px solid var(--border-mid);
-    background: var(--mist);
-    color: var(--forest-mid);
-    font-size: 12px;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 500;
-    cursor: pointer;
-    display: flex; align-items: center; gap: 5px;
-    transition: background 0.15s;
-    flex-shrink: 0;
-  }
-  .shuffle-btn:hover { background: var(--mint); }
-  .shuffle-btn svg { width: 13px; height: 13px; }
-
-  /* ── timer ── */
-  .timer-card {
-    background: var(--forest);
-    border-radius: var(--radius);
-    padding: 1.5rem 2rem;
-    margin-bottom: 1.25rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 4px 20px rgba(30,77,53,0.25);
-  }
-  .timer-left {}
-  .timer-label {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--sage);
-    margin-bottom: 0.3rem;
-  }
-  .timer-display {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 44px;
-    font-weight: 300;
-    color: #ffffff;
-    letter-spacing: 0.03em;
-    font-variant-numeric: tabular-nums;
-    transition: color 0.3s;
-    line-height: 1;
-  }
-  .timer-display.running { color: #6ee8b0; }
-
-  .timer-btns { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
-  .t-btn {
-    min-width: 90px;
-    padding: 8px 16px;
-    border-radius: 99px;
-    border: 1px solid rgba(255,255,255,0.15);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 0.15s, transform 0.1s;
-  }
-  .t-btn:active { transform: scale(0.97); }
-  .t-btn-primary {
-    background: rgba(255,255,255,0.12);
-    color: #ffffff;
-  }
-  .t-btn-primary:hover { background: rgba(255,255,255,0.2); }
-  .t-btn-primary.active { background: rgba(110,232,176,0.2); color: #6ee8b0; border-color: rgba(110,232,176,0.3); }
-  .t-btn-ghost {
-    background: transparent;
-    color: var(--sage);
-  }
-  .t-btn-ghost:hover { background: rgba(255,255,255,0.06); }
-
-  /* ── techniques ── */
-  .section-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    box-shadow: var(--shadow-card);
-  }
-  .section-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--border);
-  }
-  .section-title {
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.09em;
-    text-transform: uppercase;
-    color: var(--text-mid);
-    display: flex;
-    align-items: center;
-    gap: 7px;
-  }
-  .section-title svg { width: 14px; height: 14px; color: var(--forest-mid); }
-
-  .badge-count {
-    background: var(--mist);
-    color: var(--forest);
-    font-size: 12px;
-    font-weight: 500;
-    padding: 3px 10px;
-    border-radius: 99px;
-    border: 1px solid var(--border-mid);
-    transition: background 0.3s;
-  }
-  .badge-count.all-done { background: var(--mint); color: var(--forest); }
-
-  .technique-list { display: flex; flex-direction: column; gap: 7px; }
-
-  .technique-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 10px 12px;
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--border);
-    background: #fafcfb;
-    cursor: pointer;
-    transition: background 0.15s, border-color 0.15s;
-    user-select: none;
-  }
-  .technique-item:hover { background: var(--mist); border-color: var(--border-mid); }
-  .technique-item.checked {
-    background: linear-gradient(135deg, rgba(200,230,213,0.4), rgba(208,237,245,0.4));
-    border-color: var(--sage);
-  }
-
-  .check-circle {
-    width: 20px; height: 20px;
-    border-radius: 50%;
-    border: 1.5px solid var(--border-mid);
-    background: #fff;
-    flex-shrink: 0;
-    margin-top: 1px;
-    display: flex; align-items: center; justify-content: center;
-    transition: background 0.2s, border-color 0.2s;
-  }
-  .technique-item.checked .check-circle {
-    background: var(--forest-light);
-    border-color: var(--forest-light);
-  }
-  .check-icon { display: none; }
-  .technique-item.checked .check-icon { display: block; }
-
-  .t-content {}
-  .t-phrase {
-    font-family: 'Lora', serif;
-    font-size: 13.5px;
-    font-style: italic;
-    color: var(--text-dark);
-    line-height: 1.4;
-  }
-  .technique-item.checked .t-phrase { color: var(--forest); }
-  .t-hint {
-    font-size: 11px;
-    color: var(--text-muted);
-    margin-top: 2px;
-  }
-  .technique-item.checked .t-hint { color: var(--forest-mid); }
-
-  .clear-row {
-    text-align: right;
-    margin-top: 0.75rem;
-  }
-  .clear-btn {
-    background: none;
-    border: none;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 12px;
-    color: var(--text-muted);
-    cursor: pointer;
-    text-decoration: underline;
-    padding: 0;
-  }
-  .clear-btn:hover { color: var(--text-mid); }
-
-  /* ── congrats state ── */
-  .congrats {
-    display: none;
-    text-align: center;
-    padding: 0.5rem 0 0;
-    font-size: 13px;
-    color: var(--forest-mid);
-    font-weight: 500;
-  }
-  .congrats.show { display: block; }
+.expr-footer {
+  padding: 10px 16px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.congrats {
+  font-size: 12px; font-weight: 700;
+  color: var(--teal); display: none;
+}
+.congrats.show { display: block; }
+.clear-btn {
+  background: none; border: none;
+  font-family: 'Nunito', sans-serif;
+  font-size: 12px; color: var(--dim);
+  cursor: pointer; text-decoration: underline; padding: 0;
+}
+.clear-btn:hover { color: var(--muted); }
 </style>
 </head>
 <body>
-<div class="container">
 
-  <!-- header -->
-  <div class="header">
-    <div class="header-badge">
-      <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M6 1C3.8 1 2 2.8 2 5c0 3 4 6 4 6s4-3 4-6c0-2.2-1.8-4-4-4z" fill="#1e4d35"/>
-        <circle cx="6" cy="5" r="1.5" fill="#c8e6d5"/>
-      </svg>
-      Unit 8 · The Environment
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="tb-badge">S1</div>
+    <div>
+      <span class="tb-unit">Unit 8 · The Environment</span>
+      <span class="tb-title">Discussion Cards</span>
     </div>
-    <h1>Agree or Disagree?</h1>
-    <p>Free Practice · Extended Discussion · Cambridge Global English</p>
   </div>
+  <div class="topbar-right">
+    <div class="timer-inline" id="timerInline">00:00</div>
+  </div>
+</div>
 
-  <!-- topic card -->
-  <div class="card-wrapper">
-    <div class="topic-card" id="topicCard">
-      <div class="card-meta">
-        <span class="card-tag">Discussion statement</span>
-        <span class="card-index" id="cardIndex">1 / 5</span>
-      </div>
+<div class="main">
+
+  <div class="topic-card" id="topicCard">
+    <div class="topic-card-top">
+      <span class="topic-label">Discuss this statement</span>
+      <span class="topic-index" id="topicIndex">1 / 5</span>
+    </div>
+    <div class="topic-body">
       <div class="topic-quote" id="topicText"></div>
-      <div class="card-nav">
-        <button class="nav-btn" onclick="navigate(-1)" title="Previous">&#8592;</button>
-        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-        <button class="nav-btn" onclick="navigate(1)" title="Next">&#8594;</button>
-        <button class="shuffle-btn" onclick="shuffleTopics()">
-          <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1 4h8.5M9.5 4l-2-2M9.5 4l-2 2M1 10h4M7 10h2.5M9.5 10l-2-2M9.5 10l-2 2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
-          </svg>
-          Shuffle
-        </button>
-      </div>
+    </div>
+    <div class="card-nav">
+      <button class="nav-btn" onclick="navigate(-1)">&#8592;</button>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <button class="nav-btn" onclick="navigate(1)">&#8594;</button>
+      <button class="shuffle-btn" onclick="shuffleTopics()">&#8635; Shuffle</button>
     </div>
   </div>
 
-  <!-- timer -->
   <div class="timer-card">
-    <div class="timer-left">
-      <div class="timer-label">Speaking timer</div>
-      <div class="timer-display" id="timerDisplay">00:00</div>
+    <div>
+      <div class="timer-lbl">Speaking timer</div>
+      <div class="timer-big" id="timerBig">00:00</div>
     </div>
     <div class="timer-btns">
-      <button class="t-btn t-btn-primary" id="startBtn" onclick="toggleTimer()">▶ Start</button>
-      <button class="t-btn t-btn-ghost" onclick="resetTimer()">↺ Reset</button>
+      <button class="t-btn t-primary" id="startBtn" onclick="toggleTimer()">&#9654; Start</button>
+      <button class="t-btn t-ghost" onclick="resetTimer()">&#8634; Reset</button>
     </div>
   </div>
 
-  <!-- technique tracker -->
-  <div class="section-card">
-    <div class="section-header">
-      <div class="section-title">
-        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="1" y="1" width="12" height="12" rx="3" stroke="#2d6e4e" stroke-width="1.2"/>
-          <path d="M4 7l2 2 4-4" stroke="#2d6e4e" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Techniques used this session
+  <div class="expr-card">
+    <div class="expr-header">
+      <div class="expr-tabs">
+        <button class="etab on-agree"  id="tab-agree"    onclick="switchTab('agree')">Agreeing</button>
+        <button class="etab"           id="tab-disagree" onclick="switchTab('disagree')">Disagreeing</button>
+        <button class="etab"           id="tab-partial"  onclick="switchTab('partial')">Partial</button>
       </div>
-      <span class="badge-count" id="usedBadge">0 / 6</span>
+      <div class="used-badge" id="usedBadge">0 / 15</div>
     </div>
-
-    <div class="technique-list" id="techniqueList"></div>
-    <div class="congrats" id="congrats">All 6 techniques used — excellent discussion!</div>
-    <div class="clear-row"><button class="clear-btn" onclick="resetChecks()">Clear all</button></div>
+    <div class="expr-body">
+      <div class="expr-group show" id="group-agree"></div>
+      <div class="expr-group"      id="group-disagree"></div>
+      <div class="expr-group"      id="group-partial"></div>
+    </div>
+    <div class="expr-footer">
+      <div class="congrats" id="congrats">All expressions used — great session!</div>
+      <button class="clear-btn" onclick="clearAll()">Clear all</button>
+    </div>
   </div>
 
 </div>
@@ -455,28 +445,43 @@ const topics = [
   "We are running out of time to save the planet."
 ];
 
-const techniques = [
-  { phrase: '"That\'s an interesting point. Let me think about that..."', hint: 'Buy thinking time', checked: false },
-  { phrase: '"It depends on... / Up to a point, but..."', hint: 'Add nuance to your argument', checked: false },
-  { phrase: '"Going back to what I said earlier..."', hint: 'Return to a previous point', checked: false },
-  { phrase: '"You may be right, but..."', hint: 'Concede and redirect', checked: false },
-  { phrase: '"That\'s all very well, but..."', hint: 'Push back politely · p. 177', checked: false },
-  { phrase: '"I\'m not convinced that..."', hint: 'Express doubt · p. 177', checked: false }
-];
+const expressions = {
+  agree: [
+    { phrase: '"I completely agree with that."',           note: 'Strong, direct agreement' },
+    { phrase: '"That\'s a really good point."',           note: 'Acknowledging a strong argument' },
+    { phrase: '"Exactly — I think the same."',            note: 'Full agreement, confident tone' },
+    { phrase: '"I couldn\'t agree more."',                note: 'Emphatic agreement' },
+    { phrase: '"You\'re absolutely right about that."',   note: 'Confirming the other person\'s view' },
+  ],
+  disagree: [
+    { phrase: '"I\'m not convinced that\'s true."',       note: 'Polite doubt · p. 177' },
+    { phrase: '"That\'s all very well, but..."',          note: 'Push back politely · p. 177' },
+    { phrase: '"I see it quite differently, actually."',  note: 'Calm, firm disagreement' },
+    { phrase: '"I don\'t think that\'s entirely fair."',  note: 'Challenges the other view' },
+    { phrase: '"With respect, I disagree."',              note: 'Formal but direct' },
+  ],
+  partial: [
+    { phrase: '"I see your point, but..."',                  note: 'Concede before countering' },
+    { phrase: '"You may be right, but..."',                  note: 'Concede and redirect · p. 177' },
+    { phrase: '"That\'s true to an extent, however..."',     note: 'Partial agreement with reservation' },
+    { phrase: '"I agree up to a point, but..."',             note: 'Classic partial agreement' },
+    { phrase: '"It depends on the situation."',              note: 'Nuanced, context-sensitive response' },
+  ]
+};
 
 let currentIndex = 0;
 let seconds = 0;
 let running = false;
 let timerInterval = null;
+const checked = { agree: new Set(), disagree: new Set(), partial: new Set() };
 
 function renderTopic() {
   const card = document.getElementById('topicCard');
   card.classList.add('fade');
   setTimeout(() => {
     document.getElementById('topicText').textContent = topics[currentIndex];
-    document.getElementById('cardIndex').textContent = (currentIndex + 1) + ' / ' + topics.length;
-    const pct = ((currentIndex + 1) / topics.length) * 100;
-    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('topicIndex').textContent = (currentIndex + 1) + ' / ' + topics.length;
+    document.getElementById('progressFill').style.width = ((currentIndex + 1) / topics.length * 100) + '%';
     card.classList.remove('fade');
   }, 200);
 }
@@ -497,75 +502,103 @@ function shuffleTopics() {
 
 function toggleTimer() {
   const btn = document.getElementById('startBtn');
-  const display = document.getElementById('timerDisplay');
+  const big = document.getElementById('timerBig');
+  const inline = document.getElementById('timerInline');
   if (!running) {
     running = true;
-    btn.textContent = '⏸ Pause';
+    btn.innerHTML = '&#9646;&#9646; Pause';
     btn.classList.add('active');
-    display.classList.add('running');
+    big.classList.add('running');
+    inline.classList.add('running');
     timerInterval = setInterval(() => { seconds++; updateDisplay(); }, 1000);
   } else {
     running = false;
-    btn.textContent = '▶ Resume';
+    btn.innerHTML = '&#9654; Resume';
     btn.classList.remove('active');
-    display.classList.remove('running');
+    big.classList.remove('running');
+    inline.classList.remove('running');
     clearInterval(timerInterval);
   }
 }
 
 function resetTimer() {
   clearInterval(timerInterval);
-  running = false;
-  seconds = 0;
-  const btn = document.getElementById('startBtn');
-  btn.textContent = '▶ Start';
-  btn.classList.remove('active');
-  document.getElementById('timerDisplay').classList.remove('running');
+  running = false; seconds = 0;
+  document.getElementById('startBtn').innerHTML = '&#9654; Start';
+  document.getElementById('startBtn').classList.remove('active');
+  document.getElementById('timerBig').classList.remove('running');
+  document.getElementById('timerInline').classList.remove('running');
   updateDisplay();
 }
 
 function updateDisplay() {
   const m = Math.floor(seconds / 60);
   const s = seconds % 60;
-  document.getElementById('timerDisplay').textContent =
-    String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+  const str = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+  document.getElementById('timerBig').textContent = str;
+  document.getElementById('timerInline').textContent = str;
 }
 
-function renderTechniques() {
-  const list = document.getElementById('techniqueList');
-  list.innerHTML = '';
-  let count = 0;
-  techniques.forEach((t, i) => {
-    if (t.checked) count++;
-    const el = document.createElement('div');
-    el.className = 'technique-item' + (t.checked ? ' checked' : '');
-    el.innerHTML = `
-      <div class="check-circle">
-        <svg class="check-icon" width="10" height="10" viewBox="0 0 10 10" fill="none">
-          <path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-      <div class="t-content">
-        <div class="t-phrase">${t.phrase}</div>
-        <div class="t-hint">${t.hint}</div>
-      </div>`;
-    el.onclick = () => { t.checked = !t.checked; renderTechniques(); };
-    list.appendChild(el);
+function buildExpressions() {
+  ['agree','disagree','partial'].forEach(type => {
+    const group = document.getElementById('group-' + type);
+    const labels = { agree:'Agreeing', disagree:'Disagreeing', partial:'Partial agreement' };
+    const lbl = document.createElement('div');
+    lbl.className = 'group-label gl-' + type;
+    lbl.textContent = labels[type];
+    group.appendChild(lbl);
+    expressions[type].forEach((expr, i) => {
+      const item = document.createElement('div');
+      item.className = 'expr-item';
+      item.innerHTML = `
+        <div class="check-ring">&#10003;</div>
+        <div>
+          <div class="expr-phrase">${expr.phrase}</div>
+          <div class="expr-note">${expr.note}</div>
+        </div>`;
+      item.addEventListener('click', () => {
+        if (checked[type].has(i)) {
+          checked[type].delete(i);
+          item.classList.remove('chk-' + type);
+        } else {
+          checked[type].add(i);
+          item.classList.add('chk-' + type);
+        }
+        updateBadge();
+      });
+      group.appendChild(item);
+    });
   });
-  const badge = document.getElementById('usedBadge');
-  badge.textContent = count + ' / 6';
-  badge.className = 'badge-count' + (count === 6 ? ' all-done' : '');
-  const cong = document.getElementById('congrats');
-  cong.className = 'congrats' + (count === 6 ? ' show' : '');
 }
 
-function resetChecks() {
-  techniques.forEach(t => t.checked = false);
-  renderTechniques();
+function updateBadge() {
+  const total = checked.agree.size + checked.disagree.size + checked.partial.size;
+  const badge = document.getElementById('usedBadge');
+  badge.textContent = total + ' / 15';
+  badge.className = 'used-badge' + (total === 15 ? ' all' : '');
+  document.getElementById('congrats').className = 'congrats' + (total === 15 ? ' show' : '');
+}
+
+function switchTab(tab) {
+  ['agree','disagree','partial'].forEach(t => {
+    document.getElementById('group-' + t).className = 'expr-group' + (t === tab ? ' show' : '');
+    const btn = document.getElementById('tab-' + t);
+    btn.className = 'etab' + (t === tab ? ' on-' + t : '');
+  });
+}
+
+function clearAll() {
+  ['agree','disagree','partial'].forEach(t => {
+    checked[t].clear();
+    document.querySelectorAll('#group-' + t + ' .expr-item').forEach(el => {
+      el.classList.remove('chk-' + t);
+    });
+  });
+  updateBadge();
 }
 
 renderTopic();
-renderTechniques();
+buildExpressions();
 </script>
 </body>
 </html>
