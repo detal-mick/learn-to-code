@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 8 — The Environment | Session 3 Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Merriweather:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #1a3a52;
+            --navy-light: #2d5673;
+            --navy-dark: #0f2635;
+            --yellow: #f4b942;
+            --yellow-light: #f7ca6d;
+            --teal: #3bb5a3;
+            --teal-light: #6ccaba;
+            --teal-dark: #2a8c7e;
+            --cream: #fef9f0;
+            --white: #ffffff;
+            --gray: #e8ede9;
+            --text-dark: #2c3e50;
+        }
+
+        body {
+            font-family: 'Merriweather', serif;
+            background: linear-gradient(135deg, var(--cream) 0%, #f0f5f3 100%);
+            color: var(--text-dark);
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            background: var(--white);
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(26, 58, 82, 0.12);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+            color: var(--white);
+            padding: 2rem 2.5rem 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(59, 181, 163, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        h1 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 400;
+            position: relative;
+            z-index: 1;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--yellow);
+            color: var(--navy);
+            padding: 0.3rem 0.8rem;
+            border-radius: 16px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-top: 0.8rem;
+        }
+
+        /* Tab Navigation */
+        .tab-nav {
+            background: var(--white);
+            border-bottom: 2px solid var(--gray);
+            display: flex;
+            overflow-x: auto;
+            overflow-y: hidden;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .tab-nav::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .tab-nav::-webkit-scrollbar-track {
+            background: var(--cream);
+        }
+
+        .tab-nav::-webkit-scrollbar-thumb {
+            background: var(--teal);
+            border-radius: 2px;
+        }
+
+        .tab-button {
+            flex: 0 0 auto;
+            padding: 1rem 1.5rem;
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .tab-button:hover {
+            background: var(--cream);
+            color: var(--navy);
+        }
+
+        .tab-button.active {
+            color: var(--navy);
+            border-bottom-color: var(--teal);
+            background: linear-gradient(to bottom, var(--cream), var(--white));
+        }
+
+        .tab-button .tab-icon {
+            margin-right: 0.5rem;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            padding: 2.5rem;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 1.5rem;
+            padding-left: 1rem;
+            border-left: 4px solid var(--teal);
+        }
+
+        h3 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--navy-light);
+            margin-bottom: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        h4 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, var(--teal-light) 0%, var(--teal) 100%);
+            color: var(--white);
+            padding: 1.5rem;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 12px rgba(59, 181, 163, 0.2);
+        }
+
+        .info-box strong {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 1.5rem 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        th {
+            background: var(--navy);
+            color: var(--white);
+            padding: 1rem;
+            text-align: left;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--gray);
+            background: var(--white);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:nth-child(even) td {
+            background: #fafcfb;
+        }
+
+        .activity-card {
+            background: var(--white);
+            border: 2px solid var(--gray);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .activity-card:hover {
+            border-color: var(--teal);
+            box-shadow: 0 6px 20px rgba(59, 181, 163, 0.15);
+        }
+
+        .activity-number {
+            display: inline-block;
+            background: var(--yellow);
+            color: var(--navy);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 32px;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700;
+            margin-right: 0.5rem;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid var(--gray);
+            border-radius: 10px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            margin: 0.5rem 0;
+            transition: all 0.3s ease;
+            background: var(--white);
+        }
+
+        input[type="text"]:focus, textarea:focus {
+            outline: none;
+            border-color: var(--teal);
+            box-shadow: 0 0 0 3px rgba(59, 181, 163, 0.1);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+            font-family: 'Merriweather', serif;
+            line-height: 1.6;
+        }
+
+        .gap-fill-table {
+            margin: 1.5rem 0;
+        }
+
+        .gap-fill-table input {
+            background: var(--cream);
+            border-color: var(--yellow);
+            font-family: 'Merriweather', serif;
+        }
+
+        .prompt-box {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+            color: var(--white);
+            padding: 1.5rem;
+            border-radius: 16px;
+            margin: 1.5rem 0;
+            border-left: 6px solid var(--yellow);
+        }
+
+        .prompt-box p {
+            font-size: 1.05rem;
+            margin: 0;
+            font-style: italic;
+        }
+
+        .note {
+            background: var(--cream);
+            border-left: 4px solid var(--yellow);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+        }
+
+        .note strong {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--navy);
+        }
+
+        .sentence-box {
+            background: var(--white);
+            border: 2px dashed var(--teal-light);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 0.5rem 0;
+            font-style: italic;
+            color: var(--text-dark);
+        }
+
+        footer {
+            background: var(--gray);
+            padding: 1.5rem 2.5rem;
+            text-align: center;
+            font-family: 'DM Sans', sans-serif;
+            color: var(--navy);
+            font-size: 0.9rem;
+        }
+
+        .skill-badge {
+            display: inline-block;
+            background: var(--teal-light);
+            color: var(--navy);
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            margin: 0.2rem;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 1rem;
+                border-radius: 16px;
+            }
+            
+            .tab-button {
+                padding: 0.8rem 1rem;
+                font-size: 0.85rem;
+            }
+            
+            .tab-content {
+                padding: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .container {
+                box-shadow: none;
+            }
+            .tab-nav {
+                display: none;
+            }
+            .tab-content {
+                display: block !important;
+                page-break-after: always;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌍 Unit 8 — The Environment</h1>
+            <p class="subtitle">Session 3: Skills Focus — Speaking, Writing, & Reading</p>
+            <span class="badge">Word-Building & Language Forms</span>
+        </header>
+
+        <!-- Tab Navigation -->
+        <div class="tab-nav">
+            <button class="tab-button active" onclick="openTab(event, 'tab-intro')">
+                <span class="tab-icon">📋</span> Introduction
+            </button>
+            <button class="tab-button" onclick="openTab(event, 'tab-presentation')">
+                <span class="tab-icon">📚</span> Presentation
+            </button>
+            <button class="tab-button" onclick="openTab(event, 'tab-warmer1')">
+                <span class="tab-icon">🔥</span> Warmer 1
+            </button>
+            <button class="tab-button" onclick="openTab(event, 'tab-warmer2')">
+                <span class="tab-icon">🎯</span> Warmer 2
+            </button>
+            <button class="tab-button" onclick="openTab(event, 'tab-practice')">
+                <span class="tab-icon">✏️</span> Practice
+            </button>
+            <button class="tab-button" onclick="openTab(event, 'tab-reading')">
+                <span class="tab-icon">📖</span> Reading
+            </button>
+            <button class="tab-button" onclick="openTab(event, 'tab-speaking')">
+                <span class="tab-icon">🗣️</span> Speaking
+            </button>
+            <button class="tab-button" onclick="openTab(event, 'tab-writing')">
+                <span class="tab-icon">✍️</span> Writing
+            </button>
+            <button class="tab-button" onclick="openTab(event, 'tab-consolidation')">
+                <span class="tab-icon">🎓</span> Consolidation
+            </button>
+            <button class="tab-button" onclick="openTab(event, 'tab-reflection')">
+                <span class="tab-icon">💭</span> Reflection
+            </button>
+        </div>
+
+        <!-- Tab Content -->
+        
+        <!-- Introduction Tab -->
+        <div id="tab-intro" class="tab-content active">
+            <h2>Welcome to Session 3!</h2>
+            
+            <div class="info-box">
+                <strong>Today's Focus:</strong> Word-building — mastering noun, verb, and adjective forms of environmental vocabulary. We'll practice using these forms accurately across all four skills.
+            </div>
+
+            <div class="activity-card">
+                <h3>Learning Goals</h3>
+                <ul>
+                    <li><strong>Language focus:</strong> Word-building — noun, verb, and adjective forms of environmental vocabulary</li>
+                    <li><strong>Skill 1 — Reading:</strong> Comprehension, inference, and identifying word forms in context</li>
+                    <li><strong>Skill 2 — Speaking:</strong> Extended turn, presenting an argument using varied vocabulary</li>
+                    <li><strong>Skill 3 — Writing:</strong> Discursive paragraph with accurate use of word families</li>
+                </ul>
+            </div>
+
+            <div class="note">
+                <strong>Why word-building?</strong> Sessions 1 and 2 covered grammar points. Session 3 keeps the language load light — one vocabulary focus — so you can direct most of your cognitive energy toward the four skills themselves.
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <h3>🌟 21st Century Skills in This Session</h3>
+                <div style="margin-top: 1rem;">
+                    <span class="skill-badge">Social Responsibility</span>
+                    <span class="skill-badge">Critical Thinking</span>
+                    <span class="skill-badge">Creative Thinking</span>
+                    <span class="skill-badge">Learning to Learn</span>
+                    <span class="skill-badge">Collaborative Working</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Presentation Tab -->
+        <div id="tab-presentation" class="tab-content">
+            <h2>📚 Presentation: Word-Building Families</h2>
+            
+            <h3>Key Word Families</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Root</th>
+                        <th>Noun</th>
+                        <th>Verb</th>
+                        <th>Adjective</th>
+                        <th>Adverb</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>pollute</strong></td>
+                        <td>pollution, pollutant</td>
+                        <td>pollute</td>
+                        <td>polluted, polluting</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td><strong>sustain</strong></td>
+                        <td>sustainability</td>
+                        <td>sustain</td>
+                        <td>sustainable</td>
+                        <td>sustainably</td>
+                    </tr>
+                    <tr>
+                        <td><strong>destroy</strong></td>
+                        <td>destruction</td>
+                        <td>destroy</td>
+                        <td>destructive</td>
+                        <td>destructively</td>
+                    </tr>
+                    <tr>
+                        <td><strong>conserve</strong></td>
+                        <td>conservation</td>
+                        <td>conserve</td>
+                        <td>conservative</td>
+                        <td>conservatively</td>
+                    </tr>
+                    <tr>
+                        <td><strong>erode</strong></td>
+                        <td>erosion</td>
+                        <td>erode</td>
+                        <td>erosive, eroded</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td><strong>environment</strong></td>
+                        <td>environment</td>
+                        <td>—</td>
+                        <td>environmental</td>
+                        <td>environmentally</td>
+                    </tr>
+                    <tr>
+                        <td><strong>globe</strong></td>
+                        <td>globe, globalisation</td>
+                        <td>globalise</td>
+                        <td>global</td>
+                        <td>globally</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="note">
+                <strong>Key Teaching Points:</strong>
+                <ul style="margin-top: 0.5rem;">
+                    <li>Noun suffixes: <em>-tion, -ity, -ment, -ist, -ance</em></li>
+                    <li>Adjective suffixes: <em>-al, -ive, -able, -ed, -ing</em></li>
+                    <li>Adverb suffix: <em>-ly</em> (added to adjectives)</li>
+                    <li>Verbs are usually the base form without special suffixes</li>
+                </ul>
+            </div>
+
+            <div class="activity-card" style="margin-top: 2rem;">
+                <h3>Concept Check Questions</h3>
+                <p style="margin-bottom: 1rem;">Think about these questions as you study the word families:</p>
+                <ul>
+                    <li>If I say 'the environment is in danger', what part of speech is 'environment'?</li>
+                    <li>How would you turn 'destroy' into a noun? What suffix do you add?</li>
+                    <li>Can you make a sentence where 'sustainable' and 'sustainably' both appear correctly?</li>
+                    <li>What is the difference between 'polluted' and 'polluting'?</li>
+                    <li>Is 'environmental' a noun or an adjective? How do you know?</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Warmer 1 Tab -->
+        <div id="tab-warmer1" class="tab-content">
+            <h2>🔥 Warmer: "What's the word?"</h2>
+            
+            <div class="activity-card">
+                <h3><span class="activity-number">1</span>Vocabulary Family Activation</h3>
+                <p>For each word given, write as many related forms as you can (noun, verb, adjective, adverb). You have 30 seconds per word!</p>
+                
+                <div style="margin-top: 1.5rem;">
+                    <h4>Word: <em>pollute</em></h4>
+                    <input type="text" placeholder="Write all related forms you can think of...">
+                    
+                    <h4>Word: <em>destroy</em></h4>
+                    <input type="text" placeholder="Write all related forms you can think of...">
+                    
+                    <h4>Word: <em>sustain</em></h4>
+                    <input type="text" placeholder="Write all related forms you can think of...">
+                    
+                    <h4>Word: <em>erode</em></h4>
+                    <input type="text" placeholder="Write all related forms you can think of...">
+                    
+                    <h4>Word: <em>conserve</em></h4>
+                    <input type="text" placeholder="Write all related forms you can think of...">
+                </div>
+            </div>
+
+            <div class="note">
+                <strong>Learning to Learn:</strong> Which word family was easiest? Why? What strategy did you use — did you build from the root word, or did you try to remember words you've seen?
+            </div>
+        </div>
+
+        <!-- Warmer 2 Tab -->
+        <div id="tab-warmer2" class="tab-content">
+            <h2>🎯 Warmer: "Odd One Out"</h2>
+            
+            <div class="activity-card">
+                <h3><span class="activity-number">2</span>Find and Correct the Errors</h3>
+                <p>Three sentences below. Two use correct word forms; one has an error. Identify which sentence is wrong and correct it.</p>
+                
+                <div class="sentence-box">
+                    <strong>a)</strong> "The destruction of rainforests is one of the most pressing environment issues."
+                </div>
+                
+                <div class="sentence-box">
+                    <strong>b)</strong> "We need to act sustainably if we want to protect future generations."
+                </div>
+                
+                <div class="sentence-box">
+                    <strong>c)</strong> "Erosive of coastal areas is getting worse every year."
+                </div>
+                
+                <div style="margin-top: 1.5rem;">
+                    <label style="font-family: 'DM Sans', sans-serif; font-weight: 600; color: var(--navy);">Which sentence has an error?</label>
+                    <input type="text" placeholder="Write the letter (a, b, or c)">
+                    
+                    <label style="font-family: 'DM Sans', sans-serif; font-weight: 600; color: var(--navy); margin-top: 1rem; display: block;">Write the corrected version:</label>
+                    <input type="text" placeholder="Write the sentence correctly...">
+                </div>
+            </div>
+
+            <div class="note">
+                <strong>Hint:</strong> Look carefully at whether each word is being used as a noun, verb, adjective, or adverb. Does the sentence structure require that particular form?
+            </div>
+        </div>
+
+        <!-- Practice Tab -->
+        <div id="tab-practice" class="tab-content">
+            <h2>✏️ Controlled Practice: Family Tree Gap-Fill</h2>
+            
+            <div class="activity-card">
+                <h3><span class="activity-number">3</span>Complete the Word Families</h3>
+                <p>Fill in the missing forms. Then use any three words from the table in original sentences about the environment.</p>
+                
+                <table class="gap-fill-table">
+                    <thead>
+                        <tr>
+                            <th>Noun</th>
+                            <th>Verb</th>
+                            <th>Adjective</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>pollution</td>
+                            <td><input type="text" placeholder="?"></td>
+                            <td><input type="text" placeholder="?"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" placeholder="?"></td>
+                            <td>sustain</td>
+                            <td>sustainable</td>
+                        </tr>
+                        <tr>
+                            <td>destruction</td>
+                            <td><input type="text" placeholder="?"></td>
+                            <td>destructive</td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" placeholder="?"></td>
+                            <td>conserve</td>
+                            <td><input type="text" placeholder="?"></td>
+                        </tr>
+                        <tr>
+                            <td>erosion</td>
+                            <td>erode</td>
+                            <td><input type="text" placeholder="?"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" placeholder="?"></td>
+                            <td>globalise</td>
+                            <td><input type="text" placeholder="?"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div style="margin-top: 1.5rem;">
+                    <h4>Write three original sentences using words from the table:</h4>
+                    <input type="text" placeholder="Sentence 1...">
+                    <input type="text" placeholder="Sentence 2...">
+                    <input type="text" placeholder="Sentence 3...">
+                </div>
+            </div>
+
+            <div class="note">
+                <strong>Collaborative Working:</strong> Work together with your teacher on this activity — take turns filling in rows and checking each other's work.
+            </div>
+        </div>
+
+        <!-- Reading Tab -->
+        <div id="tab-reading" class="tab-content">
+            <h2>📖 Reading: Word-Form Hunting</h2>
+            
+            <div class="activity-card">
+                <h3><span class="activity-number">4</span>Scan the Unit 8 Main Text</h3>
+                <p>After reading the text together, complete this word-form hunting task:</p>
+                
+                <div class="note">
+                    Find and write down:
+                    <ul>
+                        <li>Two examples of a <strong>noun</strong> form of an environmental word</li>
+                        <li>Two examples of an <strong>adjective</strong> form</li>
+                        <li>One example of an <strong>adverb</strong></li>
+                    </ul>
+                </div>
+                
+                <div style="margin-top: 1.5rem;">
+                    <label style="font-family: 'DM Sans', sans-serif; font-weight: 600; color: var(--teal-dark);">Noun examples:</label>
+                    <input type="text" placeholder="Example 1">
+                    <input type="text" placeholder="Example 2">
+                    
+                    <label style="font-family: 'DM Sans', sans-serif; font-weight: 600; color: var(--teal-dark); margin-top: 1rem; display: block;">Adjective examples:</label>
+                    <input type="text" placeholder="Example 1">
+                    <input type="text" placeholder="Example 2">
+                    
+                    <label style="font-family: 'DM Sans', sans-serif; font-weight: 600; color: var(--teal-dark); margin-top: 1rem; display: block;">Adverb example:</label>
+                    <input type="text" placeholder="Example">
+                </div>
+                
+                <div style="margin-top: 2rem;">
+                    <h4>Inference Question (Critical Thinking):</h4>
+                    <p>Is the writer's tone mostly optimistic or pessimistic? Find two words or phrases that support your answer.</p>
+                    <input type="text" placeholder="Tone: optimistic or pessimistic?">
+                    <input type="text" placeholder="Supporting evidence 1">
+                    <input type="text" placeholder="Supporting evidence 2">
+                </div>
+            </div>
+
+            <div class="note">
+                <strong>Social Responsibility:</strong> Does anything in this text describe a situation you've actually seen or experienced in Indonesia?
+            </div>
+        </div>
+
+        <!-- Speaking Tab -->
+        <div id="tab-speaking" class="tab-content">
+            <h2>🗣️ Production: Extended Speaking</h2>
+            
+            <div class="activity-card">
+                <h3><span class="activity-number">5</span>2-Minute Presentation</h3>
+                
+                <div class="prompt-box">
+                    <strong>Choose ONE prompt:</strong>
+                    <ul style="margin-top: 0.8rem; padding-left: 1.5rem;">
+                        <li>"What is the single most destructive human habit affecting the environment? What would you recommend?"</li>
+                        <li>"Is sustainable living actually realistic for ordinary people in Jakarta? Argue your position."</li>
+                        <li>"If you could change one government policy to protect the environment, what would it be?"</li>
+                    </ul>
+                </div>
+                
+                <div class="note">
+                    <strong>Language Requirements:</strong>
+                    <ul>
+                        <li>At least 3 words from the word-building families studied today</li>
+                        <li>At least 1 adverb of frequency (from Session 1)</li>
+                        <li>At least 1 multi-word verb (from Session 1)</li>
+                    </ul>
+                </div>
+                
+                <div style="margin-top: 1.5rem;">
+                    <h4>Preparation Notes (bullet points only):</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-dark); margin-bottom: 0.5rem;">You have 3 minutes to prepare. Write bullet points, NOT a full script!</p>
+                    <textarea placeholder="Write your bullet points here..."></textarea>
+                </div>
+            </div>
+
+            <div class="note">
+                <strong>Creative Thinking:</strong> The 3-minute preparation time with bullets only forces you to construct ideas in real time rather than perform a rehearsed answer. This is genuine speaking skill!
+            </div>
+        </div>
+
+        <!-- Writing Tab -->
+        <div id="tab-writing" class="tab-content">
+            <h2>✍️ Production: Writing Task</h2>
+            
+            <div class="activity-card">
+                <h3><span class="activity-number">6</span>Discursive Paragraph (80-100 words)</h3>
+                
+                <div class="prompt-box">
+                    <p>"Environmentally sustainable living sounds ideal, but is it realistic? Give your opinion."</p>
+                </div>
+                
+                <div class="note">
+                    <strong>Required Elements:</strong>
+                    <ul>
+                        <li>At least 2 word-building forms used correctly (e.g., 'conservation' and 'conserve')</li>
+                        <li>A clear topic sentence and a concluding sentence</li>
+                        <li>At least one concession: "Although... / While it is true that..."</li>
+                    </ul>
+                </div>
+                
+                <div style="margin-top: 1.5rem;">
+                    <textarea placeholder="Write your paragraph here (80-100 words)..." style="min-height: 180px;"></textarea>
+                    
+                    <div style="margin-top: 1rem;">
+                        <label style="font-family: 'DM Sans', sans-serif; font-weight: 600; color: var(--teal-dark);">Word count:</label>
+                        <input type="text" placeholder="Count your words" style="width: 150px;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="note">
+                <strong>Social Responsibility:</strong> Can you give a concrete example from Jakarta or Indonesia to support your argument?
+            </div>
+        </div>
+
+        <!-- Consolidation Tab -->
+        <div id="tab-consolidation" class="tab-content">
+            <h2>🎓 Consolidation: Vocabulary Challenge</h2>
+            
+            <div class="activity-card">
+                <h3><span class="activity-number">7</span>Cross-Session Review</h3>
+                <p>Quick-fire definitions from Sessions 1, 2, and 3. Write the correct word or form.</p>
+                
+                <div style="margin-top: 1.5rem;">
+                    <div style="margin-bottom: 1.5rem;">
+                        <strong style="color: var(--teal-dark); font-size: 1.1rem;">Session 1 — Multi-word verbs:</strong>
+                        <div style="margin-top: 0.5rem;">
+                            <label>"To reduce the amount of something"</label>
+                            <input type="text" placeholder="Your answer">
+                        </div>
+                        <div style="margin-top: 0.5rem;">
+                            <label>"To destroy completely"</label>
+                            <input type="text" placeholder="Your answer">
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 1.5rem;">
+                        <strong style="color: var(--teal-dark); font-size: 1.1rem;">Session 2 — Verbs + -ing:</strong>
+                        <div style="margin-top: 0.5rem;">
+                            <label>"The verb that means to stay away from doing something"</label>
+                            <input type="text" placeholder="Your answer">
+                        </div>
+                        <div style="margin-top: 0.5rem;">
+                            <label>"Which verb — 'suggest' or 'plan' — takes -ing?"</label>
+                            <input type="text" placeholder="Your answer">
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 1rem;">
+                        <strong style="color: var(--teal-dark); font-size: 1.1rem;">Session 3 — Word-building:</strong>
+                        <div style="margin-top: 0.5rem;">
+                            <label>"Adjective form of 'sustain'"</label>
+                            <input type="text" placeholder="Your answer">
+                        </div>
+                        <div style="margin-top: 0.5rem;">
+                            <label>"Noun form of 'erode'"</label>
+                            <input type="text" placeholder="Your answer">
+                        </div>
+                        <div style="margin-top: 0.5rem;">
+                            <label>"Adverb form of 'environmental'"</label>
+                            <input type="text" placeholder="Your answer">
+                        </div>
+                        <div style="margin-top: 0.5rem;">
+                            <label>"Verb form of 'conservation'"</label>
+                            <input type="text" placeholder="Your answer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="note">
+                <strong>Learning to Learn:</strong> Which session's language felt most natural today — Session 1, 2, or 3? Which one do you still feel least confident about?
+            </div>
+        </div>
+
+        <!-- Reflection Tab -->
+        <div id="tab-reflection" class="tab-content">
+            <h2>💭 Metacognitive Exit Reflection</h2>
+            
+            <div class="activity-card">
+                <h3><span class="activity-number">8</span>Think About Your Learning</h3>
+                
+                <div style="margin-top: 1.5rem;">
+                    <label style="font-family: 'DM Sans', sans-serif; font-weight: 600; color: var(--navy);">1. Which of the four skills — reading, listening, speaking, writing — felt strongest today? Which felt weakest?</label>
+                    <textarea placeholder="Your reflection..." style="min-height: 80px;"></textarea>
+                    
+                    <label style="font-family: 'DM Sans', sans-serif; font-weight: 600; color: var(--navy); margin-top: 1rem; display: block;">2. What is one thing you will try to do differently in your next English conversation outside of class?</label>
+                    <textarea placeholder="Your reflection..." style="min-height: 80px;"></textarea>
+                    
+                    <label style="font-family: 'DM Sans', sans-serif; font-weight: 600; color: var(--navy); margin-top: 1rem; display: block;">3. If you had to teach someone the word-building rule for -tion and -ity, how would you explain it in one sentence?</label>
+                    <textarea placeholder="Your explanation..." style="min-height: 80px;"></textarea>
+                </div>
+            </div>
+
+            <div class="note">
+                <strong>Learning to Learn:</strong> Teaching back is the highest form of retention. Even a rough explanation reveals whether you've genuinely internalized the pattern or just memorized examples.
+            </div>
+
+            <div class="activity-card" style="margin-top: 2rem;">
+                <h3>Optional Homework</h3>
+                <p>Choose one environmental article from an Indonesian English-language news source (e.g. <em>The Jakarta Post</em> or <em>Jakarta Globe</em>). Read it and find:</p>
+                <ul style="margin-top: 0.5rem;">
+                    <li>5 examples of noun, verb, or adjective forms of environmental words</li>
+                    <li>Write them in a word-family table (same format as today's gap-fill)</li>
+                    <li>Write 2 sentences of your own using any two of the words you found</li>
+                </ul>
+            </div>
+        </div>
+
+        <footer>
+            <p><strong>Cambridge Global English</strong> | Unit 8 — The Environment | Session 3 Worksheet</p>
+            <p style="margin-top: 0.5rem; opacity: 0.7;">Private Session | ~90 minutes | 1-on-1</p>
+        </footer>
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            // Hide all tab content
+            var tabContents = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
+            
+            // Remove active class from all tab buttons
+            var tabButtons = document.getElementsByClassName("tab-button");
+            for (var i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove("active");
+            }
+            
+            // Show the selected tab content and mark button as active
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+            
+            // Scroll to top of content smoothly
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+    </script>
+</body>
+</html>
