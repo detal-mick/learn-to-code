@@ -311,6 +311,7 @@ The same principle emerges in the experience of Simone Biles, Olympic gymnast. D
     let currentQuestion = 0;
     let answers = {};
     let showScore = false;
+    let reviewMode = false;
 
     // Functions
     function handleAnswer(option) {
@@ -341,6 +342,136 @@ The same principle emerges in the experience of Simone Biles, Olympic gymnast. D
       }
     }
 
+    function renderReviewScreen() {
+      const reviewItems = questions.map((question, index) => {
+        const userAnswer = answers[index];
+        const correctAnswer = correctAnswers[index];
+        const isCorrect = userAnswer === correctAnswer;
+        const currentPassage = passages[question.passage];
+
+        const optionButtons = Object.entries(question.options).map(([key, value]) => {
+          let buttonClasses = 'bg-white border-2 border-gray-300 text-gray-700';
+          let circleClasses = 'bg-gray-100 text-gray-600';
+          
+          // User's answer (wrong) - blue
+          if (key === userAnswer && !isCorrect) {
+            buttonClasses = 'bg-blue-100 border-2 border-blue-500 text-gray-800';
+            circleClasses = 'bg-blue-500 text-white';
+          }
+          // Correct answer - green
+          if (key === correctAnswer) {
+            buttonClasses = 'bg-green-100 border-2 border-green-500 text-gray-800';
+            circleClasses = 'bg-green-500 text-white';
+          }
+          // User's correct answer - green
+          if (key === userAnswer && isCorrect) {
+            buttonClasses = 'bg-green-100 border-2 border-green-500 text-gray-800';
+            circleClasses = 'bg-green-500 text-white';
+          }
+
+          return `
+            <div class="w-full text-left p-4 rounded-lg ${buttonClasses} pointer-events-none">
+              <div class="flex items-start gap-3">
+                <span class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold ${circleClasses}">
+                  ${key.toUpperCase()}
+                </span>
+                <span class="flex-1 pt-1">${value}</span>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        const resultBadge = isCorrect
+          ? '<span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">✓ Correct</span>'
+          : '<span class="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">✗ Wrong</span>';
+
+        return `
+          <div class="bg-white rounded-xl shadow-lg p-6 border-t-4 ${isCorrect ? 'border-green-400' : 'border-red-400'} mb-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <!-- Left: Passage -->
+              <div>
+                <h3 class="text-lg font-bold text-gray-800 mb-3 pb-2 border-b-2 border-gray-200">
+                  ${currentPassage.title}
+                </h3>
+                <div class="prose prose-sm max-w-none overflow-y-auto max-h-[400px] pr-2 text-gray-700 leading-relaxed whitespace-pre-wrap text-sm">
+                  ${currentPassage.content}
+                </div>
+              </div>
+
+              <!-- Right: Question and Answer -->
+              <div>
+                <div class="mb-4">
+                  <div class="flex items-center justify-between mb-3">
+                    <span class="bg-gradient-to-r from-blue-500 to-yellow-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                      Question ${index + 1}/20
+                    </span>
+                    ${resultBadge}
+                  </div>
+                  <h4 class="text-base font-semibold text-gray-800 leading-relaxed">
+                    ${question.q}
+                  </h4>
+                </div>
+
+                <div class="space-y-3">
+                  ${optionButtons}
+                </div>
+
+                ${!isCorrect && userAnswer ? `
+                  <div class="mt-4 p-3 bg-gray-50 rounded-lg border-l-4 border-blue-500">
+                    <p class="text-sm text-gray-700">
+                      <span class="font-semibold text-blue-600">Your answer:</span> ${userAnswer.toUpperCase()}
+                    </p>
+                    <p class="text-sm text-gray-700 mt-1">
+                      <span class="font-semibold text-green-600">Correct answer:</span> ${correctAnswer.toUpperCase()}
+                    </p>
+                  </div>
+                ` : ''}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      const score = calculateScore();
+
+      return `
+        <div class="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50">
+          <!-- Header -->
+          <div class="bg-white shadow-md border-b-4 border-yellow-400">
+            <div class="max-w-7xl mx-auto px-6 py-6">
+              <h1 class="text-3xl font-bold text-center bg-gradient-to-r from-blue-600 to-yellow-600 bg-clip-text text-transparent">
+                Answer Review
+              </h1>
+            </div>
+          </div>
+
+          <!-- Score Summary -->
+          <div class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-10">
+            <div class="max-w-7xl mx-auto px-6 py-4">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                  <div class="text-lg font-semibold text-gray-800">
+                    Score: <span class="text-blue-600">${score}/20</span> (${Math.round((score / 20) * 100)}%)
+                  </div>
+                </div>
+                <button
+                  onclick="backToScore()"
+                  class="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-6 rounded-lg transition-colors"
+                >
+                  Back to Results
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review Content -->
+          <div class="max-w-7xl mx-auto px-6 py-8">
+            ${reviewItems}
+          </div>
+        </div>
+      `;
+    }
+
     function renderScoreScreen() {
       const score = calculateScore();
       return `
@@ -364,12 +495,20 @@ The same principle emerges in the experience of Simone Biles, Olympic gymnast. D
               <div class="text-gray-600 text-sm">Your Score</div>
             </div>
 
-            <button
-              onclick="retryQuiz()"
-              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
-            >
-              Retry Quiz
-            </button>
+            <div class="flex flex-col gap-3">
+              <button
+                onclick="showReview()"
+                class="w-full bg-gradient-to-r from-blue-500 to-yellow-500 hover:from-blue-600 hover:to-yellow-600 text-white font-semibold py-3 px-6 rounded-lg transition-all shadow-lg"
+              >
+                Review Answers
+              </button>
+              <button
+                onclick="retryQuiz()"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+              >
+                Retry Quiz
+              </button>
+            </div>
           </div>
         </div>
       `;
@@ -509,7 +648,9 @@ The same principle emerges in the experience of Simone Biles, Olympic gymnast. D
 
     function render() {
       const app = document.getElementById('app');
-      if (showScore) {
+      if (reviewMode) {
+        app.innerHTML = renderReviewScreen();
+      } else if (showScore) {
         app.innerHTML = renderScoreScreen();
       } else {
         app.innerHTML = renderQuizScreen();
@@ -542,8 +683,19 @@ The same principle emerges in the experience of Simone Biles, Olympic gymnast. D
 
     window.retryQuiz = () => {
       showScore = false;
+      reviewMode = false;
       currentQuestion = 0;
       answers = {};
+      render();
+    };
+
+    window.showReview = () => {
+      reviewMode = true;
+      render();
+    };
+
+    window.backToScore = () => {
+      reviewMode = false;
       render();
     };
 
