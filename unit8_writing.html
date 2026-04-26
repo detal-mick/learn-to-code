@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unit 8.7: Writing Extreme Weather Reports</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .fade-in {
+      animation: fadeIn 0.5s ease-in;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .draggable {
+      cursor: move;
+      transition: all 0.3s;
+    }
+    .draggable:hover {
+      transform: scale(1.05);
+    }
+    .drop-zone {
+      min-height: 60px;
+      transition: all 0.3s;
+    }
+    .drop-zone.drag-over {
+      background-color: #dbeafe;
+      border-color: #3b82f6;
+    }
+    textarea {
+      resize: vertical;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-yellow-50 min-h-screen">
+  
+  <!-- Header -->
+  <div class="bg-white shadow-md border-b-4 border-yellow-400 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-6">
+      <h1 class="text-3xl font-bold text-center bg-gradient-to-r from-blue-600 to-yellow-600 bg-clip-text text-transparent">
+        Unit 8.7: Writing Extreme Weather Reports
+      </h1>
+      <p class="text-center text-gray-600 mt-2">Interactive Learning Material - 90 Minutes</p>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="bg-white shadow-sm border-b border-gray-200 sticky top-20 z-40">
+    <div class="max-w-7xl mx-auto px-6 py-4">
+      <div class="flex items-center gap-2 overflow-x-auto pb-2" id="section-nav">
+        <button onclick="showSection('warmer')" class="section-btn flex-shrink-0 px-4 py-2 rounded-lg font-semibold transition-all bg-gradient-to-br from-yellow-400 to-yellow-500 text-white shadow-lg">
+          Warmer
+        </button>
+        <button onclick="showSection('presentation')" class="section-btn flex-shrink-0 px-4 py-2 rounded-lg font-semibold transition-all bg-gray-100 text-gray-600 hover:bg-gray-200">
+          Presentation
+        </button>
+        <button onclick="showSection('controlled')" class="section-btn flex-shrink-0 px-4 py-2 rounded-lg font-semibold transition-all bg-gray-100 text-gray-600 hover:bg-gray-200">
+          Controlled Practice
+        </button>
+        <button onclick="showSection('free')" class="section-btn flex-shrink-0 px-4 py-2 rounded-lg font-semibold transition-all bg-gray-100 text-gray-600 hover:bg-gray-200">
+          Free Practice
+        </button>
+        <button onclick="showSection('production')" class="section-btn flex-shrink-0 px-4 py-2 rounded-lg font-semibold transition-all bg-gray-100 text-gray-600 hover:bg-gray-200">
+          Production
+        </button>
+        <button onclick="showSection('consolidation')" class="section-btn flex-shrink-0 px-4 py-2 rounded-lg font-semibold transition-all bg-gray-100 text-gray-600 hover:bg-gray-200">
+          Consolidation
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="max-w-7xl mx-auto px-6 py-8">
+
+    <!-- SECTION 1: WARMER -->
+    <div id="warmer" class="section-content fade-in">
+      <div class="bg-white rounded-xl shadow-lg p-8 border-t-4 border-yellow-400 mb-6">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">🌪️ Warmer: Extreme Weather Memory Game</h2>
+        <p class="text-gray-600 mb-6">Match the extreme weather types with their definitions.</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Weather Terms Column -->
+          <div>
+            <h3 class="font-semibold text-gray-700 mb-3">Weather Types:</h3>
+            <div class="space-y-2" id="weather-terms">
+              <div class="weather-term bg-blue-100 border-2 border-blue-300 p-3 rounded-lg cursor-pointer hover:bg-blue-200 transition" data-id="heatwave">
+                🌡️ Heatwave
+              </div>
+              <div class="weather-term bg-blue-100 border-2 border-blue-300 p-3 rounded-lg cursor-pointer hover:bg-blue-200 transition" data-id="drought">
+                🏜️ Drought
+              </div>
+              <div class="weather-term bg-blue-100 border-2 border-blue-300 p-3 rounded-lg cursor-pointer hover:bg-blue-200 transition" data-id="flood">
+                🌊 Flood
+              </div>
+              <div class="weather-term bg-blue-100 border-2 border-blue-300 p-3 rounded-lg cursor-pointer hover:bg-blue-200 transition" data-id="hurricane">
+                🌀 Hurricane/Cyclone/Typhoon
+              </div>
+              <div class="weather-term bg-blue-100 border-2 border-blue-300 p-3 rounded-lg cursor-pointer hover:bg-blue-200 transition" data-id="tornado">
+                🌪️ Tornado
+              </div>
+            </div>
+          </div>
+
+          <!-- Definitions Column -->
+          <div>
+            <h3 class="font-semibold text-gray-700 mb-3">Definitions:</h3>
+            <div class="space-y-2" id="definitions">
+              <div class="definition-card bg-gray-50 border-2 border-gray-300 p-3 rounded-lg min-h-[60px]" data-match="heatwave">
+                <span class="text-gray-600">Higher than normal temperatures lasting for several days</span>
+              </div>
+              <div class="definition-card bg-gray-50 border-2 border-gray-300 p-3 rounded-lg min-h-[60px]" data-match="drought">
+                <span class="text-gray-600">A long period of time when there is no rain</span>
+              </div>
+              <div class="definition-card bg-gray-50 border-2 border-gray-300 p-3 rounded-lg min-h-[60px]" data-match="flood">
+                <span class="text-gray-600">A large amount of water that covers an area which is normally dry</span>
+              </div>
+              <div class="definition-card bg-gray-50 border-2 border-gray-300 p-3 rounded-lg min-h-[60px]" data-match="hurricane">
+                <span class="text-gray-600">A very strong and dangerous wind that blows in a circle</span>
+              </div>
+              <div class="definition-card bg-gray-50 border-2 border-gray-300 p-3 rounded-lg min-h-[60px]" data-match="tornado">
+                <span class="text-gray-600">A violent storm that forms over land with a funnel-shaped cloud</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 flex gap-3">
+          <button onclick="checkMatches()" class="bg-gradient-to-r from-blue-500 to-yellow-500 text-white font-semibold py-3 px-6 rounded-lg hover:from-blue-600 hover:to-yellow-600 transition-all shadow-lg">
+            Check Answers
+          </button>
+          <button onclick="resetMatching()" class="bg-gray-500 text-white font-semibold py-3 px-6 rounded-lg hover:bg-gray-600 transition">
+            Reset
+          </button>
+        </div>
+
+        <div id="matching-feedback" class="mt-4"></div>
+      </div>
+
+      <!-- Discussion Questions -->
+      <div class="bg-white rounded-xl shadow-lg p-8 border-t-4 border-blue-400">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Discussion Questions</h3>
+        <div class="space-y-4">
+          <div class="p-4 bg-blue-50 rounded-lg">
+            <p class="font-semibold text-gray-700 mb-2">1. What extreme weather events have you heard about recently in the news?</p>
+            <textarea class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none" rows="2" placeholder="Type your answer here..."></textarea>
+          </div>
+          <div class="p-4 bg-blue-50 rounded-lg">
+            <p class="font-semibold text-gray-700 mb-2">2. Have you or anyone you know experienced extreme weather? What happened?</p>
+            <textarea class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none" rows="2" placeholder="Type your answer here..."></textarea>
+          </div>
+          <div class="p-4 bg-blue-50 rounded-lg">
+            <p class="font-semibold text-gray-700 mb-2">3. Why do you think extreme weather events are becoming more common?</p>
+            <textarea class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none" rows="2" placeholder="Type your answer here..."></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: PRESENTATION -->
+    <div id="presentation" class="section-content hidden">
+      <div class="bg-white rounded-xl shadow-lg p-8 border-t-4 border-blue-400 mb-6">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">📰 Presentation: Report Structure</h2>
+        
+        <!-- Model Report Structure -->
+        <div class="mb-6">
+          <h3 class="text-xl font-semibold text-gray-700 mb-4">Model Report Structure</h3>
+          <div class="space-y-3">
+            <div class="flex items-start gap-3 p-4 bg-yellow-50 border-l-4 border-yellow-500 rounded">
+              <div class="flex-shrink-0 w-8 h-8 bg-yellow-500 text-white rounded-full flex items-center justify-center font-bold">1</div>
+              <div>
+                <h4 class="font-bold text-gray-800">Headline</h4>
+                <p class="text-gray-600 text-sm">Attention-grabbing title that summarizes the main event</p>
+                <p class="text-blue-600 text-sm italic mt-1">Example: "Drought, bushfires and floods in Australia"</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3 p-4 bg-green-50 border-l-4 border-green-500 rounded">
+              <div class="flex-shrink-0 w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center font-bold">2</div>
+              <div>
+                <h4 class="font-bold text-gray-800">Introduction</h4>
+                <p class="text-gray-600 text-sm">Brief overview setting the context</p>
+                <p class="text-blue-600 text-sm italic mt-1">Example: "The summer of 2019-2020 was the second hottest on record in Australia..."</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3 p-4 bg-blue-50 border-l-4 border-blue-500 rounded">
+              <div class="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold">3</div>
+              <div>
+                <h4 class="font-bold text-gray-800">Facts and Figures</h4>
+                <p class="text-gray-600 text-sm">Statistical data and specific numbers</p>
+                <p class="text-blue-600 text-sm italic mt-1">Example: "Temperature was above 40°C on 11 days in the month..."</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3 p-4 bg-purple-50 border-l-4 border-purple-500 rounded">
+              <div class="flex-shrink-0 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold">4</div>
+              <div>
+                <h4 class="font-bold text-gray-800">More Information / Detail</h4>
+                <p class="text-gray-600 text-sm">Additional context and specific examples</p>
+                <p class="text-blue-600 text-sm italic mt-1">Example: "The fires burned 5 million hectares..."</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3 p-4 bg-pink-50 border-l-4 border-pink-500 rounded">
+              <div class="flex-shrink-0 w-8 h-8 bg-pink-500 text-white rounded-full flex items-center justify-center font-bold">5</div>
+              <div>
+                <h4 class="font-bold text-gray-800">Quote</h4>
+                <p class="text-gray-600 text-sm">Expert opinion or eyewitness statement</p>
+                <p class="text-blue-600 text-sm italic mt-1">Example: "'Australia has always had bushfires, but the fires in 2019 were like nothing we'd ever seen before.'"</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3 p-4 bg-orange-50 border-l-4 border-orange-500 rounded">
+              <div class="flex-shrink-0 w-8 h-8 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold">6</div>
+              <div>
+                <h4 class="font-bold text-gray-800">Conclusion</h4>
+                <p class="text-gray-600 text-sm">Summary and future outlook</p>
+                <p class="text-blue-600 text-sm italic mt-1">Example: "Scientists believe that the exceptional heat is due to climate change..."</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3 p-4 bg-gray-50 border-l-4 border-gray-500 rounded">
+              <div class="flex-shrink-0 w-8 h-8 bg-gray-500 text-white rounded-full flex items-center justify-center font-bold">7</div>
+              <div>
+                <h4 class="font-bold text-gray-800">Photo + Caption</h4>
+                <p class="text-gray-600 text-sm">Visual element with descriptive text</p>
+                <p class="text-blue-600 text-sm italic mt-1">Example: "Drought conditions in Victoria, Australia"</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Concept Checking Questions -->
+        <div class="mt-8">
+          <h3 class="text-xl font-semibold text-gray-700 mb-4">Concept Checking Questions</h3>
+          <div class="space-y-4">
+            <div class="p-4 bg-gray-50 rounded-lg">
+              <p class="font-semibold text-gray-700 mb-2">1. Why does the headline need to be attention-grabbing?</p>
+              <textarea class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none" rows="2" placeholder="Type your answer here..."></textarea>
+            </div>
+            <div class="p-4 bg-gray-50 rounded-lg">
+              <p class="font-semibold text-gray-700 mb-2">2. What's the difference between the introduction and the facts and figures section?</p>
+              <textarea class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none" rows="2" placeholder="Type your answer here..."></textarea>
+            </div>
+            <div class="p-4 bg-gray-50 rounded-lg">
+              <p class="font-semibold text-gray-700 mb-2">3. Why do you think the writer includes a quote?</p>
+              <textarea class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none" rows="2" placeholder="Type your answer here..."></textarea>
+            </div>
+            <div class="p-4 bg-gray-50 rounded-lg">
+              <p class="font-semibold text-gray-700 mb-2">4. Is the style formal or informal? How do you know?</p>
+              <textarea class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none" rows="2" placeholder="Type your answer here..."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 3: CONTROLLED PRACTICE -->
+    <div id="controlled" class="section-content hidden">
+      <div class="bg-white rounded-xl shadow-lg p-8 border-t-4 border-green-400 mb-6">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">✍️ Controlled Practice: Report Elements</h2>
+        
+        <!-- Activity 1: Categorizing Report Elements -->
+        <div class="mb-8">
+          <h3 class="text-xl font-semibold text-gray-700 mb-4">Activity 1: Categorize These Sentences</h3>
+          <p class="text-gray-600 mb-4">Drag each sentence to the correct category:</p>
+
+          <!-- Draggable sentences -->
+          <div class="mb-6 p-4 bg-gray-50 rounded-lg">
+            <h4 class="font-semibold text-gray-700 mb-3">Sentences to categorize:</h4>
+            <div id="sentences-pool" class="space-y-2">
+              <div class="draggable bg-white border-2 border-gray-300 p-3 rounded-lg shadow-sm" draggable="true" data-category="headline">
+                Record-breaking heatwave strikes Southern Europe
+              </div>
+              <div class="draggable bg-white border-2 border-gray-300 p-3 rounded-lg shadow-sm" draggable="true" data-category="statistic">
+                Temperatures soared to 45°C across the region, 10°C above the seasonal average
+              </div>
+              <div class="draggable bg-white border-2 border-gray-300 p-3 rounded-lg shadow-sm" draggable="true" data-category="quote">
+                "This is just the beginning," warned climate scientist Dr. Maria Santos
+              </div>
+              <div class="draggable bg-white border-2 border-gray-300 p-3 rounded-lg shadow-sm" draggable="true" data-category="detail">
+                The heatwave forced schools to close early and led to widespread power outages
+              </div>
+              <div class="draggable bg-white border-2 border-gray-300 p-3 rounded-lg shadow-sm" draggable="true" data-category="conclusion">
+                Experts predict more frequent extreme events in coming years
+              </div>
+              <div class="draggable bg-white border-2 border-gray-300 p-3 rounded-lg shadow-sm" draggable="true" data-category="statistic">
+                According to meteorological data, rainfall was 60% below average
+              </div>
+            </div>
+          </div>
+
+          <!-- Drop zones -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="drop-zone border-2 border-dashed border-blue-300 rounded-lg p-4 bg-blue-50" data-category="headline">
+              <h4 class="font-bold text-blue-700 mb-2">Headlines</h4>
+              <div class="drop-container space-y-2 min-h-[100px]"></div>
+            </div>
+
+            <div class="drop-zone border-2 border-dashed border-green-300 rounded-lg p-4 bg-green-50" data-category="statistic">
+              <h4 class="font-bold text-green-700 mb-2">Statistics/Data</h4>
+              <div class="drop-container space-y-2 min-h-[100px]"></div>
+            </div>
+
+            <div class="drop-zone border-2 border-dashed border-purple-300 rounded-lg p-4 bg-purple-50" data-category="quote">
+              <h4 class="font-bold text-purple-700 mb-2">Quotes</h4>
+              <div class="drop-container space-y-2 min-h-[100px]"></div>
+            </div>
+
+            <div class="drop-zone border-2 border-dashed border-orange-300 rounded-lg p-4 bg-orange-50" data-category="detail">
+              <h4 class="font-bold text-orange-700 mb-2">Descriptive Details</h4>
+              <div class="drop-container space-y-2 min-h-[100px]"></div>
+            </div>
+
+            <div class="drop-zone border-2 border-dashed border-pink-300 rounded-lg p-4 bg-pink-50" data-category="conclusion">
+              <h4 class="font-bold text-pink-700 mb-2">Conclusions</h4>
+              <div class="drop-container space-y-2 min-h-[100px]"></div>
+            </div>
+          </div>
+
+          <div class="mt-4 flex gap-3">
+            <button onclick="checkCategorization()" class="bg-gradient-to-r from-blue-500 to-green-500 text-white font-semibold py-2 px-6 rounded-lg hover:from-blue-600 hover:to-green-600 transition-all shadow-lg">
+              Check Answers
+            </button>
+            <button onclick="resetCategorization()" class="bg-gray-500 text-white font-semibold py-2 px-6 rounded-lg hover:bg-gray-600 transition">
+              Reset
+            </button>
+          </div>
+          <div id="categorization-feedback" class="mt-4"></div>
+        </div>
+
+        <!-- Activity 2: Writing Headlines -->
+        <div class="mt-8">
+          <h3 class="text-xl font-semibold text-gray-700 mb-4">Activity 2: Write Headlines</h3>
+          <p class="text-gray-600 mb-4">Write an attention-grabbing headline for each scenario:</p>
+
+          <div class="space-y-4">
+            <div class="p-4 bg-blue-50 rounded-lg">
+              <p class="font-semibold text-gray-700 mb-2">Scenario 1:</p>
+              <p class="text-gray-600 mb-3">Heavy flooding in Thailand displaces 10,000 families. Rivers overflow after three days of continuous rain.</p>
+              <input type="text" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none" placeholder="Write your headline here...">
+            </div>
+
+            <div class="p-4 bg-blue-50 rounded-lg">
+              <p class="font-semibold text-gray-700 mb-2">Scenario 2:</p>
+              <p class="text-gray-600 mb-3">Unprecedented snowstorm paralyzes New York City. 60cm of snow falls in 12 hours, breaking all records.</p>
+              <input type="text" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none" placeholder="Write your headline here...">
+            </div>
+
+            <div class="p-4 bg-blue-50 rounded-lg">
+              <p class="font-semibold text-gray-700 mb-2">Scenario 3:</p>
+              <p class="text-gray-600 mb-3">Prolonged drought threatens agricultural production in Kenya. Crops fail as rain doesn't come for six months.</p>
+              <input type="text" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none" placeholder="Write your headline here...">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 4: FREE PRACTICE -->
+    <div id="free" class="section-content hidden">
+      <div class="bg-white rounded-xl shadow-lg p-8 border-t-4 border-purple-400">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">🔍 Free Practice: Research & Note-Taking</h2>
+        
+        <div class="mb-6 p-4 bg-yellow-50 border-l-4 border-yellow-500 rounded">
+          <p class="font-semibold text-gray-700">📋 Instructions:</p>
+          <p class="text-gray-600 mt-2">Choose an extreme weather event from recent news and gather information using the template below. You'll use these notes to write your report in the Production stage.</p>
+        </div>
+
+        <!-- Research Template -->
+        <div class="space-y-6">
+          <!-- Event Selection -->
+          <div class="p-4 bg-gray-50 rounded-lg">
+            <label class="block font-semibold text-gray-700 mb-2">Select Your Event Type:</label>
+            <select id="event-type" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none">
+              <option value="">Choose an event type...</option>
+              <option value="heatwave">Heatwave</option>
+              <option value="flood">Flooding</option>
+              <option value="hurricane">Hurricane/Typhoon/Cyclone</option>
+              <option value="drought">Drought</option>
+              <option value="coldsnap">Severe Cold Snap</option>
+              <option value="wildfire">Wildfire</option>
+              <option value="snowstorm">Snowstorm/Blizzard</option>
+            </select>
+          </div>
+
+          <!-- Basic Facts -->
+          <div class="p-4 bg-blue-50 rounded-lg">
+            <h3 class="font-bold text-gray-800 mb-3">📍 BASIC FACTS</h3>
+            <div class="space-y-3">
+              <div>
+                <label class="block text-gray-700 mb-1">What happened?</label>
+                <textarea class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none" rows="2" placeholder="Brief description of the event..."></textarea>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-gray-700 mb-1">Where?</label>
+                  <input type="text" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none" placeholder="Location...">
+                </div>
+                <div>
+                  <label class="block text-gray-700 mb-1">When?</label>
+                  <input type="text" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none" placeholder="Date/time period...">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Statistics -->
+          <div class="p-4 bg-green-50 rounded-lg">
+            <h3 class="font-bold text-gray-800 mb-3">📊 STATISTICS & DATA</h3>
+            <div class="space-y-3">
+              <div>
+                <label class="block text-gray-700 mb-1">Temperature/Rainfall/Wind Speed Data:</label>
+                <textarea class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-green-500 focus:outline-none" rows="2" placeholder="e.g., 'Temperatures reached 42°C, 8°C above average'"></textarea>
+              </div>
+              <div>
+                <label class="block text-gray-700 mb-1">Number of People Affected:</label>
+                <input type="text" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-green-500 focus:outline-none" placeholder="e.g., '15,000 people evacuated'">
+              </div>
+              <div>
+                <label class="block text-gray-700 mb-1">Economic Damage/Other Numbers:</label>
+                <input type="text" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-green-500 focus:outline-none" placeholder="e.g., '$500 million in damages'">
+              </div>
+            </div>
+          </div>
+
+          <!-- Quotes -->
+          <div class="p-4 bg-purple-50 rounded-lg">
+            <h3 class="font-bold text-gray-800 mb-3">💬 QUOTES</h3>
+            <div class="space-y-3">
+              <div>
+                <label class="block text-gray-700 mb-1">Quote from Expert/Official/Witness:</label>
+                <textarea class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none" rows="2" placeholder="e.g., 'According to Dr. Smith, 'This is unprecedented in our region.''"></textarea>
+              </div>
+              <div>
+                <label class="block text-gray-700 mb-1">Who said it? (Name and role):</label>
+                <input type="text" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none" placeholder="e.g., 'Dr. Jane Smith, Climate Scientist'">
+              </div>
+            </div>
+          </div>
+
+          <!-- Specific Details -->
+          <div class="p-4 bg-orange-50 rounded-lg">
+            <h3 class="font-bold text-gray-800 mb-3">📝 SPECIFIC DETAILS & EXAMPLES</h3>
+            <textarea class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none" rows="4" placeholder="e.g., 'Schools were forced to close for three days. Emergency services responded to over 200 calls. Local farmers reported crop losses of up to 70%.'"></textarea>
+          </div>
+
+          <!-- Photo Notes -->
+          <div class="p-4 bg-pink-50 rounded-lg">
+            <h3 class="font-bold text-gray-800 mb-3">📸 PHOTO IDEA</h3>
+            <div class="space-y-3">
+              <div>
+                <label class="block text-gray-700 mb-1">Describe the photo you would use:</label>
+                <textarea class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-pink-500 focus:outline-none" rows="2" placeholder="e.g., 'Flooded streets in downtown Bangkok with cars partially submerged'"></textarea>
+              </div>
+              <div>
+                <label class="block text-gray-700 mb-1">Photo Caption:</label>
+                <input type="text" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-pink-500 focus:outline-none" placeholder="e.g., 'Severe flooding in Bangkok, Thailand, September 2024'">
+              </div>
+            </div>
+          </div>
+
+          <!-- Save Button -->
+          <div class="flex gap-3">
+            <button onclick="saveNotes()" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold py-3 px-6 rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all shadow-lg">
+              💾 Save My Notes
+            </button>
+            <button onclick="clearNotes()" class="bg-gray-500 text-white font-semibold py-3 px-6 rounded-lg hover:bg-gray-600 transition">
+              Clear All
+            </button>
+          </div>
+          <div id="notes-feedback" class="mt-4"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 5: PRODUCTION -->
+    <div id="production" class="section-content hidden">
+      <div class="bg-white rounded-xl shadow-lg p-8 border-t-4 border-yellow-400">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">✍️ Production: Write Your Report</h2>
+        
+        <div class="mb-6 p-4 bg-blue-50 border-l-4 border-blue-500 rounded">
+          <p class="font-semibold text-gray-700">📋 Instructions:</p>
+          <p class="text-gray-600 mt-2">Use your research notes from the previous section to write a complete weather report. Target length: 200-250 words. Remember to include all the required elements!</p>
+        </div>
+
+        <!-- Writing Checklist -->
+        <div class="mb-6 p-4 bg-yellow-50 rounded-lg border-2 border-yellow-300">
+          <h3 class="font-semibold text-gray-800 mb-3">✅ Writing Checklist - Make sure you include:</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <label class="flex items-center gap-2">
+              <input type="checkbox" class="w-4 h-4">
+              <span class="text-gray-700">Attention-grabbing headline</span>
+            </label>
+            <label class="flex items-center gap-2">
+              <input type="checkbox" class="w-4 h-4">
+              <span class="text-gray-700">Clear introduction</span>
+            </label>
+            <label class="flex items-center gap-2">
+              <input type="checkbox" class="w-4 h-4">
+              <span class="text-gray-700">Facts and statistics</span>
+            </label>
+            <label class="flex items-center gap-2">
+              <input type="checkbox" class="w-4 h-4">
+              <span class="text-gray-700">Specific details</span>
+            </label>
+            <label class="flex items-center gap-2">
+              <input type="checkbox" class="w-4 h-4">
+              <span class="text-gray-700">At least one quote</span>
+            </label>
+            <label class="flex items-center gap-2">
+              <input type="checkbox" class="w-4 h-4">
+              <span class="text-gray-700">Conclusion</span>
+            </label>
+            <label class="flex items-center gap-2">
+              <input type="checkbox" class="w-4 h-4">
+              <span class="text-gray-700">Photo caption</span>
+            </label>
+            <label class="flex items-center gap-2">
+              <input type="checkbox" class="w-4 h-4">
+              <span class="text-gray-700">Formal, objective style</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Report Writing Template -->
+        <div class="space-y-4">
+          <div>
+            <label class="block font-bold text-gray-800 mb-2 text-lg">📰 HEADLINE</label>
+            <input type="text" id="report-headline" class="w-full p-4 border-2 border-gray-300 rounded-lg focus:border-yellow-500 focus:outline-none text-xl font-semibold" placeholder="Write an attention-grabbing headline...">
+          </div>
+
+          <div>
+            <label class="block font-bold text-gray-800 mb-2">📝 INTRODUCTION <span class="text-sm font-normal text-gray-500">(Brief overview)</span></label>
+            <textarea id="report-intro" class="w-full p-4 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none" rows="3" placeholder="The summer of 2024 saw unprecedented..."></textarea>
+          </div>
+
+          <div>
+            <label class="block font-bold text-gray-800 mb-2">📊 FACTS AND FIGURES <span class="text-sm font-normal text-gray-500">(Statistics and data)</span></label>
+            <textarea id="report-facts" class="w-full p-4 border-2 border-gray-300 rounded-lg focus:border-green-500 focus:outline-none" rows="4" placeholder="According to meteorological data, temperatures reached..."></textarea>
+          </div>
+
+          <div>
+            <label class="block font-bold text-gray-800 mb-2">📋 MORE INFORMATION <span class="text-sm font-normal text-gray-500">(Additional details)</span></label>
+            <textarea id="report-details" class="w-full p-4 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none" rows="4" placeholder="The extreme weather led to..."></textarea>
+          </div>
+
+          <div>
+            <label class="block font-bold text-gray-800 mb-2">💬 QUOTE <span class="text-sm font-normal text-gray-500">(Expert or witness)</span></label>
+            <textarea id="report-quote" class="w-full p-4 border-2 border-gray-300 rounded-lg focus:border-pink-500 focus:outline-none" rows="2" placeholder='"This is the worst we\'ve seen," said Dr. Maria Santos, climate scientist.'></textarea>
+          </div>
+
+          <div>
+            <label class="block font-bold text-gray-800 mb-2">🏁 CONCLUSION <span class="text-sm font-normal text-gray-500">(Summary and outlook)</span></label>
+            <textarea id="report-conclusion" class="w-full p-4 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none" rows="3" placeholder="Experts warn that such extreme events..."></textarea>
+          </div>
+
+          <div>
+            <label class="block font-bold text-gray-800 mb-2">📸 PHOTO CAPTION</label>
+            <input type="text" id="report-caption" class="w-full p-4 border-2 border-gray-300 rounded-lg focus:border-gray-500 focus:outline-none" placeholder="Flooding in Bangkok, Thailand, September 2024">
+          </div>
+        </div>
+
+        <!-- Word Count -->
+        <div class="mt-6 p-4 bg-gray-50 rounded-lg">
+          <div class="flex items-center justify-between">
+            <span class="font-semibold text-gray-700">Word Count:</span>
+            <span id="word-count" class="text-2xl font-bold text-blue-600">0</span>
+          </div>
+          <div class="mt-2 bg-gray-200 rounded-full h-3">
+            <div id="word-count-bar" class="bg-gradient-to-r from-blue-500 to-green-500 h-3 rounded-full transition-all" style="width: 0%"></div>
+          </div>
+          <p class="text-sm text-gray-500 mt-1">Target: 200-250 words</p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="mt-6 flex gap-3">
+          <button onclick="saveReport()" class="bg-gradient-to-r from-blue-500 to-yellow-500 text-white font-semibold py-3 px-6 rounded-lg hover:from-blue-600 hover:to-yellow-600 transition-all shadow-lg">
+            💾 Save My Report
+          </button>
+          <button onclick="previewReport()" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold py-3 px-6 rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all shadow-lg">
+            👁️ Preview Report
+          </button>
+          <button onclick="clearReport()" class="bg-gray-500 text-white font-semibold py-3 px-6 rounded-lg hover:bg-gray-600 transition">
+            Clear All
+          </button>
+        </div>
+        <div id="report-feedback" class="mt-4"></div>
+
+        <!-- Preview Modal -->
+        <div id="preview-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div class="bg-white rounded-xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="sticky top-0 bg-gradient-to-r from-blue-600 to-yellow-600 text-white p-6 rounded-t-xl">
+              <div class="flex items-center justify-between">
+                <h3 class="text-2xl font-bold">📰 Report Preview</h3>
+                <button onclick="closePreview()" class="text-white hover:text-gray-200 text-3xl">&times;</button>
+              </div>
+            </div>
+            <div id="preview-content" class="p-8">
+              <!-- Preview content will be inserted here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 6: CONSOLIDATION -->
+    <div id="consolidation" class="section-content hidden">
+      <div class="bg-white rounded-xl shadow-lg p-8 border-t-4 border-green-400">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">🎯 Consolidation: Self-Assessment & Reflection</h2>
+        
+        <!-- Self-Assessment Checklist -->
+        <div class="mb-8 p-6 bg-green-50 rounded-lg border-2 border-green-300">
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">✅ Self-Assessment Checklist</h3>
+          <p class="text-gray-600 mb-4">Review your report and check all that apply:</p>
+          
+          <div class="space-y-3">
+            <label class="flex items-start gap-3 p-3 bg-white rounded-lg hover:bg-gray-50 transition">
+              <input type="checkbox" class="w-5 h-5 mt-1 flex-shrink-0">
+              <span class="text-gray-700">Is the headline clear and interesting? Does it make you want to read more?</span>
+            </label>
+            
+            <label class="flex items-start gap-3 p-3 bg-white rounded-lg hover:bg-gray-50 transition">
+              <input type="checkbox" class="w-5 h-5 mt-1 flex-shrink-0">
+              <span class="text-gray-700">Are there clear paragraphs with appropriate sub-headings?</span>
+            </label>
+            
+            <label class="flex items-start gap-3 p-3 bg-white rounded-lg hover:bg-gray-50 transition">
+              <input type="checkbox" class="w-5 h-5 mt-1 flex-shrink-0">
+              <span class="text-gray-700">Have I included specific facts and statistics with numbers?</span>
+            </label>
+            
+            <label class="flex items-start gap-3 p-3 bg-white rounded-lg hover:bg-gray-50 transition">
+              <input type="checkbox" class="w-5 h-5 mt-1 flex-shrink-0">
+              <span class="text-gray-700">Is there at least one quote from an expert, official, or witness?</span>
+            </label>
+            
+            <label class="flex items-start gap-3 p-3 bg-white rounded-lg hover:bg-gray-50 transition">
+              <input type="checkbox" class="w-5 h-5 mt-1 flex-shrink-0">
+              <span class="text-gray-700">Is my writing formal and objective (not personal opinions)?</span>
+            </label>
+            
+            <label class="flex items-start gap-3 p-3 bg-white rounded-lg hover:bg-gray-50 transition">
+              <input type="checkbox" class="w-5 h-5 mt-1 flex-shrink-0">
+              <span class="text-gray-700">Does the conclusion summarize key points and/or mention future outlook?</span>
+            </label>
+            
+            <label class="flex items-start gap-3 p-3 bg-white rounded-lg hover:bg-gray-50 transition">
+              <input type="checkbox" class="w-5 h-5 mt-1 flex-shrink-0">
+              <span class="text-gray-700">Have I checked grammar, spelling, and punctuation?</span>
+            </label>
+            
+            <label class="flex items-start gap-3 p-3 bg-white rounded-lg hover:bg-gray-50 transition">
+              <input type="checkbox" class="w-5 h-5 mt-1 flex-shrink-0">
+              <span class="text-gray-700">Is my report between 200-250 words?</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Environmental Reflection -->
+        <div class="mb-8">
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">🌍 Environmental Reflection</h3>
+          <p class="text-gray-600 mb-4">Reflect on what you learned about environmental issues:</p>
+          
+          <div class="space-y-4">
+            <div class="p-4 bg-blue-50 rounded-lg">
+              <p class="font-semibold text-gray-700 mb-2">1. What did writing this report teach you about extreme weather?</p>
+              <textarea class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none" rows="3" placeholder="Reflect on what you learned..."></textarea>
+            </div>
+
+            <div class="p-4 bg-blue-50 rounded-lg">
+              <p class="font-semibold text-gray-700 mb-2">2. How do you think climate change is connected to the event you wrote about?</p>
+              <textarea class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none" rows="3" placeholder="Explain the connection..."></textarea>
+            </div>
+
+            <div class="p-4 bg-blue-50 rounded-lg">
+              <p class="font-semibold text-gray-700 mb-2">3. What can people do to reduce the impact of extreme weather events?</p>
+              <textarea class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none" rows="3" placeholder="Share your ideas..."></textarea>
+            </div>
+
+            <div class="p-4 bg-blue-50 rounded-lg">
+              <p class="font-semibold text-gray-700 mb-2">4. As a report writer, why is it important to present facts rather than just opinions?</p>
+              <textarea class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none" rows="3" placeholder="Think about journalistic responsibility..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Learning Reflection -->
+        <div class="p-6 bg-purple-50 rounded-lg border-2 border-purple-300">
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">💭 Learning Reflection</h3>
+          
+          <div class="space-y-4">
+            <div>
+              <label class="block font-semibold text-gray-700 mb-2">What was the most challenging part of writing the report?</label>
+              <textarea class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none" rows="2" placeholder="Be honest about what you found difficult..."></textarea>
+            </div>
+
+            <div>
+              <label class="block font-semibold text-gray-700 mb-2">What did you do well in your report?</label>
+              <textarea class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none" rows="2" placeholder="Celebrate your strengths..."></textarea>
+            </div>
+
+            <div>
+              <label class="block font-semibold text-gray-700 mb-2">What would you improve if you wrote another weather report?</label>
+              <textarea class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none" rows="2" placeholder="Think about areas for growth..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Completion Certificate -->
+        <div class="mt-8 text-center">
+          <button onclick="generateCertificate()" class="bg-gradient-to-r from-green-500 to-blue-500 text-white font-bold py-4 px-8 rounded-lg hover:from-green-600 hover:to-blue-600 transition-all shadow-lg text-lg">
+            🎓 Generate Completion Certificate
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="bg-white shadow-md border-t-4 border-blue-400 mt-12">
+    <div class="max-w-7xl mx-auto px-6 py-6 text-center text-gray-600">
+      <p class="font-semibold">Unit 8.7: Writing Extreme Weather Reports</p>
+      <p class="text-sm mt-1">Cambridge Global English Learner's Book 9 | Interactive Learning Material</p>
+    </div>
+  </div>
+
+  <script>
+    // Section Navigation
+    let currentSection = 'warmer';
+
+    function showSection(sectionId) {
+      // Hide all sections
+      document.querySelectorAll('.section-content').forEach(section => {
+        section.classList.add('hidden');
+        section.classList.remove('fade-in');
+      });
+
+      // Show selected section
+      const section = document.getElementById(sectionId);
+      section.classList.remove('hidden');
+      setTimeout(() => section.classList.add('fade-in'), 10);
+
+      // Update navigation buttons
+      document.querySelectorAll('.section-btn').forEach(btn => {
+        btn.classList.remove('bg-gradient-to-br', 'from-yellow-400', 'to-yellow-500', 'text-white', 'shadow-lg');
+        btn.classList.add('bg-gray-100', 'text-gray-600');
+      });
+
+      event.target.classList.remove('bg-gray-100', 'text-gray-600');
+      event.target.classList.add('bg-gradient-to-br', 'from-yellow-400', 'to-yellow-500', 'text-white', 'shadow-lg');
+
+      currentSection = sectionId;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // WARMER: Weather Matching Game
+    let selectedTerm = null;
+    const matches = {};
+
+    document.querySelectorAll('.weather-term').forEach(term => {
+      term.addEventListener('click', function() {
+        // Deselect previous
+        document.querySelectorAll('.weather-term').forEach(t => {
+          t.classList.remove('ring-4', 'ring-blue-500');
+        });
+
+        // Select this one
+        this.classList.add('ring-4', 'ring-blue-500');
+        selectedTerm = this.dataset.id;
+      });
+    });
+
+    document.querySelectorAll('.definition-card').forEach(card => {
+      card.addEventListener('click', function() {
+        if (!selectedTerm) {
+          alert('Please select a weather type first!');
+          return;
+        }
+
+        matches[selectedTerm] = this.dataset.match;
+
+        // Visual feedback
+        this.classList.add('bg-blue-100', 'border-blue-500');
+        
+        // Deselect term
+        document.querySelectorAll('.weather-term').forEach(t => {
+          t.classList.remove('ring-4', 'ring-blue-500');
+        });
+        selectedTerm = null;
+      });
+    });
+
+    function checkMatches() {
+      const correctMatches = {
+        'heatwave': 'heatwave',
+        'drought': 'drought',
+        'flood': 'flood',
+        'hurricane': 'hurricane',
+        'tornado': 'tornado'
+      };
+
+      let correct = 0;
+      let total = Object.keys(correctMatches).length;
+
+      for (let term in correctMatches) {
+        if (matches[term] === correctMatches[term]) {
+          correct++;
+        }
+      }
+
+      const feedback = document.getElementById('matching-feedback');
+      if (correct === total) {
+        feedback.innerHTML = `
+          <div class="p-4 bg-green-100 border-2 border-green-500 rounded-lg">
+            <p class="text-green-800 font-semibold">🎉 Perfect! You matched all ${total} correctly!</p>
+          </div>
+        `;
+      } else {
+        feedback.innerHTML = `
+          <div class="p-4 bg-yellow-100 border-2 border-yellow-500 rounded-lg">
+            <p class="text-yellow-800 font-semibold">You matched ${correct} out of ${total} correctly. Try again!</p>
+          </div>
+        `;
+      }
+    }
+
+    function resetMatching() {
+      matches = {};
+      selectedTerm = null;
+      document.querySelectorAll('.weather-term').forEach(t => {
+        t.classList.remove('ring-4', 'ring-blue-500');
+      });
+      document.querySelectorAll('.definition-card').forEach(c => {
+        c.classList.remove('bg-blue-100', 'border-blue-500');
+      });
+      document.getElementById('matching-feedback').innerHTML = '';
+    }
+
+    // CONTROLLED PRACTICE: Drag and Drop Categorization
+    let draggedElement = null;
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const draggables = document.querySelectorAll('.draggable');
+      const dropZones = document.querySelectorAll('.drop-zone');
+
+      draggables.forEach(item => {
+        item.addEventListener('dragstart', function(e) {
+          draggedElement = this;
+          this.style.opacity = '0.5';
+        });
+
+        item.addEventListener('dragend', function() {
+          this.style.opacity = '1';
+        });
+      });
+
+      dropZones.forEach(zone => {
+        zone.addEventListener('dragover', function(e) {
+          e.preventDefault();
+          this.classList.add('drag-over');
+        });
+
+        zone.addEventListener('dragleave', function() {
+          this.classList.remove('drag-over');
+        });
+
+        zone.addEventListener('drop', function(e) {
+          e.preventDefault();
+          this.classList.remove('drag-over');
+          
+          const container = this.querySelector('.drop-container');
+          if (draggedElement) {
+            container.appendChild(draggedElement);
+          }
+        });
+      });
+    });
+
+    function checkCategorization() {
+      const dropZones = document.querySelectorAll('.drop-zone');
+      let correct = 0;
+      let total = 0;
+
+      dropZones.forEach(zone => {
+        const category = zone.dataset.category;
+        const items = zone.querySelectorAll('.draggable');
+        
+        items.forEach(item => {
+          total++;
+          if (item.dataset.category === category) {
+            correct++;
+            item.classList.add('border-green-500', 'bg-green-50');
+            item.classList.remove('border-gray-300');
+          } else {
+            item.classList.add('border-red-500', 'bg-red-50');
+            item.classList.remove('border-gray-300');
+          }
+        });
+      });
+
+      const feedback = document.getElementById('categorization-feedback');
+      if (correct === total) {
+        feedback.innerHTML = `
+          <div class="p-4 bg-green-100 border-2 border-green-500 rounded-lg">
+            <p class="text-green-800 font-semibold">🎉 Excellent! All ${total} sentences are correctly categorized!</p>
+          </div>
+        `;
+      } else {
+        feedback.innerHTML = `
+          <div class="p-4 bg-yellow-100 border-2 border-yellow-500 rounded-lg">
+            <p class="text-yellow-800 font-semibold">You categorized ${correct} out of ${total} correctly. Green = correct, Red = incorrect. Try moving the red ones!</p>
+          </div>
+        `;
+      }
+    }
+
+    function resetCategorization() {
+      const pool = document.getElementById('sentences-pool');
+      const draggables = document.querySelectorAll('.draggable');
+      
+      draggables.forEach(item => {
+        item.classList.remove('border-green-500', 'bg-green-50', 'border-red-500', 'bg-red-50');
+        item.classList.add('border-gray-300');
+        pool.appendChild(item);
+      });
+
+      document.getElementById('categorization-feedback').innerHTML = '';
+    }
+
+    // FREE PRACTICE: Save Notes
+    function saveNotes() {
+      const feedback = document.getElementById('notes-feedback');
+      feedback.innerHTML = `
+        <div class="p-4 bg-green-100 border-2 border-green-500 rounded-lg">
+          <p class="text-green-800 font-semibold">✅ Notes saved! You can now move to the Production section to write your report.</p>
+        </div>
+      `;
+      
+      setTimeout(() => {
+        feedback.innerHTML = '';
+      }, 3000);
+    }
+
+    function clearNotes() {
+      if (confirm('Are you sure you want to clear all your notes?')) {
+        document.querySelectorAll('#free textarea, #free input').forEach(field => {
+          field.value = '';
+        });
+        document.getElementById('event-type').value = '';
+      }
+    }
+
+    // PRODUCTION: Word Count and Report Functions
+    function updateWordCount() {
+      const fields = ['report-intro', 'report-facts', 'report-details', 'report-quote', 'report-conclusion'];
+      let totalWords = 0;
+
+      fields.forEach(fieldId => {
+        const text = document.getElementById(fieldId).value;
+        const words = text.trim().split(/\s+/).filter(word => word.length > 0);
+        totalWords += words.length;
+      });
+
+      document.getElementById('word-count').textContent = totalWords;
+      
+      // Update progress bar
+      const percentage = Math.min((totalWords / 250) * 100, 100);
+      document.getElementById('word-count-bar').style.width = percentage + '%';
+
+      // Change color based on target
+      const bar = document.getElementById('word-count-bar');
+      if (totalWords >= 200 && totalWords <= 250) {
+        bar.className = 'bg-gradient-to-r from-green-500 to-green-600 h-3 rounded-full transition-all';
+      } else if (totalWords > 250) {
+        bar.className = 'bg-gradient-to-r from-yellow-500 to-orange-500 h-3 rounded-full transition-all';
+      } else {
+        bar.className = 'bg-gradient-to-r from-blue-500 to-blue-600 h-3 rounded-full transition-all';
+      }
+    }
+
+    // Add event listeners for word count
+    document.addEventListener('DOMContentLoaded', function() {
+      const reportFields = ['report-intro', 'report-facts', 'report-details', 'report-quote', 'report-conclusion'];
+      reportFields.forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        if (field) {
+          field.addEventListener('input', updateWordCount);
+        }
+      });
+    });
+
+    function saveReport() {
+      const headline = document.getElementById('report-headline').value;
+      
+      if (!headline.trim()) {
+        alert('Please write a headline first!');
+        return;
+      }
+
+      const feedback = document.getElementById('report-feedback');
+      feedback.innerHTML = `
+        <div class="p-4 bg-green-100 border-2 border-green-500 rounded-lg">
+          <p class="text-green-800 font-semibold">✅ Report saved! Don't forget to review it in the Consolidation section.</p>
+        </div>
+      `;
+      
+      setTimeout(() => {
+        feedback.innerHTML = '';
+      }, 3000);
+    }
+
+    function previewReport() {
+      const headline = document.getElementById('report-headline').value;
+      const intro = document.getElementById('report-intro').value;
+      const facts = document.getElementById('report-facts').value;
+      const details = document.getElementById('report-details').value;
+      const quote = document.getElementById('report-quote').value;
+      const conclusion = document.getElementById('report-conclusion').value;
+      const caption = document.getElementById('report-caption').value;
+
+      if (!headline.trim()) {
+        alert('Please write a headline first!');
+        return;
+      }
+
+      const previewHTML = `
+        <article class="prose prose-lg max-w-none">
+          <h1 class="text-3xl font-bold text-gray-900 mb-6 border-b-4 border-blue-500 pb-2">${headline}</h1>
+          
+          ${intro ? `<div class="mb-4"><h3 class="text-sm font-semibold text-gray-500 uppercase mb-2">Introduction</h3><p class="text-gray-700 leading-relaxed">${intro}</p></div>` : ''}
+          
+          ${facts ? `<div class="mb-4 bg-blue-50 p-4 rounded"><h3 class="text-sm font-semibold text-blue-700 uppercase mb-2">Facts and Figures</h3><p class="text-gray-700 leading-relaxed">${facts}</p></div>` : ''}
+          
+          ${details ? `<div class="mb-4"><h3 class="text-sm font-semibold text-gray-500 uppercase mb-2">More Information</h3><p class="text-gray-700 leading-relaxed">${details}</p></div>` : ''}
+          
+          ${quote ? `<div class="mb-4 bg-purple-50 border-l-4 border-purple-500 p-4 rounded"><p class="text-gray-700 italic">${quote}</p></div>` : ''}
+          
+          ${conclusion ? `<div class="mb-4 bg-green-50 p-4 rounded"><h3 class="text-sm font-semibold text-green-700 uppercase mb-2">Conclusion</h3><p class="text-gray-700 leading-relaxed">${conclusion}</p></div>` : ''}
+          
+          ${caption ? `<div class="mt-6 p-4 bg-gray-100 rounded"><p class="text-sm text-gray-600 italic">📸 ${caption}</p></div>` : ''}
+        </article>
+      `;
+
+      document.getElementById('preview-content').innerHTML = previewHTML;
+      document.getElementById('preview-modal').classList.remove('hidden');
+    }
+
+    function closePreview() {
+      document.getElementById('preview-modal').classList.add('hidden');
+    }
+
+    function clearReport() {
+      if (confirm('Are you sure you want to clear your entire report?')) {
+        document.getElementById('report-headline').value = '';
+        document.getElementById('report-intro').value = '';
+        document.getElementById('report-facts').value = '';
+        document.getElementById('report-details').value = '';
+        document.getElementById('report-quote').value = '';
+        document.getElementById('report-conclusion').value = '';
+        document.getElementById('report-caption').value = '';
+        updateWordCount();
+      }
+    }
+
+    // CONSOLIDATION: Certificate Generation
+    function generateCertificate() {
+      const studentName = prompt('Enter your name for the certificate:');
+      
+      if (!studentName) return;
+
+      const certificateHTML = `
+        <div class="text-center p-12 bg-gradient-to-br from-blue-50 to-yellow-50 rounded-xl border-8 border-double border-yellow-500">
+          <div class="mb-6">
+            <h1 class="text-4xl font-bold bg-gradient-to-r from-blue-600 to-yellow-600 bg-clip-text text-transparent mb-2">Certificate of Completion</h1>
+            <div class="text-6xl mb-4">🏆</div>
+          </div>
+          
+          <p class="text-xl text-gray-700 mb-4">This certifies that</p>
+          <p class="text-3xl font-bold text-blue-600 mb-4">${studentName}</p>
+          <p class="text-xl text-gray-700 mb-4">has successfully completed</p>
+          <p class="text-2xl font-semibold text-gray-800 mb-6">Unit 8.7: Writing Extreme Weather Reports</p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 text-sm">
+            <div class="p-3 bg-white rounded-lg">
+              <p class="font-semibold text-gray-700">Skills Mastered:</p>
+              <p class="text-gray-600">Report Writing</p>
+            </div>
+            <div class="p-3 bg-white rounded-lg">
+              <p class="font-semibold text-gray-700">21st Century Skills:</p>
+              <p class="text-gray-600">Critical Thinking</p>
+            </div>
+            <div class="p-3 bg-white rounded-lg">
+              <p class="font-semibold text-gray-700">Environmental Awareness:</p>
+              <p class="text-gray-600">Climate Change</p>
+            </div>
+          </div>
+          
+          <p class="text-gray-600 text-sm">Date: ${new Date().toLocaleDateString()}</p>
+          <p class="text-gray-500 text-xs mt-4">Cambridge Global English Learner's Book 9</p>
+        </div>
+      `;
+
+      const modal = document.getElementById('preview-modal');
+      document.getElementById('preview-content').innerHTML = certificateHTML;
+      modal.classList.remove('hidden');
+    }
+
+    // Close modal on outside click
+    document.getElementById('preview-modal')?.addEventListener('click', function(e) {
+      if (e.target === this) {
+        closePreview();
+      }
+    });
+  </script>
+
+</body>
+                </html> 
