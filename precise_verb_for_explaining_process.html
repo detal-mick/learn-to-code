@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Process Writing Worksheet — Unit 8: The Environment</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue:#1a3a6b; --blue-mid:#2255a4; --blue-light:#e8eef8;
+  --yellow:#f5c518; --yellow-light:#fff9e0;
+  --teal:#0e9f8e; --teal-light:#e5f7f5;
+  --orange:#f07c1e; --orange-light:#fff3e6;
+  --red:#d63031; --red-light:#fdecea;
+  --bg:#f0f3fa; --white:#fff;
+  --text:#1a1a2e; --muted:#5a6a7e; --dim:#9aabba;
+  --border:#dde3ef; --radius:14px; --radius-sm:8px;
+  --shadow:0 4px 20px rgba(26,58,107,0.10);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Lato',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px;line-height:1.6;}
+
+/* HEADER */
+.site-header{background:var(--blue);position:sticky;top:0;z-index:200;box-shadow:0 2px 16px rgba(26,58,107,0.3);}
+.header-top{display:flex;align-items:center;justify-content:space-between;padding:14px 2rem;border-bottom:1px solid rgba(255,255,255,0.08);}
+.hb-badge{background:var(--yellow);color:var(--blue);font-family:'Nunito',sans-serif;font-weight:900;font-size:18px;padding:4px 12px;border-radius:var(--radius-sm);line-height:1;}
+.hb-text{color:var(--white);margin-left:12px;}
+.hb-title{font-family:'Nunito',sans-serif;font-weight:900;font-size:18px;line-height:1.1;}
+.hb-sub{font-size:11px;color:rgba(255,255,255,0.55);}
+.score-pill{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);border-radius:99px;padding:6px 16px;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:var(--yellow);}
+.phase-nav{display:flex;overflow-x:auto;padding:0 2rem;scrollbar-width:none;}
+.phase-nav::-webkit-scrollbar{display:none;}
+.phase-btn{padding:10px 18px;border:none;background:none;font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;color:rgba(255,255,255,0.5);border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;transition:all 0.15s;letter-spacing:0.04em;}
+.phase-btn:hover{color:rgba(255,255,255,0.8);}
+.phase-btn.active{color:var(--yellow);border-bottom-color:var(--yellow);}
+
+/* LAYOUT */
+.page-content{max-width:860px;margin:0 auto;padding:2rem 1.25rem 5rem;}
+.phase-section{display:none;}
+.phase-section.active{display:block;}
+
+/* PHASE HEADER */
+.phase-header{display:flex;align-items:center;gap:14px;margin-bottom:1.75rem;padding-bottom:1.25rem;border-bottom:2px solid var(--border);}
+.phase-icon{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+.ph-yellow{background:var(--yellow-light);}
+.ph-blue{background:var(--blue-light);}
+.ph-orange{background:var(--orange-light);}
+.ph-teal{background:var(--teal-light);}
+.phase-name{font-family:'Nunito',sans-serif;font-weight:900;font-size:22px;color:var(--blue);line-height:1.1;}
+.phase-time{font-size:12px;color:var(--muted);margin-top:2px;}
+
+/* ACTIVITY BLOCK */
+.activity-block{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:1.25rem;overflow:hidden;box-shadow:var(--shadow);}
+.activity-top{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--border);}
+.act-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-weight:900;font-size:14px;flex-shrink:0;}
+.an-blue{background:var(--blue);color:var(--white);}
+.an-yellow{background:var(--yellow);color:var(--blue);}
+.an-orange{background:var(--orange);color:var(--white);}
+.an-teal{background:var(--teal);color:var(--white);}
+.act-label{font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;color:var(--blue);flex:1;line-height:1.3;}
+.act-tag{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:3px 10px;border-radius:99px;}
+.tag-creative{background:var(--orange-light);color:var(--orange);border:1px solid var(--orange);}
+.tag-book{background:var(--blue-light);color:var(--blue-mid);border:1px solid var(--blue-mid);}
+.tag-speaking{background:var(--teal-light);color:var(--teal);border:1px solid var(--teal);}
+.tag-writing{background:var(--yellow-light);color:#b07c00;border:1px solid var(--yellow);}
+.activity-body{padding:18px;}
+
+/* INSTRUCTION */
+.instr{font-size:13.5px;color:var(--muted);background:var(--bg);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:1rem;border-left:4px solid var(--blue-mid);font-style:italic;line-height:1.6;}
+
+/* VERB SORT GAME */
+.verb-pool{display:flex;flex-wrap:wrap;gap:8px;margin:1rem 0;padding:14px;background:var(--bg);border-radius:var(--radius-sm);min-height:60px;}
+.verb-chip{padding:7px 16px;border-radius:99px;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;cursor:pointer;border:2px solid var(--border);background:var(--white);color:var(--text);transition:all 0.15s;user-select:none;}
+.verb-chip:hover{border-color:var(--blue-mid);transform:translateY(-1px);}
+.verb-chip.picked{opacity:0.35;pointer-events:none;}
+.sort-cols{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:1rem 0;}
+@media(max-width:520px){.sort-cols{grid-template-columns:1fr;}}
+.sort-col{border-radius:var(--radius-sm);padding:12px;min-height:120px;}
+.sc-precise{background:var(--teal-light);border:2px dashed var(--teal);}
+.sc-general{background:var(--red-light);border:2px dashed var(--red);}
+.sort-col-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;}
+.sct-precise{color:var(--teal);}
+.sct-general{color:var(--red);}
+.sort-drop{display:flex;flex-wrap:wrap;gap:6px;min-height:50px;}
+.sorted-chip{padding:5px 12px;border-radius:99px;font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;cursor:pointer;transition:all 0.15s;}
+.sorted-chip.in-precise{background:var(--teal);color:var(--white);}
+.sorted-chip.in-general{background:var(--red);color:var(--white);}
+.sorted-chip.chip-correct{box-shadow:0 0 0 3px rgba(14,159,142,0.35);}
+.sorted-chip.chip-wrong{box-shadow:0 0 0 3px rgba(214,48,49,0.35);opacity:0.6;}
+
+/* BROKEN INSTRUCTIONS */
+.broken-pair{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
+@media(max-width:520px){.broken-pair{grid-template-columns:1fr;}}
+.broken-opt{padding:12px 14px;border-radius:var(--radius-sm);border:2px solid var(--border);cursor:pointer;font-size:13.5px;font-style:italic;line-height:1.6;transition:all 0.15s;background:var(--bg);}
+.broken-opt:hover{border-color:var(--blue-mid);background:var(--blue-light);}
+.broken-opt.selected{border-color:var(--yellow);background:var(--yellow-light);}
+.broken-opt.correct{border-color:var(--teal);background:var(--teal-light);}
+.broken-opt.wrong{border-color:var(--red);background:var(--red-light);}
+.broken-label{font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;font-family:'Nunito',sans-serif;}
+
+/* CLEAR FRAMEWORK */
+.clear-grid{display:flex;flex-direction:column;gap:8px;margin:1rem 0;}
+.clear-row{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border-radius:var(--radius-sm);}
+.clear-letter{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-weight:900;font-size:18px;flex-shrink:0;}
+.clear-body{}
+.clear-step{font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;line-height:1.2;}
+.clear-desc{font-size:13px;color:var(--muted);margin-top:2px;}
+.cr-c{background:var(--yellow-light);border:1px solid var(--yellow);}.cr-c .clear-letter{background:var(--yellow);color:var(--blue);}
+.cr-l{background:var(--teal-light);border:1px solid var(--teal);}.cr-l .clear-letter{background:var(--teal);color:var(--white);}
+.cr-e{background:var(--blue-light);border:1px solid var(--blue-mid);}.cr-e .clear-letter{background:var(--blue);color:var(--white);}
+.cr-a{background:var(--orange-light);border:1px solid var(--orange);}.cr-a .clear-letter{background:var(--orange);color:var(--white);}
+.cr-r{background:#f3e8ff;border:1px solid #9333ea;}.cr-r .clear-letter{background:#9333ea;color:var(--white);}
+
+/* SEQUENCE MAP */
+.seq-map{display:flex;flex-direction:column;align-items:center;gap:4px;margin:1rem 0;}
+.seq-node{padding:8px 22px;border-radius:99px;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;text-align:center;}
+.sn-main{background:var(--blue);color:var(--white);}
+.sn-optional{background:var(--yellow-light);color:#b07c00;border:2px dashed var(--yellow);font-style:italic;font-size:12px;}
+.seq-arrow{color:var(--dim);font-size:18px;line-height:1;}
+.seq-branch{display:flex;gap:10px;align-items:center;}
+
+/* PRECISION UPGRADE */
+.upgrade-item{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:10px;}
+.upgrade-weak{font-size:13.5px;font-style:italic;color:var(--red);margin-bottom:6px;}
+.upgrade-hint{font-size:11px;color:var(--muted);margin-bottom:8px;font-weight:700;font-family:'Nunito',sans-serif;text-transform:uppercase;letter-spacing:0.06em;}
+.upgrade-input{width:100%;border:2px solid var(--border);border-radius:var(--radius-sm);padding:8px 12px;font-family:'Lato',sans-serif;font-size:13.5px;outline:none;transition:border-color 0.18s;}
+.upgrade-input:focus{border-color:var(--blue-mid);}
+.upgrade-reveal{display:none;margin-top:6px;padding:8px 12px;background:var(--teal-light);border-left:3px solid var(--teal);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13px;font-style:italic;color:var(--teal);}
+.upgrade-reveal.show{display:block;}
+
+/* BAD PROCESS GAME */
+.bad-text{background:var(--red-light);border:1px solid var(--red);border-radius:var(--radius-sm);padding:14px 16px;font-style:italic;font-size:14px;line-height:1.8;color:var(--red);margin:1rem 0;}
+
+/* PRODUCTION */
+.topic-chips{display:flex;flex-wrap:wrap;gap:8px;margin:1rem 0;}
+.topic-chip{padding:8px 16px;border-radius:var(--radius-sm);border:2px solid var(--border);font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;cursor:pointer;background:var(--bg);color:var(--muted);transition:all 0.15s;}
+.topic-chip:hover{border-color:var(--blue-mid);color:var(--blue);}
+.topic-chip.active{background:var(--blue);border-color:var(--blue);color:var(--white);}
+.clear-checklist{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:1rem 0;}
+@media(max-width:480px){.clear-checklist{grid-template-columns:1fr;}}
+.cl-item{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--bg);cursor:pointer;font-size:13px;transition:all 0.15s;}
+.cl-item:hover{border-color:var(--blue-mid);background:var(--blue-light);}
+.cl-item.checked{background:var(--teal-light);border-color:var(--teal);color:var(--teal);}
+.cl-box{width:18px;height:18px;border-radius:4px;border:2px solid var(--border);background:var(--white);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;flex-shrink:0;transition:all 0.15s;}
+.cl-item.checked .cl-box{background:var(--teal);border-color:var(--teal);color:var(--white);}
+.writing-textarea{width:100%;min-height:200px;border:2px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;font-family:'Lato',sans-serif;font-size:14px;color:var(--text);resize:vertical;outline:none;line-height:1.75;transition:border-color 0.18s;}
+.writing-textarea:focus{border-color:var(--blue-mid);}
+.wc-row{display:flex;align-items:center;justify-content:space-between;margin-top:8px;}
+.wc-label{font-size:12px;color:var(--muted);}
+.wc-num{font-family:'Nunito',sans-serif;font-weight:900;font-size:18px;color:var(--blue);}
+.wc-num.ok{color:var(--teal);}
+.wc-num.over{color:var(--orange);}
+.lang-targets{display:flex;flex-wrap:wrap;gap:8px;margin:1rem 0;}
+.ltag{font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:4px 12px;border-radius:99px;font-family:'Nunito',sans-serif;}
+.lt-verb{background:var(--teal-light);color:var(--teal);border:1px solid var(--teal);}
+.lt-seq{background:var(--blue-light);color:var(--blue-mid);border:1px solid var(--blue-mid);}
+.lt-tense{background:var(--yellow-light);color:#b07c00;border:1px solid var(--yellow);}
+.lt-nopass{background:var(--orange-light);color:var(--orange);border:1px solid var(--orange);}
+
+/* ERROR CORRECTION */
+.error-item{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:10px;}
+.error-sentence{font-size:14px;font-style:italic;color:var(--red);margin-bottom:8px;font-family:'Lato',serif;}
+.error-sentence mark{background:rgba(214,48,49,0.15);color:var(--red);font-weight:700;font-style:normal;padding:0 3px;border-radius:3px;text-decoration:underline;}
+.error-type{font-size:11px;font-weight:700;font-family:'Nunito',sans-serif;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:6px;}
+.error-input{width:100%;border:2px solid var(--border);border-radius:var(--radius-sm);padding:8px 12px;font-family:'Lato',sans-serif;font-size:13.5px;outline:none;transition:border-color 0.18s;}
+.error-input:focus{border-color:var(--blue-mid);}
+.error-input.ec-correct{border-color:var(--teal);background:var(--teal-light);}
+.error-input.ec-wrong{border-color:var(--red);background:var(--red-light);}
+
+/* REFLECT */
+.reflect-item{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:10px;box-shadow:0 2px 8px rgba(26,58,107,0.05);}
+.reflect-q{font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;color:var(--blue);margin-bottom:10px;}
+.reflect-opts{display:flex;gap:8px;flex-wrap:wrap;}
+.r-opt{padding:6px 16px;border-radius:99px;border:1.5px solid var(--border);background:var(--bg);font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;cursor:pointer;transition:all 0.15s;color:var(--muted);}
+.r-opt:hover{border-color:var(--blue-mid);color:var(--blue);}
+.r-opt.sel{background:var(--teal-light);border-color:var(--teal);color:var(--teal);}
+
+/* MISC */
+.check-btn{padding:9px 18px;border-radius:99px;border:none;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;cursor:pointer;transition:all 0.15s;}
+.cb-blue{background:var(--blue);color:var(--white);}
+.cb-blue:hover{background:var(--blue-mid);}
+.cb-ghost{background:transparent;border:1.5px solid var(--border);color:var(--muted);}
+.cb-ghost:hover{border-color:var(--blue);color:var(--blue);}
+.divider{border:none;border-top:1px solid var(--border);margin:1.25rem 0;}
+.score-tracker{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--blue);color:var(--white);border-radius:var(--radius);padding:12px 18px;box-shadow:0 4px 24px rgba(26,58,107,0.35);font-family:'Nunito',sans-serif;z-index:500;min-width:140px;}
+.st-label{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:2px;}
+.st-score{font-size:22px;font-weight:900;color:var(--yellow);}
+.st-pts{font-size:11px;color:rgba(255,255,255,0.55);}
+.feedback-box{margin-top:10px;padding:10px 14px;border-radius:var(--radius-sm);font-size:13px;font-weight:600;}
+.fb-ok{background:var(--teal-light);color:var(--teal);border:1px solid var(--teal);}
+.fb-warn{background:var(--yellow-light);color:#b07c00;border:1px solid var(--yellow);}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="site-header">
+  <div class="header-top">
+    <div style="display:flex;align-items:center;">
+      <div class="hb-badge">S4</div>
+      <div class="hb-text">
+        <div class="hb-title">Process Writing Worksheet</div>
+        <div class="hb-sub">Unit 8 · The Environment · Precise Verbs & Sequencing</div>
+      </div>
+    </div>
+    <div class="score-pill">⭐ <span id="headerScore">0</span> pts</div>
+  </div>
+  <div class="phase-nav">
+    <button class="phase-btn active" onclick="go('warmer',this)">🔥 Warmer</button>
+    <button class="phase-btn" onclick="go('material',this)">📚 Material</button>
+    <button class="phase-btn" onclick="go('practice',this)">✏️ Controlled</button>
+    <button class="phase-btn" onclick="go('free',this)">💬 Free Practice</button>
+    <button class="phase-btn" onclick="go('production',this)">📝 Production</button>
+    <button class="phase-btn" onclick="go('consolidation',this)">🔁 Consolidation</button>
+  </div>
+</div>
+
+<div class="page-content">
+
+<!-- ═══ WARMER ═══ -->
+<div class="phase-section active" id="phase-warmer">
+  <div class="phase-header">
+    <div class="phase-icon ph-yellow">🔥</div>
+    <div>
+      <div class="phase-name">Warmer</div>
+      <div class="phase-time">10 minutes · Activate vocabulary</div>
+    </div>
+  </div>
+
+  <!-- Activity 1: Verb Sort -->
+  <div class="activity-block">
+    <div class="activity-top">
+      <div class="act-num an-yellow">1</div>
+      <div class="act-label">"Verb or Vague?" — Sort each verb into the correct column</div>
+      <span class="act-tag tag-creative">Creative</span>
+    </div>
+    <div class="activity-body">
+      <div class="instr">Tap a verb from the pool to select it, then tap a column to place it. Precise verbs describe an exact action. General/vague verbs could mean many things. <span style="color:var(--orange);font-weight:700;">+5 pts per correct sort</span></div>
+      <div style="font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">Tap a verb to pick it up:</div>
+      <div class="verb-pool" id="verbPool"></div>
+      <div class="sort-cols">
+        <div class="sort-col sc-precise" onclick="dropVerb('precise')">
+          <div class="sort-col-title sct-precise">✓ Precise action verb</div>
+          <div class="sort-drop" id="drop-precise"></div>
+        </div>
+        <div class="sort-col sc-general" onclick="dropVerb('general')">
+          <div class="sort-col-title sct-general">✗ General / vague verb</div>
+          <div class="sort-drop" id="drop-general"></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:10px;">
+        <button class="check-btn cb-blue" onclick="checkSort()">Check sort</button>
+        <button class="check-btn cb-ghost" onclick="resetSort()">Reset</button>
+      </div>
+      <div id="sortFeedback"></div>
+    </div>
+  </div>
+
+  <!-- Activity 2: Broken Instructions -->
+  <div class="activity-block">
+    <div class="activity-top">
+      <div class="act-num an-blue">2</div>
+      <div class="act-label">"Broken Instructions" — Tap the stronger, clearer version</div>
+      <span class="act-tag tag-creative">Creative</span>
+    </div>
+    <div class="activity-body">
+      <div class="instr">Two versions of the same instruction are shown. Tap the one that uses a precise verb and specific detail. <span style="color:var(--orange);font-weight:700;">+10 pts each</span></div>
+      <div id="brokenList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MATERIAL ═══ -->
+<div class="phase-section" id="phase-material">
+  <div class="phase-header">
+    <div class="phase-icon ph-blue">📚</div>
+    <div>
+      <div class="phase-name">Material</div>
+      <div class="phase-time">Reference — Study before practice</div>
+    </div>
+  </div>
+
+  <!-- CLEAR Framework -->
+  <div class="activity-block">
+    <div class="activity-top">
+      <div class="act-num an-blue">—</div>
+      <div class="act-label">The CLEAR Framework — Your writing toolkit for process texts</div>
+      <span class="act-tag tag-book">Book-based</span>
+    </div>
+    <div class="activity-body">
+      <div class="instr">Use this framework every time you write a process explanation. Keep this page open during Production.</div>
+      <div class="clear-grid">
+        <div class="clear-row cr-c"><div class="clear-letter">C</div><div class="clear-body"><div class="clear-step">Choose the exact action verb</div><div class="clear-desc">Pick a precise verb — not a general one. <em>Separate</em> not <em>put</em>. <em>Tighten</em> not <em>fix</em>. <em>Pour</em> not <em>move</em>.</div></div></div>
+        <div class="clear-row cr-l"><div class="clear-letter">L</div><div class="clear-body"><div class="clear-step">Label the sequence position</div><div class="clear-desc">Open every step with a sequencing marker: <em>First, Next, Then, After that, Finally.</em></div></div></div>
+        <div class="clear-row cr-e"><div class="clear-letter">E</div><div class="clear-body"><div class="clear-step">Explain the action briefly</div><div class="clear-desc">One sentence maximum. Keep it direct. Simple present tense: <em>Separate / Filter / Tighten</em> — not <em>"You should separate"</em>.</div></div></div>
+        <div class="clear-row cr-a"><div class="clear-letter">A</div><div class="clear-body"><div class="clear-step">Add necessary detail</div><div class="clear-desc">Specify: time, tool, quantity, direction, or colour. <em>"Pour 500ml of water into the green bin"</em> — not <em>"pour some water"</em>.</div></div></div>
+        <div class="clear-row cr-r"><div class="clear-letter">R</div><div class="clear-body"><div class="clear-step">Review for clarity</div><div class="clear-desc">Ask: could a stranger in a different city follow this without asking questions? If not, add detail.</div></div></div>
+      </div>
+
+      <hr class="divider">
+
+      <div style="font-family:'Nunito',sans-serif;font-weight:800;font-size:15px;color:var(--blue);margin-bottom:4px;">Worked example — environment topic</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:10px;font-style:italic;">Topic: How to separate household waste</div>
+      <div style="background:var(--blue);color:var(--white);border-radius:var(--radius-sm);padding:14px 16px;font-size:14px;line-height:1.8;">
+        <div style="margin-bottom:6px;"><span style="color:var(--yellow);font-weight:700;">First,</span> <strong>separate</strong> your household waste into three categories.</div>
+        <div style="margin-bottom:6px;"><span style="color:var(--yellow);font-weight:700;">Next,</span> <strong>place</strong> all food scraps and organic waste into the green bin.</div>
+        <div style="margin-bottom:6px;"><span style="color:var(--yellow);font-weight:700;">After that,</span> <strong>fold</strong> cardboard boxes flat and <strong>insert</strong> them into the blue recycling bin.</div>
+        <div style="margin-bottom:6px;"><span style="color:var(--yellow);font-weight:700;">Then,</span> <strong>compress</strong> any plastic bottles before placing them in the yellow bin.</div>
+        <div><span style="color:var(--yellow);font-weight:700;">Finally,</span> <strong>tighten</strong> the lid on each bin and <strong>move</strong> them to the collection point before 6 AM.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sequencing Map -->
+  <div class="activity-block">
+    <div class="activity-top">
+      <div class="act-num an-teal">—</div>
+      <div class="act-label">Sequencing language — from opening to closing a process</div>
+      <span class="act-tag tag-book">Reference</span>
+    </div>
+    <div class="activity-body">
+      <div class="seq-map">
+        <div class="seq-node sn-optional">Before you begin, ...</div>
+        <div class="seq-arrow">↓</div>
+        <div class="seq-node sn-main">First, ...</div>
+        <div class="seq-arrow">↓</div>
+        <div class="seq-branch">
+          <div class="seq-node sn-main">Next, ...</div>
+          <div style="color:var(--dim);font-size:13px;">or</div>
+          <div class="seq-node sn-optional">After that, ...</div>
+        </div>
+        <div class="seq-arrow">↓</div>
+        <div class="seq-node sn-main">Then, ...</div>
+        <div class="seq-arrow">↓</div>
+        <div class="seq-node sn-optional">In the last step, ...</div>
+        <div class="seq-arrow">↓</div>
+        <div class="seq-node sn-main">Finally, ...</div>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:14px;font-size:12px;">
+        <div style="display:flex;align-items:center;gap:6px;"><div style="width:14px;height:14px;border-radius:50%;background:var(--blue);"></div><span style="color:var(--muted);">Required</span></div>
+        <div style="display:flex;align-items:center;gap:6px;"><div style="width:14px;height:14px;border-radius:50%;background:var(--yellow);"></div><span style="color:var(--muted);">Optional addition</span></div>
+      </div>
+      <div style="margin-top:14px;padding:10px 14px;background:var(--orange-light);border-left:4px solid var(--orange);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13px;color:var(--orange);">
+        <strong>Avoid:</strong> Passive voice (<em>"The lid should be tightened"</em> → write <em>"Tighten the lid"</em>), vague quantities (<em>"some", "a bit", "around"</em>), and uncertainty words (<em>"maybe", "kind of"</em>).
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CONTROLLED PRACTICE ═══ -->
+<div class="phase-section" id="phase-practice">
+  <div class="phase-header">
+    <div class="phase-icon ph-orange">✏️</div>
+    <div>
+      <div class="phase-name">Controlled Practice</div>
+      <div class="phase-time">10 minutes · Accuracy focus</div>
+    </div>
+  </div>
+
+  <!-- Activity 3: Book exercises -->
+  <div class="activity-block">
+    <div class="activity-top">
+      <div class="act-num an-orange">3</div>
+      <div class="act-label">Book exercises — Complete p. 176–177, then summarise your answers here</div>
+      <span class="act-tag tag-book">Book-based</span>
+    </div>
+    <div class="activity-body">
+      <div class="instr">Do the book exercises written first. Then answer these check questions based on what you completed.</div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div>
+          <div style="font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;color:var(--blue);margin-bottom:5px;">Which sequencing words appeared most often in the exercises?</div>
+          <input type="text" style="width:100%;border:2px solid var(--border);border-radius:var(--radius-sm);padding:8px 12px;font-family:'Lato',sans-serif;font-size:13.5px;outline:none;" placeholder="List them here...">
+        </div>
+        <div>
+          <div style="font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;color:var(--blue);margin-bottom:5px;">Write one sentence from the book that uses a precise action verb + a specific detail:</div>
+          <input type="text" style="width:100%;border:2px solid var(--border);border-radius:var(--radius-sm);padding:8px 12px;font-family:'Lato',sans-serif;font-size:13.5px;outline:none;" placeholder="Write the sentence here...">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Activity 4: Precision Upgrade -->
+  <div class="activity-block">
+    <div class="activity-top">
+      <div class="act-num an-blue">4</div>
+      <div class="act-label">Precision upgrade drill — Rewrite each weak instruction</div>
+      <span class="act-tag tag-creative">Creative</span>
+    </div>
+    <div class="activity-body">
+      <div class="instr">Replace the vague verb with a precise one and add a specific detail. 30 seconds per sentence. <span style="color:var(--orange);font-weight:700;">+5 pts each</span></div>
+      <div id="upgradeList"></div>
+      <div style="display:flex;gap:8px;margin-top:12px;">
+        <button class="check-btn cb-ghost" onclick="showUpgradeHints()">Show example rewrites</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FREE PRACTICE ═══ -->
+<div class="phase-section" id="phase-free">
+  <div class="phase-header">
+    <div class="phase-icon ph-teal">💬</div>
+    <div>
+      <div class="phase-name">Free Practice</div>
+      <div class="phase-time">15 minutes · Analysis & fluency</div>
+    </div>
+  </div>
+
+  <!-- Activity 5: Model text analysis -->
+  <div class="activity-block">
+    <div class="activity-top">
+      <div class="act-num an-teal">5</div>
+      <div class="act-label">Model text analysis — Identify language features in the text</div>
+      <span class="act-tag tag-book">Book-based</span>
+    </div>
+    <div class="activity-body">
+      <div class="instr">Read the model text. Find the language features listed below and type one example of each. Tap the checkbox when done. <span style="color:var(--orange);font-weight:700;">+5 pts each</span></div>
+      <div style="background:var(--bg);border-radius:var(--radius-sm);padding:14px;margin:1rem 0;font-size:14px;line-height:1.8;border:1px solid var(--border);">
+        <p style="margin-bottom:8px;"><strong style="color:var(--yellow-light);background:var(--blue);padding:2px 6px;border-radius:4px;">How to Compost at Home</strong></p>
+        <p style="margin-bottom:8px;"><em>Before you begin,</em> prepare a container with small holes in the base to allow drainage. <em>First,</em> <strong>layer</strong> a base of dry leaves or shredded cardboard at the bottom of the bin. <em>Next,</em> <strong>add</strong> a 5cm layer of food scraps — vegetable peelings, coffee grounds, or fruit waste. <em>After that,</em> <strong>cover</strong> the food scraps with another layer of dry material. <em>Then,</em> <strong>insert</strong> a long stick or pipe into the centre to allow air to circulate. <em>Finally,</em> <strong>seal</strong> the lid and <strong>place</strong> the bin in a shaded area. After four to six weeks, <strong>remove</strong> the finished compost from the base and <strong>spread</strong> it around your plants.</p>
+      </div>
+      <div id="analysisChecks"></div>
+    </div>
+  </div>
+
+  <!-- Activity 6: Bad process game -->
+  <div class="activity-block">
+    <div class="activity-top">
+      <div class="act-num an-orange">6</div>
+      <div class="act-label">"Bad Process" — Rewrite the teacher's terrible instructions correctly</div>
+      <span class="act-tag tag-creative">Creative</span>
+    </div>
+    <div class="activity-body">
+      <div class="instr">The text below breaks every rule: vague verbs, no sequence, passive voice, no specific detail. Rewrite it as a clear process explanation. Aim for 5 steps. <span style="color:var(--orange);font-weight:700;">+15 pts</span></div>
+      <div class="bad-text">
+        "So, the water is taken and moved somewhere. After some time, things happen to it. Maybe some stuff is added. Then it gets done. The bottles are put in a place when finished. It should be done every week or so."
+      </div>
+      <textarea class="writing-textarea" id="badRewrite" placeholder="Rewrite with precise verbs, sequence markers, and specific detail..." rows="7"></textarea>
+      <div style="margin-top:10px;display:flex;gap:8px;">
+        <button class="check-btn cb-blue" onclick="submitBadRewrite()">Submit rewrite +15 pts</button>
+      </div>
+      <div id="badFeedback"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PRODUCTION ═══ -->
+<div class="phase-section" id="phase-production">
+  <div class="phase-header">
+    <div class="phase-icon ph-orange">📝</div>
+    <div>
+      <div class="phase-name">Production</div>
+      <div class="phase-time">20 minutes · Extended writing</div>
+    </div>
+  </div>
+
+  <div class="activity-block">
+    <div class="activity-top">
+      <div class="act-num an-orange">7</div>
+      <div class="act-label">Write a process explanation — 100–130 words on your chosen topic</div>
+      <span class="act-tag tag-writing">Writing</span>
+    </div>
+    <div class="activity-body">
+      <div style="font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:var(--blue);margin-bottom:8px;">Choose a topic:</div>
+      <div class="topic-chips" id="topicChips"></div>
+      <div class="lang-targets">
+        <span class="ltag lt-verb">✓ 4+ precise action verbs</span>
+        <span class="ltag lt-seq">✓ 4+ sequence markers (incl. First & Finally)</span>
+        <span class="ltag lt-tense">✓ Simple present tense throughout</span>
+        <span class="ltag lt-nopass">✗ No passive voice</span>
+      </div>
+      <textarea class="writing-textarea" id="productionText" placeholder="Before you begin, ... First, ... Next, ... Then, ... Finally, ..." oninput="updateWC()"></textarea>
+      <div class="wc-row">
+        <span class="wc-label">Word count: <span class="wc-num" id="wcNum">0</span> / 100–130</span>
+        <button class="check-btn cb-blue" onclick="submitProduction()">Submit +20 pts</button>
+      </div>
+
+      <hr class="divider">
+
+      <div style="font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:var(--blue);margin-bottom:8px;">CLEAR self-check — tick each before submitting:</div>
+      <div class="clear-checklist" id="clearChecklist"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CONSOLIDATION ═══ -->
+<div class="phase-section" id="phase-consolidation">
+  <div class="phase-header">
+    <div class="phase-icon ph-blue">🔁</div>
+    <div>
+      <div class="phase-name">Consolidation</div>
+      <div class="phase-time">10 minutes · Fix & reflect</div>
+    </div>
+  </div>
+
+  <!-- Activity 8: Error correction -->
+  <div class="activity-block">
+    <div class="activity-top">
+      <div class="act-num an-blue">8</div>
+      <div class="act-label">Delayed error correction — Identify the error type and rewrite correctly</div>
+      <span class="act-tag tag-creative">Creative</span>
+    </div>
+    <div class="activity-body">
+      <div class="instr">Each sentence has one error: either passive voice, a vague verb, or a missing/wrong sequence marker. Rewrite the sentence correctly. <span style="color:var(--orange);font-weight:700;">+10 pts each</span></div>
+      <div id="errorList"></div>
+      <div style="margin-top:12px;display:flex;gap:8px;">
+        <button class="check-btn cb-blue" onclick="checkErrors()">Check answers</button>
+        <button class="check-btn cb-ghost" onclick="showErrorHints()">Show corrections</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Activity 9: Metacognitive reflection -->
+  <div class="activity-block">
+    <div class="activity-top">
+      <div class="act-num an-teal">9</div>
+      <div class="act-label">Exit reflection — Be honest, no wrong answers</div>
+      <span class="act-tag tag-creative">Learning to Learn</span>
+    </div>
+    <div class="activity-body">
+      <div id="reflectList"></div>
+      <div style="margin-top:1rem;">
+        <div style="font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;color:var(--blue);margin-bottom:6px;">Teach-back: Explain the difference between a precise and a general verb in one sentence:</div>
+        <textarea style="width:100%;min-height:70px;border:2px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-family:'Lato',sans-serif;font-size:13.5px;outline:none;" placeholder="A precise verb..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /page-content -->
+
+<div class="score-tracker">
+  <div class="st-label">Session score</div>
+  <div class="st-score" id="scoreDisplay">0</div>
+  <div class="st-pts">points earned</div>
+</div>
+
+<script>
+// ── SCORE ──
+let score = 0;
+function addScore(n) {
+  score += n;
+  document.getElementById('scoreDisplay').textContent = score;
+  document.getElementById('headerScore').textContent = score;
+}
+
+// ── NAV ──
+function go(id, btn) {
+  document.querySelectorAll('.phase-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.phase-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('phase-' + id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// ═══════════════════════════════════════════
+// WARMER 1: VERB SORT
+// ═══════════════════════════════════════════
+const verbs = [
+  { word:'separate', correct:'precise' },
+  { word:'pour', correct:'precise' },
+  { word:'compress', correct:'precise' },
+  { word:'remove', correct:'precise' },
+  { word:'filter', correct:'precise' },
+  { word:'attach', correct:'precise' },
+  { word:'do', correct:'general' },
+  { word:'put', correct:'general' },
+  { word:'make', correct:'general' },
+  { word:'fix', correct:'general' },
+];
+
+let pickedVerb = null;
+const sortPlacements = {};
+const sortScored = new Set();
+
+function buildSort() {
+  const pool = document.getElementById('verbPool');
+  verbs.forEach(v => {
+    const chip = document.createElement('span');
+    chip.className = 'verb-chip';
+    chip.textContent = v.word;
+    chip.dataset.word = v.word;
+    chip.onclick = () => {
+      document.querySelectorAll('.verb-chip:not(.picked)').forEach(c => c.style.background = '');
+      pickedVerb = v.word;
+      chip.style.background = 'var(--yellow-light)';
+      chip.style.borderColor = 'var(--yellow)';
+    };
+    pool.appendChild(chip);
+  });
+}
+
+function dropVerb(col) {
+  if (!pickedVerb) return;
+  sortPlacements[pickedVerb] = col;
+  // remove from other col
+  document.querySelectorAll('.sorted-chip').forEach(c => {
+    if (c.dataset.word === pickedVerb) c.remove();
+  });
+  // hide in pool
+  const poolChip = document.querySelector(`#verbPool [data-word="${pickedVerb}"]`);
+  if (poolChip) { poolChip.classList.add('picked'); poolChip.style.background = ''; poolChip.style.borderColor = ''; }
+  // add to col
+  const chip = document.createElement('span');
+  chip.className = `sorted-chip in-${col}`;
+  chip.dataset.word = pickedVerb;
+  chip.textContent = pickedVerb;
+  chip.onclick = () => {
+    // return to pool
+    delete sortPlacements[chip.dataset.word];
+    if (poolChip) { poolChip.classList.remove('picked'); }
+    chip.remove();
+  };
+  document.getElementById('drop-' + col).appendChild(chip);
+  pickedVerb = null;
+}
+
+function checkSort() {
+  let correct = 0;
+  document.querySelectorAll('.sorted-chip').forEach(chip => {
+    const word = chip.dataset.word;
+    const placed = chip.classList.contains('in-precise') ? 'precise' : 'general';
+    const expected = verbs.find(v => v.word === word).correct;
+    chip.classList.remove('chip-correct','chip-wrong');
+    if (placed === expected) {
+      chip.classList.add('chip-correct');
+      if (!sortScored.has(word)) { sortScored.add(word); addScore(5); }
+      correct++;
+    } else {
+      chip.classList.add('chip-wrong');
+    }
+  });
+  const total = Object.keys(sortPlacements).length;
+  const fb = document.getElementById('sortFeedback');
+  fb.innerHTML = correct === verbs.length
+    ? '<div class="feedback-box fb-ok">✓ All ' + verbs.length + ' verbs correctly sorted!</div>'
+    : '<div class="feedback-box fb-warn">'+correct+' / '+total+' correct — red chips are in the wrong column. Tap them to return to the pool.</div>';
+}
+
+function resetSort() {
+  Object.keys(sortPlacements).forEach(k => delete sortPlacements[k]);
+  pickedVerb = null;
+  document.getElementById('drop-precise').innerHTML = '';
+  document.getElementById('drop-general').innerHTML = '';
+  document.querySelectorAll('#verbPool .verb-chip').forEach(c => {
+    c.classList.remove('picked'); c.style.background = ''; c.style.borderColor = '';
+  });
+  document.getElementById('sortFeedback').innerHTML = '';
+}
+
+// ═══════════════════════════════════════════
+// WARMER 2: BROKEN INSTRUCTIONS
+// ═══════════════════════════════════════════
+const brokenData = [
+  {
+    a: 'Move the plastic to the other bin.',
+    b: 'Separate the plastic from organic waste and place it in the yellow recycling bin.',
+    correct: 'b'
+  },
+  {
+    a: 'Fix the water container.',
+    b: 'Tighten the cap on the water container until secure.',
+    correct: 'b'
+  },
+  {
+    a: 'Do something with the compost.',
+    b: 'Pour the food scraps into the compost bin and stir for 10 seconds.',
+    correct: 'b'
+  },
+];
+
+const brokenAnswered = new Set();
+
+function buildBroken() {
+  const list = document.getElementById('brokenList');
+  brokenData.forEach((item, i) => {
+    const wrap = document.createElement('div');
+    wrap.style.marginBottom = '16px';
+    wrap.innerHTML = `<div class="broken-label">Pair ${i + 1} — tap the stronger version</div>`;
+    const pair = document.createElement('div');
+    pair.className = 'broken-pair';
+
+    ['a','b'].forEach(key => {
+      const el = document.createElement('div');
+      el.className = 'broken-opt';
+      el.textContent = item[key];
+      el.dataset.pair = i;
+      el.dataset.choice = key;
+      el.onclick = () => {
+        if (brokenAnswered.has(i)) return;
+        brokenAnswered.add(i);
+        pair.querySelectorAll('.broken-opt').forEach(o => {
+          o.classList.remove('selected');
+          if (o.dataset.choice === item.correct) o.classList.add('correct');
+          else o.classList.add('wrong');
+        });
+        if (key === item.correct) addScore(10);
+      };
+      pair.appendChild(el);
+    });
+
+    wrap.appendChild(pair);
+    list.appendChild(wrap);
+  });
+}
+
+// ═══════════════════════════════════════════
+// CONTROLLED: PRECISION UPGRADE
+// ═══════════════════════════════════════════
+const upgradeData = [
+  {
+    weak: '"Put the rubbish somewhere."',
+    hint: 'Where exactly? Which verb replaces "put"?',
+    eg: 'e.g. "Separate the dry rubbish from wet waste and place it in the grey bin."'
+  },
+  {
+    weak: '"Move the water."',
+    hint: 'How? Into what container? Which verb?',
+    eg: 'e.g. "Pour the collected rainwater into the storage tank through the filter."'
+  },
+  {
+    weak: '"Do something with the compost."',
+    hint: 'What exact action? Add a quantity or time.',
+    eg: 'e.g. "Stir the compost mixture for 30 seconds and add one cup of dry leaves."'
+  },
+  {
+    weak: '"Fix the lid on the container."',
+    hint: 'Which verb replaces "fix"?',
+    eg: 'e.g. "Tighten the lid on the compost bin until it clicks into place."'
+  },
+  {
+    weak: '"Take away the used oil."',
+    hint: 'Precise verb? Where does it go?',
+    eg: 'e.g. "Remove the used cooking oil with a ladle and pour it into the sealed disposal bottle."'
+  },
+];
+
+const upgradeScored = new Set();
+
+function buildUpgrade() {
+  const list = document.getElementById('upgradeList');
+  upgradeData.forEach((item, i) => {
+    const el = document.createElement('div');
+    el.className = 'upgrade-item';
+    el.innerHTML = `
+      <div class="upgrade-weak">${item.weak}</div>
+      <div class="upgrade-hint">${item.hint}</div>
+      <input class="upgrade-input" id="up-${i}" placeholder="Rewrite with a precise verb + specific detail..." oninput="scoreUpgrade(${i})">
+      <div class="upgrade-reveal" id="up-hint-${i}">${item.eg}</div>`;
+    list.appendChild(el);
+  });
+}
+
+function scoreUpgrade(i) {
+  const val = document.getElementById(`up-${i}`).value.trim();
+  if (val.length > 15 && !upgradeScored.has(i)) {
+    upgradeScored.add(i);
+    addScore(5);
+  }
+}
+
+function showUpgradeHints() {
+  upgradeData.forEach((_, i) => document.getElementById(`up-hint-${i}`).classList.add('show'));
+}
+
+// ═══════════════════════════════════════════
+// FREE: MODEL TEXT ANALYSIS
+// ═══════════════════════════════════════════
+const analysisItems = [
+  { label: 'One precise action verb (not put/do/make/fix)', key: 'verb' },
+  { label: 'One sequencing marker used at the start of a step', key: 'seq' },
+  { label: 'One step that includes a specific quantity or measurement', key: 'qty' },
+  { label: 'One optional sequencing word (not First/Next/Then/Finally)', key: 'opt' },
+  { label: 'One place where passive voice was avoided — rewrite it as passive to see the difference', key: 'pass' },
+];
+const analysisChecked = new Set();
+
+function buildAnalysis() {
+  const wrap = document.getElementById('analysisChecks');
+  analysisItems.forEach((item, i) => {
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);';
+    row.innerHTML = `
+      <div id="achk-${i}" onclick="toggleAnalysis(${i})" style="width:20px;height:20px;border-radius:4px;border:2px solid var(--border);background:var(--white);flex-shrink:0;margin-top:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;transition:all 0.15s;"></div>
+      <div style="flex:1;">
+        <div style="font-size:13px;font-weight:700;color:var(--blue);margin-bottom:4px;">${item.label}</div>
+        <input type="text" style="width:100%;border:2px solid var(--border);border-radius:var(--radius-sm);padding:6px 10px;font-family:'Lato',sans-serif;font-size:13px;outline:none;" placeholder="Write your example here...">
+      </div>`;
+    wrap.appendChild(row);
+  });
+}
+
+function toggleAnalysis(i) {
+  const box = document.getElementById(`achk-${i}`);
+  if (analysisChecked.has(i)) {
+    analysisChecked.delete(i);
+    box.textContent = '';
+    box.style.background = 'var(--white)';
+    box.style.borderColor = 'var(--border)';
+    box.style.color = '';
+  } else {
+    analysisChecked.add(i);
+    box.textContent = '✓';
+    box.style.background = 'var(--teal)';
+    box.style.borderColor = 'var(--teal)';
+    box.style.color = 'var(--white)';
+    addScore(5);
+  }
+}
+
+// ═══════════════════════════════════════════
+// FREE: BAD PROCESS
+// ═══════════════════════════════════════════
+let badSubmitted = false;
+function submitBadRewrite() {
+  if (badSubmitted) return;
+  const text = document.getElementById('badRewrite').value.trim();
+  const wc = text ? text.split(/\s+/).length : 0;
+  const fb = document.getElementById('badFeedback');
+  if (wc < 20) {
+    fb.innerHTML = '<div class="feedback-box fb-warn">Your rewrite is too short — aim for at least 5 clear steps.</div>';
+    return;
+  }
+  badSubmitted = true;
+  addScore(15);
+  fb.innerHTML = '<div class="feedback-box fb-ok">✓ Rewrite submitted! +15 pts. Your teacher will review for precise verbs and sequence markers.</div>';
+}
+
+// ═══════════════════════════════════════════
+// PRODUCTION
+// ═══════════════════════════════════════════
+const topics = [
+  'Sorting household waste for recycling',
+  'Making a simple compost bin',
+  'Reducing plastic when grocery shopping',
+  'Setting up a rainwater collection system',
+  'Making eco-friendly citrus cleaning liquid',
+  'Preparing a small home garden',
+];
+
+const clearItems = [
+  'C — Used an exact action verb for every step',
+  'L — Labelled the sequence at the start of each step',
+  'E — Kept each explanation to one sentence',
+  'A — Added a specific detail (time / tool / quantity)',
+  'R — Could a stranger follow this without asking questions?',
+];
+
+let productionSubmitted = false;
+
+function buildProduction() {
+  const chips = document.getElementById('topicChips');
+  topics.forEach(t => {
+    const chip = document.createElement('div');
+    chip.className = 'topic-chip';
+    chip.textContent = t;
+    chip.onclick = () => {
+      document.querySelectorAll('.topic-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+    };
+    chips.appendChild(chip);
+  });
+
+  const cl = document.getElementById('clearChecklist');
+  clearItems.forEach((item, i) => {
+    const el = document.createElement('div');
+    el.className = 'cl-item';
+    el.innerHTML = `<div class="cl-box" id="clb-${i}"></div><span>${item}</span>`;
+    el.onclick = () => {
+      el.classList.toggle('checked');
+      document.getElementById(`clb-${i}`).textContent = el.classList.contains('checked') ? '✓' : '';
+    };
+    cl.appendChild(el);
+  });
+}
+
+function updateWC() {
+  const text = document.getElementById('productionText').value.trim();
+  const wc = text ? text.split(/\s+/).length : 0;
+  const el = document.getElementById('wcNum');
+  el.textContent = wc;
+  el.className = 'wc-num' + (wc >= 100 && wc <= 130 ? ' ok' : wc > 130 ? ' over' : '');
+}
+
+function submitProduction() {
+  if (productionSubmitted) return;
+  const text = document.getElementById('productionText').value.trim();
+  const wc = text ? text.split(/\s+/).length : 0;
+  if (wc < 60) { alert('Too short — aim for at least 100 words.'); return; }
+  productionSubmitted = true;
+  addScore(20);
+  alert('✓ Process explanation submitted! +20 pts. Your teacher will review it.');
+}
+
+// ═══════════════════════════════════════════
+// CONSOLIDATION: ERROR CORRECTION
+// ═══════════════════════════════════════════
+const errorData = [
+  {
+    sentence: 'The lid <mark>is tightened</mark> before moving the bin outside.',
+    type: 'Error type: Passive voice',
+    accepted: ['tighten the lid','tighten the lid before moving the bin outside'],
+    hint: 'Tighten the lid before moving the bin outside.'
+  },
+  {
+    sentence: '<mark>Do something with</mark> the plastic bottles before placing them in the bin.',
+    type: 'Error type: Vague verb',
+    accepted: ['compress','crush','flatten','rinse','compress the plastic bottles','crush the plastic bottles','flatten the plastic bottles'],
+    hint: 'Compress the plastic bottles before placing them in the bin.'
+  },
+  {
+    sentence: 'Pour the compost into the garden bed. <mark>After,</mark> water the area thoroughly.',
+    type: 'Error type: Incomplete sequencing marker',
+    accepted: ['after that','then','after that water','then water'],
+    hint: 'Pour the compost into the garden bed. After that, water the area thoroughly.'
+  },
+  {
+    sentence: 'The water filter should be removed <mark>around</mark> every month.',
+    type: 'Error type: Vague quantifier + passive voice',
+    accepted: ['remove the water filter every month','remove the filter every month','remove the water filter once a month'],
+    hint: 'Remove the water filter every month.'
+  },
+];
+
+const errorScored = new Set();
+
+function buildErrors() {
+  const list = document.getElementById('errorList');
+  errorData.forEach((item, i) => {
+    const el = document.createElement('div');
+    el.className = 'error-item';
+    el.innerHTML = `
+      <div class="error-type">${item.type}</div>
+      <div class="error-sentence">${item.sentence}</div>
+      <input class="error-input" id="err-${i}" placeholder="Rewrite the sentence correctly...">
+      <div class="upgrade-reveal" id="err-hint-${i}">${item.hint}</div>`;
+    list.appendChild(el);
+  });
+}
+
+function checkErrors() {
+  errorData.forEach((item, i) => {
+    const input = document.getElementById(`err-${i}`);
+    const val = input.value.trim().toLowerCase().replace(/[.,!?]/g,'');
+    input.classList.remove('ec-correct','ec-wrong');
+    const correct = item.accepted.some(a => val.includes(a.toLowerCase()));
+    if (correct) {
+      input.classList.add('ec-correct');
+      if (!errorScored.has(i)) { errorScored.add(i); addScore(10); }
+    } else if (val) {
+      input.classList.add('ec-wrong');
+    }
+  });
+}
+
+function showErrorHints() {
+  errorData.forEach((_, i) => document.getElementById(`err-hint-${i}`).classList.add('show'));
+}
+
+// ═══════════════════════════════════════════
+// REFLECTION
+// ═══════════════════════════════════════════
+const reflectData = [
+  {
+    q: 'Which CLEAR step is hardest to remember when writing under time pressure?',
+    opts: ['C — Choosing the verb','L — Labelling sequence','E — Keeping it brief','A — Adding detail','R — Reviewing']
+  },
+  {
+    q: 'Did you catch yourself using passive voice today?',
+    opts: ['Yes — I fixed it','Yes — I missed it','No, I avoided it throughout']
+  },
+  {
+    q: 'Which activity helped you understand precise verbs the most?',
+    opts: ['Verb sort game','Broken instructions','Precision upgrade','Model analysis','Bad process rewrite']
+  },
+];
+
+function buildReflect() {
+  const list = document.getElementById('reflectList');
+  reflectData.forEach((item, i) => {
+    const el = document.createElement('div');
+    el.className = 'reflect-item';
+    el.innerHTML = `<div class="reflect-q">${item.q}</div><div class="reflect-opts" id="ro-${i}"></div>`;
+    list.appendChild(el);
+    const wrap = document.getElementById(`ro-${i}`);
+    item.opts.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'r-opt';
+      btn.textContent = opt;
+      btn.onclick = () => {
+        wrap.querySelectorAll('.r-opt').forEach(b => b.classList.remove('sel'));
+        btn.classList.add('sel');
+      };
+      wrap.appendChild(btn);
+    });
+  });
+}
+
+// INIT
+buildSort();
+buildBroken();
+buildUpgrade();
+buildAnalysis();
+buildProduction();
+buildErrors();
+buildReflect();
+</script>
+</body>
+</html>
