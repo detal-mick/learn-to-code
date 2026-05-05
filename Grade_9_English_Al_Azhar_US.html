@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 9 – English Worksheet</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal:       #0a7075;
+    --teal-light: #e0f4f5;
+    --teal-mid:   #4db6bc;
+    --orange:     #f4813a;
+    --orange-light:#fff0e8;
+    --yellow:     #ffc940;
+    --yellow-light:#fff9e0;
+    --cream:      #fdf8f2;
+    --card:       #ffffff;
+    --text:       #1e2d3d;
+    --muted:      #7a8fa0;
+    --border:     #e4edf2;
+    --green:      #27ae60;
+    --green-light:#eafaf1;
+    --red:        #e74c3c;
+    --red-light:  #fdecea;
+    --radius:     14px;
+    --shadow:     0 4px 18px rgba(10,112,117,0.10);
+    --shadow-card:0 2px 10px rgba(10,112,117,0.08);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: linear-gradient(135deg, var(--teal) 0%, #0d9099 100%);
+    color: #fff;
+    padding: 28px 24px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .site-header h1 {
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.9rem; font-weight: 800;
+    letter-spacing: -0.5px;
+    position: relative;
+  }
+  .site-header .subtitle {
+    font-size: 0.92rem; opacity: 0.85; margin-top: 4px;
+    position: relative;
+  }
+  .badge-row {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    justify-content: center; margin-top: 14px;
+    position: relative;
+  }
+  .badge {
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 50px;
+    padding: 4px 14px;
+    font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+
+  /* ── PROGRESS BAR ── */
+  .progress-wrap {
+    background: var(--teal);
+    padding: 10px 24px 14px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .progress-label { color: #fff; font-size: 0.82rem; font-weight: 600; white-space: nowrap; }
+  .progress-track {
+    flex: 1; height: 8px; background: rgba(255,255,255,0.2);
+    border-radius: 99px; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; background: var(--yellow);
+    border-radius: 99px;
+    transition: width 0.5s cubic-bezier(.4,0,.2,1);
+    width: 0%;
+  }
+  .progress-score {
+    color: var(--yellow); font-size: 0.82rem; font-weight: 700; white-space: nowrap;
+  }
+
+  /* ── STAGE TABS ── */
+  .tabs-wrap {
+    background: #fff;
+    border-bottom: 2px solid var(--border);
+    padding: 0 16px;
+    display: flex; gap: 4px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .tab-btn {
+    font-family: 'Baloo 2', cursive;
+    font-size: 0.82rem; font-weight: 700;
+    padding: 14px 14px 12px;
+    border: none; background: transparent; cursor: pointer;
+    color: var(--muted);
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    transition: color 0.2s, border-color 0.2s;
+    position: relative; top: 2px;
+  }
+  .tab-btn.active { color: var(--teal); border-bottom-color: var(--orange); }
+  .tab-btn .tab-icon { margin-right: 5px; }
+  .tab-btn .tab-check {
+    display: inline-block; width: 16px; height: 16px;
+    background: var(--green); color: #fff; border-radius: 50%;
+    font-size: 0.6rem; line-height: 16px; text-align: center;
+    margin-left: 6px; opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .tab-btn.done .tab-check { opacity: 1; }
+
+  /* ── STAGE PANELS ── */
+  .stage { display: none; padding: 24px 16px 60px; max-width: 780px; margin: 0 auto; }
+  .stage.active { display: block; animation: fadeUp 0.35s ease both; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── STAGE HEADER ── */
+  .stage-header {
+    display: flex; align-items: flex-start; gap: 14px;
+    margin-bottom: 24px;
+  }
+  .stage-icon {
+    width: 52px; height: 52px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; flex-shrink: 0;
+  }
+  .stage-icon.green  { background: var(--teal-light); }
+  .stage-icon.orange { background: var(--orange-light); }
+  .stage-icon.purple { background: #f0ebff; }
+  .stage-icon.yellow { background: var(--yellow-light); }
+
+  .stage-header-text h2 {
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.25rem; font-weight: 800; color: var(--teal);
+  }
+  .stage-header-text p {
+    font-size: 0.85rem; color: var(--muted); margin-top: 2px; line-height: 1.5;
+  }
+
+  /* ── SECTION TITLES ── */
+  .section-title {
+    font-family: 'Baloo 2', cursive;
+    font-size: 1rem; font-weight: 700;
+    color: var(--teal);
+    border-left: 4px solid var(--orange);
+    padding-left: 10px;
+    margin: 28px 0 16px;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-card);
+    border: 1.5px solid var(--border);
+    padding: 20px;
+    margin-bottom: 14px;
+  }
+
+  /* ── PASSAGE BOX ── */
+  .passage-box {
+    background: linear-gradient(135deg, #f0fafb 0%, #e8f6f7 100%);
+    border: 1.5px solid var(--teal-mid);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    margin-bottom: 18px;
+    font-size: 0.9rem; line-height: 1.75;
+    color: var(--text);
+    position: relative;
+  }
+  .passage-box .passage-label {
+    font-family: 'Baloo 2', cursive;
+    font-size: 0.72rem; font-weight: 700;
+    color: var(--teal); text-transform: uppercase;
+    letter-spacing: 1px; margin-bottom: 8px;
+    display: flex; align-items: center; gap: 6px;
+  }
+
+  /* ── QUESTION CARD ── */
+  .q-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    border: 1.5px solid var(--border);
+    padding: 18px 20px;
+    margin-bottom: 12px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .q-card:hover { box-shadow: var(--shadow-card); }
+  .q-number {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 26px; height: 26px; border-radius: 8px;
+    background: var(--teal); color: #fff;
+    font-size: 0.78rem; font-weight: 700;
+    margin-right: 10px; flex-shrink: 0;
+  }
+  .q-text {
+    font-size: 0.9rem; font-weight: 600; line-height: 1.55;
+    display: flex; align-items: flex-start; gap: 0;
+    flex-wrap: nowrap;
+  }
+  .q-text-inner { flex: 1; }
+  .q-italics { font-style: italic; color: var(--muted); font-weight: 400; }
+
+  /* ── OPTIONS ── */
+  .options { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+  .option {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 14px; border-radius: 10px;
+    border: 1.5px solid var(--border);
+    cursor: pointer;
+    transition: background 0.18s, border-color 0.18s, transform 0.15s;
+    font-size: 0.875rem; font-weight: 500;
+    user-select: none;
+  }
+  .option:hover { background: var(--teal-light); border-color: var(--teal-mid); }
+  .option:active { transform: scale(0.985); }
+  .option .opt-letter {
+    width: 24px; height: 24px; border-radius: 7px;
+    background: var(--border); color: var(--muted);
+    font-size: 0.75rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; transition: background 0.18s, color 0.18s;
+  }
+  .option.correct {
+    background: var(--green-light); border-color: var(--green);
+    animation: popIn 0.25s ease;
+  }
+  .option.correct .opt-letter { background: var(--green); color: #fff; }
+  .option.wrong {
+    background: var(--red-light); border-color: var(--red);
+  }
+  .option.wrong .opt-letter { background: var(--red); color: #fff; }
+  .option.reveal-correct {
+    background: var(--green-light); border-color: var(--green);
+    opacity: 0.75;
+  }
+  .option.reveal-correct .opt-letter { background: var(--green); color: #fff; }
+  .option.disabled { pointer-events: none; }
+
+  @keyframes popIn {
+    0%   { transform: scale(0.96); }
+    60%  { transform: scale(1.03); }
+    100% { transform: scale(1); }
+  }
+
+  /* ── FEEDBACK ── */
+  .feedback {
+    margin-top: 10px; padding: 10px 14px;
+    border-radius: 10px; font-size: 0.83rem;
+    font-weight: 600; display: none;
+    align-items: flex-start; gap: 8px;
+    line-height: 1.5;
+  }
+  .feedback.show { display: flex; animation: fadeUp 0.2s ease; }
+  .feedback.fb-correct { background: var(--green-light); color: #1a7a45; border: 1px solid #b7e4c7; }
+  .feedback.fb-wrong   { background: var(--red-light);   color: #a93226; border: 1px solid #f5c6c2; }
+
+  /* ── TEXT INPUT ── */
+  .answer-input {
+    width: 100%; border: 1.5px solid var(--border);
+    border-radius: 10px; padding: 10px 14px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.875rem; color: var(--text);
+    background: #f9fcfd; margin-top: 10px;
+    resize: vertical; min-height: 42px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    line-height: 1.5;
+  }
+  .answer-input:focus {
+    outline: none; border-color: var(--teal-mid);
+    box-shadow: 0 0 0 3px rgba(77,182,188,0.15);
+    background: #fff;
+  }
+  .answer-input.correct-input { border-color: var(--green); background: var(--green-light); }
+  .answer-input.wrong-input   { border-color: var(--red);   background: var(--red-light); }
+
+  /* ── CHECK BTN ── */
+  .check-btn {
+    font-family: 'Baloo 2', cursive;
+    font-size: 0.85rem; font-weight: 700;
+    padding: 9px 20px; border-radius: 99px;
+    border: none; cursor: pointer;
+    background: var(--teal); color: #fff;
+    margin-top: 10px;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 3px 10px rgba(10,112,117,0.25);
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .check-btn:hover { background: #0a5d62; box-shadow: 0 5px 14px rgba(10,112,117,0.35); }
+  .check-btn:active { transform: scale(0.96); }
+  .check-btn.secondary { background: #fff; color: var(--teal); border: 1.5px solid var(--teal); box-shadow: none; }
+  .check-btn.secondary:hover { background: var(--teal-light); }
+  .check-btn.orange-btn { background: var(--orange); box-shadow: 0 3px 10px rgba(244,129,58,0.3); }
+  .check-btn.orange-btn:hover { background: #e0672a; }
+
+  /* ── SECTION SCORE ── */
+  .section-score-bar {
+    background: var(--teal-light); border: 1.5px solid var(--teal-mid);
+    border-radius: var(--radius); padding: 14px 18px;
+    margin-top: 18px; display: none;
+    align-items: center; gap: 14px;
+    animation: fadeUp 0.3s ease;
+  }
+  .section-score-bar.show { display: flex; }
+  .section-score-bar .score-num {
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.6rem; font-weight: 800; color: var(--teal);
+  }
+  .section-score-bar .score-label { font-size: 0.85rem; color: var(--muted); }
+  .section-score-bar .score-emoji { font-size: 1.4rem; }
+
+  /* ── WORD COUNTER ── */
+  .word-counter {
+    font-size: 0.75rem; color: var(--muted);
+    text-align: right; margin-top: 4px; font-weight: 600;
+  }
+  .word-counter.good { color: var(--green); }
+
+  /* ── TEXTAREA PRODUCTION ── */
+  .prod-textarea {
+    width: 100%; border: 1.5px solid var(--border);
+    border-radius: 12px; padding: 14px 16px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.9rem; color: var(--text);
+    background: #f9fcfd;
+    resize: vertical; min-height: 130px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    line-height: 1.7; margin-top: 10px;
+  }
+  .prod-textarea:focus {
+    outline: none; border-color: var(--teal-mid);
+    box-shadow: 0 0 0 3px rgba(77,182,188,0.15);
+    background: #fff;
+  }
+
+  /* ── TEXT TYPE CHIPS ── */
+  .chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 18px; }
+  .chip {
+    padding: 5px 14px; border-radius: 50px;
+    font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.3px;
+    cursor: default;
+  }
+  .chip-narrative { background: #fff0e8; color: #c0530e; border: 1.5px solid #f4c5a3; }
+  .chip-recount   { background: #e8f0ff; color: #2550a0; border: 1.5px solid #b3c5f5; }
+  .chip-describe  { background: var(--yellow-light); color: #8a6000; border: 1.5px solid #f5d97a; }
+  .chip-report    { background: #f0ebff; color: #5c35b5; border: 1.5px solid #c8b8f0; }
+  .chip-passive   { background: var(--green-light); color: #1a7a45; border: 1.5px solid #b7e4c7; }
+
+  /* ── GRID TABLE (consolidation) ── */
+  .grid-table { width: 100%; border-collapse: separate; border-spacing: 0; overflow: hidden; border-radius: 12px; border: 1.5px solid var(--border); }
+  .grid-table th {
+    background: var(--teal); color: #fff;
+    font-family: 'Baloo 2', cursive; font-weight: 700;
+    padding: 11px 14px; font-size: 0.82rem; text-align: left;
+  }
+  .grid-table td {
+    padding: 10px 12px; border-top: 1.5px solid var(--border);
+    font-size: 0.82rem; vertical-align: top;
+  }
+  .grid-table tr:nth-child(even) td { background: #f7fbfc; }
+  .grid-table td:first-child {
+    font-family: 'Baloo 2', cursive; font-weight: 700;
+    color: var(--teal); background: var(--teal-light);
+  }
+  .grid-input {
+    width: 100%; border: 1.5px solid var(--border);
+    border-radius: 8px; padding: 7px 10px;
+    font-family: 'Nunito', sans-serif; font-size: 0.8rem;
+    background: #fff;
+    transition: border-color 0.2s;
+  }
+  .grid-input:focus { outline: none; border-color: var(--teal-mid); }
+  .grid-input.correct-input { border-color: var(--green); background: var(--green-light); color: #1a7a45; font-weight: 600; }
+  .grid-input.wrong-input   { border-color: var(--red);   background: var(--red-light); }
+
+  /* ── PASSIVE DRILL ── */
+  .drill-card {
+    background: var(--card); border: 1.5px solid var(--border);
+    border-radius: var(--radius); padding: 16px 18px; margin-bottom: 10px;
+  }
+  .drill-card .active-sent {
+    font-weight: 600; font-size: 0.9rem; margin-bottom: 8px;
+    padding: 8px 12px; background: var(--orange-light);
+    border-radius: 8px; border-left: 3px solid var(--orange);
+  }
+  .drill-reveal {
+    font-size: 0.82rem; color: var(--muted); margin-top: 8px;
+    display: none; padding: 8px 12px;
+    background: var(--green-light); border-radius: 8px;
+    border-left: 3px solid var(--green);
+    font-weight: 600; color: #1a7a45;
+  }
+  .drill-reveal.show { display: block; animation: fadeUp 0.25s ease; }
+
+  /* ── REMINDER CARDS ── */
+  .reminder-list { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+  .reminder-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--card); border: 1.5px solid var(--border);
+    border-radius: 12px; padding: 12px 16px;
+  }
+  .reminder-icon { font-size: 1.1rem; margin-top: 1px; }
+  .reminder-text { font-size: 0.86rem; line-height: 1.55; }
+  .reminder-text strong { color: var(--teal); }
+
+  /* ── NAV BUTTONS ── */
+  .nav-row {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 32px; gap: 10px;
+  }
+  .nav-btn {
+    font-family: 'Baloo 2', cursive; font-size: 0.9rem; font-weight: 700;
+    padding: 12px 24px; border-radius: 50px; border: none; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .nav-next {
+    background: var(--orange); color: #fff;
+    box-shadow: 0 4px 14px rgba(244,129,58,0.35);
+  }
+  .nav-next:hover { background: #e0672a; transform: translateY(-1px); }
+  .nav-prev { background: var(--card); color: var(--teal); border: 1.5px solid var(--border); }
+  .nav-prev:hover { background: var(--teal-light); }
+
+  /* ── CELEBRATION ── */
+  #celebration {
+    display: none; position: fixed; inset: 0;
+    background: rgba(10,112,117,0.92); z-index: 999;
+    align-items: center; justify-content: center;
+    flex-direction: column; gap: 20px;
+    text-align: center; padding: 24px;
+  }
+  #celebration.show { display: flex; animation: fadeUp 0.4s ease; }
+  #celebration .cel-emoji { font-size: 4rem; animation: bounce 0.8s ease infinite alternate; }
+  @keyframes bounce {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-12px); }
+  }
+  #celebration h2 {
+    font-family: 'Baloo 2', cursive; font-size: 2rem;
+    color: #fff; font-weight: 800;
+  }
+  #celebration p { color: rgba(255,255,255,0.85); font-size: 1rem; }
+  #celebration .final-score {
+    background: var(--yellow); color: var(--teal);
+    font-family: 'Baloo 2', cursive; font-size: 2.5rem; font-weight: 800;
+    padding: 16px 40px; border-radius: 99px; margin: 10px 0;
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 500px) {
+    .site-header h1 { font-size: 1.45rem; }
+    .stage { padding: 18px 12px 60px; }
+    .grid-table th, .grid-table td { padding: 8px 10px; }
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--teal-mid); border-radius: 99px; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <h1>📘 English Worksheet</h1>
+  <p class="subtitle">Think (Cambridge) · Chapter 9 · Test Preparation</p>
+  <div class="badge-row">
+    <span class="badge">📖 Narrative Text</span>
+    <span class="badge">🔄 Recount</span>
+    <span class="badge">🖼 Descriptive</span>
+    <span class="badge">📊 Report</span>
+    <span class="badge">✍️ Passive Voice</span>
+  </div>
+</header>
+
+<!-- PROGRESS -->
+<div class="progress-wrap">
+  <span class="progress-label">Progress</span>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  <span class="progress-score" id="totalScore">0 pts</span>
+</div>
+
+<!-- TABS -->
+<div class="tabs-wrap">
+  <button class="tab-btn active" onclick="goTab(0)">
+    <span class="tab-icon">🎯</span>Controlled Practice<span class="tab-check" id="ck0">✓</span>
+  </button>
+  <button class="tab-btn" onclick="goTab(1)">
+    <span class="tab-icon">🚀</span>Free Practice<span class="tab-check" id="ck1">✓</span>
+  </button>
+  <button class="tab-btn" onclick="goTab(2)">
+    <span class="tab-icon">✏️</span>Production<span class="tab-check" id="ck2">✓</span>
+  </button>
+  <button class="tab-btn" onclick="goTab(3)">
+    <span class="tab-icon">🧠</span>Consolidation<span class="tab-check" id="ck3">✓</span>
+  </button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!--  STAGE 1 – CONTROLLED PRACTICE                        -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="stage active" id="stage0">
+  <div class="stage-header">
+    <div class="stage-icon green">🎯</div>
+    <div class="stage-header-text">
+      <h2>Controlled Practice</h2>
+      <p>Use your notes. Choose the correct answer and check what you know. Read each question carefully!</p>
+    </div>
+  </div>
+
+  <!-- Text Type chips for reference -->
+  <div class="chip-row">
+    <span class="chip chip-narrative">Narrative – entertain, has conflict</span>
+    <span class="chip chip-recount">Recount – retell events, no conflict</span>
+    <span class="chip chip-describe">Descriptive – specific subject</span>
+    <span class="chip chip-report">Report – class/group of things</span>
+    <span class="chip chip-passive">Passive – to be + V3</span>
+  </div>
+
+  <div class="section-title">Part A — Identify the Text Type (10 Questions)</div>
+
+  <!-- Q1 -->
+  <div class="q-card" id="s1q1">
+    <div class="q-text"><span class="q-number">1</span><span class="q-text-inner">Read this excerpt: <span class="q-italics">"The Komodo dragon is a large species of lizard found in Indonesia. It has a long tail, sharp claws, and a forked tongue. It can grow up to 3 meters in length..."</span><br>What type of text is this?</span></div>
+    <div class="options" data-answer="C" data-section="s1">
+      <div class="option" data-val="A"><span class="opt-letter">A</span>Narrative</div>
+      <div class="option" data-val="B"><span class="opt-letter">B</span>Descriptive</div>
+      <div class="option" data-val="C"><span class="opt-letter">C</span>Report</div>
+      <div class="option" data-val="D"><span class="opt-letter">D</span>Recount</div>
+    </div>
+    <div class="feedback"><span></span><span></span></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-card" id="s1q2">
+    <div class="q-text"><span class="q-number">2</span><span class="q-text-inner">Read this: <span class="q-italics">"Last Sunday, I woke up early and went to the market with my mother. First, we bought vegetables. Then, we had breakfast at a local stall. It was a simple but memorable morning."</span><br>What type of text is this?</span></div>
+    <div class="options" data-answer="B" data-section="s1">
+      <div class="option" data-val="A"><span class="opt-letter">A</span>Narrative</div>
+      <div class="option" data-val="B"><span class="opt-letter">B</span>Recount</div>
+      <div class="option" data-val="C"><span class="opt-letter">C</span>Report</div>
+      <div class="option" data-val="D"><span class="opt-letter">D</span>Descriptive</div>
+    </div>
+    <div class="feedback"><span></span><span></span></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-card" id="s1q3">
+    <div class="q-text"><span class="q-number">3</span><span class="q-text-inner">Read this: <span class="q-italics">"Once upon a time, a young farmer found a golden egg in his chicken coop. He was overjoyed, but when he tried to find more, the chicken laid nothing. Desperate, he cut the chicken open — and found nothing inside."</span><br>What type of text is this?</span></div>
+    <div class="options" data-answer="D" data-section="s1">
+      <div class="option" data-val="A"><span class="opt-letter">A</span>Recount</div>
+      <div class="option" data-val="B"><span class="opt-letter">B</span>Report</div>
+      <div class="option" data-val="C"><span class="opt-letter">C</span>Descriptive</div>
+      <div class="option" data-val="D"><span class="opt-letter">D</span>Narrative</div>
+    </div>
+    <div class="feedback"><span></span><span></span></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="q-card" id="s1q4">
+    <div class="q-text"><span class="q-number">4</span><span class="q-text-inner">Read this: <span class="q-italics">"My grandmother's house is a small, cozy cottage at the end of a quiet lane. It has a wooden porch, white walls, and a garden full of jasmine flowers. The smell of her cooking always fills the air."</span><br>What type of text is this?</span></div>
+    <div class="options" data-answer="A" data-section="s1">
+      <div class="option" data-val="A"><span class="opt-letter">A</span>Descriptive</div>
+      <div class="option" data-val="B"><span class="opt-letter">B</span>Report</div>
+      <div class="option" data-val="C"><span class="opt-letter">C</span>Narrative</div>
+      <div class="option" data-val="D"><span class="opt-letter">D</span>Recount</div>
+    </div>
+    <div class="feedback"><span></span><span></span></div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="q-card" id="s1q5">
+    <div class="q-text"><span class="q-number">5</span><span class="q-text-inner">Which generic structure belongs to a <strong>Narrative</strong> text?</span></div>
+    <div class="options" data-answer="D" data-section="s1">
+      <div class="option" data-val="A"><span class="opt-letter">A</span>Identification → Description</div>
+      <div class="option" data-val="B"><span class="opt-letter">B</span>Orientation → Events → Re-orientation</div>
+      <div class="option" data-val="C"><span class="opt-letter">C</span>General Classification → Description</div>
+      <div class="option" data-val="D"><span class="opt-letter">D</span>Orientation → Complication → Resolution</div>
+    </div>
+    <div class="feedback"><span></span><span></span></div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="q-card" id="s1q6">
+    <div class="q-text"><span class="q-number">6</span><span class="q-text-inner">Which sentence uses the <strong>passive voice</strong> correctly?</span></div>
+    <div class="options" data-answer="B" data-section="s1">
+      <div class="option" data-val="A"><span class="opt-letter">A</span>The teacher explained the lesson clearly.</div>
+      <div class="option" data-val="B"><span class="opt-letter">B</span>The lesson was explained clearly by the teacher.</div>
+      <div class="option" data-val="C"><span class="opt-letter">C</span>The lesson explaining clearly.</div>
+      <div class="option" data-val="D"><span class="opt-letter">D</span>The teacher is explain the lesson.</div>
+    </div>
+    <div class="feedback"><span></span><span></span></div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="q-card" id="s1q7">
+    <div class="q-text"><span class="q-number">7</span><span class="q-text-inner">In a <strong>Report</strong> text, the language is usually written in…</span></div>
+    <div class="options" data-answer="B" data-section="s1">
+      <div class="option" data-val="A"><span class="opt-letter">A</span>Past tense, first person</div>
+      <div class="option" data-val="B"><span class="opt-letter">B</span>Present tense, passive voice, no personal pronouns</div>
+      <div class="option" data-val="C"><span class="opt-letter">C</span>Present tense, first person, emotional language</div>
+      <div class="option" data-val="D"><span class="opt-letter">D</span>Past tense, third person, with dialogue</div>
+    </div>
+    <div class="feedback"><span></span><span></span></div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="q-card" id="s1q8">
+    <div class="q-text"><span class="q-number">8</span><span class="q-text-inner">Transform this active sentence into passive: <span class="q-italics">"The students completed the assignment."</span></span></div>
+    <div class="options" data-answer="C" data-section="s1">
+      <div class="option" data-val="A"><span class="opt-letter">A</span>The assignment completed by the students.</div>
+      <div class="option" data-val="B"><span class="opt-letter">B</span>The assignment is completed by the students.</div>
+      <div class="option" data-val="C"><span class="opt-letter">C</span>The assignment was completed by the students.</div>
+      <div class="option" data-val="D"><span class="opt-letter">D</span>The assignment has complete by the students.</div>
+    </div>
+    <div class="feedback"><span></span><span></span></div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="q-card" id="s1q9">
+    <div class="q-text"><span class="q-number">9</span><span class="q-text-inner">Which word is a typical <strong>temporal conjunction</strong> used in Recount texts?</span></div>
+    <div class="options" data-answer="C" data-section="s1">
+      <div class="option" data-val="A"><span class="opt-letter">A</span>However</div>
+      <div class="option" data-val="B"><span class="opt-letter">B</span>Therefore</div>
+      <div class="option" data-val="C"><span class="opt-letter">C</span>Subsequently</div>
+      <div class="option" data-val="D"><span class="opt-letter">D</span>Although</div>
+    </div>
+    <div class="feedback"><span></span><span></span></div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="q-card" id="s1q10">
+    <div class="q-text"><span class="q-number">10</span><span class="q-text-inner">Which text type would most likely contain this sentence: <span class="q-italics">"This species is found across Southeast Asia and is classified under the order Squamata."</span></span></div>
+    <div class="options" data-answer="D" data-section="s1">
+      <div class="option" data-val="A"><span class="opt-letter">A</span>Recount</div>
+      <div class="option" data-val="B"><span class="opt-letter">B</span>Narrative</div>
+      <div class="option" data-val="C"><span class="opt-letter">C</span>Descriptive</div>
+      <div class="option" data-val="D"><span class="opt-letter">D</span>Report</div>
+    </div>
+    <div class="feedback"><span></span><span></span></div>
+  </div>
+
+  <div class="section-score-bar" id="scoreS1">
+    <span class="score-emoji">📊</span>
+    <div>
+      <div class="score-num" id="scoreS1Num">0/10</div>
+      <div class="score-label">Part A score</div>
+    </div>
+  </div>
+
+  <!-- PART B: Passive Transformation -->
+  <div class="section-title">Part B — Passive Voice Transformation (5 Items)</div>
+  <div class="card">
+    <p style="font-size:0.85rem;color:var(--muted);margin-bottom:14px;">📝 <strong>Instructions:</strong> Rewrite each sentence in passive voice. Then click <em>Check</em> to see the model answer.</p>
+
+    <!-- PV1 -->
+    <div style="margin-bottom:18px;">
+      <p style="font-size:0.88rem;font-weight:600;">1. The chef prepared a delicious meal.</p>
+      <textarea class="answer-input" id="pv1" placeholder="Type your passive sentence here..." rows="2"></textarea>
+      <button class="check-btn" onclick="checkPassive('pv1','A delicious meal was prepared by the chef.')">Check ✓</button>
+      <div class="feedback" id="fb-pv1"><span></span><span></span></div>
+    </div>
+
+    <!-- PV2 -->
+    <div style="margin-bottom:18px;">
+      <p style="font-size:0.88rem;font-weight:600;">2. Scientists have discovered a new species of fish.</p>
+      <textarea class="answer-input" id="pv2" placeholder="Type your passive sentence here..." rows="2"></textarea>
+      <button class="check-btn" onclick="checkPassive('pv2','A new species of fish has been discovered by scientists.')">Check ✓</button>
+      <div class="feedback" id="fb-pv2"><span></span><span></span></div>
+    </div>
+
+    <!-- PV3 -->
+    <div style="margin-bottom:18px;">
+      <p style="font-size:0.88rem;font-weight:600;">3. The government builds new roads every year.</p>
+      <textarea class="answer-input" id="pv3" placeholder="Type your passive sentence here..." rows="2"></textarea>
+      <button class="check-btn" onclick="checkPassive('pv3','New roads are built by the government every year.')">Check ✓</button>
+      <div class="feedback" id="fb-pv3"><span></span><span></span></div>
+    </div>
+
+    <!-- PV4 -->
+    <div style="margin-bottom:18px;">
+      <p style="font-size:0.88rem;font-weight:600;">4. My sister is painting the fence.</p>
+      <textarea class="answer-input" id="pv4" placeholder="Type your passive sentence here..." rows="2"></textarea>
+      <button class="check-btn" onclick="checkPassive('pv4','The fence is being painted by my sister.')">Check ✓</button>
+      <div class="feedback" id="fb-pv4"><span></span><span></span></div>
+    </div>
+
+    <!-- PV5 -->
+    <div style="margin-bottom:4px;">
+      <p style="font-size:0.88rem;font-weight:600;">5. Someone stole the bicycle last night.</p>
+      <textarea class="answer-input" id="pv5" placeholder="Type your passive sentence here..." rows="2"></textarea>
+      <button class="check-btn" onclick="checkPassive('pv5','The bicycle was stolen last night.')">Check ✓</button>
+      <div class="feedback" id="fb-pv5"><span></span><span></span></div>
+    </div>
+  </div>
+
+  <div class="nav-row">
+    <div></div>
+    <button class="nav-btn nav-next" onclick="goTab(1)">Free Practice →</button>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!--  STAGE 2 – FREE PRACTICE                              -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="stage" id="stage1">
+  <div class="stage-header">
+    <div class="stage-icon orange">🚀</div>
+    <div class="stage-header-text">
+      <h2>Free Practice</h2>
+      <p>No notes! Work independently. Read the passages, then answer the questions. Trust yourself. 💪</p>
+    </div>
+  </div>
+
+  <div class="section-title">Passage 1 — Questions 1–4</div>
+
+  <div class="passage-box">
+    <div class="passage-label">📄 Read Carefully</div>
+    Mount Bromo is one of the most famous active volcanoes in East Java, Indonesia. It stands at 2,329 meters above sea level and is surrounded by the Tengger Caldera, a vast sea of sand known as the "Sea of Sand." The mountain attracts thousands of tourists each year who come to witness its dramatic sunrise and volcanic landscape. Local Tenggerese people consider it sacred and hold the annual Yadnya Kasada ceremony there.
+  </div>
+
+  <!-- FP Q1 -->
+  <div class="q-card">
+    <div class="q-text"><span class="q-number">1</span><span class="q-text-inner">What type of text is the passage above?</span></div>
+    <div class="options" data-answer="C" data-section="s2">
+      <div class="option" data-val="A"><span class="opt-letter">A</span>Narrative</div>
+      <div class="option" data-val="B"><span class="opt-letter">B</span>Recount</div>
+      <div class="option" data-val="C"><span class="opt-letter">C</span>Descriptive</div>
+      <div class="option" data-val="D"><span class="opt-letter">D</span>Report</div>
+    </div>
+    <div class="feedback"><span></span><span></span></div>
+  </div>
+
+  <!-- FP Q2 -->
+  <div class="q-card">
+    <div class="q-text"><span class="q-number">2</span><span class="q-text-inner">The phrase <span class="q-italics">"is surrounded by"</span> in the passage is an example of…</span></div>
+    <div class="options" data-answer="B" data-section="s2">
+      <div class="option" data-val="A"><span class="opt-letter">A</span>Active voice, present tense</div>
+      <div class="option" data-val="B"><span class="opt-letter">B</span>Passive voice, present tense</div>
+      <div class="option" data-val="C"><span class="opt-letter">C</span>Passive voice, past tense</div>
+      <div class="option" data-val="D"><span class="opt-letter">D</span>Active voice, past tense</div>
+    </div>
+    <div class="feedback"><span></span><span></span></div>
+  </div>
+
+  <!-- FP Q3 -->
+  <div class="q-card">
+    <div class="q-text"><span class="q-number">3</span><span class="q-text-inner">Which sentence represents the <strong>Identification</strong> structure of the text?</span></div>
+    <div class="options" data-answer="B" data-section="s2">
+      <div class="option" data-val="A"><span class="opt-letter">A</span>"Local Tenggerese people consider it sacred..."</div>
+      <div class="option" data-val="B"><span class="opt-letter">B</span>"Mount Bromo is one of the most famous active volcanoes in East Java, Indonesia."</div>
+      <div class="option" data-val="C"><span class="opt-letter">C</span>"The mountain attracts thousands of tourists each year..."</div>
+      <div class="option" data-val="D"><span class="opt-letter">D</span>"It stands at 2,329 meters above sea level..."</div>
+    </div>
+    <div class="feedback"><span></span><span></span></div>
+  </div>
+
+  <!-- FP Q4 -->
+  <div class="q-card">
+    <div class="q-text"><span class="q-number">4</span><span class="q-text-inner">The ceremony is <strong>held</strong> by the Tenggerese people. The underlined word is in…</span></div>
+    <div class="options" data-answer="B" data-section="s2">
+      <div class="option" data-val="A"><span class="opt-letter">A</span>Active voice</div>
+      <div class="option" data-val="B"><span class="opt-letter">B</span>Passive voice</div>
+      <div class="option" data-val="C"><span class="opt-letter">C</span>Future tense</div>
+      <div class="option" data-val="D"><span class="opt-letter">D</span>Perfect tense</div>
+    </div>
+    <div class="feedback"><span></span><span></span></div>
+  </div>
+
+  <div class="section-title">Passage 2 — Questions 5–8</div>
+
+  <div class="passage-box">
+    <div class="passage-label">📄 Read Carefully</div>
+    In 2019, I visited Yogyakarta for the first time with my family. On the first day, we went to Borobudur Temple early in the morning. The view from the top was breathtaking. The next day, we explored Malioboro Street and bought batik souvenirs. On our last day, we watched a traditional Wayang Kulit performance. It was an unforgettable experience.
+  </div>
+
+  <!-- FP Q5 -->
+  <div class="q-card">
+    <div class="q-text"><span class="q-number">5</span><span class="q-text-inner">What type of text is this passage?</span></div>
+    <div class="options" data-answer="D" data-section="s2">
+      <div class="option" data-val="A"><span class="opt-letter">A</span>Narrative</div>
+      <div class="option" data-val="B"><span class="opt-letter">B</span>Report</div>
+      <div class="option" data-val="C"><span class="opt-letter">C</span>Descriptive</div>
+      <div class="option" data-val="D"><span class="opt-letter">D</span>Recount</div>
+    </div>
+    <div class="feedback"><span></span><span></span></div>
+  </div>
+
+  <!-- FP Q6 -->
+  <div class="q-card">
+    <div class="q-text"><span class="q-number">6</span><span class="q-text-inner">Which part of the passage functions as the <strong>Re-orientation</strong>?</span></div>
+    <div class="options" data-answer="C" data-section="s2">
+      <div class="option" data-val="A"><span class="opt-letter">A</span>"In 2019, I visited Yogyakarta for the first time..."</div>
+      <div class="option" data-val="B"><span class="opt-letter">B</span>"The view from the top was breathtaking."</div>
+      <div class="option" data-val="C"><span class="opt-letter">C</span>"It was an unforgettable experience."</div>
+      <div class="option" data-val="D"><span class="opt-letter">D</span>"We went to Borobudur Temple early in the morning."</div>
+    </div>
+    <div class="feedback"><span></span><span></span></div>
+  </div>
+
+  <!-- FP Q7 -->
+  <div class="q-card">
+    <div class="q-text"><span class="q-number">7</span><span class="q-text-inner"><span class="q-italics">"Batik souvenirs were bought by us"</span> is a passive transformation of which sentence?</span></div>
+    <div class="options" data-answer="B" data-section="s2">
+      <div class="option" data-val="A"><span class="opt-letter">A</span>"We watched a traditional Wayang Kulit performance."</div>
+      <div class="option" data-val="B"><span class="opt-letter">B</span>"We bought batik souvenirs."</div>
+      <div class="option" data-val="C"><span class="opt-letter">C</span>"I visited Yogyakarta for the first time."</div>
+      <div class="option" data-val="D"><span class="opt-letter">D</span>"The view from the top was breathtaking."</div>
+    </div>
+    <div class="feedback"><span></span><span></span></div>
+  </div>
+
+  <!-- FP Q8 -->
+  <div class="q-card">
+    <div class="q-text"><span class="q-number">8</span><span class="q-text-inner">Which expression in the passage signals time sequence?</span></div>
+    <div class="options" data-answer="C" data-section="s2">
+      <div class="option" data-val="A"><span class="opt-letter">A</span>"because"</div>
+      <div class="option" data-val="B"><span class="opt-letter">B</span>"although"</div>
+      <div class="option" data-val="C"><span class="opt-letter">C</span>"the next day"</div>
+      <div class="option" data-val="D"><span class="opt-letter">D</span>"however"</div>
+    </div>
+    <div class="feedback"><span></span><span></span></div>
+  </div>
+
+  <!-- FP Q9 -->
+  <div class="q-card">
+    <div class="q-text"><span class="q-number">9</span><span class="q-text-inner">A student writes: <span class="q-italics">"The story was write by a famous author."</span> What is the error?</span></div>
+    <div class="options" data-answer="B" data-section="s2">
+      <div class="option" data-val="A"><span class="opt-letter">A</span>Wrong tense of "to be"</div>
+      <div class="option" data-val="B"><span class="opt-letter">B</span>"write" should be "written" (past participle V3)</div>
+      <div class="option" data-val="C"><span class="opt-letter">C</span>"by" should be removed</div>
+      <div class="option" data-val="D"><span class="opt-letter">D</span>"famous" is incorrect</div>
+    </div>
+    <div class="feedback"><span></span><span></span></div>
+  </div>
+
+  <!-- FP Q10 -->
+  <div class="q-card">
+    <div class="q-text"><span class="q-number">10</span><span class="q-text-inner">Which sentence is <strong>NOT</strong> an example of passive voice?</span></div>
+    <div class="options" data-answer="D" data-section="s2">
+      <div class="option" data-val="A"><span class="opt-letter">A</span>The report was submitted on time.</div>
+      <div class="option" data-val="B"><span class="opt-letter">B</span>The windows were broken during the storm.</div>
+      <div class="option" data-val="C"><span class="opt-letter">C</span>She has been promoted to manager.</div>
+      <div class="option" data-val="D"><span class="opt-letter">D</span>The committee discussed the new policy.</div>
+    </div>
+    <div class="feedback"><span></span><span></span></div>
+  </div>
+
+  <div class="section-score-bar" id="scoreS2">
+    <span class="score-emoji">🚀</span>
+    <div>
+      <div class="score-num" id="scoreS2Num">0/10</div>
+      <div class="score-label">Free Practice score</div>
+    </div>
+  </div>
+
+  <!-- SHORT ANSWER -->
+  <div class="section-title">Short Answer — Text Analysis (3 Items)</div>
+  <div class="card">
+    <p style="font-size:0.85rem;color:var(--muted);margin-bottom:16px;">💬 Answer in 1–3 sentences. Write in your own words.</p>
+
+    <div style="margin-bottom:20px;">
+      <p style="font-size:0.88rem;font-weight:600;margin-bottom:6px;">1. What is the main difference between a <em>Recount</em> and a <em>Narrative</em> text?</p>
+      <textarea class="prod-textarea" id="sa1" placeholder="Write your answer here..." oninput="countWords(this,'wc-sa1',30)" style="min-height:90px;"></textarea>
+      <div class="word-counter" id="wc-sa1">0 words</div>
+      <button class="check-btn secondary" style="margin-top:8px;" onclick="showSampleAnswer('sa1-reveal')">Show sample answer 👁</button>
+      <div class="feedback fb-correct" id="sa1-reveal" style="margin-top:8px;">
+        <span>💡</span><span>A Recount simply retells past events in sequence without any conflict. A Narrative, however, must have a Complication (a problem) and a Resolution, and its purpose is to entertain the reader through a story.</span>
+      </div>
+    </div>
+
+    <div style="margin-bottom:20px;">
+      <p style="font-size:0.88rem;font-weight:600;margin-bottom:6px;">2. Why is passive voice commonly used in <em>Report</em> texts?</p>
+      <textarea class="prod-textarea" id="sa2" placeholder="Write your answer here..." oninput="countWords(this,'wc-sa2',30)" style="min-height:90px;"></textarea>
+      <div class="word-counter" id="wc-sa2">0 words</div>
+      <button class="check-btn secondary" style="margin-top:8px;" onclick="showSampleAnswer('sa2-reveal')">Show sample answer 👁</button>
+      <div class="feedback fb-correct" id="sa2-reveal" style="margin-top:8px;">
+        <span>💡</span><span>Report texts focus on facts and the subject being described, not on who performs the action. Passive voice removes the personal subject and makes writing more objective and formal, which is appropriate for scientific or encyclopaedic texts.</span>
+      </div>
+    </div>
+
+    <div>
+      <p style="font-size:0.88rem;font-weight:600;margin-bottom:6px;">3. Write one example <em>Identification</em> sentence for a Descriptive text about a place you know.</p>
+      <textarea class="prod-textarea" id="sa3" placeholder="e.g. 'The Eiffel Tower is an iconic iron structure located in Paris, France.'" oninput="countWords(this,'wc-sa3',15)" style="min-height:70px;"></textarea>
+      <div class="word-counter" id="wc-sa3">0 words</div>
+    </div>
+  </div>
+
+  <div class="nav-row">
+    <button class="nav-btn nav-prev" onclick="goTab(0)">← Controlled</button>
+    <button class="nav-btn nav-next" onclick="goTab(2)">Production →</button>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!--  STAGE 3 – PRODUCTION                                 -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="stage" id="stage2">
+  <div class="stage-header">
+    <div class="stage-icon purple">✏️</div>
+    <div class="stage-header-text">
+      <h2>Production Stage</h2>
+      <p>No notes. Produce your own writing. Show what you've learned! 🌟</p>
+    </div>
+  </div>
+
+  <!-- TASK A -->
+  <div class="section-title">Task A — Write a Short Text (choose ONE)</div>
+  <div class="card">
+    <p style="font-size:0.85rem;color:var(--muted);margin-bottom:14px;">Select your text type, then write in the box below.</p>
+
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px;" id="textTypeSelector">
+      <button class="check-btn" onclick="selectTextType('narrative')" id="btn-narrative">📖 Narrative</button>
+      <button class="check-btn secondary" onclick="selectTextType('recount')" id="btn-recount">🔄 Recount</button>
+      <button class="check-btn secondary" onclick="selectTextType('descriptive')" id="btn-descriptive">🖼 Descriptive</button>
+    </div>
+
+    <div id="task-guide" class="passage-box" style="margin-bottom:12px;display:none;">
+      <div class="passage-label" id="guide-label">📌 Your guide</div>
+      <div id="guide-text" style="font-size:0.86rem;line-height:1.7;"></div>
+    </div>
+
+    <textarea class="prod-textarea" id="taskA" placeholder="Choose a text type above to start writing..." oninput="countWords(this,'wc-taskA',80)" disabled style="min-height:180px;"></textarea>
+    <div class="word-counter" id="wc-taskA">0 / 100 target words</div>
+
+    <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="check-btn orange-btn" onclick="checkStructure()">Check My Structure 📋</button>
+      <button class="check-btn secondary" onclick="clearTaskA()">Clear ✕</button>
+    </div>
+    <div class="feedback" id="fb-taskA" style="margin-top:10px;"><span></span><span></span></div>
+  </div>
+
+  <!-- TASK B -->
+  <div class="section-title">Task B — Passive Voice in Context (5 Sentences)</div>
+  <div class="card">
+    <p style="font-size:0.85rem;color:var(--muted);margin-bottom:16px;">Write 5 original sentences in passive voice — each using a different tense. No repeating tenses!</p>
+
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+          <span style="background:var(--teal);color:#fff;border-radius:6px;padding:2px 9px;font-size:0.75rem;font-weight:700;">Simple Present</span>
+          <span style="font-size:0.78rem;color:var(--muted);">is/are + V3</span>
+        </div>
+        <textarea class="answer-input" id="pb1" placeholder="e.g. English is spoken around the world." oninput="countWords(this,'',0)" rows="2"></textarea>
+      </div>
+      <div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+          <span style="background:var(--orange);color:#fff;border-radius:6px;padding:2px 9px;font-size:0.75rem;font-weight:700;">Simple Past</span>
+          <span style="font-size:0.78rem;color:var(--muted);">was/were + V3</span>
+        </div>
+        <textarea class="answer-input" id="pb2" placeholder="e.g. The letter was written yesterday." oninput="countWords(this,'',0)" rows="2"></textarea>
+      </div>
+      <div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+          <span style="background:#5c35b5;color:#fff;border-radius:6px;padding:2px 9px;font-size:0.75rem;font-weight:700;">Present Perfect</span>
+          <span style="font-size:0.78rem;color:var(--muted);">has/have been + V3</span>
+        </div>
+        <textarea class="answer-input" id="pb3" placeholder="e.g. The project has been completed." oninput="countWords(this,'',0)" rows="2"></textarea>
+      </div>
+      <div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+          <span style="background:#27ae60;color:#fff;border-radius:6px;padding:2px 9px;font-size:0.75rem;font-weight:700;">Present Continuous</span>
+          <span style="font-size:0.78rem;color:var(--muted);">is/are being + V3</span>
+        </div>
+        <textarea class="answer-input" id="pb4" placeholder="e.g. The road is being repaired now." oninput="countWords(this,'',0)" rows="2"></textarea>
+      </div>
+      <div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+          <span style="background:#c0530e;color:#fff;border-radius:6px;padding:2px 9px;font-size:0.75rem;font-weight:700;">Future (will)</span>
+          <span style="font-size:0.78rem;color:var(--muted);">will be + V3</span>
+        </div>
+        <textarea class="answer-input" id="pb5" placeholder="e.g. The results will be announced tomorrow." oninput="countWords(this,'',0)" rows="2"></textarea>
+      </div>
+    </div>
+
+    <button class="check-btn" style="margin-top:16px;" onclick="checkPassiveB()">Check All Sentences ✓</button>
+    <div class="feedback" id="fb-pb" style="margin-top:10px;"><span></span><span></span></div>
+  </div>
+
+  <div class="nav-row">
+    <button class="nav-btn nav-prev" onclick="goTab(1)">← Free Practice</button>
+    <button class="nav-btn nav-next" onclick="goTab(3)">Consolidation →</button>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!--  STAGE 4 – CONSOLIDATION                              -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="stage" id="stage3">
+  <div class="stage-header">
+    <div class="stage-icon yellow">🧠</div>
+    <div class="stage-header-text">
+      <h2>Consolidation</h2>
+      <p>Lock in your knowledge. Fill in from memory, then drill your passive voice. You've got this! ⭐</p>
+    </div>
+  </div>
+
+  <div class="section-title">Summary Grid — Fill in from Memory</div>
+  <div class="card" style="padding:16px 10px;">
+    <p style="font-size:0.82rem;color:var(--muted);margin-bottom:12px;padding-left:6px;">Fill in all cells from memory. Then click <strong>Check Grid</strong> to see how you did.</p>
+    <div style="overflow-x:auto;">
+      <table class="grid-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>📖 Narrative</th>
+            <th>🔄 Recount</th>
+            <th>🖼 Descriptive</th>
+            <th>📊 Report</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Purpose</td>
+            <td><input class="grid-input" id="g-purpose-narr" placeholder="..."></td>
+            <td><input class="grid-input" id="g-purpose-rec" placeholder="..."></td>
+            <td><input class="grid-input" id="g-purpose-desc" placeholder="..."></td>
+            <td><input class="grid-input" id="g-purpose-rep" placeholder="..."></td>
+          </tr>
+          <tr>
+            <td>Structure</td>
+            <td><input class="grid-input" id="g-struct-narr" placeholder="..."></td>
+            <td><input class="grid-input" id="g-struct-rec" placeholder="..."></td>
+            <td><input class="grid-input" id="g-struct-desc" placeholder="..."></td>
+            <td><input class="grid-input" id="g-struct-rep" placeholder="..."></td>
+          </tr>
+          <tr>
+            <td>Main Tense</td>
+            <td><input class="grid-input" id="g-tense-narr" placeholder="..."></td>
+            <td><input class="grid-input" id="g-tense-rec" placeholder="..."></td>
+            <td><input class="grid-input" id="g-tense-desc" placeholder="..."></td>
+            <td><input class="grid-input" id="g-tense-rep" placeholder="..."></td>
+          </tr>
+          <tr>
+            <td>Key Feature</td>
+            <td><input class="grid-input" id="g-feat-narr" placeholder="..."></td>
+            <td><input class="grid-input" id="g-feat-rec" placeholder="..."></td>
+            <td><input class="grid-input" id="g-feat-desc" placeholder="..."></td>
+            <td><input class="grid-input" id="g-feat-rep" placeholder="..."></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="check-btn" onclick="checkGrid()">Check Grid ✓</button>
+      <button class="check-btn secondary" onclick="revealGrid()">Reveal All 👁</button>
+    </div>
+    <div class="feedback" id="fb-grid" style="margin-top:10px;"><span></span><span></span></div>
+  </div>
+
+  <!-- PASSIVE DRILL -->
+  <div class="section-title">Passive Voice Rapid Drill</div>
+  <div class="card">
+    <p style="font-size:0.85rem;color:var(--muted);margin-bottom:14px;">🔥 Write the passive version in the box, then tap <strong>Reveal</strong> to check.</p>
+
+    <div class="drill-card">
+      <div class="active-sent">1. "People speak English worldwide."</div>
+      <textarea class="answer-input" id="d1" placeholder="Passive: ..." rows="2"></textarea>
+      <button class="check-btn secondary" style="margin-top:8px;" onclick="revealDrill('dr1')">Reveal ▶</button>
+      <div class="drill-reveal" id="dr1">✅ English is spoken worldwide (by people).</div>
+    </div>
+
+    <div class="drill-card">
+      <div class="active-sent">2. "The teacher corrected our essays."</div>
+      <textarea class="answer-input" id="d2" placeholder="Passive: ..." rows="2"></textarea>
+      <button class="check-btn secondary" style="margin-top:8px;" onclick="revealDrill('dr2')">Reveal ▶</button>
+      <div class="drill-reveal" id="dr2">✅ Our essays were corrected by the teacher.</div>
+    </div>
+
+    <div class="drill-card">
+      <div class="active-sent">3. "They are building a new bridge."</div>
+      <textarea class="answer-input" id="d3" placeholder="Passive: ..." rows="2"></textarea>
+      <button class="check-btn secondary" style="margin-top:8px;" onclick="revealDrill('dr3')">Reveal ▶</button>
+      <div class="drill-reveal" id="dr3">✅ A new bridge is being built (by them).</div>
+    </div>
+
+    <div class="drill-card">
+      <div class="active-sent">4. "Someone has eaten my lunch!"</div>
+      <textarea class="answer-input" id="d4" placeholder="Passive: ..." rows="2"></textarea>
+      <button class="check-btn secondary" style="margin-top:8px;" onclick="revealDrill('dr4')">Reveal ▶</button>
+      <div class="drill-reveal" id="dr4">✅ My lunch has been eaten!</div>
+    </div>
+
+    <div class="drill-card">
+      <div class="active-sent">5. "The company will announce the results tomorrow."</div>
+      <textarea class="answer-input" id="d5" placeholder="Passive: ..." rows="2"></textarea>
+      <button class="check-btn secondary" style="margin-top:8px;" onclick="revealDrill('dr5')">Reveal ▶</button>
+      <div class="drill-reveal" id="dr5">✅ The results will be announced tomorrow (by the company).</div>
+    </div>
+  </div>
+
+  <!-- TEST DAY REMINDERS -->
+  <div class="section-title">📌 Test Day Reminders</div>
+  <div class="reminder-list">
+    <div class="reminder-item"><span class="reminder-icon">📖</span><span class="reminder-text"><strong>Narrative</strong> = story with a <strong>Complication</strong> → always look for a conflict/problem and its resolution.</span></div>
+    <div class="reminder-item"><span class="reminder-icon">🔄</span><span class="reminder-text"><strong>Recount</strong> = no problem, just a <strong>sequence of events</strong> (First… Then… Finally…).</span></div>
+    <div class="reminder-item"><span class="reminder-icon">🖼</span><span class="reminder-text"><strong>Descriptive</strong> = describes a <strong>specific</strong> subject — one person, place, or thing.</span></div>
+    <div class="reminder-item"><span class="reminder-icon">📊</span><span class="reminder-text"><strong>Report</strong> = describes a <strong>general class/group</strong> of things (e.g. dolphins, volcanoes).</span></div>
+    <div class="reminder-item"><span class="reminder-icon">✍️</span><span class="reminder-text"><strong>Passive Voice</strong> = <strong>to be + past participle (V3)</strong> — always match the tense of the original sentence.</span></div>
+    <div class="reminder-item"><span class="reminder-icon">💡</span><span class="reminder-text">In passive sentences, <strong>by + agent</strong> is optional — it can be omitted if the doer is unknown or unimportant.</span></div>
+  </div>
+
+  <div class="nav-row" style="margin-top:28px;">
+    <button class="nav-btn nav-prev" onclick="goTab(2)">← Production</button>
+    <button class="nav-btn nav-next" onclick="finishWorksheet()" style="background:var(--yellow);color:var(--teal);">🏁 Finish!</button>
+  </div>
+</div>
+
+<!-- CELEBRATION -->
+<div id="celebration">
+  <div class="cel-emoji">🎉</div>
+  <h2>Worksheet Complete!</h2>
+  <p>Great work! Here's your total score:</p>
+  <div class="final-score" id="finalScoreDisplay">0/20</div>
+  <p id="finalMessage" style="color:rgba(255,255,255,0.9);max-width:320px;line-height:1.6;">Keep reviewing those key points and you'll do great tomorrow!</p>
+  <button class="check-btn" style="margin-top:10px;font-size:1rem;padding:14px 32px;" onclick="document.getElementById('celebration').classList.remove('show')">Back to Worksheet</button>
+</div>
+
+<script>
+/* ── STATE ── */
+let totalPoints = 0;
+let s1Score = 0, s2Score = 0;
+const s1Answered = {}, s2Answered = {};
+
+/* ── TABS ── */
+function goTab(idx) {
+  document.querySelectorAll('.stage').forEach((s, i) => {
+    s.classList.toggle('active', i === idx);
+  });
+  document.querySelectorAll('.tab-btn').forEach((b, i) => {
+    b.classList.toggle('active', i === idx);
+    if (i < idx) b.classList.add('done');
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  updateProgress(idx);
+}
+
+function updateProgress(tabIdx) {
+  const pct = Math.round(((tabIdx) / 4) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+}
+
+/* ── MC CLICK ── */
+document.querySelectorAll('.options').forEach(optGroup => {
+  optGroup.querySelectorAll('.option').forEach(opt => {
+    opt.addEventListener('click', () => handleMC(opt, optGroup));
+  });
+});
+
+function handleMC(opt, optGroup) {
+  if (optGroup.classList.contains('answered')) return;
+  optGroup.classList.add('answered');
+  const correct = optGroup.dataset.answer;
+  const chosen  = opt.dataset.val;
+  const section = optGroup.dataset.section;
+  const fb      = optGroup.closest('.q-card').querySelector('.feedback');
+
+  optGroup.querySelectorAll('.option').forEach(o => o.classList.add('disabled'));
+
+  if (chosen === correct) {
+    opt.classList.add('correct');
+    showFeedback(fb, true, '✅ Correct! Well done.');
+    addScore(section, 1);
+  } else {
+    opt.classList.add('wrong');
+    showFeedback(fb, false, `❌ Not quite. The correct answer is <strong>${correct}</strong>.`);
+    // reveal correct
+    optGroup.querySelectorAll('.option').forEach(o => {
+      if (o.dataset.val === correct) o.classList.add('reveal-correct');
+    });
+    addScore(section, 0);
+  }
+  updateSectionScore(section);
+}
+
+function addScore(section, pts) {
+  if (section === 's1') s1Score += pts;
+  if (section === 's2') s2Score += pts;
+  totalPoints = s1Score + s2Score;
+  document.getElementById('totalScore').textContent = totalPoints + ' pts';
+}
+
+function updateSectionScore(section) {
+  const allGroups = document.querySelectorAll(`.options[data-section="${section}"]`);
+  const answered  = document.querySelectorAll(`.options[data-section="${section}"].answered`).length;
+  if (section === 's1') {
+    document.getElementById('scoreS1').classList.toggle('show', answered === allGroups.length);
+    document.getElementById('scoreS1Num').textContent = s1Score + '/10';
+  }
+  if (section === 's2') {
+    document.getElementById('scoreS2').classList.toggle('show', answered === allGroups.length);
+    document.getElementById('scoreS2Num').textContent = s2Score + '/10';
+  }
+}
+
+/* ── FEEDBACK ── */
+function showFeedback(el, isCorrect, msg) {
+  el.classList.add('show');
+  el.classList.add(isCorrect ? 'fb-correct' : 'fb-wrong');
+  el.children[0].textContent = '';
+  el.children[1].innerHTML   = msg;
+}
+
+/* ── PASSIVE VOICE (Part B) ── */
+function checkPassive(id, modelAnswer) {
+  const input = document.getElementById(id);
+  const fb    = document.getElementById('fb-' + id);
+  const val   = input.value.trim();
+  if (!val) {
+    fb.className = 'feedback fb-wrong show';
+    fb.children[1].textContent = '⚠️ Please write an answer first!';
+    return;
+  }
+  // soft check: must contain key words from answer
+  const keys = modelAnswer.toLowerCase().split(' ')
+    .filter(w => w.length > 3 && !['been','were','have','that'].includes(w));
+  const hits = keys.filter(k => val.toLowerCase().includes(k)).length;
+  const ratio = hits / keys.length;
+
+  if (ratio >= 0.55) {
+    input.className = 'answer-input correct-input';
+    fb.className = 'feedback fb-correct show';
+    fb.children[0].textContent = '✅';
+    fb.children[1].innerHTML = `Good! Model answer: <em>${modelAnswer}</em>`;
+  } else {
+    input.className = 'answer-input wrong-input';
+    fb.className = 'feedback fb-wrong show';
+    fb.children[0].textContent = '💬';
+    fb.children[1].innerHTML = `Keep trying! Model answer: <em>${modelAnswer}</em>`;
+  }
+}
+
+/* ── SHORT ANSWER REVEAL ── */
+function showSampleAnswer(id) {
+  const el = document.getElementById(id);
+  el.classList.add('show');
+}
+
+/* ── WORD COUNTER ── */
+function countWords(el, counterId, target) {
+  const words = el.value.trim().split(/\s+/).filter(w => w.length > 0).length;
+  if (!counterId) return;
+  const counter = document.getElementById(counterId);
+  if (!counter) return;
+  if (target > 0) {
+    counter.textContent = words + ' / ' + target + ' target words';
+    counter.className   = words >= target ? 'word-counter good' : 'word-counter';
+  } else {
+    counter.textContent = words + ' words';
+  }
+}
+
+/* ── PRODUCTION TASK A ── */
+const guides = {
+  narrative: {
+    label: '📖 Narrative Guide (~100 words)',
+    text: `<strong>Structure to follow:</strong><br>
+    1. <strong>Orientation</strong> – Introduce who, where, when.<br>
+    2. <strong>Complication</strong> – The problem or conflict.<br>
+    3. <strong>Resolution</strong> – How it was solved.<br><br>
+    <strong>Language tips:</strong> Use past tense, action verbs, time connectives (suddenly, then, finally), and descriptive language.`,
+    placeholder: 'Write your narrative here... (include Orientation, Complication, Resolution)'
+  },
+  recount: {
+    label: '🔄 Recount Guide (~80 words)',
+    text: `<strong>Structure to follow:</strong><br>
+    1. <strong>Orientation</strong> – Who, when, where.<br>
+    2. <strong>Events</strong> – At least 2 events in order (use: first, then, next, finally).<br>
+    3. <strong>Re-orientation</strong> – A closing comment or feeling.<br><br>
+    <strong>Language tips:</strong> Past tense, first person ("I" / "We"), temporal conjunctions.`,
+    placeholder: 'Write your recount here... (include Orientation, Events, Re-orientation)'
+  },
+  descriptive: {
+    label: '🖼 Descriptive Guide (~80 words)',
+    text: `<strong>Structure to follow:</strong><br>
+    1. <strong>Identification</strong> – What is the subject? One sentence intro.<br>
+    2. <strong>Description</strong> – Describe at least 3 features (appearance, smell, atmosphere, etc.).<br><br>
+    <strong>Language tips:</strong> Present tense, adjectives, linking verbs (is, has, looks, feels), sensory language.`,
+    placeholder: 'Write your descriptive text here... (include Identification + Description)'
+  }
+};
+
+let activeType = '';
+function selectTextType(type) {
+  activeType = type;
+  const guide = guides[type];
+  document.getElementById('task-guide').style.display = 'block';
+  document.getElementById('guide-label').textContent = guide.label;
+  document.getElementById('guide-text').innerHTML = guide.text;
+  document.getElementById('taskA').disabled = false;
+  document.getElementById('taskA').placeholder = guide.placeholder;
+  document.getElementById('taskA').focus();
+  // update button states
+  ['narrative','recount','descriptive'].forEach(t => {
+    const btn = document.getElementById('btn-' + t);
+    btn.className = (t === type) ? 'check-btn' : 'check-btn secondary';
+  });
+}
+
+function checkStructure() {
+  const text = document.getElementById('taskA').value.trim();
+  const fb   = document.getElementById('fb-taskA');
+  if (!text) {
+    fb.className = 'feedback fb-wrong show';
+    fb.children[1].textContent = '⚠️ Write something first!';
+    return;
+  }
+  const words = text.split(/\s+/).filter(w=>w).length;
+  if (words < 30) {
+    fb.className = 'feedback fb-wrong show';
+    fb.children[1].textContent = '⚠️ Your text is very short. Try to write at least 60–100 words.';
+    return;
+  }
+  fb.className = 'feedback fb-correct show';
+  fb.children[0].textContent = '✅';
+  fb.children[1].innerHTML = `Good effort! You wrote <strong>${words} words</strong>. Remember to review your structure and tense before the test.`;
+}
+
+function clearTaskA() {
+  document.getElementById('taskA').value = '';
+  document.getElementById('wc-taskA').textContent = '0 / 100 target words';
+  document.getElementById('wc-taskA').className = 'word-counter';
+  document.getElementById('fb-taskA').className = 'feedback';
+}
+
+/* ── PASSIVE TASK B ── */
+function checkPassiveB() {
+  const ids = ['pb1','pb2','pb3','pb4','pb5'];
+  const fb  = document.getElementById('fb-pb');
+  const missing = ids.filter(id => !document.getElementById(id).value.trim()).length;
+  if (missing > 0) {
+    fb.className = 'feedback fb-wrong show';
+    fb.children[1].textContent = `⚠️ You still have ${missing} empty sentence(s). Fill them all in!`;
+    return;
+  }
+  // basic check: each must contain a "be" verb + something
+  const beVerbs = /\b(am|is|are|was|were|been|being|be)\b/i;
+  let good = 0;
+  ids.forEach(id => {
+    if (beVerbs.test(document.getElementById(id).value)) good++;
+  });
+  fb.className = good >= 4 ? 'feedback fb-correct show' : 'feedback fb-wrong show';
+  fb.children[0].textContent = good >= 4 ? '✅' : '💬';
+  fb.children[1].innerHTML = good >= 4
+    ? `Looking good! <strong>${good}/5</strong> sentences seem to use passive voice correctly. Review the tense of each one.`
+    : `<strong>${good}/5</strong> sentences seem to use passive voice. Remember: passive = <em>to be + V3</em>. Check sentences where "is/are/was/were/been" is missing.`;
+}
+
+/* ── GRID CHECK ── */
+const gridAnswers = {
+  'g-purpose-narr': ['entertain', 'story', 'entertainment'],
+  'g-purpose-rec':  ['retell', 'past events', 'inform', 'recount'],
+  'g-purpose-desc': ['describe', 'specific', 'description'],
+  'g-purpose-rep':  ['inform', 'facts', 'general', 'report'],
+  'g-struct-narr':  ['orientation', 'complication', 'resolution'],
+  'g-struct-rec':   ['orientation', 'events', 're-orientation', 'reorientation'],
+  'g-struct-desc':  ['identification', 'description'],
+  'g-struct-rep':   ['general classification', 'classification', 'description'],
+  'g-tense-narr':   ['past'],
+  'g-tense-rec':    ['past'],
+  'g-tense-desc':   ['present'],
+  'g-tense-rep':    ['present'],
+  'g-feat-narr':    ['complication', 'conflict', 'dialogue', 'problem', 'past tense'],
+  'g-feat-rec':     ['temporal', 'sequence', 'first then', 'time', 'first person'],
+  'g-feat-desc':    ['adjective', 'sensory', 'specific', 'linking verb'],
+  'g-feat-rep':     ['passive', 'technical', 'no pronoun', 'objective', 'formal']
+};
+
+const gridReveals = {
+  'g-purpose-narr': 'To entertain through a story',
+  'g-purpose-rec':  'To retell past events',
+  'g-purpose-desc': 'To describe a specific subject',
+  'g-purpose-rep':  'To inform about a general class',
+  'g-struct-narr':  'Orientation → Complication → Resolution',
+  'g-struct-rec':   'Orientation → Events → Re-orientation',
+  'g-struct-desc':  'Identification → Description',
+  'g-struct-rep':   'General Classification → Description',
+  'g-tense-narr':   'Past tense',
+  'g-tense-rec':    'Past tense',
+  'g-tense-desc':   'Present tense',
+  'g-tense-rep':    'Present tense',
+  'g-feat-narr':    'Complication/conflict, dialogue',
+  'g-feat-rec':     'Temporal conjunctions (first, then)',
+  'g-feat-desc':    'Adjectives, sensory language',
+  'g-feat-rep':     'Passive voice, technical vocab'
+};
+
+function checkGrid() {
+  let correct = 0, total = 0;
+  Object.keys(gridAnswers).forEach(id => {
+    const inp = document.getElementById(id);
+    const val = inp.value.trim().toLowerCase();
+    total++;
+    const hit = gridAnswers[id].some(kw => val.includes(kw));
+    inp.className = 'grid-input ' + (hit ? 'correct-input' : (val ? 'wrong-input' : ''));
+    if (hit) correct++;
+  });
+  const fb = document.getElementById('fb-grid');
+  fb.className = correct >= total * 0.7 ? 'feedback fb-correct show' : 'feedback fb-wrong show';
+  fb.children[0].textContent = correct >= total * 0.7 ? '✅' : '💬';
+  fb.children[1].innerHTML = `<strong>${correct}/${total}</strong> cells correct. ${correct < total ? 'Click <em>Reveal All</em> to see the full answers.' : 'Excellent memory!'}`;
+}
+
+function revealGrid() {
+  Object.keys(gridReveals).forEach(id => {
+    const inp = document.getElementById(id);
+    inp.value = gridReveals[id];
+    inp.className = 'grid-input correct-input';
+  });
+}
+
+/* ── PASSIVE DRILL ── */
+function revealDrill(id) {
+  document.getElementById(id).classList.add('show');
+}
+
+/* ── FINISH ── */
+function finishWorksheet() {
+  totalPoints = s1Score + s2Score;
+  document.getElementById('finalScoreDisplay').textContent = totalPoints + '/20';
+  let msg = '';
+  if (totalPoints >= 18) msg = "🌟 Outstanding! You're very well prepared for tomorrow's test!";
+  else if (totalPoints >= 14) msg = "👍 Great job! Go back and review any mistakes before the test.";
+  else if (totalPoints >= 10) msg = "📚 Good effort! Focus on reviewing text structures and passive voice tonight.";
+  else msg = "💪 Keep going! Review the reference section and try the questions again.";
+  document.getElementById('finalMessage').textContent = msg;
+  document.getElementById('celebration').classList.add('show');
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.add('done'));
+  document.getElementById('progressFill').style.width = '100%';
+  document.getElementById('totalScore').textContent = totalPoints + ' pts';
+}
+</script>
+</body>
+</html>
