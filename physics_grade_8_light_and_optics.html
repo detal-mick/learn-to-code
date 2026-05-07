@@ -1,0 +1,1875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Light & Optics · Light & Mirrors</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --bg2: #0f1525;
+    --bg3: #141b2e;
+    --surface: #1a2238;
+    --surface2: #1f2a40;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.14);
+    --gold: #f5c842;
+    --gold2: #e8b520;
+    --gold-dim: rgba(245,200,66,0.15);
+    --gold-glow: rgba(245,200,66,0.08);
+    --cyan: #4dd9e0;
+    --cyan-dim: rgba(77,217,224,0.12);
+    --red: #f07070;
+    --red-dim: rgba(240,112,112,0.12);
+    --green: #6dd98a;
+    --green-dim: rgba(109,217,138,0.12);
+    --text: #e8eaf2;
+    --text2: #8892a4;
+    --text3: #5a6478;
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-rays {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.18;
+  }
+
+  .hero-rays line {
+    stroke: var(--gold);
+    stroke-width: 1;
+    animation: ray-pulse 3s ease-in-out infinite;
+  }
+
+  .hero-rays line:nth-child(2) { animation-delay: 0.4s; }
+  .hero-rays line:nth-child(3) { animation-delay: 0.8s; }
+  .hero-rays line:nth-child(4) { animation-delay: 1.2s; }
+  .hero-rays line:nth-child(5) { animation-delay: 1.6s; }
+
+  @keyframes ray-pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  .hero-chip {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(245,200,66,0.3);
+    border-radius: 20px;
+    padding: 4px 14px;
+    margin-bottom: 1.2rem;
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #fff 0%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero p {
+    color: var(--text2);
+    font-size: 15px;
+    font-weight: 300;
+    margin-bottom: 1.8rem;
+  }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .hero-stat {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--text2);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .hero-stat::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    display: block;
+  }
+
+  /* ── NAV ── */
+  .nav {
+    display: flex;
+    overflow-x: auto;
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 0 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 200;
+  }
+
+  .nav::-webkit-scrollbar { display: none; }
+
+  .nav-btn {
+    flex-shrink: 0;
+    padding: 1rem 1.1rem;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--text3);
+    cursor: pointer;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text2);
+    transition: all 0.2s;
+    white-space: nowrap;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 0.01em;
+  }
+
+  .nav-btn:hover { color: var(--text); }
+  .nav-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+  /* ── LAYOUT ── */
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem 1.2rem 4rem;
+  }
+
+  .section { display: none; }
+  .section.active { display: block; }
+
+  .section-head {
+    margin-bottom: 2rem;
+  }
+
+  .section-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.7rem;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.2;
+  }
+
+  .section-sub {
+    font-size: 14px;
+    color: var(--text2);
+    margin-top: 0.4rem;
+    line-height: 1.6;
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .card-gold {
+    background: var(--gold-glow);
+    border-color: rgba(245,200,66,0.2);
+  }
+
+  .card-cyan {
+    background: var(--cyan-dim);
+    border-color: rgba(77,217,224,0.2);
+  }
+
+  .card-red { background: var(--red-dim); border-color: rgba(240,112,112,0.2); }
+  .card-green { background: var(--green-dim); border-color: rgba(109,217,138,0.2); }
+
+  .card h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card p, .card li {
+    font-size: 14px;
+    line-height: 1.75;
+    color: #b0bac8;
+  }
+
+  .card ul { padding-left: 1.2rem; }
+  .card ul li { margin-bottom: 0.3rem; }
+
+  /* ── FORMULA BOX ── */
+  .formula {
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 0.9rem 1.2rem;
+    margin: 0.75rem 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 15px;
+    color: var(--gold);
+    letter-spacing: 0.03em;
+  }
+
+  .formula small {
+    display: block;
+    font-size: 11px;
+    color: var(--text3);
+    margin-top: 4px;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 0;
+  }
+
+  /* ── TABLE ── */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin: 0.75rem 0;
+  }
+
+  .data-table th {
+    background: var(--bg3);
+    color: var(--gold);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border2);
+  }
+
+  .data-table td {
+    padding: 9px 12px;
+    color: #b0bac8;
+    border-bottom: 1px solid var(--border);
+    line-height: 1.5;
+  }
+
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+  .data-table td strong { color: var(--text); font-weight: 500; }
+
+  /* ── TWO COL ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 560px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2rem 0;
+  }
+
+  /* ── BADGE ── */
+  .badge {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: 10px;
+    padding: 2px 8px;
+  }
+
+  .badge-gold { background: rgba(245,200,66,0.15); color: var(--gold); }
+  .badge-cyan { background: var(--cyan-dim); color: var(--cyan); }
+  .badge-red { background: var(--red-dim); color: var(--red); }
+  .badge-green { background: var(--green-dim); color: var(--green); }
+
+  /* ── WARMER CARDS ── */
+  .warmer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+    gap: 10px;
+    margin-bottom: 1.2rem;
+  }
+
+  .w-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+  }
+
+  .w-card:hover { border-color: rgba(245,200,66,0.3); transform: translateY(-2px); }
+  .w-card.open { border-color: rgba(245,200,66,0.4); background: var(--gold-glow); }
+
+  .w-icon { font-size: 1.8rem; margin-bottom: 8px; display: block; }
+  .w-q { font-size: 13px; font-weight: 500; color: var(--text); }
+  .w-ans {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--gold);
+    display: none;
+    line-height: 1.5;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .w-card.open .w-ans { display: block; }
+
+  /* ── MIRROR TABS ── */
+  .mirror-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .m-tab {
+    padding: 7px 18px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid var(--border2);
+    background: var(--surface);
+    color: var(--text2);
+    transition: all 0.18s;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .m-tab:hover { border-color: rgba(245,200,66,0.4); color: var(--text); }
+  .m-tab.active { background: var(--gold-dim); border-color: rgba(245,200,66,0.5); color: var(--gold); }
+
+  .m-panel { display: none; }
+  .m-panel.active { display: block; }
+
+  /* ── CANVAS MIRROR SIMULATOR ── */
+  .sim-wrap {
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius);
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .sim-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 500px) { .sim-controls { grid-template-columns: 1fr; } }
+
+  .ctrl-group label {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text2);
+    margin-bottom: 6px;
+  }
+
+  .ctrl-group input[type=range] {
+    width: 100%;
+    accent-color: var(--gold);
+  }
+
+  .ctrl-group select {
+    width: 100%;
+    padding: 7px 10px;
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+  }
+
+  .ctrl-val {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--gold);
+    float: right;
+  }
+
+  canvas {
+    display: block;
+    width: 100%;
+    border-radius: var(--radius-sm);
+    background: #070b14;
+  }
+
+  .sim-result {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 8px;
+  }
+
+  .res-chip {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 8px 10px;
+    text-align: center;
+  }
+
+  .res-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text3);
+    margin-bottom: 3px;
+  }
+
+  .res-val {
+    font-family: 'DM Mono', monospace;
+    font-size: 15px;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .res-desc { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+  /* ── IMAGE TABLE ── */
+  .img-table-wrap { overflow-x: auto; }
+
+  /* ── WORKED EXAMPLE ── */
+  .worked {
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .worked .step {
+    display: flex;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: #b0bac8;
+  }
+
+  .worked .step:last-child { border-bottom: none; }
+
+  .step-num {
+    min-width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--gold-dim);
+    border: 1px solid rgba(245,200,66,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .mono { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--cyan); }
+
+  /* ── QUIZ ── */
+  .quiz-q {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .q-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 0.5rem;
+  }
+
+  .q-text {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+
+  .opts { display: flex; flex-direction: column; gap: 8px; }
+
+  .opt {
+    padding: 11px 14px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border2);
+    background: var(--bg3);
+    font-size: 13.5px;
+    color: #b0bac8;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: left;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  .opt:hover:not(:disabled) { border-color: rgba(245,200,66,0.4); color: var(--text); }
+  .opt.correct { background: var(--green-dim); border-color: rgba(109,217,138,0.4); color: var(--green); }
+  .opt.wrong { background: var(--red-dim); border-color: rgba(240,112,112,0.4); color: var(--red); }
+  .opt:disabled { cursor: default; }
+
+  .q-feedback {
+    margin-top: 0.75rem;
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    line-height: 1.6;
+    display: none;
+  }
+
+  .q-feedback.show { display: block; }
+  .q-feedback.ok { background: var(--green-dim); color: var(--green); border: 1px solid rgba(109,217,138,0.25); }
+  .q-feedback.no { background: var(--red-dim); color: var(--red); border: 1px solid rgba(240,112,112,0.25); }
+
+  /* ── CALCULATOR ── */
+  .calc-wrap {
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .calc-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 480px) { .calc-inputs { grid-template-columns: 1fr 1fr; } }
+
+  .calc-field label {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text2);
+    margin-bottom: 5px;
+  }
+
+  .calc-field input {
+    width: 100%;
+    padding: 9px 10px;
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    transition: border-color 0.2s;
+  }
+
+  .calc-field input:focus { outline: none; border-color: rgba(245,200,66,0.5); }
+  .calc-field input::placeholder { color: var(--text3); }
+
+  .calc-out {
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    display: none;
+  }
+
+  .calc-out.show { display: block; }
+
+  .calc-line {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: #b0bac8;
+    padding: 4px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .calc-line:last-child { border-bottom: none; }
+  .calc-line strong { color: var(--gold); }
+
+  .calc-img-desc {
+    margin-top: 10px;
+    padding: 10px 12px;
+    background: var(--gold-glow);
+    border: 1px solid rgba(245,200,66,0.2);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .calc-error { color: var(--red); font-size: 13px; }
+
+  /* ── BUTTONS ── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 22px;
+    border-radius: 20px;
+    font-size: 13.5px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.18s;
+  }
+
+  .btn-gold { background: var(--gold); color: #0a0e1a; font-weight: 600; }
+  .btn-gold:hover { background: var(--gold2); }
+  .btn-outline { background: transparent; border: 1px solid var(--border2); color: var(--text2); }
+  .btn-outline:hover { border-color: rgba(245,200,66,0.4); color: var(--gold); }
+
+  .btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 1.2rem; }
+
+  .score-box {
+    background: var(--gold-glow);
+    border: 1px solid rgba(245,200,66,0.3);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    text-align: center;
+    margin-bottom: 1.2rem;
+    display: none;
+  }
+
+  .score-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 3rem;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .score-lbl { font-size: 14px; color: var(--text2); margin-top: 4px; }
+
+  /* ── ACCORDION ── */
+  .acc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+
+  .acc-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .acc-head:hover { background: rgba(255,255,255,0.02); }
+
+  .acc-title {
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .acc-arrow {
+    color: var(--text3);
+    font-size: 14px;
+    transition: transform 0.2s;
+  }
+
+  .acc.open .acc-arrow { transform: rotate(180deg); color: var(--gold); }
+  .acc.open .acc-head { background: rgba(245,200,66,0.04); }
+
+  .acc-body {
+    display: none;
+    padding: 0 1.25rem 1.25rem;
+    font-size: 14px;
+    line-height: 1.75;
+    color: #b0bac8;
+  }
+
+  .acc.open .acc-body { display: block; }
+
+  .acc-body p { margin-bottom: 0.6rem; }
+  .acc-body p:last-child { margin-bottom: 0; }
+
+  /* ── SNELL INTERACTIVE ── */
+  .snell-wrap {
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  /* ── INFO BOX ── */
+  .info-box {
+    border-left: 3px solid var(--cyan);
+    background: var(--cyan-dim);
+    padding: 10px 14px;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin-bottom: 1rem;
+    font-size: 13px;
+    color: var(--cyan);
+    line-height: 1.6;
+  }
+
+  .warn-box {
+    border-left: 3px solid var(--gold);
+    background: var(--gold-glow);
+    padding: 10px 14px;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin-bottom: 1rem;
+    font-size: 13px;
+    color: #d4a820;
+    line-height: 1.6;
+  }
+
+  /* ── ESSAY ── */
+  .essay-q { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
+  .essay-q textarea {
+    width: 100%; margin-top: 0.75rem;
+    padding: 10px 12px;
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    resize: vertical;
+    min-height: 80px;
+    line-height: 1.6;
+    transition: border-color 0.2s;
+  }
+
+  .essay-q textarea:focus { outline: none; border-color: rgba(245,200,66,0.4); }
+  .essay-q textarea::placeholder { color: var(--text3); }
+
+  .key-toggle {
+    margin-top: 0.75rem;
+    font-size: 12px;
+    color: var(--text3);
+    cursor: pointer;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+
+  .key-toggle:hover { color: var(--gold); }
+
+  .key-content {
+    display: none;
+    margin-top: 0.75rem;
+    padding: 12px 14px;
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    color: #7aaa8a;
+    line-height: 1.7;
+  }
+
+  .key-content.show { display: block; }
+
+  /* ── PROGRESS ── */
+  .prog-bar-wrap { background: var(--surface); border-radius: 20px; height: 4px; margin-top: 6px; }
+  .prog-bar { height: 4px; background: var(--gold); border-radius: 20px; transition: width 0.4s; }
+
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <svg class="hero-rays" viewBox="0 0 100 100" preserveAspectRatio="none">
+    <line x1="50" y1="50" x2="0" y2="0"/>
+    <line x1="50" y1="50" x2="100" y2="0"/>
+    <line x1="50" y1="50" x2="100" y2="100"/>
+    <line x1="50" y1="50" x2="0" y2="100"/>
+    <line x1="50" y1="50" x2="50" y2="0"/>
+  </svg>
+  <div class="hero-chip">Physics · Optics Unit</div>
+  <h1>Light & Optics<br>Light & Mirrors</h1>
+  <p>Senior High School · Private Tutoring Session · 90 min</p>
+  <div class="hero-stats">
+    <span class="hero-stat">Warmer 10 min</span>
+    <span class="hero-stat">Optics 20 min</span>
+    <span class="hero-stat">Mirrors 20 min</span>
+    <span class="hero-stat">Activities 25 min</span>
+    <span class="hero-stat">Practice 15 min</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav">
+  <button class="nav-btn active" onclick="goTab('warmer',this)">Warmer</button>
+  <button class="nav-btn" onclick="goTab('optics',this)">Light & Optics</button>
+  <button class="nav-btn" onclick="goTab('mirrors',this)">Light & Mirrors</button>
+  <button class="nav-btn" onclick="goTab('simulator',this)">Ray Simulator</button>
+  <button class="nav-btn" onclick="goTab('calculator',this)">Calculator</button>
+  <button class="nav-btn" onclick="goTab('practice',this)">Practice</button>
+</div>
+
+<div class="container">
+
+<!-- ═══════════════════════════════ WARMER ═══════════════════════════════ -->
+<div id="tab-warmer" class="section active">
+  <div class="section-head">
+    <div class="section-eyebrow">Warm-up · 10 min</div>
+    <div class="section-title">Before We Begin</div>
+    <div class="section-sub">Tap each card to reveal the answer. Try to answer in your head first!</div>
+  </div>
+
+  <div class="warn-box">
+    <strong>Think about this:</strong> When you look at yourself in a spoon, why does your reflection appear <em>upside down</em> on the concave side but <em>right-side up</em> on the convex side?
+    <br><small style="opacity:0.8">— We'll answer this fully by the end of the Mirrors section.</small>
+  </div>
+
+  <div class="warmer-grid">
+    <div class="w-card" onclick="this.classList.toggle('open')">
+      <span class="w-icon">➡️</span>
+      <div class="w-q">Does light travel in a straight line or curve?</div>
+      <div class="w-ans">Straight line (rectilinear propagation) — unless it passes through a new medium.</div>
+    </div>
+    <div class="w-card" onclick="this.classList.toggle('open')">
+      <span class="w-icon">👁️</span>
+      <div class="w-q">Why can we see objects that don't emit light?</div>
+      <div class="w-ans">Light reflects off them (diffuse reflection) and enters our eyes.</div>
+    </div>
+    <div class="w-card" onclick="this.classList.toggle('open')">
+      <span class="w-icon">🥄</span>
+      <div class="w-q">What happens when light hits a mirror?</div>
+      <div class="w-ans">It bounces back — this is reflection. Angle in = angle out (from the normal).</div>
+    </div>
+    <div class="w-card" onclick="this.classList.toggle('open')">
+      <span class="w-icon">🥤</span>
+      <div class="w-q">Why does a straw look bent in water?</div>
+      <div class="w-ans">Refraction — light bends when it changes medium (air → water) because its speed changes.</div>
+    </div>
+    <div class="w-card" onclick="this.classList.toggle('open')">
+      <span class="w-icon">⚡</span>
+      <div class="w-q">How fast does light travel in vacuum?</div>
+      <div class="w-ans">c = 3 × 10⁸ m/s (~300,000 km/s). Nothing travels faster.</div>
+    </div>
+    <div class="w-card" onclick="this.classList.toggle('open')">
+      <span class="w-icon">🌈</span>
+      <div class="w-q">What causes a rainbow?</div>
+      <div class="w-ans">Refraction + internal reflection inside water droplets, splitting white light into colours.</div>
+    </div>
+  </div>
+
+  <div class="card card-gold">
+    <h3>🗺️ What we'll cover today</h3>
+    <table class="data-table">
+      <tr><th>Part</th><th>Topic</th><th>Key Ideas</th></tr>
+      <tr><td><span class="badge badge-gold">A</span></td><td><strong>Light & Optics</strong></td><td>Reflection, refraction, Snell's Law, refractive index</td></tr>
+      <tr><td><span class="badge badge-cyan">B</span></td><td><strong>Light & Mirrors</strong></td><td>Concave, convex, ray diagrams, mirror equation</td></tr>
+    </table>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-gold" onclick="goTabByName('optics')">Start Part A: Optics →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ OPTICS ═══════════════════════════════ -->
+<div id="tab-optics" class="section">
+  <div class="section-head">
+    <div class="section-eyebrow">Part A · 20 min</div>
+    <div class="section-title">Light & Optics</div>
+    <div class="section-sub">The nature of light, how it reflects, and how it bends when changing medium.</div>
+  </div>
+
+  <!-- What is light -->
+  <div class="acc open">
+    <div class="acc-head" onclick="toggleAcc(this)">
+      <div class="acc-title">
+        <span style="color:var(--gold)">01</span> What Is Light?
+      </div>
+      <span class="acc-arrow">▾</span>
+    </div>
+    <div class="acc-body">
+      <p>Light is a form of <strong style="color:var(--text)">electromagnetic radiation</strong> visible to the human eye. Key facts:</p>
+      <ul style="padding-left:1.2rem; margin-bottom:0.5rem;">
+        <li>Travels in a straight line — <strong style="color:var(--text)">rectilinear propagation</strong></li>
+        <li>Does not need a medium (travels through vacuum)</li>
+        <li>Speed in vacuum: <span class="mono">c = 3 × 10⁸ m/s</span></li>
+        <li>Slows down in denser media (glass, water)</li>
+        <li>Has both wave and particle properties (wave-particle duality)</li>
+      </ul>
+      <div class="info-box">💡 Why do shadows have sharp edges? Because light travels in straight lines — it can't bend around corners (unlike sound).</div>
+    </div>
+  </div>
+
+  <!-- Reflection -->
+  <div class="acc open">
+    <div class="acc-head" onclick="toggleAcc(this)">
+      <div class="acc-title"><span style="color:var(--gold)">02</span> Reflection of Light</div>
+      <span class="acc-arrow">▾</span>
+    </div>
+    <div class="acc-body">
+      <p><strong style="color:var(--text)">The Law of Reflection:</strong> The angle of incidence equals the angle of reflection — both measured from the <em>normal</em> (a perpendicular line at the point of contact).</p>
+      <div class="formula">θᵢ = θᵣ<small>angle of incidence = angle of reflection (from the normal)</small></div>
+      <table class="data-table" style="margin-bottom:0.75rem">
+        <tr><th>Type</th><th>Surface</th><th>Result</th></tr>
+        <tr><td><strong>Specular</strong></td><td>Smooth (mirror, calm water)</td><td>Clear, ordered reflection</td></tr>
+        <tr><td><strong>Diffuse</strong></td><td>Rough (paper, walls, skin)</td><td>Scattered in many directions</td></tr>
+      </table>
+      <div class="info-box">🧠 We see most objects because of <em>diffuse</em> reflection — not because they emit light or shine like mirrors.</div>
+    </div>
+  </div>
+
+  <!-- Refraction -->
+  <div class="acc open">
+    <div class="acc-head" onclick="toggleAcc(this)">
+      <div class="acc-title"><span style="color:var(--gold)">03</span> Refraction & Snell's Law</div>
+      <span class="acc-arrow">▾</span>
+    </div>
+    <div class="acc-body">
+      <p>Refraction occurs when light <strong style="color:var(--text)">changes speed</strong> as it moves from one medium to another, causing it to <strong style="color:var(--text)">bend</strong>.</p>
+      <div class="formula">n₁ sin θ₁ = n₂ sin θ₂<small>Snell's Law: n = refractive index, θ = angle from normal</small></div>
+      <div class="formula">n = c / v<small>Refractive index = speed of light in vacuum ÷ speed in medium</small></div>
+      <table class="data-table" style="margin-bottom:0.75rem">
+        <tr><th>Medium</th><th>n</th><th>Light speed</th></tr>
+        <tr><td>Vacuum</td><td>1.00</td><td>3.00 × 10⁸ m/s</td></tr>
+        <tr><td>Air</td><td>~1.00</td><td>≈ vacuum</td></tr>
+        <tr><td>Water</td><td>1.33</td><td>2.26 × 10⁸ m/s</td></tr>
+        <tr><td>Glass</td><td>~1.5</td><td>2.00 × 10⁸ m/s</td></tr>
+        <tr><td>Diamond</td><td>2.42</td><td>1.24 × 10⁸ m/s</td></tr>
+      </table>
+      <p><strong style="color:var(--text)">Rule:</strong> Higher n → light slows more → bends more toward the normal.</p>
+      <div class="info-box">🌊 When moving into a denser medium (n increases), light bends <em>toward</em> the normal. Into a less dense medium, it bends <em>away</em>.</div>
+
+      <!-- Interactive Snell's Law -->
+      <div class="snell-wrap" style="margin-top:1rem">
+        <div style="font-family:'DM Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text2);margin-bottom:0.75rem">Interactive: Snell's Law Explorer</div>
+        <div class="sim-controls">
+          <div class="ctrl-group">
+            <label>Angle of Incidence θ₁ <span class="ctrl-val" id="snell-angle-val">30°</span></label>
+            <input type="range" min="1" max="89" value="30" id="snell-angle" oninput="updateSnell()">
+          </div>
+          <div class="ctrl-group">
+            <label>Medium 2</label>
+            <select id="snell-medium" onchange="updateSnell()">
+              <option value="1.00">Air (n = 1.00)</option>
+              <option value="1.33" selected>Water (n = 1.33)</option>
+              <option value="1.5">Glass (n = 1.5)</option>
+              <option value="2.42">Diamond (n = 2.42)</option>
+            </select>
+          </div>
+        </div>
+        <canvas id="snell-canvas" height="200"></canvas>
+        <div class="sim-result" style="margin-top:0.75rem">
+          <div class="res-chip"><div class="res-label">θ₁ (air)</div><div class="res-val" id="sn-t1">30°</div></div>
+          <div class="res-chip"><div class="res-label">n₂</div><div class="res-val" id="sn-n2">1.33</div></div>
+          <div class="res-chip"><div class="res-label">θ₂</div><div class="res-val" id="sn-t2">—</div></div>
+          <div class="res-chip"><div class="res-label">Bends</div><div class="res-val" id="sn-dir" style="font-size:12px">toward</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIR -->
+  <div class="acc">
+    <div class="acc-head" onclick="toggleAcc(this)">
+      <div class="acc-title"><span style="color:var(--gold)">04</span> Total Internal Reflection</div>
+      <span class="acc-arrow">▾</span>
+    </div>
+    <div class="acc-body">
+      <p>When light travels from a <strong style="color:var(--text)">denser → less dense</strong> medium and the angle of incidence exceeds the <strong style="color:var(--text)">critical angle (θc)</strong>, the light cannot escape — it reflects entirely back.</p>
+      <div class="formula">sin θc = n₂ / n₁<small>Critical angle formula (where n₁ > n₂)</small></div>
+      <p><strong style="color:var(--text)">Applications:</strong> optical fibres (internet cables), endoscopes, diamond sparkle.</p>
+      <div class="info-box">💎 Diamond's high n (2.42) gives a very small critical angle (~24°), so light bounces internally many times before escaping — creating that dazzling sparkle.</div>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-gold" onclick="goTabByName('mirrors')">Part B: Mirrors →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ MIRRORS ═══════════════════════════════ -->
+<div id="tab-mirrors" class="section">
+  <div class="section-head">
+    <div class="section-eyebrow">Part B · 20 min</div>
+    <div class="section-title">Light & Mirrors</div>
+    <div class="section-sub">Curved mirrors, ray diagrams, image formation, and the mirror equation.</div>
+  </div>
+
+  <!-- Key Terms -->
+  <div class="acc open">
+    <div class="acc-head" onclick="toggleAcc(this)">
+      <div class="acc-title"><span style="color:var(--gold)">01</span> Key Terms & Sign Convention</div>
+      <span class="acc-arrow">▾</span>
+    </div>
+    <div class="acc-body">
+      <table class="data-table" style="margin-bottom:0.75rem">
+        <tr><th>Term</th><th>Symbol</th><th>Meaning</th></tr>
+        <tr><td>Centre of Curvature</td><td class="mono">C</td><td>Centre of sphere mirror is part of</td></tr>
+        <tr><td>Radius of Curvature</td><td class="mono">R</td><td>Distance from mirror to C</td></tr>
+        <tr><td>Focal Point</td><td class="mono">F</td><td>Where parallel rays converge (concave) or appear to diverge from (convex)</td></tr>
+        <tr><td>Focal Length</td><td class="mono">f = R/2</td><td>Distance from mirror to F</td></tr>
+        <tr><td>Object Distance</td><td class="mono">u</td><td>Distance from object to mirror</td></tr>
+        <tr><td>Image Distance</td><td class="mono">v</td><td>Distance from image to mirror</td></tr>
+      </table>
+      <div class="warn-box">
+        <strong>New Cartesian Sign Convention:</strong><br>
+        • All distances measured from the pole (P)<br>
+        • Direction of incident light = positive<br>
+        • Opposite to incident light = negative<br>
+        • For concave mirror: f is <span style="color:var(--red)">negative</span> | For convex: f is <span style="color:var(--green)">positive</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mirror types -->
+  <div class="acc open">
+    <div class="acc-head" onclick="toggleAcc(this)">
+      <div class="acc-title"><span style="color:var(--gold)">02</span> Types of Mirrors</div>
+      <span class="acc-arrow">▾</span>
+    </div>
+    <div class="acc-body">
+      <div class="mirror-tabs" style="margin-bottom:1rem">
+        <button class="m-tab active" onclick="switchMirrorInfo('plane',this)">Plane</button>
+        <button class="m-tab" onclick="switchMirrorInfo('concave',this)">Concave</button>
+        <button class="m-tab" onclick="switchMirrorInfo('convex',this)">Convex</button>
+      </div>
+
+      <div id="minfo-plane" class="m-panel active">
+        <div class="two-col">
+          <div class="card">
+            <h3>🪞 Plane Mirror</h3>
+            <ul>
+              <li>Flat reflective surface</li>
+              <li>Image always <strong>virtual</strong></li>
+              <li>Always <strong>upright</strong></li>
+              <li>Same size as object (m = 1)</li>
+              <li>Image distance = object distance</li>
+              <li>Laterally inverted (left↔right)</li>
+            </ul>
+          </div>
+          <div class="card card-gold">
+            <h3>📍 Applications</h3>
+            <ul>
+              <li>Bathroom mirrors</li>
+              <li>Periscopes (two plane mirrors)</li>
+              <li>Dressing mirrors</li>
+              <li>Laser beam direction</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div id="minfo-concave" class="m-panel">
+        <div class="card card-gold" style="margin-bottom:0.75rem">
+          <h3>🔵 Concave Mirror — Converging</h3>
+          <p>Curves inward (like the inside of a bowl). Parallel rays reflect <em>through</em> the focal point F.</p>
+        </div>
+        <div class="acc-body" style="padding:0">
+          <table class="data-table">
+            <tr><th>Object at</th><th>Image at</th><th>Nature</th><th>Size</th><th>Orientation</th></tr>
+            <tr><td>Beyond C</td><td>Between F and C</td><td><span class="badge badge-cyan">Real</span></td><td>Smaller</td><td>Inverted</td></tr>
+            <tr><td>At C (u=2f)</td><td>At C</td><td><span class="badge badge-cyan">Real</span></td><td>Same</td><td>Inverted</td></tr>
+            <tr><td>Between F and C</td><td>Beyond C</td><td><span class="badge badge-cyan">Real</span></td><td>Larger</td><td>Inverted</td></tr>
+            <tr><td>At F</td><td>Infinity</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>Between F and P</td><td>Behind mirror</td><td><span class="badge badge-gold">Virtual</span></td><td>Larger</td><td>Upright</td></tr>
+          </table>
+          <div class="info-box" style="margin-top:0.75rem">Uses: makeup mirrors, dental mirrors, satellite dishes, solar concentrators, torch reflectors</div>
+        </div>
+      </div>
+
+      <div id="minfo-convex" class="m-panel">
+        <div class="card card-cyan" style="margin-bottom:0.75rem">
+          <h3>🟡 Convex Mirror — Diverging</h3>
+          <p>Curves outward. Reflected rays diverge — they only <em>appear</em> to come from a focal point behind the mirror.</p>
+        </div>
+        <table class="data-table" style="margin-bottom:0.75rem">
+          <tr><th>Property</th><th>Always true for convex</th></tr>
+          <tr><td>Image nature</td><td><span class="badge badge-gold">Virtual</span></td></tr>
+          <tr><td>Image orientation</td><td>Upright</td></tr>
+          <tr><td>Image size</td><td>Diminished (smaller)</td></tr>
+          <tr><td>Image position</td><td>Between F and P (behind mirror)</td></tr>
+          <tr><td>Field of view</td><td>Wider than plane or concave</td></tr>
+        </table>
+        <div class="info-box">Uses: vehicle side mirrors, shop security mirrors, road safety mirrors at blind corners</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Formulas -->
+  <div class="acc open">
+    <div class="acc-head" onclick="toggleAcc(this)">
+      <div class="acc-title"><span style="color:var(--gold)">03</span> Mirror Equation & Magnification</div>
+      <span class="acc-arrow">▾</span>
+    </div>
+    <div class="acc-body">
+      <div class="formula">1/f = 1/v + 1/u<small>Mirror equation — relates focal length, image distance, object distance</small></div>
+      <div class="formula">m = −v/u = hᵢ/h₀<small>Magnification — m > 0 means upright; m < 0 means inverted; |m| > 1 means enlarged</small></div>
+      <div class="formula">f = R / 2<small>Focal length = half the radius of curvature</small></div>
+      <table class="data-table">
+        <tr><th>Quantity</th><th>Concave</th><th>Convex</th></tr>
+        <tr><td>f</td><td class="mono" style="color:var(--red)">negative (−)</td><td class="mono" style="color:var(--green)">positive (+)</td></tr>
+        <tr><td>u</td><td colspan="2" class="mono" style="color:var(--red)">always negative (object in front)</td></tr>
+        <tr><td>v (real image)</td><td class="mono" style="color:var(--red)">negative</td><td>not possible</td></tr>
+        <tr><td>v (virtual image)</td><td class="mono" style="color:var(--green)">positive</td><td class="mono" style="color:var(--green)">positive</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Worked Example -->
+  <div class="acc">
+    <div class="acc-head" onclick="toggleAcc(this)">
+      <div class="acc-title"><span style="color:var(--gold)">04</span> Worked Example — Step by Step</div>
+      <span class="acc-arrow">▾</span>
+    </div>
+    <div class="acc-body">
+      <p style="margin-bottom:0.75rem; color:var(--text)"><strong>Problem:</strong> An object is placed 30 cm in front of a concave mirror with focal length 10 cm. Find the image distance, magnification, and describe the image.</p>
+      <div class="worked">
+        <div class="step"><div class="step-num">1</div><div>Write down knowns: <span class="mono">u = −30 cm</span>, <span class="mono">f = −10 cm</span> (concave → negative)</div></div>
+        <div class="step"><div class="step-num">2</div><div>Apply mirror equation: <span class="mono">1/v = 1/f − 1/u = 1/(−10) − 1/(−30) = −3/30 + 1/30 = −2/30</span></div></div>
+        <div class="step"><div class="step-num">3</div><div><span class="mono">v = −15 cm</span> — negative means the image is in <strong style="color:var(--text)">front of the mirror</strong> → <span class="badge badge-cyan">Real image</span></div></div>
+        <div class="step"><div class="step-num">4</div><div>Magnification: <span class="mono">m = −v/u = −(−15)/(−30) = −0.5</span> → Inverted, diminished (half size)</div></div>
+        <div class="step"><div class="step-num">5</div><div><strong style="color:var(--gold)">Answer:</strong> Image is 15 cm in front of mirror, real, inverted, and 0.5× the size of the object.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-gold" onclick="goTabByName('simulator')">Try the Ray Simulator →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ SIMULATOR ═══════════════════════════════ -->
+<div id="tab-simulator" class="section">
+  <div class="section-head">
+    <div class="section-eyebrow">Interactive Tool</div>
+    <div class="section-title">Mirror Ray Diagram Simulator</div>
+    <div class="section-sub">Adjust the controls to see how image position changes in real time. The three principal rays are drawn automatically.</div>
+  </div>
+
+  <div class="sim-wrap">
+    <div class="sim-controls">
+      <div class="ctrl-group">
+        <label>Mirror Type</label>
+        <select id="sim-type" onchange="drawMirror()">
+          <option value="concave">Concave (Converging)</option>
+          <option value="convex">Convex (Diverging)</option>
+        </select>
+      </div>
+      <div class="ctrl-group">
+        <label>Focal Length f <span class="ctrl-val" id="sim-f-val">15 cm</span></label>
+        <input type="range" min="5" max="35" value="15" id="sim-f" oninput="drawMirror()">
+      </div>
+      <div class="ctrl-group">
+        <label>Object Distance |u| <span class="ctrl-val" id="sim-u-val">35 cm</span></label>
+        <input type="range" min="2" max="70" value="35" id="sim-u" oninput="drawMirror()">
+      </div>
+      <div class="ctrl-group">
+        <label>Object Height <span class="ctrl-val" id="sim-h-val">4 cm</span></label>
+        <input type="range" min="1" max="8" value="4" id="sim-h" oninput="drawMirror()">
+      </div>
+    </div>
+
+    <canvas id="mirror-canvas" height="340"></canvas>
+
+    <div class="sim-result">
+      <div class="res-chip"><div class="res-label">Image dist v</div><div class="res-val" id="r-v">—</div></div>
+      <div class="res-chip"><div class="res-label">Magnification</div><div class="res-val" id="r-m">—</div></div>
+      <div class="res-chip"><div class="res-label">Image height</div><div class="res-val" id="r-hi">—</div></div>
+      <div class="res-chip"><div class="res-label">Nature</div><div class="res-val" id="r-nat" style="font-size:12px">—</div></div>
+      <div class="res-chip"><div class="res-label">Orientation</div><div class="res-val" id="r-ori" style="font-size:12px">—</div></div>
+      <div class="res-chip"><div class="res-label">Size</div><div class="res-val" id="r-size" style="font-size:12px">—</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🎨 Diagram Legend</h3>
+    <div style="display:flex; gap:1.5rem; flex-wrap:wrap; font-size:13px; color:var(--text2)">
+      <span><span style="color:#f5c842">━━</span> Ray 1: Parallel → through F</span>
+      <span><span style="color:#4dd9e0">━━</span> Ray 2: Through F → parallel</span>
+      <span><span style="color:#f07070">━━</span> Ray 3: Through C → back on itself</span>
+      <span><span style="color:#6dd98a">▲</span> Object</span>
+      <span><span style="color:rgba(255,255,255,0.4)">▲</span> Image (dashed = virtual)</span>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-gold" onclick="goTabByName('calculator')">Mirror Calculator →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ CALCULATOR ═══════════════════════════════ -->
+<div id="tab-calculator" class="section">
+  <div class="section-head">
+    <div class="section-eyebrow">Tool</div>
+    <div class="section-title">Mirror Equation Calculator</div>
+    <div class="section-sub">Enter any two known values and leave one blank. The calculator solves for the missing value and describes the image.</div>
+  </div>
+
+  <div class="calc-wrap">
+    <div style="font-family:'DM Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text2);margin-bottom:1rem">1/f = 1/v + 1/u · Enter values with correct sign (negative for concave f, negative for u in front of mirror)</div>
+    <div class="calc-inputs">
+      <div class="calc-field">
+        <label>Focal length f (cm)</label>
+        <input type="number" id="c-f" placeholder="e.g. −10" step="any">
+      </div>
+      <div class="calc-field">
+        <label>Object dist u (cm)</label>
+        <input type="number" id="c-u" placeholder="e.g. −30" step="any">
+      </div>
+      <div class="calc-field">
+        <label>Image dist v (cm)</label>
+        <input type="number" id="c-v" placeholder="e.g. −15" step="any">
+      </div>
+      <div class="calc-field">
+        <label>Object height h₀ (cm)</label>
+        <input type="number" id="c-h0" placeholder="optional" step="any">
+      </div>
+    </div>
+    <button class="btn btn-gold" onclick="runCalc()">Calculate</button>
+    <button class="btn btn-outline" onclick="clearCalc()" style="margin-left:8px">Clear</button>
+
+    <div class="calc-out" id="calc-out" style="margin-top:1rem">
+      <div class="calc-line" id="co-f"></div>
+      <div class="calc-line" id="co-u"></div>
+      <div class="calc-line" id="co-v"></div>
+      <div class="calc-line" id="co-m"></div>
+      <div class="calc-line" id="co-hi" style="display:none"></div>
+      <div class="calc-img-desc" id="co-desc"></div>
+    </div>
+  </div>
+
+  <div class="card card-gold">
+    <h3>📝 Quick Reference — Sign Rules</h3>
+    <table class="data-table">
+      <tr><th>Situation</th><th>Sign</th></tr>
+      <tr><td>f for concave mirror</td><td class="mono" style="color:var(--red)">negative (−)</td></tr>
+      <tr><td>f for convex mirror</td><td class="mono" style="color:var(--green)">positive (+)</td></tr>
+      <tr><td>u (object in front)</td><td class="mono" style="color:var(--red)">always negative</td></tr>
+      <tr><td>v (real image, in front)</td><td class="mono" style="color:var(--red)">negative</td></tr>
+      <tr><td>v (virtual image, behind)</td><td class="mono" style="color:var(--green)">positive</td></tr>
+      <tr><td>m (upright image)</td><td class="mono" style="color:var(--green)">positive</td></tr>
+      <tr><td>m (inverted image)</td><td class="mono" style="color:var(--red)">negative</td></tr>
+    </table>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-gold" onclick="goTabByName('practice')">Go to Practice →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ PRACTICE ═══════════════════════════════ -->
+<div id="tab-practice" class="section">
+  <div class="section-head">
+    <div class="section-eyebrow">Independent Practice · 15 min</div>
+    <div class="section-title">Test Your Understanding</div>
+    <div class="section-sub">Section A: multiple choice with instant feedback. Section B: written problems — use your notebook.</div>
+  </div>
+
+  <div id="score-box" class="score-box">
+    <div class="score-num" id="score-disp">0 / 6</div>
+    <div class="score-lbl">Multiple Choice Score</div>
+    <button class="btn btn-outline" style="margin-top:12px" onclick="resetQuiz()">Try Again</button>
+  </div>
+
+  <p style="font-family:'DM Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text3);margin-bottom:1rem">Section A — Multiple Choice</p>
+
+  <div id="quiz-wrap"></div>
+
+  <div class="btn-row" style="margin-bottom:2rem">
+    <button class="btn btn-gold" onclick="checkQuiz()">Check Answers</button>
+    <button class="btn btn-outline" onclick="resetQuiz()">Reset</button>
+  </div>
+
+  <hr class="divider">
+
+  <p style="font-family:'DM Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text3);margin-bottom:1rem">Section B — Problem Solving</p>
+
+  <div class="essay-q">
+    <div class="q-num">Problem 1</div>
+    <div class="q-text">An object is placed 40 cm in front of a concave mirror of focal length 15 cm. Calculate (a) image distance, (b) magnification, (c) describe the image fully.</div>
+    <textarea placeholder="Show your working here..."></textarea>
+    <div class="key-toggle" onclick="toggleKey(this)">▸ show answer key</div>
+    <div class="key-content">f = −15 cm, u = −40 cm → 1/v = 1/(−15) − 1/(−40) = −8/120 + 3/120 = −5/120 → <strong>v = −24 cm</strong><br>m = −(−24)/(−40) = <strong>−0.6</strong><br>Image: Real (v negative), Inverted (m negative), Diminished (|m| = 0.6 < 1)</div>
+  </div>
+
+  <div class="essay-q">
+    <div class="q-num">Problem 2</div>
+    <div class="q-text">A convex mirror has radius of curvature 60 cm. An object is 45 cm in front of it. Find (a) focal length, (b) image distance, (c) state whether real or virtual and explain why.</div>
+    <textarea placeholder="Show your working here..."></textarea>
+    <div class="key-toggle" onclick="toggleKey(this)">▸ show answer key</div>
+    <div class="key-content">f = R/2 = 60/2 = <strong>+30 cm</strong> (convex → positive)<br>u = −45 cm → 1/v = 1/30 − 1/(−45) = 1/30 + 1/45 = 5/90 → <strong>v = +18 cm</strong><br>Virtual — positive v means image forms behind the mirror (virtual side).</div>
+  </div>
+
+  <div class="essay-q">
+    <div class="q-num">Problem 3</div>
+    <div class="q-text">A concave mirror produces a real image on a screen 60 cm from the mirror. The object is 20 cm away. Find (a) focal length, (b) magnification, (c) image height if object is 5 cm tall.</div>
+    <textarea placeholder="Show your working here..."></textarea>
+    <div class="key-toggle" onclick="toggleKey(this)">▸ show answer key</div>
+    <div class="key-content">Real image on screen → v = −60 cm, u = −20 cm<br>1/f = 1/(−60) + 1/(−20) = −4/60 → <strong>f = −15 cm</strong><br>m = −(−60)/(−20) = <strong>−3</strong> (inverted, 3× larger)<br>hᵢ = m × h₀ = −3 × 5 = <strong>−15 cm</strong> (15 cm tall, inverted)</div>
+  </div>
+
+  <hr class="divider">
+
+  <p style="font-family:'DM Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text3);margin-bottom:1rem">Section C — Critical Thinking</p>
+
+  <div class="essay-q">
+    <div class="q-num">Critical Thinking 1</div>
+    <div class="q-text">A student says: "Convex mirrors are useless — they make everything smaller." Do you agree or disagree? Justify using both advantages and limitations of convex mirrors.</div>
+    <textarea placeholder="Write your argument here..."></textarea>
+    <div class="key-toggle" onclick="toggleKey(this)">▸ show guide</div>
+    <div class="key-content">Disagree. The diminished image is a trade-off for a <em>wider field of view</em>. In safety contexts (vehicle mirrors, road corners, security), seeing more area matters more than seeing larger. A convex mirror covers what a flat mirror cannot — this is its design advantage, not a flaw. It is unsuitable for magnification tasks, but that is not its purpose.</div>
+  </div>
+
+  <div class="essay-q">
+    <div class="q-num">Critical Thinking 2</div>
+    <div class="q-text">As an object moves from beyond C toward F in a concave mirror, describe how the image changes in position, size, and orientation. What happens exactly at F?</div>
+    <textarea placeholder="Describe the changes step by step..."></textarea>
+    <div class="key-toggle" onclick="toggleKey(this)">▸ show guide</div>
+    <div class="key-content">Beyond C → image between F and C (real, inverted, smaller). At C → image at C (real, inverted, same size). Between F and C → image beyond C (real, inverted, increasingly larger). As object approaches F → image moves toward infinity, size grows without bound. At F → reflected rays are parallel, no convergence point, image at infinity.</div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<script>
+// ── TAB SWITCHING ──
+function goTab(name, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  btn.classList.add('active');
+  if (name === 'simulator') { setTimeout(drawMirror, 50); }
+  if (name === 'optics') { setTimeout(updateSnell, 50); }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function goTabByName(name) {
+  const btns = document.querySelectorAll('.nav-btn');
+  const map = { warmer: 0, optics: 1, mirrors: 2, simulator: 3, calculator: 4, practice: 5 };
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  btns.forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  btns[map[name]].classList.add('active');
+  if (name === 'simulator') setTimeout(drawMirror, 50);
+  if (name === 'optics') setTimeout(updateSnell, 50);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── ACCORDION ──
+function toggleAcc(head) {
+  head.parentElement.classList.toggle('open');
+}
+
+// ── MIRROR INFO TABS ──
+function switchMirrorInfo(name, btn) {
+  document.querySelectorAll('.m-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.m-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('minfo-' + name).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── SNELL'S LAW CANVAS ──
+function updateSnell() {
+  const theta1 = parseFloat(document.getElementById('snell-angle').value);
+  const n2 = parseFloat(document.getElementById('snell-medium').value);
+  const n1 = 1.00;
+  document.getElementById('snell-angle-val').textContent = theta1 + '°';
+
+  const sinT2 = n1 * Math.sin(theta1 * Math.PI / 180) / n2;
+  const isTIR = sinT2 > 1;
+  let theta2 = isTIR ? null : Math.asin(sinT2) * 180 / Math.PI;
+
+  document.getElementById('sn-t1').textContent = theta1 + '°';
+  document.getElementById('sn-n2').textContent = n2.toFixed(2);
+  document.getElementById('sn-t2').textContent = isTIR ? 'TIR!' : theta2.toFixed(1) + '°';
+  document.getElementById('sn-dir').textContent = n2 > n1 ? 'toward ↗' : 'away ↙';
+
+  const canvas = document.getElementById('snell-canvas');
+  const W = canvas.offsetWidth;
+  canvas.width = W;
+  canvas.height = 200;
+  const ctx = canvas.getContext('2d');
+  const cx = W / 2, cy = 100;
+
+  ctx.clearRect(0, 0, W, 200);
+
+  // Background halves
+  ctx.fillStyle = '#0d1520';
+  ctx.fillRect(0, 0, W, 200);
+  ctx.fillStyle = '#0a1a2a';
+  ctx.fillRect(0, cy, W, cy);
+
+  // Labels
+  ctx.fillStyle = '#5a6478';
+  ctx.font = '11px DM Mono, monospace';
+  ctx.fillText('Air  n = 1.00', 10, cy - 8);
+  ctx.fillText('Medium  n = ' + n2.toFixed(2), 10, cy + 18);
+
+  // Interface line
+  ctx.strokeStyle = '#2a3a54';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([]);
+  ctx.beginPath(); ctx.moveTo(0, cy); ctx.lineTo(W, cy); ctx.stroke();
+
+  // Normal
+  ctx.strokeStyle = '#3a4a6a';
+  ctx.setLineDash([4, 4]);
+  ctx.beginPath(); ctx.moveTo(cx, 10); ctx.lineTo(cx, 190); ctx.stroke();
+  ctx.setLineDash([]);
+
+  const t1r = theta1 * Math.PI / 180;
+  const len = 75;
+
+  // Incident ray (gold)
+  ctx.strokeStyle = '#f5c842';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(cx - Math.sin(t1r) * len, cy - Math.cos(t1r) * len);
+  ctx.lineTo(cx, cy);
+  ctx.stroke();
+
+  // Angle label
+  ctx.fillStyle = '#f5c842';
+  ctx.font = '11px DM Mono, monospace';
+  ctx.fillText('θ₁=' + theta1 + '°', cx - Math.sin(t1r) * len * 0.55 - 28, cy - Math.cos(t1r) * len * 0.5);
+
+  if (!isTIR) {
+    // Refracted ray (cyan)
+    const t2r = theta2 * Math.PI / 180;
+    ctx.strokeStyle = '#4dd9e0';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx + Math.sin(t2r) * len, cy + Math.cos(t2r) * len);
+    ctx.stroke();
+
+    ctx.fillStyle = '#4dd9e0';
+    ctx.fillText('θ₂=' + theta2.toFixed(1) + '°', cx + Math.sin(t2r) * len * 0.5 + 4, cy + Math.cos(t2r) * len * 0.5 + 14);
+  } else {
+    // TIR — reflected ray
+    ctx.strokeStyle = '#f07070';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx + Math.sin(t1r) * len, cy - Math.cos(t1r) * len);
+    ctx.stroke();
+
+    ctx.fillStyle = '#f07070';
+    ctx.font = '12px DM Sans, sans-serif';
+    ctx.fillText('Total Internal Reflection!', cx - 80, cy + 35);
+  }
+
+  // Reflected ray (dim)
+  ctx.strokeStyle = '#f5c84250';
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([3, 3]);
+  ctx.beginPath();
+  ctx.moveTo(cx, cy);
+  ctx.lineTo(cx + Math.sin(t1r) * len * 0.6, cy - Math.cos(t1r) * len * 0.6);
+  ctx.stroke();
+  ctx.setLineDash([]);
+}
+
+// ── MIRROR SIMULATOR ──
+function drawMirror() {
+  const type = document.getElementById('sim-type').value;
+  const fAbs = parseFloat(document.getElementById('sim-f').value);
+  const uAbs = parseFloat(document.getElementById('sim-u').value);
+  const hObj = parseFloat(document.getElementById('sim-h').value);
+
+  document.getElementById('sim-f-val').textContent = fAbs + ' cm';
+  document.getElementById('sim-u-val').textContent = uAbs + ' cm';
+  document.getElementById('sim-h-val').textContent = hObj + ' cm';
+
+  const f = type === 'concave' ? -fAbs : fAbs;
+  const u = -uAbs;
+
+  const invV = 1 / f - 1 / u;
+  const v = 1 / invV;
+  const m = -v / u;
+  const hImg = m * hObj;
+
+  // Update result chips
+  document.getElementById('r-v').textContent = Math.abs(v) > 999 ? '∞' : v.toFixed(1) + ' cm';
+  document.getElementById('r-m').textContent = Math.abs(v) > 999 ? '∞' : m.toFixed(2);
+  document.getElementById('r-hi').textContent = Math.abs(v) > 999 ? '∞' : Math.abs(hImg).toFixed(1) + ' cm';
+  document.getElementById('r-nat').textContent = v < 0 ? 'Real' : 'Virtual';
+  document.getElementById('r-ori').textContent = m > 0 ? 'Upright' : 'Inverted';
+  document.getElementById('r-size').textContent = Math.abs(m) > 1.05 ? 'Enlarged' : Math.abs(m) < 0.95 ? 'Diminished' : 'Same size';
+
+  const canvas = document.getElementById('mirror-canvas');
+  const W = canvas.offsetWidth;
+  canvas.width = W;
+  canvas.height = 340;
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, W, 340);
+  ctx.fillStyle = '#070b14';
+  ctx.fillRect(0, 0, W, 340);
+
+  const SCALE = W / 160;
+  const OX = W * 0.78; // mirror position (right side)
+  const OY = 170;
+
+  // Helper: world → canvas
+  const wx = x => OX + x * SCALE;
+  const wy = y => OY - y * SCALE;
+
+  // Principal axis
+  ctx.strokeStyle = '#1e2d4a';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([]);
+  ctx.beginPath(); ctx.moveTo(0, OY); ctx.lineTo(W, OY); ctx.stroke();
+
+  // Mirror arc
+  ctx.strokeStyle = '#3a5a8a';
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  const mirrorH = 55;
+  if (type === 'concave') {
+    const r = fAbs * 2 * SCALE;
+    ctx.arc(OX + r, OY, r, Math.PI - 0.38, Math.PI + 0.38);
+  } else {
+    const r = fAbs * 2 * SCALE;
+    ctx.arc(OX - r, OY, r, -0.38, 0.38);
+  }
+  ctx.stroke();
+
+  // Mark F and C
+  const fX = wx(type === 'concave' ? -fAbs : fAbs);
+  const cX = wx(type === 'concave' ? -fAbs * 2 : fAbs * 2);
+
+  function markPoint(x, label, col) {
+    ctx.fillStyle = col;
+    ctx.beginPath(); ctx.arc(x, OY, 4, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = col;
+    ctx.font = '11px DM Mono, monospace';
+    ctx.fillText(label, x - 6, OY + 16);
+  }
+
+  markPoint(fX, 'F', '#f5c842');
+  markPoint(cX, 'C', '#4dd9e0');
+  markPoint(OX, 'P', '#5a6478');
+
+  // Object
+  const objX = wx(-uAbs);
+  drawArrow(ctx, objX, OY, objX, wy(hObj), '#6dd98a', 2);
+  ctx.fillStyle = '#6dd98a';
+  ctx.font = '11px DM Mono, monospace';
+  ctx.fillText('O', objX - 5, wy(hObj) - 6);
+
+  // Image (only if not at infinity)
+  if (Math.abs(v) < 500) {
+    const imgX = wx(v);
+    const isVirtual = v > 0;
+    const imgCol = isVirtual ? 'rgba(255,255,255,0.35)' : 'rgba(255,255,255,0.75)';
+    if (isVirtual) ctx.setLineDash([4, 3]);
+    drawArrow(ctx, imgX, OY, imgX, wy(hImg), imgCol, 2);
+    ctx.setLineDash([]);
+    ctx.fillStyle = imgCol;
+    ctx.font = '11px DM Mono, monospace';
+    ctx.fillText("I'", imgX - 5, wy(hImg) - 6);
+  }
+
+  // Ray 1 (gold): from top of object, parallel to axis → reflects through F (concave) or away from F (convex)
+  ctx.strokeStyle = '#f5c842';
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([]);
+  const objTopY = wy(hObj);
+  // Incident: objX → OX (parallel)
+  drawRay(ctx, objX, objTopY, OX, objTopY, '#f5c842');
+  // Reflect: mirror → through F or extension
+  const mirrorTopY = objTopY;
+  if (type === 'concave') {
+    // goes through F → continue to image side
+    const slope1 = (OY - mirrorTopY) / (fX - OX);
+    const endX = imgOk(v) ? wx(v) : 20;
+    const endY = mirrorTopY + slope1 * (endX - OX);
+    drawRay(ctx, OX, mirrorTopY, endX, endY, '#f5c842');
+  } else {
+    // appears to diverge from F (behind mirror)
+    const slope1 = (OY - mirrorTopY) / (fX - OX);
+    drawRay(ctx, OX, mirrorTopY, 20, mirrorTopY + slope1 * (20 - OX), '#f5c842');
+    ctx.setLineDash([3, 3]);
+    drawRay(ctx, OX, mirrorTopY, fX, OY, '#f5c84260');
+    ctx.setLineDash([]);
+  }
+
+  // Ray 2 (cyan): from top of object through F → parallel after reflection
+  ctx.strokeStyle = '#4dd9e0';
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([]);
+  if (type === 'concave') {
+    drawRay(ctx, objX, objTopY, OX, objTopY - (objTopY - OY) * (OX - objX) / (fX - objX), '#4dd9e0');
+    drawRay(ctx, OX, objTopY - (objTopY - OY) * (OX - objX) / (fX - objX), 20, objTopY - (objTopY - OY) * (OX - objX) / (fX - objX), '#4dd9e0');
+  } else {
+    const yAtMirror = OY - (OY - objTopY) * (OX - objX) / (fX - objX);
+    drawRay(ctx, objX, objTopY, OX, yAtMirror, '#4dd9e0');
+    drawRay(ctx, OX, yAtMirror, 20, yAtMirror, '#4dd9e0');
+  }
+
+  // Ray 3 (red): through C → back on itself
+  ctx.strokeStyle = '#f07070';
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([]);
+  if (Math.abs(cX - objX) > 5) {
+    drawRay(ctx, objX, objTopY, OX, objTopY - (objTopY - OY) * (OX - objX) / (cX - objX), '#f07070');
+    drawRay(ctx, OX, objTopY - (objTopY - OY) * (OX - objX) / (cX - objX), objX, objTopY, '#f0707060');
+  }
+}
+
+function imgOk(v) { return Math.abs(v) < 500; }
+
+function drawRay(ctx, x1, y1, x2, y2, col) {
+  ctx.strokeStyle = col;
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x2, y2);
+  ctx.stroke();
+}
+
+function drawArrow(ctx, x1, y1, x2, y2, col, lw) {
+  ctx.strokeStyle = col;
+  ctx.fillStyle = col;
+  ctx.lineWidth = lw;
+  ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+  // arrowhead
+  const angle = Math.atan2(y2 - y1, x2 - x1);
+  const size = 7;
+  ctx.beginPath();
+  ctx.moveTo(x2, y2);
+  ctx.lineTo(x2 - size * Math.cos(angle - 0.4), y2 - size * Math.sin(angle - 0.4));
+  ctx.lineTo(x2 - size * Math.cos(angle + 0.4), y2 - size * Math.sin(angle + 0.4));
+  ctx.closePath();
+  ctx.fill();
+}
+
+// ── CALCULATOR ──
+function runCalc() {
+  const fv = document.getElementById('c-f').value;
+  const uv = document.getElementById('c-u').value;
+  const vv = document.getElementById('c-v').value;
+  const h0v = document.getElementById('c-h0').value;
+
+  const known = [fv, uv, vv].filter(x => x !== '').length;
+  if (known < 2) { alert('Please enter at least 2 of the 3 values (f, u, v).'); return; }
+
+  let f = fv !== '' ? parseFloat(fv) : null;
+  let u = uv !== '' ? parseFloat(uv) : null;
+  let v = vv !== '' ? parseFloat(vv) : null;
+
+  if (f === null) f = 1 / (1 / v + 1 / u);
+  else if (u === null) u = 1 / (1 / f - 1 / v);
+  else if (v === null) v = 1 / (1 / f - 1 / u);
+
+  const m = -v / u;
+  const h0 = h0v !== '' ? parseFloat(h0v) : null;
+  const hi = h0 !== null ? m * h0 : null;
+
+  document.getElementById('co-f').innerHTML = '<strong>f =</strong> ' + f.toFixed(2) + ' cm';
+  document.getElementById('co-u').innerHTML = '<strong>u =</strong> ' + u.toFixed(2) + ' cm';
+  document.getElementById('co-v').innerHTML = '<strong>v =</strong> ' + v.toFixed(2) + ' cm';
+  document.getElementById('co-m').innerHTML = '<strong>m =</strong> ' + m.toFixed(3);
+
+  const hiEl = document.getElementById('co-hi');
+  if (hi !== null) {
+    hiEl.innerHTML = '<strong>hᵢ =</strong> ' + hi.toFixed(2) + ' cm';
+    hiEl.style.display = 'block';
+  } else { hiEl.style.display = 'none'; }
+
+  const nat = v < 0 ? 'Real' : 'Virtual';
+  const ori = m > 0 ? 'Upright' : 'Inverted';
+  const sz = Math.abs(m) > 1.05 ? 'Enlarged' : Math.abs(m) < 0.95 ? 'Diminished' : 'Same size';
+  document.getElementById('co-desc').textContent = `Image: ${nat} · ${ori} · ${sz} (m = ${m.toFixed(2)})`;
+
+  document.getElementById('calc-out').classList.add('show');
+}
+
+function clearCalc() {
+  ['c-f', 'c-u', 'c-v', 'c-h0'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('calc-out').classList.remove('show');
+}
+
+// ── QUIZ ──
+const qData = [
+  {
+    q: 'The law of reflection states that the angle of incidence:',
+    opts: ['is always 90°', 'equals the angle of refraction', 'equals the angle of reflection', 'is twice the angle of reflection'],
+    ans: 2,
+    fb: 'θᵢ = θᵣ — both measured from the normal (perpendicular to the surface at the point of contact).'
+  },
+  {
+    q: 'A ray of light moves from glass (n = 1.5) into air (n = 1.0). It bends:',
+    opts: ['toward the normal', 'away from the normal', 'parallel to the surface', 'it does not bend'],
+    ans: 1,
+    fb: 'Moving to a less dense medium (lower n), light speeds up and bends away from the normal.'
+  },
+  {
+    q: 'A concave mirror has a radius of curvature of 40 cm. Its focal length is:',
+    opts: ['40 cm', '80 cm', '20 cm', '10 cm'],
+    ans: 2,
+    fb: 'f = R/2 = 40/2 = 20 cm. The focal length is always half the radius of curvature.'
+  },
+  {
+    q: 'Which of these ALWAYS produces a virtual, upright, diminished image regardless of object position?',
+    opts: ['Concave mirror', 'Plane mirror', 'Convex mirror', 'Both plane and convex'],
+    ans: 2,
+    fb: 'Convex mirrors always produce virtual, upright, diminished images — this is why they give a wider field of view in vehicle side mirrors.'
+  },
+  {
+    q: 'Using sign convention: an object is 25 cm in front of a concave mirror (f = 10 cm). What is 1/v?',
+    opts: ['1/v = 1/(−10) + 1/(−25)', '1/v = 1/(−10) − 1/(−25)', '1/v = 1/10 + 1/25', '1/v = 1/25 − 1/10'],
+    ans: 1,
+    fb: 'Mirror equation: 1/f = 1/v + 1/u → 1/v = 1/f − 1/u = 1/(−10) − 1/(−25). Concave: f negative. Object in front: u negative.'
+  },
+  {
+    q: 'Total internal reflection occurs only when light travels from:',
+    opts: ['less dense to more dense medium at any angle', 'denser to less dense medium, angle > critical angle', 'less dense to more dense medium, angle > critical angle', 'any medium to vacuum'],
+    ans: 1,
+    fb: 'TIR requires: (1) denser → less dense medium, AND (2) angle of incidence > critical angle. Both conditions must be met.'
+  }
+];
+
+function buildQuiz() {
+  const wrap = document.getElementById('quiz-wrap');
+  wrap.innerHTML = '';
+  qData.forEach((q, i) => {
+    const d = document.createElement('div');
+    d.className = 'quiz-q';
+    d.innerHTML = `
+      <div class="q-num">Question ${i + 1} of ${qData.length}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="opts">${q.opts.map((o, j) => `
+        <button class="opt" onclick="selectOpt(this,${i},${j})" data-idx="${j}">${['A','B','C','D'][j]}. ${o}</button>
+      `).join('')}</div>
+      <div class="q-feedback" id="fb-${i}"></div>
+    `;
+    wrap.appendChild(d);
+  });
+}
+
+function selectOpt(btn, qi, oi) {
+  const parent = btn.closest('.opts');
+  if (parent.querySelector('.correct, .wrong')) return;
+  parent.querySelectorAll('.opt').forEach(b => { b.style.opacity = '0.5'; delete b.dataset.selected; });
+  btn.style.opacity = '1';
+  btn.dataset.selected = 'true';
+}
+
+function checkQuiz() {
+  let score = 0;
+  qData.forEach((q, i) => {
+    const qs = document.querySelectorAll('.quiz-q')[i];
+    const opts = qs.querySelectorAll('.opt');
+    const fb = document.getElementById('fb-' + i);
+    let sel = -1;
+    opts.forEach((b, j) => { if (b.dataset.selected) sel = j; });
+    opts.forEach((b, j) => {
+      b.disabled = true; b.style.opacity = '1';
+      if (j === q.ans) b.classList.add('correct');
+      else if (j === sel && sel !== q.ans) b.classList.add('wrong');
+    });
+    if (sel === q.ans) {
+      score++;
+      fb.textContent = '✓ Correct! ' + q.fb;
+      fb.className = 'q-feedback show ok';
+    } else {
+      fb.textContent = (sel === -1 ? 'No answer. ' : '✗ Not quite. ') + q.fb;
+      fb.className = 'q-feedback show no';
+    }
+  });
+  const box = document.getElementById('score-box');
+  document.getElementById('score-disp').textContent = score + ' / ' + qData.length;
+  box.style.display = 'block';
+  box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function resetQuiz() {
+  document.getElementById('score-box').style.display = 'none';
+  buildQuiz();
+}
+
+// ── ANSWER KEY TOGGLE ──
+function toggleKey(el) {
+  const content = el.nextElementSibling;
+  content.classList.toggle('show');
+  el.textContent = content.classList.contains('show') ? '▾ hide answer key' : '▸ show answer key';
+}
+
+// ── INIT ──
+buildQuiz();
+setTimeout(() => {
+  updateSnell();
+  drawMirror();
+}, 100);
+
+window.addEventListener('resize', () => {
+  const simActive = document.getElementById('tab-simulator').classList.contains('active');
+  const optActive = document.getElementById('tab-optics').classList.contains('active');
+  if (simActive) drawMirror();
+  if (optActive) updateSnell();
+});
+</script>
+</body>
+</html>
