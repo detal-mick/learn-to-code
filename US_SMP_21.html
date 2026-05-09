@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>English Exam Preparation – Grade 9</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Nunito+Sans:wght@400;600&display=swap');
+    :root {
+      --navy:#1a2e5a; --yellow:#f5c518; --teal:#2a9d8f; --orange:#e76f51;
+      --light-bg:#f8f9fc; --card-bg:#ffffff; --text:#2d2d2d; --muted:#6b7280; --border:#e5e7eb;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Nunito Sans',sans-serif;background:var(--light-bg);color:var(--text);font-size:16px;line-height:1.7}
+    header{background:var(--navy);color:white;padding:32px 24px 28px;text-align:center}
+    header .badge{display:inline-block;background:var(--yellow);color:var(--navy);font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;padding:4px 14px;border-radius:20px;margin-bottom:12px}
+    header h1{font-family:'Nunito',sans-serif;font-weight:800;font-size:26px;margin-bottom:6px}
+    header p{font-size:14px;color:#cbd5e1}
+    .topics{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;padding:20px 24px;background:white;border-bottom:1px solid var(--border)}
+    .topic-pill{display:flex;align-items:center;gap:6px;padding:6px 16px;border-radius:20px;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px}
+    .pill-a{background:#dbeafe;color:#1e40af}.pill-b{background:#d1fae5;color:#065f46}.pill-c{background:#fde8d8;color:#9a3412}
+    main{max-width:860px;margin:0 auto;padding:32px 20px 60px}
+    .section-header{display:flex;align-items:center;gap:14px;margin:36px 0 18px}
+    .section-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+    .icon-a{background:#dbeafe}.icon-b{background:#d1fae5}.icon-c{background:#fde8d8}
+    .section-header h2{font-family:'Nunito',sans-serif;font-weight:800;font-size:20px;color:var(--navy)}
+    .section-header .sub{font-size:13px;color:var(--muted);margin-top:2px}
+    .difficulty-row{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+    .diff-tag{font-family:'Nunito',sans-serif;font-weight:700;font-size:11px;padding:2px 10px;border-radius:10px;letter-spacing:.5px;text-transform:uppercase}
+    .diff-basic{background:#dcfce7;color:#166534}.diff-medium{background:#fef9c3;color:#854d0e}.diff-hard{background:#fee2e2;color:#991b1b}
+    .q-card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:22px 24px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+    .q-number{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:white;margin-bottom:10px}
+    .num-a{background:#3b82f6}.num-b{background:var(--teal)}.num-c{background:var(--orange)}
+    .q-text{font-size:15.5px;line-height:1.75;margin-bottom:14px;color:var(--text)}
+    .q-text strong{color:var(--navy)}
+    .passage{background:#f1f5f9;border-left:4px solid var(--teal);border-radius:0 10px 10px 0;padding:14px 18px;margin-bottom:16px;font-size:14.5px;line-height:1.8;color:#374151}
+    .passage .passage-title{font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;color:var(--teal);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px}
+    .ad-box{border:2px dashed #f59e0b;border-radius:10px;background:#fffbeb;padding:14px 18px;margin-bottom:16px;font-size:14.5px;line-height:1.8}
+    .ad-box .ad-label{font-family:'Nunito',sans-serif;font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#b45309;margin-bottom:6px}
+    .options{display:flex;flex-direction:column;gap:9px}
+    .option{display:flex;align-items:flex-start;gap:12px;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:15px}
+    .opt-letter{display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:26px;border-radius:6px;background:var(--light-bg);border:1.5px solid var(--border);font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;color:var(--navy);flex-shrink:0;margin-top:1px}
+    .dialogue{background:white;border:1.5px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:14px;font-size:14.5px}
+    .dialogue .d-line{margin-bottom:6px}
+    .dialogue .d-line:last-child{margin-bottom:0}
+    .dialogue .speaker{font-family:'Nunito',sans-serif;font-weight:700;color:var(--navy)}
+    .blank{display:inline-block;width:140px;border-bottom:2px solid var(--navy);vertical-align:bottom;margin:0 4px}
+    .section-divider{border:none;border-top:2px dashed var(--border);margin:40px 0 0}
+    footer{text-align:center;padding:20px;font-size:13px;color:var(--muted);border-top:1px solid var(--border)}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="badge">Exam Preparation</div>
+  <h1>English – Grade 9 🎓</h1>
+  <p>Report Text · Advertisement Text · Expression of Opinion &amp; Suggestion</p>
+</header>
+
+<div class="topics">
+  <span class="topic-pill pill-a">📄 Report Text</span>
+  <span class="topic-pill pill-b">📢 Advertisement Text</span>
+  <span class="topic-pill pill-c">💬 Opinion &amp; Suggestion</span>
+</div>
+
+<main>
+
+<!-- ═══ PART A ═══ -->
+<div class="section-header">
+  <div class="section-icon icon-a">📄</div>
+  <div><h2>Part A – Report Text</h2><div class="sub">Questions 1–10</div></div>
+</div>
+
+<div class="difficulty-row"><span class="diff-tag diff-basic">Basic Concept</span></div>
+
+<div class="q-card">
+  <div class="q-number num-a">1</div>
+  <div class="q-text">What is the <strong>main purpose</strong> of a report text?</div>
+  <div class="options">
+    <div class="option"><span class="opt-letter">A</span> To retell a past event in sequence</div>
+    <div class="option"><span class="opt-letter">B</span> To describe something the way it generally is, based on facts</div>
+    <div class="option"><span class="opt-letter">C</span> To persuade the reader to do something</div>
+    <div class="option"><span class="opt-letter">D</span> To entertain the reader with a fictional story</div>
+  </div>
+</div>
+
+<div class="q-card">
+  <div class="q-number num-a">2</div>
+  <div class="q-text">Which of the following is the correct <strong>generic structure</strong> of a report text?</div>
+  <div class="options">
+    <div class="option"><span class="opt-letter">A</span> Orientation → Events → Re-orientation</div>
+    <div class="option"><span class="opt-letter">B</span> General classification → Description</div>
+    <div class="option"><span class="opt-letter">C</span> Thesis → Arguments → Recommendation</div>
+    <div class="option"><span class="opt-letter">D</span> Identification → Description → Conclusion</div>
+  </div>
+</div>
+
+<div class="q-card">
+  <div class="q-number num-a">3</div>
+  <div class="q-text">Report texts commonly use the <strong>simple present tense</strong>. Which sentence is an example of this?</div>
+  <div class="options">
+    <div class="option"><span class="opt-letter">A</span> Dolphins were swimming near the coast yesterday.</div>
+    <div class="option"><span class="opt-letter">B</span> Dolphins are highly intelligent marine mammals.</div>
+    <div class="option"><span class="opt-letter">C</span> Dolphins will be studied by scientists next year.</div>
+    <div class="option"><span class="opt-letter">D</span> Dolphins had been observed in the wild for decades.</div>
+  </div>
+</div>
+
+<div class="difficulty-row" style="margin-top:18px"><span class="diff-tag diff-medium">Intermediate</span></div>
+
+<div class="q-card">
+  <div class="q-number num-a">4</div>
+  <div class="q-text">Read the following passage and answer questions 4–6.</div>
+  <div class="passage">
+    <div class="passage-title">🌿 Read the text</div>
+    <strong>The Komodo Dragon</strong><br><br>
+    The Komodo dragon (<em>Varanus komodoensis</em>) is the world's largest living lizard. It is found only on a few islands in Indonesia, including Komodo, Rinca, and Flores. Komodo dragons can grow up to 3 metres in length and weigh around 70 kilograms. They are carnivorous and hunt large prey such as deer, goats, and even water buffalo. Their saliva contains dozens of types of harmful bacteria, which help weaken their prey.
+  </div>
+  <div class="q-text">Which part of the generic structure does the text mostly represent?</div>
+  <div class="options">
+    <div class="option"><span class="opt-letter">A</span> General classification only</div>
+    <div class="option"><span class="opt-letter">B</span> Description only</div>
+    <div class="option"><span class="opt-letter">C</span> Both general classification and description</div>
+    <div class="option"><span class="opt-letter">D</span> Re-orientation</div>
+  </div>
+</div>
+
+<div class="q-card">
+  <div class="q-number num-a">5</div>
+  <div class="q-text">Based on the Komodo dragon text, what does the word <strong>"carnivorous"</strong> mean?</div>
+  <div class="options">
+    <div class="option"><span class="opt-letter">A</span> An animal that eats only plants</div>
+    <div class="option"><span class="opt-letter">B</span> An animal that eats both plants and meat</div>
+    <div class="option"><span class="opt-letter">C</span> An animal that eats meat or other animals</div>
+    <div class="option"><span class="opt-letter">D</span> An animal that does not eat at all</div>
+  </div>
+</div>
+
+<div class="q-card">
+  <div class="q-number num-a">6</div>
+  <div class="q-text">Based on the Komodo dragon text, which statement is <strong>TRUE</strong>?</div>
+  <div class="options">
+    <div class="option"><span class="opt-letter">A</span> Komodo dragons can be found across all of Indonesia.</div>
+    <div class="option"><span class="opt-letter">B</span> Komodo dragons are the largest lizards in the world.</div>
+    <div class="option"><span class="opt-letter">C</span> Komodo dragons are herbivores that eat leaves and grass.</div>
+    <div class="option"><span class="opt-letter">D</span> Komodo dragons can grow up to 7 metres long.</div>
+  </div>
+</div>
+
+<div class="difficulty-row" style="margin-top:18px"><span class="diff-tag diff-hard">Text Analysis</span></div>
+
+<div class="q-card">
+  <div class="q-number num-a">7</div>
+  <div class="q-text">Read the following text carefully and answer questions 7–10.</div>
+  <div class="passage">
+    <div class="passage-title">🌊 Read the text</div>
+    <strong>Coral Reefs</strong><br><br>
+    Coral reefs are underwater structures made from calcium carbonate secreted by corals. They are often called the "rainforests of the sea" because they support a wide variety of marine life. Although they cover less than 1% of the ocean floor, coral reefs are home to more than 25% of all marine species. They provide essential services such as protecting coastlines, supporting fishing industries, and attracting tourism. Unfortunately, coral reefs are under serious threat due to rising ocean temperatures, pollution, and destructive fishing practices.
+  </div>
+  <div class="q-text">What is the <strong>main idea</strong> of the text above?</div>
+  <div class="options">
+    <div class="option"><span class="opt-letter">A</span> Coral reefs are a type of rock found on the ocean floor.</div>
+    <div class="option"><span class="opt-letter">B</span> Coral reefs are important ecosystems that are currently facing serious threats.</div>
+    <div class="option"><span class="opt-letter">C</span> Coral reefs only exist in tropical countries.</div>
+    <div class="option"><span class="opt-letter">D</span> Marine species depend only on coral reefs for their survival.</div>
+  </div>
+</div>
+
+<div class="q-card">
+  <div class="q-number num-a">8</div>
+  <div class="q-text">In the coral reef text, the phrase <strong>"rainforests of the sea"</strong> is used to…</div>
+  <div class="options">
+    <div class="option"><span class="opt-letter">A</span> Show that coral reefs are literally forests located underwater</div>
+    <div class="option"><span class="opt-letter">B</span> Compare coral reefs to rainforests because both have rich biodiversity</div>
+    <div class="option"><span class="opt-letter">C</span> Suggest that coral reefs produce rain for the ocean</div>
+    <div class="option"><span class="opt-letter">D</span> Explain that coral reefs are found in rainforest areas</div>
+  </div>
+</div>
+
+<div class="q-card">
+  <div class="q-number num-a">9</div>
+  <div class="q-text">According to the text, which of the following is <strong>NOT</strong> mentioned as a threat to coral reefs?</div>
+  <div class="options">
+    <div class="option"><span class="opt-letter">A</span> Rising ocean temperatures</div>
+    <div class="option"><span class="opt-letter">B</span> Destructive fishing practices</div>
+    <div class="option"><span class="opt-letter">C</span> Overpopulation of marine species</div>
+    <div class="option"><span class="opt-letter">D</span> Pollution</div>
+  </div>
+</div>
+
+<div class="q-card">
+  <div class="q-number num-a">10</div>
+  <div class="q-text">The text uses the phrase <em>"Although they cover less than 1% of the ocean floor…"</em> — this sentence shows a relationship of…</div>
+  <div class="options">
+    <div class="option"><span class="opt-letter">A</span> Cause and effect</div>
+    <div class="option"><span class="opt-letter">B</span> Contrast or concession</div>
+    <div class="option"><span class="opt-letter">C</span> Time sequence</div>
+    <div class="option"><span class="opt-letter">D</span> Addition</div>
+  </div>
+</div>
+
+<!-- ═══ PART B ═══ -->
+<hr class="section-divider"/>
+<div class="section-header">
+  <div class="section-icon icon-b">📢</div>
+  <div><h2>Part B – Advertisement Text</h2><div class="sub">Questions 11–20</div></div>
+</div>
+
+<div class="difficulty-row"><span class="diff-tag diff-basic">Basic Concept</span></div>
+
+<div class="q-card">
+  <div class="q-number num-b">11</div>
+  <div class="q-text">What is the <strong>main purpose</strong> of an advertisement text?</div>
+  <div class="options">
+    <div class="option"><span class="opt-letter">A</span> To tell a story about a product</div>
+    <div class="option"><span class="opt-letter">B</span> To explain how a product is made</div>
+    <div class="option"><span class="opt-letter">C</span> To persuade people to buy, use, or do something</div>
+    <div class="option"><span class="opt-letter">D</span> To describe the history of a company</div>
+  </div>
+</div>
+
+<div class="q-card">
+  <div class="q-number num-b">12</div>
+  <div class="q-text">Which of these is a typical <strong>language feature</strong> found in advertisements?</div>
+  <div class="options">
+    <div class="option"><span class="opt-letter">A</span> Past tense verbs and passive voice</div>
+    <div class="option"><span class="opt-letter">B</span> Imperative sentences and persuasive language</div>
+    <div class="option"><span class="opt-letter">C</span> Complex scientific terminology and long sentences</div>
+    <div class="option"><span class="opt-letter">D</span> Chronological connectors such as "first", "then", "finally"</div>
+  </div>
+</div>
+
+<div class="q-card">
+  <div class="q-number num-b">13</div>
+  <div class="q-text">Which sentence below is an example of <strong>imperative language</strong> in an advertisement?</div>
+  <div class="options">
+    <div class="option"><span class="opt-letter">A</span> "This product was created in 2010."</div>
+    <div class="option"><span class="opt-letter">B</span> "Customers have been satisfied with our services."</div>
+    <div class="option"><span class="opt-letter">C</span> "Try our new product today and feel the difference!"</div>
+    <div class="option"><span class="opt-letter">D</span> "The product is made from natural ingredients."</div>
+  </div>
+</div>
+
+<div class="difficulty-row" style="margin-top:18px"><span class="diff-tag diff-medium">Intermediate</span></div>
+
+<div class="q-card">
+  <div class="q-number num-b">14</div>
+  <div class="q-text">Read the following advertisement and answer questions 14–17.</div>
+  <div class="ad-box">
+    <div class="ad-label">📢 Advertisement</div>
+    <strong style="font-size:17px">✨ BRIGHTGLOW Skin Care</strong><br><br>
+    Are you tired of dull, uneven skin? <strong>BrightGlow Vitamin C Serum</strong> is here to help!<br><br>
+    ✅ Reduces dark spots in just 7 days<br>
+    ✅ Made from 100% natural ingredients<br>
+    ✅ Dermatologist tested &amp; approved<br>
+    ✅ Suitable for all skin types<br><br>
+    <em>Buy 2 get 1 FREE – This week only!</em><br><br>
+    📦 Order now at <strong>www.brightglow.id</strong> or visit your nearest pharmacy.<br>
+    <span style="font-size:13px;color:#b45309">*Results may vary depending on skin type.</span>
+  </div>
+  <div class="q-text">What is being advertised in the text above?</div>
+  <div class="options">
+    <div class="option"><span class="opt-letter">A</span> A skincare serum product</div>
+    <div class="option"><span class="opt-letter">B</span> A dermatology clinic</div>
+    <div class="option"><span class="opt-letter">C</span> A natural vitamin supplement</div>
+    <div class="option"><span class="opt-letter">D</span> An online pharmacy service</div>
+  </div>
+</div>
+
+<div class="q-card">
+  <div class="q-number num-b">15</div>
+  <div class="q-text">Based on the BrightGlow advertisement, which claim does the company make about its product?</div>
+  <div class="options">
+    <div class="option"><span class="opt-letter">A</span> It is the cheapest skincare product available.</div>
+    <div class="option"><span class="opt-letter">B</span> It is guaranteed to work for every customer.</div>
+    <div class="option"><span class="opt-letter">C</span> It is tested and approved by dermatologists.</div>
+    <div class="option"><span class="opt-letter">D</span> It was developed over 10 years of research.</div>
+  </div>
+</div>
+
+<div class="q-card">
+  <div class="q-number num-b">16</div>
+  <div class="q-text">The fine print says: <em>"Results may vary depending on skin type."</em> Why do advertisements commonly include this kind of statement?</div>
+  <div class="options">
+    <div class="option"><span class="opt-letter">A</span> To make the advertisement longer</div>
+    <div class="option"><span class="opt-letter">B</span> To limit liability and acknowledge that claims may not apply to everyone</div>
+    <div class="option"><span class="opt-letter">C</span> To encourage customers to consult a doctor first</div>
+    <div class="option"><span class="opt-letter">D</span> To show that the product is not yet proven to work</div>
+  </div>
+</div>
+
+<div class="q-card">
+  <div class="q-number num-b">17</div>
+  <div class="q-text">The phrase <em>"Buy 2 get 1 FREE – This week only!"</em> is intended to…</div>
+  <div class="options">
+    <div class="option"><span class="opt-letter">A</span> Inform customers about the company's return policy</div>
+    <div class="option"><span class="opt-letter">B</span> Create a sense of urgency and encourage immediate purchase</div>
+    <div class="option"><span class="opt-letter">C</span> Warn customers about a limited supply of the product</div>
+    <div class="option"><span class="opt-letter">D</span> Explain the standard pricing for the product</div>
+  </div>
+</div>
+
+<div class="difficulty-row" style="margin-top:18px"><span class="diff-tag diff-hard">Text Analysis</span></div>
+
+<div class="q-card">
+  <div class="q-number num-b">18</div>
+  <div class="q-text">Read the two advertisements below and answer the question.</div>
+  <div class="ad-box" style="margin-bottom:10px">
+    <div class="ad-label">Advertisement 1</div>
+    <strong>SuperClean Dishwashing Liquid</strong> — removes 99% of germs and grease in ONE wash. Gentle on hands, tough on dirt. Available at supermarkets everywhere.
+  </div>
+  <div class="ad-box">
+    <div class="ad-label">Advertisement 2</div>
+    <strong>EcoWash Dishwashing Liquid</strong> — 100% biodegradable formula. Safe for your family and the environment. No harsh chemicals. Choose green, choose EcoWash.
+  </div>
+  <div class="q-text">What is the <strong>main difference</strong> in the persuasive strategy between Advertisement 1 and Advertisement 2?</div>
+  <div class="options">
+    <div class="option"><span class="opt-letter">A</span> Advertisement 1 focuses on effectiveness and germ removal, while Advertisement 2 appeals to environmental and health values.</div>
+    <div class="option"><span class="opt-letter">B</span> Advertisement 1 is for a luxury product, while Advertisement 2 targets low-income customers.</div>
+    <div class="option"><span class="opt-letter">C</span> Advertisement 1 uses emotional language, while Advertisement 2 uses scientific evidence.</div>
+    <div class="option"><span class="opt-letter">D</span> Advertisement 1 and Advertisement 2 use exactly the same persuasive approach.</div>
+  </div>
+</div>
+
+<div class="q-card">
+  <div class="q-number num-b">19</div>
+  <div class="q-text">Which of the following <strong>best describes</strong> the target audience of the BrightGlow advertisement?</div>
+  <div class="options">
+    <div class="option"><span class="opt-letter">A</span> Elderly men looking for health supplements</div>
+    <div class="option"><span class="opt-letter">B</span> People concerned about the appearance of their skin</div>
+    <div class="option"><span class="opt-letter">C</span> Dermatologists looking for new products to recommend</div>
+    <div class="option"><span class="opt-letter">D</span> Pharmacists who sell vitamins</div>
+  </div>
+</div>
+
+<div class="q-card">
+  <div class="q-number num-b">20</div>
+  <div class="q-text">Which of the following is an example of a <strong>misleading claim</strong> that a responsible advertiser should avoid?</div>
+  <div class="options">
+    <div class="option"><span class="opt-letter">A</span> "Our product is available in three sizes."</div>
+    <div class="option"><span class="opt-letter">B</span> "Lose 10 kg in just 3 days — guaranteed!"</div>
+    <div class="option"><span class="opt-letter">C</span> "Free delivery on orders above Rp100.000."</div>
+    <div class="option"><span class="opt-letter">D</span> "Contains natural lemon extract."</div>
+  </div>
+</div>
+
+<!-- ═══ PART C ═══ -->
+<hr class="section-divider"/>
+<div class="section-header">
+  <div class="section-icon icon-c">💬</div>
+  <div><h2>Part C – Opinion &amp; Suggestion</h2><div class="sub">Questions 21–30</div></div>
+</div>
+
+<div class="difficulty-row"><span class="diff-tag diff-basic">Basic Concept</span></div>
+
+<div class="q-card">
+  <div class="q-number num-c">21</div>
+  <div class="q-text">Which of the following expressions is used to <strong>give an opinion</strong>?</div>
+  <div class="options">
+    <div class="option"><span class="opt-letter">A</span> "You should take more rest."</div>
+    <div class="option"><span class="opt-letter">B</span> "In my opinion, that plan will not work."</div>
+    <div class="option"><span class="opt-letter">C</span> "Why don't you ask your teacher for help?"</div>
+    <div class="option"><span class="opt-letter">D</span> "How about having lunch together?"</div>
+  </div>
+</div>
+
+<div class="q-card">
+  <div class="q-number num-c">22</div>
+  <div class="q-text">Which sentence is an example of <strong>giving a suggestion</strong>?</div>
+  <div class="options">
+    <div class="option"><span class="opt-letter">A</span> "I feel that this movie is very entertaining."</div>
+    <div class="option"><span class="opt-letter">B</span> "As far as I am concerned, the school canteen needs improvement."</div>
+    <div class="option"><span class="opt-letter">C</span> "You'd better start studying earlier before the exam."</div>
+    <div class="option"><span class="opt-letter">D</span> "I think the school uniform looks great."</div>
+  </div>
+</div>
+
+<div class="q-card">
+  <div class="q-number num-c">23</div>
+  <div class="q-text">Which of the following is the correct response to <strong>agree with an opinion</strong>?</div>
+  <div class="options">
+    <div class="option"><span class="opt-letter">A</span> "I don't think that's right."</div>
+    <div class="option"><span class="opt-letter">B</span> "I totally disagree with you."</div>
+    <div class="option"><span class="opt-letter">C</span> "That's exactly what I think too."</div>
+    <div class="option"><span class="opt-letter">D</span> "Are you sure about that?"</div>
+  </div>
+</div>
+
+<div class="difficulty-row" style="margin-top:18px"><span class="diff-tag diff-medium">Intermediate</span></div>
+
+<div class="q-card">
+  <div class="q-number num-c">24</div>
+  <div class="q-text">Choose the <strong>best expression</strong> to complete the dialogue.</div>
+  <div class="dialogue">
+    <div class="d-line"><span class="speaker">Rina :</span> "I've been so tired lately. I can't focus on studying at all."</div>
+    <div class="d-line"><span class="speaker">Dani :</span> <span class="blank"></span></div>
+  </div>
+  <div class="options">
+    <div class="option"><span class="opt-letter">A</span> "I think you should get more sleep and take regular breaks."</div>
+    <div class="option"><span class="opt-letter">B</span> "What do you think about my new shoes?"</div>
+    <div class="option"><span class="opt-letter">C</span> "In my opinion, your problem is not serious."</div>
+    <div class="option"><span class="opt-letter">D</span> "You are the most tired person I have ever met."</div>
+  </div>
+</div>
+
+<div class="q-card">
+  <div class="q-number num-c">25</div>
+  <div class="q-text">Choose the expression that <strong>politely disagrees</strong> with a suggestion.</div>
+  <div class="options">
+    <div class="option"><span class="opt-letter">A</span> "That's a great idea! Let's do it!"</div>
+    <div class="option"><span class="opt-letter">B</span> "I'm not sure about that. I think there's a better way."</div>
+    <div class="option"><span class="opt-letter">C</span> "No! That's completely wrong."</div>
+    <div class="option"><span class="opt-letter">D</span> "Whatever you say."</div>
+  </div>
+</div>
+
+<div class="q-card">
+  <div class="q-number num-c">26</div>
+  <div class="q-text">Choose the <strong>best response</strong> for the blank.</div>
+  <div class="dialogue">
+    <div class="d-line"><span class="speaker">Teacher :</span> "Students, what do you think about having a school garden project?"</div>
+    <div class="d-line"><span class="speaker">Bagas :</span> <span class="blank"></span></div>
+  </div>
+  <div class="options">
+    <div class="option"><span class="opt-letter">A</span> "I think it's a wonderful idea. It can teach us to love nature and be responsible."</div>
+    <div class="option"><span class="opt-letter">B</span> "I am going to the garden tomorrow."</div>
+    <div class="option"><span class="opt-letter">C</span> "Gardens are usually in parks, not schools."</div>
+    <div class="option"><span class="opt-letter">D</span> "What time will the garden be open?"</div>
+  </div>
+</div>
+
+<div class="difficulty-row" style="margin-top:18px"><span class="diff-tag diff-hard">Choosing Correct Expression</span></div>
+
+<div class="q-card">
+  <div class="q-number num-c">27</div>
+  <div class="q-text">Read the situation and choose the <strong>most appropriate</strong> expression.</div>
+  <div class="passage">
+    <div class="passage-title">🎭 Situation</div>
+    Your friend Sinta wants to drop out of school because she feels overwhelmed. You want to encourage her to stay and suggest some solutions.
+  </div>
+  <div class="options">
+    <div class="option"><span class="opt-letter">A</span> "If I were you, I would talk to the school counselor and try to manage your time better."</div>
+    <div class="option"><span class="opt-letter">B</span> "I think dropping out is actually a good choice for you."</div>
+    <div class="option"><span class="opt-letter">C</span> "Do you want to come to my house this weekend?"</div>
+    <div class="option"><span class="opt-letter">D</span> "I feel the same way too. School is very difficult."</div>
+  </div>
+</div>
+
+<div class="q-card">
+  <div class="q-number num-c">28</div>
+  <div class="q-text">Choose the <strong>most suitable</strong> response for the blank.</div>
+  <div class="dialogue">
+    <div class="d-line"><span class="speaker">Farhan :</span> "I think we should use more plastic bags to carry our groceries. They're cheap and practical."</div>
+    <div class="d-line"><span class="speaker">Nisa :</span> <span class="blank"></span></div>
+  </div>
+  <div class="options">
+    <div class="option"><span class="opt-letter">A</span> "I agree. Plastic bags are very useful."</div>
+    <div class="option"><span class="opt-letter">B</span> "I see your point, but in my opinion, we should use reusable bags instead to protect the environment."</div>
+    <div class="option"><span class="opt-letter">C</span> "I also like plastic bags very much."</div>
+    <div class="option"><span class="opt-letter">D</span> "I don't think plastic bags are cheap at all."</div>
+  </div>
+</div>
+
+<div class="q-card">
+  <div class="q-number num-c">29</div>
+  <div class="q-text">Choose the expression that <strong>best expresses a reasoned opinion</strong>.</div>
+  <div class="dialogue">
+    <div class="d-line"><span class="speaker">Moderator :</span> "Should mobile phones be banned in schools?"</div>
+    <div class="d-line"><span class="speaker">Student A :</span> <span class="blank"></span></div>
+  </div>
+  <div class="options">
+    <div class="option"><span class="opt-letter">A</span> "Yes, because I don't like mobile phones."</div>
+    <div class="option"><span class="opt-letter">B</span> "In my view, mobile phones should not be completely banned. Instead, schools should teach students to use them responsibly for learning purposes."</div>
+    <div class="option"><span class="opt-letter">C</span> "No. Mobile phones are very expensive and students might lose them."</div>
+    <div class="option"><span class="opt-letter">D</span> "I think mobile phones are cool."</div>
+  </div>
+</div>
+
+<div class="q-card">
+  <div class="q-number num-c">30</div>
+  <div class="q-text">Which conversation shows a <strong>correct and complete exchange</strong> of giving and responding to a suggestion?</div>
+  <div class="options">
+    <div class="option"><span class="opt-letter">A</span><div><em>Ayu :</em> "Why don't we study together this afternoon?"<br><em>Budi :</em> "That sounds great! What time shall we meet?"</div></div>
+    <div class="option"><span class="opt-letter">B</span><div><em>Ayu :</em> "I think you should read more books."<br><em>Budi :</em> "I am going to the library."</div></div>
+    <div class="option"><span class="opt-letter">C</span><div><em>Ayu :</em> "In my opinion, we need more homework."<br><em>Budi :</em> "The weather is very hot today."</div></div>
+    <div class="option"><span class="opt-letter">D</span><div><em>Ayu :</em> "I suggest taking the bus."<br><em>Budi :</em> "Buses are yellow."</div></div>
+  </div>
+</div>
+
+</main>
+<footer>📘 English Exam Preparation – Grade 9 &nbsp;|&nbsp; 30 Questions &nbsp;|&nbsp; Good luck, everyone! 🍀</footer>
+</body>
+</html> 
