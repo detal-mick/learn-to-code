@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Latihan Soal — Lomba Lentera Bahasa Inggris Kelas VII</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f0f4f8;
+    --glass: rgba(255,255,255,0.55);
+    --glass-border: rgba(255,255,255,0.8);
+    --glass-shadow: 0 8px 32px rgba(60,80,120,0.10), 0 1.5px 6px rgba(60,80,120,0.07);
+    --blue: #2563eb;
+    --blue-light: #dbeafe;
+    --blue-mid: #93c5fd;
+    --red: #dc2626;
+    --red-light: #fee2e2;
+    --green: #16a34a;
+    --green-light: #dcfce7;
+    --text: #1e293b;
+    --muted: #64748b;
+    --white: #ffffff;
+    --border: rgba(148,163,184,0.25);
+    --radius: 18px;
+    --radius-sm: 10px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Liquid glass background blobs */
+  body::before, body::after {
+    content: '';
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 0;
+  }
+  body::before {
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, #bfdbfe 0%, #93c5fd 60%, transparent 100%);
+    top: -100px; left: -150px;
+  }
+  body::after {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, #e0e7ff 0%, #c7d2fe 60%, transparent 100%);
+    bottom: -100px; right: -100px;
+  }
+
+  .wrap {
+    position: relative; z-index: 1;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 28px 18px 60px;
+  }
+
+  /* Header */
+  .header {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1.5px solid var(--glass-border);
+    border-radius: var(--radius);
+    box-shadow: var(--glass-shadow);
+    padding: 22px 28px 18px;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+  .header .badge {
+    display: inline-block;
+    background: var(--blue);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    padding: 3px 12px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  .header h1 {
+    font-size: 1.45rem;
+    font-weight: 900;
+    color: var(--text);
+    line-height: 1.2;
+  }
+  .header p {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-top: 5px;
+    font-weight: 500;
+  }
+
+  /* Progress bar */
+  .progress-wrap {
+    background: var(--glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1.5px solid var(--glass-border);
+    border-radius: 30px;
+    box-shadow: var(--glass-shadow);
+    padding: 12px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .progress-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .progress-bar-bg {
+    flex: 1;
+    height: 8px;
+    background: rgba(148,163,184,0.2);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--blue), #60a5fa);
+    border-radius: 10px;
+    transition: width 0.4s cubic-bezier(.4,0,.2,1);
+    width: 0%;
+  }
+  .progress-count {
+    font-size: 0.78rem;
+    font-weight: 800;
+    color: var(--blue);
+    white-space: nowrap;
+  }
+
+  /* Section label */
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--blue);
+    padding: 4px 12px;
+    background: var(--blue-light);
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+
+  /* Question card */
+  .q-card {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1.5px solid var(--glass-border);
+    border-radius: var(--radius);
+    box-shadow: var(--glass-shadow);
+    padding: 22px 24px 18px;
+    margin-bottom: 16px;
+    transition: box-shadow 0.2s;
+  }
+  .q-card:hover {
+    box-shadow: 0 12px 40px rgba(60,80,120,0.13), 0 2px 8px rgba(60,80,120,0.08);
+  }
+
+  .q-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .q-num {
+    min-width: 30px; height: 30px;
+    background: var(--blue);
+    color: white;
+    font-size: 0.78rem;
+    font-weight: 800;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .q-text {
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.55;
+    color: var(--text);
+  }
+
+  /* Reading passage */
+  .passage {
+    background: rgba(241,245,249,0.7);
+    border-left: 3px solid var(--blue-mid);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    font-family: 'Nunito Sans', sans-serif;
+    color: #334155;
+    line-height: 1.65;
+    margin-bottom: 12px;
+    font-style: italic;
+  }
+
+  /* Options */
+  .options { display: flex; flex-direction: column; gap: 8px; }
+
+  .opt {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 11px 15px;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid var(--border);
+    background: rgba(255,255,255,0.6);
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text);
+    transition: all 0.18s ease;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .opt:hover:not(.locked) {
+    border-color: var(--blue-mid);
+    background: rgba(219,234,254,0.5);
+    transform: translateX(2px);
+  }
+  .opt.selected:not(.locked) {
+    border-color: var(--blue);
+    background: var(--blue-light);
+    color: var(--blue);
+    font-weight: 700;
+  }
+  .opt .opt-letter {
+    width: 26px; height: 26px;
+    border-radius: 6px;
+    background: rgba(148,163,184,0.15);
+    border: 1.5px solid rgba(148,163,184,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--muted);
+    flex-shrink: 0;
+    transition: all 0.18s;
+  }
+  .opt.selected:not(.locked) .opt-letter {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: white;
+  }
+
+  /* After submit: correct/wrong */
+  .opt.correct {
+    border-color: var(--green);
+    background: var(--green-light);
+    color: var(--green);
+    font-weight: 700;
+  }
+  .opt.correct .opt-letter {
+    background: var(--green); border-color: var(--green); color: white;
+  }
+  .opt.wrong {
+    border-color: var(--red);
+    background: var(--red-light);
+    color: var(--red);
+    font-weight: 700;
+  }
+  .opt.wrong .opt-letter {
+    background: var(--red); border-color: var(--red); color: white;
+  }
+  .opt.locked { cursor: default; }
+  .opt.locked:not(.correct):not(.wrong) {
+    opacity: 0.45;
+  }
+
+  /* Submit button */
+  .btn-row {
+    display: flex;
+    justify-content: center;
+    margin: 28px 0 16px;
+  }
+  .btn-submit {
+    background: var(--blue);
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 800;
+    padding: 14px 48px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 18px rgba(37,99,235,0.3);
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+  }
+  .btn-submit:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,99,235,0.35); }
+  .btn-submit:active { transform: translateY(0); }
+  .btn-submit:disabled { background: #94a3b8; box-shadow: none; cursor: not-allowed; transform: none; }
+
+  /* Result panel */
+  .result-panel {
+    display: none;
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1.5px solid var(--glass-border);
+    border-radius: var(--radius);
+    box-shadow: var(--glass-shadow);
+    padding: 28px 28px 24px;
+    margin-bottom: 28px;
+    text-align: center;
+    animation: popIn 0.4s cubic-bezier(.17,.67,.35,1.3);
+  }
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.92); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .result-panel.show { display: block; }
+
+  .score-circle {
+    width: 110px; height: 110px;
+    border-radius: 50%;
+    margin: 0 auto 16px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    font-weight: 900;
+    position: relative;
+  }
+  .score-circle .score-num {
+    font-size: 2.1rem;
+    line-height: 1;
+  }
+  .score-circle .score-total {
+    font-size: 0.75rem;
+    font-weight: 700;
+    opacity: 0.7;
+  }
+
+  .score-great { background: var(--green-light); color: var(--green); border: 3px solid var(--green); }
+  .score-ok { background: var(--blue-light); color: var(--blue); border: 3px solid var(--blue); }
+  .score-low { background: var(--red-light); color: var(--red); border: 3px solid var(--red); }
+
+  .result-title { font-size: 1.2rem; font-weight: 900; margin-bottom: 4px; }
+  .result-sub { font-size: 0.82rem; color: var(--muted); font-weight: 500; }
+
+  .stat-row {
+    display: flex; justify-content: center; gap: 24px; margin-top: 18px;
+  }
+  .stat-item { text-align: center; }
+  .stat-val { font-size: 1.4rem; font-weight: 900; }
+  .stat-lbl { font-size: 0.72rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .stat-item.green .stat-val { color: var(--green); }
+  .stat-item.red .stat-val { color: var(--red); }
+  .stat-item.blue .stat-val { color: var(--blue); }
+
+  .btn-reset {
+    margin-top: 18px;
+    background: white;
+    color: var(--blue);
+    border: 2px solid var(--blue);
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 800;
+    padding: 10px 30px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-reset:hover { background: var(--blue); color: white; }
+
+  /* Responsive */
+  @media (max-width: 500px) {
+    .wrap { padding: 16px 10px 50px; }
+    .q-card { padding: 16px 14px 14px; }
+    .header { padding: 16px 16px 14px; }
+    .header h1 { font-size: 1.15rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header">
+    <div class="badge">Lomba Lentera 2026</div>
+    <h1>Latihan Soal Bahasa Inggris<br>Kelas VII</h1>
+    <p>SMP Islam Al Azhar 14 Semarang &nbsp;·&nbsp; 50 Soal Pilihan Ganda &nbsp;·&nbsp; 120 Menit</p>
+  </div>
+
+  <div class="progress-wrap">
+    <span class="progress-label">Progress</span>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progressFill"></div>
+    </div>
+    <span class="progress-count" id="progressCount">0 / 50</span>
+  </div>
+
+  <div id="resultPanel" class="result-panel">
+    <div class="score-circle" id="scoreCircle">
+      <span class="score-num" id="scoreNum">0</span>
+      <span class="score-total">/ 50</span>
+    </div>
+    <div class="result-title" id="resultTitle"></div>
+    <div class="result-sub" id="resultSub"></div>
+    <div class="stat-row">
+      <div class="stat-item green"><div class="stat-val" id="statCorrect">0</div><div class="stat-lbl">Benar</div></div>
+      <div class="stat-item red"><div class="stat-val" id="statWrong">0</div><div class="stat-lbl">Salah</div></div>
+      <div class="stat-item blue"><div class="stat-val" id="statSkip">0</div><div class="stat-lbl">Skip</div></div>
+    </div>
+    <button class="btn-reset" onclick="resetQuiz()">🔄 Ulangi Latihan</button>
+  </div>
+
+  <div id="quizContainer"></div>
+
+  <div class="btn-row">
+    <button class="btn-submit" id="btnSubmit" onclick="submitQuiz()">Cek Jawaban</button>
+  </div>
+
+</div>
+
+<script>
+const questions = [
+  // ===== SECTION 1: INTRODUCE MYSELF (Q1–12) =====
+  {
+    section: "Introduce Myself",
+    text: "Read the text and answer questions 1–4.<br><br><em>Hi! My name is Farhan. I am twelve years old. I study at SMP Al Azhar 14 Semarang. I come from Semarang. I live with my parents and one younger sister. My sister's name is Nisa. She is nine years old. My father works as an engineer and my mother is a nurse. My hobby is playing football and reading comic books.</em>",
+    question: "What is Farhan's hobby?",
+    options: ["Singing and dancing","Playing football and reading comic books","Drawing and cooking","Swimming and cycling"],
+    answer: 1
+  },
+  {
+    section: "Introduce Myself",
+    text: null,
+    question: "How old is Farhan's sister?",
+    options: ["Eight years old","Ten years old","Nine years old","Twelve years old"],
+    answer: 2
+  },
+  {
+    section: "Introduce Myself",
+    text: null,
+    question: "What does Farhan's father do?",
+    options: ["He is a teacher","He is a doctor","He is a nurse","He is an engineer"],
+    answer: 3
+  },
+  {
+    section: "Introduce Myself",
+    text: null,
+    question: "The text is mainly about ...",
+    options: ["Farhan's school schedule","A self-introduction of a boy named Farhan","The city of Semarang","Farhan's sister Nisa"],
+    answer: 1
+  },
+  {
+    section: "Introduce Myself",
+    text: "Read the text and answer questions 5–7.<br><br><em>My name is Shinta. I am thirteen years old and I am in grade seven. I enjoy painting and listening to music. My favorite music is pop. I have two brothers, Bagas and Reza. Bagas is fifteen and Reza is ten. We live with our grandparents because our parents work in Jakarta.</em>",
+    question: "How many siblings does Shinta have?",
+    options: ["One","Two","Three","Four"],
+    answer: 1
+  },
+  {
+    section: "Introduce Myself",
+    text: null,
+    question: "Why do Shinta and her brothers live with their grandparents?",
+    options: ["Because they don't have parents","Because their parents work in Jakarta","Because their grandparents are sick","Because they like their grandparents' house"],
+    answer: 1
+  },
+  {
+    section: "Introduce Myself",
+    text: null,
+    question: "Which statement is TRUE based on the text?",
+    options: ["Shinta likes rock music","Reza is the oldest sibling","Shinta's hobby is painting and listening to music","Bagas is ten years old"],
+    answer: 2
+  },
+  {
+    section: "Introduce Myself",
+    text: null,
+    question: "My mother works as a doctor. She helps sick people. The word 'doctor' means ...",
+    options: ["A person who teaches students","A person who treats sick people","A person who cooks food","A person who builds houses"],
+    answer: 1
+  },
+  {
+    section: "Introduce Myself",
+    text: null,
+    question: "Choose the correct sentence to introduce yourself.",
+    options: ["My name is Ahmad, I has twelve years.","I am Ahmad, I am twelve year old.","My name is Ahmad. I am twelve years old.","I named Ahmad. I is twelve years old."],
+    answer: 2
+  },
+  {
+    section: "Introduce Myself",
+    text: null,
+    question: "\"I enjoy ... in my free time.\" The correct way to fill the blank is ...",
+    options: ["read","to reading","reading","reads"],
+    answer: 2
+  },
+  {
+    section: "Introduce Myself",
+    text: null,
+    question: "Dinda: \"Hello! What is your name?\"<br>Rani: \"...\"<br>Choose the best response.",
+    options: ["My name is Rani. Nice to meet you!","I am fine, thank you.","Yes, I am Rani.","I am from Semarang."],
+    answer: 0
+  },
+  {
+    section: "Introduce Myself",
+    text: null,
+    question: "Which word describes a family relationship?",
+    options: ["Friendly","Nephew","Hobby","Subject"],
+    answer: 1
+  },
+
+  // ===== SECTION 2: DAY / DATE / SCHEDULE (Q13–24) =====
+  {
+    section: "Day & Date / Schedule",
+    text: "Read the schedule and answer questions 13–17.<br><br><em>Danu's Weekly Schedule:<br>Monday: English (08.00–09.20), Science (09.30–10.50)<br>Tuesday: Math (07.00–08.20), Art (10.00–11.20)<br>Wednesday: English (08.00–09.20), Physical Education (13.00–14.20)<br>Thursday: Math (07.00–08.20), Indonesian (09.30–10.50)<br>Friday: Islamic Studies (07.00–08.20), Extracurricular (14.00–16.00)</em>",
+    question: "On which days does Danu have English class?",
+    options: ["Tuesday and Thursday","Monday and Wednesday","Wednesday and Friday","Monday and Friday"],
+    answer: 1
+  },
+  {
+    section: "Day & Date / Schedule",
+    text: null,
+    question: "What time does Danu's extracurricular activity end?",
+    options: ["14.00","15.00","16.00","17.00"],
+    answer: 2
+  },
+  {
+    section: "Day & Date / Schedule",
+    text: null,
+    question: "How many times does Danu have Math in a week?",
+    options: ["Once","Twice","Three times","Four times"],
+    answer: 1
+  },
+  {
+    section: "Day & Date / Schedule",
+    text: null,
+    question: "Which subject does Danu have on Thursday morning?",
+    options: ["English","Science","Math","Art"],
+    answer: 2
+  },
+  {
+    section: "Day & Date / Schedule",
+    text: null,
+    question: "The text is mainly about ...",
+    options: ["Danu's favorite subject","Danu's weekly class schedule","The school rules","A school activity report"],
+    answer: 1
+  },
+  {
+    section: "Day & Date / Schedule",
+    text: null,
+    question: "\"The exam is ... Monday, the 13th of May.\" Choose the correct preposition.",
+    options: ["in","at","on","from"],
+    answer: 2
+  },
+  {
+    section: "Day & Date / Schedule",
+    text: null,
+    question: "What is the correct way to say the date \"17 August 1945\"?",
+    options: ["The seventeen August nineteen forty-five","The seventeenth of August, nineteen forty-five","Seventeen of August, nineteen forty-five","August seventeen, one thousand nine forty-five"],
+    answer: 1
+  },
+  {
+    section: "Day & Date / Schedule",
+    text: null,
+    question: "Which sentence uses time expression correctly?",
+    options: ["School starts at Monday.","We have a holiday in 25 December.","The class begins at 07.00.","She was born on 2003."],
+    answer: 2
+  },
+  {
+    section: "Day & Date / Schedule",
+    text: "Read and answer questions 20–21.<br><br><em>The school flag ceremony is held every Monday morning at 07.00. All students must wear their complete uniform. After the ceremony, students go to their classrooms. Break time is at 09.30 for fifteen minutes. School ends at 14.30 from Monday to Thursday, and at 11.30 on Friday.</em>",
+    question: "When is the flag ceremony held?",
+    options: ["Every Friday at 07.00","Every Monday morning at 07.00","Every morning at 08.00","Every Saturday at 07.30"],
+    answer: 1
+  },
+  {
+    section: "Day & Date / Schedule",
+    text: null,
+    question: "What time does school end on Friday?",
+    options: ["14.30","13.30","12.30","11.30"],
+    answer: 3
+  },
+  {
+    section: "Day & Date / Schedule",
+    text: null,
+    question: "What comes AFTER Tuesday?",
+    options: ["Monday","Wednesday","Thursday","Sunday"],
+    answer: 1
+  },
+  {
+    section: "Day & Date / Schedule",
+    text: null,
+    question: "\"We have school ... Monday ... Friday.\" Choose the correct words.",
+    options: ["from / until","on / in","at / to","in / at"],
+    answer: 0
+  },
+
+  // ===== SECTION 3: DESCRIPTIVE TEXT — PERSON (Q25–33) =====
+  {
+    section: "Descriptive Text — Person",
+    text: "Read the text and answer questions 25–29.<br><br><em>My best friend's name is Zara. She is thirteen years old and is in grade seven. She is tall and slim with long, straight black hair. She has dark brown eyes and a warm smile. Zara is a very kind and patient person. She always listens when her friends have problems. She never gets angry easily. She loves reading novels and playing the piano. I am lucky to have a friend like Zara.</em>",
+    question: "What does Zara look like?",
+    options: ["Short, chubby, with curly hair","Tall, slim, with long straight black hair","Medium height with wavy brown hair","Short with straight blonde hair"],
+    answer: 1
+  },
+  {
+    section: "Descriptive Text — Person",
+    text: null,
+    question: "Which word best describes Zara's personality?",
+    options: ["Arrogant and impatient","Kind and patient","Shy and unfriendly","Lazy and careless"],
+    answer: 1
+  },
+  {
+    section: "Descriptive Text — Person",
+    text: null,
+    question: "What is Zara's hobby?",
+    options: ["Singing and dancing","Playing football","Reading novels and playing the piano","Drawing and painting"],
+    answer: 2
+  },
+  {
+    section: "Descriptive Text — Person",
+    text: null,
+    question: "\"She never gets angry easily.\" This sentence tells us about Zara's ...",
+    options: ["Physical appearance","Daily schedule","Personality","Family background"],
+    answer: 2
+  },
+  {
+    section: "Descriptive Text — Person",
+    text: null,
+    question: "The text is mainly about ...",
+    options: ["The writer's school","A description of the writer's best friend","Zara's family members","The importance of friendship"],
+    answer: 1
+  },
+  {
+    section: "Descriptive Text — Person",
+    text: null,
+    question: "Choose the correct sentence describing someone's physical appearance.",
+    options: ["He is very friendly and helpful.","She has long curly hair and green eyes.","He enjoys playing basketball every day.","She always comes to school on time."],
+    answer: 1
+  },
+  {
+    section: "Descriptive Text — Person",
+    text: null,
+    question: "\"My teacher is ... and ...\" Choose the correct pair of personality words.",
+    options: ["tall / slim","black / curly","strict / fair","running / jumping"],
+    answer: 2
+  },
+  {
+    section: "Descriptive Text — Person",
+    text: null,
+    question: "What is the GENERIC STRUCTURE of a descriptive text?",
+    options: ["Orientation – Complication – Resolution","General Statement – Explanation","Identification – Description","Goal – Steps – Result"],
+    answer: 2
+  },
+  {
+    section: "Descriptive Text — Person",
+    text: null,
+    question: "Which tense is mainly used in a descriptive text?",
+    options: ["Simple Past Tense","Simple Present Tense","Present Perfect Tense","Future Tense"],
+    answer: 1
+  },
+
+  // ===== SECTION 4: DESCRIPTIVE TEXT — THINGS / FOOD (Q34–40) =====
+  {
+    section: "Descriptive Text — Things / Food",
+    text: "Read the text and answer questions 34–37.<br><br><em>Lumpia Semarang is a famous traditional food from Semarang, Central Java. It is a roll made of thin flour pastry filled with bamboo shoots, eggs, and shrimp. The filling is cooked with sweet soy sauce, giving it a savory and slightly sweet taste. Lumpia can be served fried or fresh. It is usually eaten with chili sauce and cucumber. Lumpia Semarang is one of the most popular souvenirs from the city.</em>",
+    question: "Where does Lumpia Semarang come from?",
+    options: ["Yogyakarta","Surabaya","Semarang, Central Java","Solo, Central Java"],
+    answer: 2
+  },
+  {
+    section: "Descriptive Text — Things / Food",
+    text: null,
+    question: "What are the main ingredients of Lumpia Semarang?",
+    options: ["Rice, chicken, and vegetables","Bamboo shoots, eggs, and shrimp","Tofu, tempeh, and chili","Noodles, beef, and mushroom"],
+    answer: 1
+  },
+  {
+    section: "Descriptive Text — Things / Food",
+    text: null,
+    question: "How does Lumpia Semarang taste?",
+    options: ["Sour and spicy","Sweet and salty","Savory and slightly sweet","Bitter and sour"],
+    answer: 2
+  },
+  {
+    section: "Descriptive Text — Things / Food",
+    text: null,
+    question: "\"It is usually eaten with chili sauce and cucumber.\" The word 'it' refers to ...",
+    options: ["Semarang","The chili sauce","Lumpia Semarang","The shrimp"],
+    answer: 2
+  },
+  {
+    section: "Descriptive Text — Things / Food",
+    text: null,
+    question: "Choose the word that describes TEXTURE of food.",
+    options: ["Spicy","Sweet","Crunchy","Sour"],
+    answer: 2
+  },
+  {
+    section: "Descriptive Text — Things / Food",
+    text: null,
+    question: "\"This bag is made ... leather. It is used ... keeping books.\" Choose the correct prepositions.",
+    options: ["from / for","of / to","by / in","with / at"],
+    answer: 0
+  },
+  {
+    section: "Descriptive Text — Things / Food",
+    text: null,
+    question: "Which sentence correctly describes an OBJECT?",
+    options: ["She is very kind and helpful to everyone.","The vase is round, white, and made of ceramic.","He loves playing guitar after school.","They go to the market every Sunday morning."],
+    answer: 1
+  },
+
+  // ===== SECTION 5: DESCRIPTIVE TEXT — PLACE (Q41–50) =====
+  {
+    section: "Descriptive Text — Place",
+    text: "Read the text and answer questions 41–45.<br><br><em>Lawang Sewu is a historic building located in the center of Semarang, Central Java. The name means 'Thousand Doors' in Javanese. It was built by the Dutch in 1904 and used as a railway company office. The building has three floors and features large arched windows and hundreds of doors. It is surrounded by a spacious garden. Today, Lawang Sewu is a popular tourist attraction. To get there from Simpang Lima, go straight along Pemuda Street. Turn left at the roundabout and Lawang Sewu will be on your right.</em>",
+    question: "What does 'Lawang Sewu' mean in Javanese?",
+    options: ["Thousand Windows","Thousand Doors","Ancient Building","Big House"],
+    answer: 1
+  },
+  {
+    section: "Descriptive Text — Place",
+    text: null,
+    question: "When was Lawang Sewu built?",
+    options: ["1904","1945","1800","1920"],
+    answer: 0
+  },
+  {
+    section: "Descriptive Text — Place",
+    text: null,
+    question: "From Simpang Lima, how do you get to Lawang Sewu?",
+    options: ["Turn right, then go straight","Go straight on Pemuda Street, then turn left at the roundabout","Turn left immediately, then turn right","Go straight, then turn right at the roundabout"],
+    answer: 1
+  },
+  {
+    section: "Descriptive Text — Place",
+    text: null,
+    question: "Which word in the text tells us WHERE Lawang Sewu is?",
+    options: ["Historic","Located in the center of Semarang","Popular tourist attraction","Built by the Dutch"],
+    answer: 1
+  },
+  {
+    section: "Descriptive Text — Place",
+    text: null,
+    question: "The text above is an example of ...",
+    options: ["Narrative text","Procedure text","Descriptive text about a place","Report text"],
+    answer: 2
+  },
+  {
+    section: "Descriptive Text — Place",
+    text: null,
+    question: "\"The bookstore is ... the school and the hospital.\" Choose the correct preposition.",
+    options: ["in front of","behind","between","opposite"],
+    answer: 2
+  },
+  {
+    section: "Descriptive Text — Place",
+    text: null,
+    question: "\"Turn left at the traffic light, then go ... until you see the mosque.\" Choose the correct word.",
+    options: ["turn","straight","left","behind"],
+    answer: 1
+  },
+  {
+    section: "Descriptive Text — Place",
+    text: null,
+    question: "\"The post office is ... the bank.\" Which option shows that the post office is very close and beside the bank?",
+    options: ["in front of","far from","next to","behind"],
+    answer: 2
+  },
+  {
+    section: "Descriptive Text — Place",
+    text: "Read and answer questions 49–50.<br><br><em>Sam wants to go to the library. He is standing in front of his school. He should turn right and walk along Green Street. Then he must turn left at the flower shop. The library is the second building on the right side, next to the supermarket.</em>",
+    question: "Where does Sam start his journey?",
+    options: ["At the flower shop","At the supermarket","In front of his school","At the library entrance"],
+    answer: 2
+  },
+  {
+    section: "Descriptive Text — Place",
+    text: null,
+    question: "Which sentence BEST describes the library's location based on the text?",
+    options: ["It is on the left side of Green Street","It is next to the supermarket, second building on the right after turning left at the flower shop","It is directly opposite the school","It is behind the flower shop"],
+    answer: 1
+  }
+];
+
+let userAnswers = new Array(50).fill(null);
+let submitted = false;
+let lastPassageIndex = -1;
+
+function buildQuiz() {
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = '';
+
+  let currentSection = '';
+  let passageHTML = '';
+
+  questions.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'q-card';
+    card.id = 'card-' + i;
+
+    let sectionHTML = '';
+    if (q.section !== currentSection) {
+      currentSection = q.section;
+      sectionHTML = `<div class="section-label">${q.section}</div>`;
+    }
+
+    let passageBlock = '';
+    if (q.text) {
+      passageHTML = q.text;
+      passageBlock = `<div class="passage">${q.text}</div>`;
+    }
+
+    const optLetters = ['A','B','C','D'];
+    const optsHTML = q.options.map((opt, j) =>
+      `<div class="opt" id="opt-${i}-${j}" onclick="selectAnswer(${i}, ${j})">
+        <span class="opt-letter">${optLetters[j]}</span>
+        <span>${opt}</span>
+      </div>`
+    ).join('');
+
+    card.innerHTML = `
+      ${sectionHTML}
+      ${passageBlock}
+      <div class="q-header">
+        <div class="q-num">${i + 1}</div>
+        <div class="q-text">${q.question}</div>
+      </div>
+      <div class="options">${optsHTML}</div>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+function selectAnswer(qIdx, optIdx) {
+  if (submitted) return;
+
+  const prev = userAnswers[qIdx];
+  if (prev !== null) {
+    document.getElementById(`opt-${qIdx}-${prev}`).classList.remove('selected');
+  }
+
+  userAnswers[qIdx] = optIdx;
+  document.getElementById(`opt-${qIdx}-${optIdx}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress() {
+  const answered = userAnswers.filter(a => a !== null).length;
+  const pct = (answered / 50) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressCount').textContent = answered + ' / 50';
+}
+
+function submitQuiz() {
+  if (submitted) return;
+  submitted = true;
+
+  let correct = 0, wrong = 0, skip = 0;
+
+  questions.forEach((q, i) => {
+    const chosen = userAnswers[i];
+    const correct_idx = q.answer;
+
+    for (let j = 0; j < 4; j++) {
+      const el = document.getElementById(`opt-${i}-${j}`);
+      el.classList.add('locked');
+      el.classList.remove('selected');
+    }
+
+    if (chosen === null) {
+      skip++;
+      // show correct answer faintly
+      document.getElementById(`opt-${i}-${correct_idx}`).classList.add('correct');
+    } else if (chosen === correct_idx) {
+      correct++;
+      document.getElementById(`opt-${i}-${correct_idx}`).classList.add('correct');
+    } else {
+      wrong++;
+      document.getElementById(`opt-${i}-${chosen}`).classList.add('wrong');
+      document.getElementById(`opt-${i}-${correct_idx}`).classList.add('correct');
+    }
+  });
+
+  // Show result
+  const panel = document.getElementById('resultPanel');
+  panel.classList.add('show');
+
+  const circle = document.getElementById('scoreCircle');
+  document.getElementById('scoreNum').textContent = correct;
+  document.getElementById('statCorrect').textContent = correct;
+  document.getElementById('statWrong').textContent = wrong;
+  document.getElementById('statSkip').textContent = skip;
+
+  const pct = correct / 50;
+  if (pct >= 0.8) {
+    circle.className = 'score-circle score-great';
+    document.getElementById('resultTitle').textContent = '🎉 Luar Biasa!';
+    document.getElementById('resultSub').textContent = 'Kamu sangat siap untuk Lomba Lentera!';
+  } else if (pct >= 0.6) {
+    circle.className = 'score-circle score-ok';
+    document.getElementById('resultTitle').textContent = '👍 Bagus!';
+    document.getElementById('resultSub').textContent = 'Tingkatkan lagi di bagian yang salah ya!';
+  } else {
+    circle.className = 'score-circle score-low';
+    document.getElementById('resultTitle').textContent = '💪 Tetap Semangat!';
+    document.getElementById('resultSub').textContent = 'Review materinya dan coba lagi, pasti bisa!';
+  }
+
+  document.getElementById('btnSubmit').disabled = true;
+  panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function resetQuiz() {
+  userAnswers = new Array(50).fill(null);
+  submitted = false;
+  document.getElementById('resultPanel').classList.remove('show');
+  document.getElementById('btnSubmit').disabled = false;
+  document.getElementById('progressFill').style.width = '0%';
+  document.getElementById('progressCount').textContent = '0 / 50';
+  buildQuiz();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+buildQuiz();
+</script>
+</body>
+</html>
