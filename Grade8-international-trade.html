@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>International Trade — Grade 8 Economics</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --glass: rgba(255,255,255,0.18);
+  --glass-border: rgba(255,255,255,0.35);
+  --glass-hover: rgba(255,255,255,0.28);
+  --glass-dark: rgba(0,0,0,0.12);
+  --blur: blur(18px);
+  --radius: 20px;
+  --accent1: #38bdf8;
+  --accent2: #34d399;
+  --accent3: #f472b6;
+  --accent4: #fbbf24;
+  --text: #f0f9ff;
+  --text-muted: rgba(240,249,255,0.7);
+  --shadow: 0 8px 32px rgba(0,0,0,0.18);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: #0c1a2e;
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── Animated background blobs ── */
+.bg {
+  position: fixed; inset: 0; z-index: 0; overflow: hidden;
+}
+.blob {
+  position: absolute; border-radius: 50%;
+  filter: blur(80px); opacity: 0.45; animation: drift 14s ease-in-out infinite;
+}
+.blob:nth-child(1){ width:520px;height:520px;background:#0ea5e9;top:-120px;left:-100px;animation-delay:0s; }
+.blob:nth-child(2){ width:400px;height:400px;background:#10b981;top:40%;right:-80px;animation-delay:-5s; }
+.blob:nth-child(3){ width:350px;height:350px;background:#8b5cf6;bottom:-80px;left:30%;animation-delay:-9s; }
+.blob:nth-child(4){ width:280px;height:280px;background:#f472b6;top:20%;left:55%;animation-delay:-3s; }
+@keyframes drift {
+  0%,100%{ transform:translate(0,0) scale(1); }
+  33%{ transform:translate(30px,-40px) scale(1.06); }
+  66%{ transform:translate(-20px,30px) scale(0.96); }
+}
+
+/* ── Layout ── */
+.wrap { position:relative; z-index:1; max-width:900px; margin:0 auto; padding:24px 16px 60px; }
+
+/* ── Header ── */
+header {
+  text-align:center; padding:36px 24px 28px;
+  background:var(--glass); backdrop-filter:var(--blur);
+  border:1px solid var(--glass-border); border-radius:28px;
+  margin-bottom:24px; box-shadow:var(--shadow);
+}
+header .emoji { font-size:2.8rem; display:block; margin-bottom:8px; }
+header h1 { font-size:clamp(1.5rem,4vw,2.2rem); font-weight:900; line-height:1.2;
+  background:linear-gradient(135deg,#38bdf8,#34d399,#f472b6);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+header p { margin-top:8px; color:var(--text-muted); font-size:0.95rem; font-weight:600; }
+
+/* ── Tab nav ── */
+.tabs {
+  display:flex; gap:8px; flex-wrap:wrap; justify-content:center;
+  margin-bottom:20px;
+}
+.tab-btn {
+  background:var(--glass); backdrop-filter:var(--blur);
+  border:1px solid var(--glass-border); border-radius:50px;
+  color:var(--text); font-family:'Nunito',sans-serif; font-weight:700; font-size:0.82rem;
+  padding:9px 16px; cursor:pointer; transition:all .25s;
+  display:flex; align-items:center; gap:6px;
+}
+.tab-btn:hover { background:var(--glass-hover); transform:translateY(-2px); }
+.tab-btn.active {
+  background:linear-gradient(135deg,rgba(56,189,248,0.45),rgba(52,211,153,0.35));
+  border-color:rgba(56,189,248,0.6); box-shadow:0 4px 20px rgba(56,189,248,0.3);
+}
+
+/* ── Panels ── */
+.panel { display:none; animation:fadeUp .35s ease; }
+.panel.active { display:block; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+
+/* ── Glass card ── */
+.card {
+  background:var(--glass); backdrop-filter:var(--blur);
+  border:1px solid var(--glass-border); border-radius:var(--radius);
+  padding:22px 24px; margin-bottom:16px; box-shadow:var(--shadow);
+}
+.card h2 { font-size:1.2rem; font-weight:800; margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+.card h3 { font-size:1rem; font-weight:700; margin:14px 0 6px; color:var(--accent1); }
+.card p, .card li { font-size:0.9rem; line-height:1.65; color:var(--text-muted); }
+.card ul { padding-left:18px; }
+.card ul li { margin-bottom:4px; }
+.tag {
+  display:inline-block; padding:3px 10px; border-radius:50px; font-size:0.75rem; font-weight:700;
+  background:rgba(56,189,248,0.2); border:1px solid rgba(56,189,248,0.4); color:var(--accent1); margin-right:5px;
+}
+
+/* ── Key Terms Accordion ── */
+.term-list { display:grid; gap:8px; }
+.term {
+  background:rgba(255,255,255,0.08); border:1px solid var(--glass-border);
+  border-radius:14px; overflow:hidden; cursor:pointer; transition:background .2s;
+}
+.term:hover { background:rgba(255,255,255,0.14); }
+.term-head {
+  padding:12px 16px; font-weight:700; font-size:0.88rem;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.term-head .arrow { transition:transform .3s; font-size:0.75rem; color:var(--accent2); }
+.term.open .arrow { transform:rotate(180deg); }
+.term-body { display:none; padding:0 16px 12px; font-size:0.85rem; color:var(--text-muted); line-height:1.6; }
+.term.open .term-body { display:block; }
+.term-eg { margin-top:6px; color:var(--accent2); font-weight:600; font-size:0.82rem; }
+
+/* ── Trade Game reveal cards ── */
+.game-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+@media(max-width:540px){ .game-grid{ grid-template-columns:1fr; } }
+.game-card {
+  background:rgba(255,255,255,0.08); border:1px solid var(--glass-border);
+  border-radius:16px; padding:16px; cursor:pointer; transition:all .25s;
+  position:relative; overflow:hidden;
+}
+.game-card:hover { background:rgba(255,255,255,0.15); transform:translateY(-3px); }
+.game-card .gc-front { font-weight:700; font-size:0.9rem; display:flex; align-items:center; gap:8px; }
+.game-card .gc-back { display:none; margin-top:10px; font-size:0.82rem; color:var(--text-muted); line-height:1.55; border-top:1px solid rgba(255,255,255,0.15); padding-top:10px; }
+.game-card.revealed .gc-back { display:block; }
+.reveal-hint { font-size:0.72rem; color:var(--text-muted); margin-top:4px; }
+
+/* ── SPICED / WPIDEC ── */
+.sw-toggle { display:flex; gap:8px; margin-bottom:16px; }
+.sw-btn {
+  flex:1; padding:10px; border-radius:14px; border:2px solid transparent;
+  font-family:'Nunito',sans-serif; font-weight:800; font-size:0.9rem;
+  cursor:pointer; transition:all .25s; text-align:center;
+}
+.sw-btn.spiced { background:rgba(52,211,153,0.15); border-color:rgba(52,211,153,0.4); color:#34d399; }
+.sw-btn.spiced.active { background:rgba(52,211,153,0.35); border-color:#34d399; box-shadow:0 4px 16px rgba(52,211,153,0.3); }
+.sw-btn.wpidec { background:rgba(244,114,182,0.15); border-color:rgba(244,114,182,0.4); color:#f472b6; }
+.sw-btn.wpidec.active { background:rgba(244,114,182,0.35); border-color:#f472b6; box-shadow:0 4px 16px rgba(244,114,182,0.3); }
+.sw-panel { display:none; }
+.sw-panel.active { display:grid; gap:10px; }
+.sw-item {
+  background:rgba(255,255,255,0.08); border:1px solid var(--glass-border);
+  border-radius:16px; padding:14px 16px; cursor:pointer; transition:all .2s;
+}
+.sw-item:hover { background:rgba(255,255,255,0.14); }
+.sw-item-head { display:flex; align-items:center; gap:10px; font-weight:800; font-size:1rem; }
+.sw-item-head .letter {
+  width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;font-weight:900;flex-shrink:0;
+}
+.spiced-active .letter { background:rgba(52,211,153,0.25);color:#34d399; }
+.wpidec-active .letter { background:rgba(244,114,182,0.25);color:#f472b6; }
+.sw-item-body { display:none; margin-top:10px; font-size:0.85rem; color:var(--text-muted); line-height:1.6; padding-top:10px; border-top:1px solid rgba(255,255,255,0.12); }
+.sw-item.open .sw-item-body { display:block; }
+.sw-example { margin-top:6px; font-weight:600; font-size:0.82rem; }
+.spiced-active .sw-example { color:#34d399; }
+.wpidec-active .sw-example { color:#f472b6; }
+
+/* ── MNC toggle ── */
+.mnc-toggle { display:flex; gap:8px; margin-bottom:14px; }
+.mnc-btn {
+  flex:1; padding:9px; border-radius:12px; border:2px solid transparent;
+  font-family:'Nunito',sans-serif; font-weight:800; font-size:0.85rem;
+  cursor:pointer; transition:all .25s;
+}
+.mnc-btn.pos { background:rgba(52,211,153,0.15); border-color:rgba(52,211,153,0.3); color:#34d399; }
+.mnc-btn.pos.active { background:rgba(52,211,153,0.3); border-color:#34d399; }
+.mnc-btn.neg { background:rgba(244,114,182,0.15); border-color:rgba(244,114,182,0.3); color:#f472b6; }
+.mnc-btn.neg.active { background:rgba(244,114,182,0.3); border-color:#f472b6; }
+.mnc-panel { display:none; }
+.mnc-panel.active { display:grid; gap:8px; }
+.mnc-point {
+  background:rgba(255,255,255,0.08); border-radius:14px;
+  padding:12px 15px; font-size:0.87rem; color:var(--text-muted); line-height:1.6;
+  border-left:3px solid transparent;
+}
+.pos-panel .mnc-point { border-color:#34d399; }
+.neg-panel .mnc-point { border-color:#f472b6; }
+.mnc-point strong { display:block; color:var(--text); margin-bottom:2px; font-weight:700; }
+
+/* ── Four Freedoms ── */
+.freedoms { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
+@media(max-width:500px){ .freedoms{ grid-template-columns:1fr; } }
+.freedom-card {
+  background:rgba(255,255,255,0.08); border:1px solid var(--glass-border);
+  border-radius:16px; padding:18px 16px; text-align:center; cursor:pointer; transition:all .25s;
+}
+.freedom-card:hover { background:rgba(255,255,255,0.16); transform:translateY(-3px); }
+.freedom-card .fc-icon { font-size:2rem; margin-bottom:8px; }
+.freedom-card .fc-title { font-weight:800; font-size:0.9rem; margin-bottom:6px; }
+.freedom-card .fc-desc { font-size:0.8rem; color:var(--text-muted); display:none; line-height:1.5; }
+.freedom-card.open .fc-desc { display:block; }
+
+/* ── Quiz ── */
+.quiz-q { margin-bottom:20px; }
+.quiz-q .q-text { font-weight:700; font-size:0.92rem; margin-bottom:10px; }
+.quiz-options { display:grid; gap:7px; }
+.quiz-opt {
+  background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2);
+  border-radius:12px; padding:10px 14px; cursor:pointer;
+  font-family:'Nunito',sans-serif; font-size:0.85rem; color:var(--text);
+  text-align:left; transition:all .2s; font-weight:600;
+}
+.quiz-opt:hover:not(:disabled) { background:rgba(255,255,255,0.16); }
+.quiz-opt.correct { background:rgba(52,211,153,0.3); border-color:#34d399; color:#fff; }
+.quiz-opt.wrong { background:rgba(244,114,182,0.3); border-color:#f472b6; color:#fff; }
+.quiz-feedback { font-size:0.82rem; margin-top:8px; font-weight:700; min-height:18px; }
+.quiz-feedback.ok { color:#34d399; }
+.quiz-feedback.no { color:#f472b6; }
+#quiz-score {
+  text-align:center; padding:20px; font-size:1.1rem; font-weight:800;
+  background:rgba(56,189,248,0.15); border:1px solid rgba(56,189,248,0.4);
+  border-radius:16px; display:none; margin-top:8px; color:var(--accent1);
+}
+#restart-btn {
+  display:none; margin:12px auto 0; padding:10px 24px;
+  background:rgba(56,189,248,0.25); border:1px solid rgba(56,189,248,0.5);
+  border-radius:50px; color:var(--accent1); font-family:'Nunito',sans-serif;
+  font-weight:700; font-size:0.9rem; cursor:pointer; transition:all .2s;
+}
+#restart-btn:hover { background:rgba(56,189,248,0.4); }
+
+/* ── Highlight box ── */
+.highlight {
+  background:rgba(56,189,248,0.12); border:1px solid rgba(56,189,248,0.3);
+  border-radius:14px; padding:14px 16px; font-size:0.87rem; line-height:1.65;
+  color:var(--text-muted); margin-top:12px;
+}
+.highlight strong { color:var(--accent1); }
+
+/* ── Table ── */
+.glass-table { width:100%; border-collapse:collapse; font-size:0.83rem; margin-top:12px; }
+.glass-table th { background:rgba(56,189,248,0.2); padding:9px 12px; text-align:left; font-weight:800; }
+.glass-table td { padding:9px 12px; border-top:1px solid rgba(255,255,255,0.08); color:var(--text-muted); }
+.glass-table tr:hover td { background:rgba(255,255,255,0.06); }
+
+/* ── Progress dots ── */
+.dots { display:flex; justify-content:center; gap:8px; margin-bottom:20px; }
+.dot { width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.2);cursor:pointer;transition:all .2s; }
+.dot.active { background:var(--accent1); box-shadow:0 0 8px var(--accent1); }
+</style>
+</head>
+<body>
+
+<div class="bg">
+  <div class="blob"></div><div class="blob"></div>
+  <div class="blob"></div><div class="blob"></div>
+</div>
+
+<div class="wrap">
+  <header>
+    <span class="emoji">🌍</span>
+    <h1>International Trade</h1>
+    <p>Grade 8 Economics · Interactive Study Guide</p>
+  </header>
+
+  <div class="tabs" id="tabBar">
+    <button class="tab-btn active" data-tab="t1">📦 What is Trade?</button>
+    <button class="tab-btn" data-tab="t2">🎮 Trade Game</button>
+    <button class="tab-btn" data-tab="t3">🔤 SPICED & WPIDEC</button>
+    <button class="tab-btn" data-tab="t4">🏭 MNCs & Indonesia</button>
+    <button class="tab-btn" data-tab="t5">🇪🇺 EU & Single Market</button>
+    <button class="tab-btn" data-tab="t6">✏️ Quiz</button>
+  </div>
+
+  <div class="dots" id="dots"></div>
+
+  <!-- ─────────────── PANEL 1: What is Trade ─────────────── -->
+  <div class="panel active" id="t1">
+    <div class="card">
+      <h2>📦 What Is International Trade?</h2>
+      <p>Indonesia grows excellent coffee and palm oil but cannot produce commercial aircraft. Germany engineers world-class machinery but cannot grow rice. So they trade. <strong>International trade</strong> is the exchange of goods and services between countries — selling what you produce best (<em>exports</em>) and buying what others produce better (<em>imports</em>).</p>
+      <div class="highlight">
+        <strong>Comparative Advantage:</strong> Even if a country <em>could</em> make everything itself, it makes more sense to specialise in what it does best and trade for the rest. Indonesia focuses on palm oil; Japan focuses on electronics. Both end up better off.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>📖 Key Terms — Click to Expand</h2>
+      <div class="term-list" id="termList">
+        <div class="term">
+          <div class="term-head">Export <span class="arrow">▼</span></div>
+          <div class="term-body">Goods or services <strong>sold to another country</strong>.<div class="term-eg">🇮🇩 Indonesia exports palm oil to India and the EU.</div></div>
+        </div>
+        <div class="term">
+          <div class="term-head">Import <span class="arrow">▼</span></div>
+          <div class="term-body">Goods or services <strong>bought from another country</strong>.<div class="term-eg">🇮🇩 Indonesia imports aircraft from the USA and machinery from Germany.</div></div>
+        </div>
+        <div class="term">
+          <div class="term-head">Trade Surplus <span class="arrow">▼</span></div>
+          <div class="term-body">When a country <strong>exports more than it imports</strong> — more money flowing in than out. Indonesia often runs a surplus in commodities.</div>
+        </div>
+        <div class="term">
+          <div class="term-head">Trade Deficit <span class="arrow">▼</span></div>
+          <div class="term-body">When a country <strong>imports more than it exports</strong> — more money flowing out than in.</div>
+        </div>
+        <div class="term">
+          <div class="term-head">Tariff <span class="arrow">▼</span></div>
+          <div class="term-body">A <strong>tax placed on imported goods</strong>, making them more expensive. Used to protect local industries from foreign competition.</div>
+        </div>
+        <div class="term">
+          <div class="term-head">Quota <span class="arrow">▼</span></div>
+          <div class="term-body">A <strong>limit on the quantity</strong> of a good that can be imported. e.g. "Only 10,000 foreign cars allowed per year."</div>
+        </div>
+        <div class="term">
+          <div class="term-head">Free Trade <span class="arrow">▼</span></div>
+          <div class="term-body">Trade between countries with <strong>no tariffs, quotas, or barriers</strong>. Example: the ASEAN Free Trade Area (AFTA) among Southeast Asian nations.</div>
+        </div>
+        <div class="term">
+          <div class="term-head">Balance of Trade <span class="arrow">▼</span></div>
+          <div class="term-body">The <strong>difference between a country's exports and imports</strong>. Positive = surplus; negative = deficit.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────────────── PANEL 2: Trade Game ─────────────── -->
+  <div class="panel" id="t2">
+    <div class="card">
+      <h2>🎮 The International Trade Game</h2>
+      <p>In the Trade Game, student groups represent countries with different resources (paper, scissors, rulers, pens). Each country tries to "manufacture" goods (cut shapes) and sell them to the World Bank for points. To produce more, countries must trade with each other.</p>
+      <div class="highlight"><strong>Click each card</strong> to reveal what each observation teaches us about the real world.</div>
+    </div>
+
+    <div class="card">
+      <h2>💡 What the Game Reveals</h2>
+      <div class="game-grid">
+        <div class="game-card" onclick="this.classList.toggle('revealed')">
+          <div class="gc-front">🏆 Rich countries dominate early<div class="reveal-hint">tap to reveal</div></div>
+          <div class="gc-back">Developed nations have better tools, technology, and capital. They produce faster and earn more points from the start — just like in real global trade.</div>
+        </div>
+        <div class="game-card" onclick="this.classList.toggle('revealed')">
+          <div class="gc-front">🌿 Raw materials earn less<div class="reveal-hint">tap to reveal</div></div>
+          <div class="gc-back">Countries with only raw materials (paper, no scissors) earn little until they trade for tools. In reality, exporting raw resources earns less than exporting manufactured goods.</div>
+        </div>
+        <div class="game-card" onclick="this.classList.toggle('revealed')">
+          <div class="gc-front">🤝 Negotiation reflects power<div class="reveal-hint">tap to reveal</div></div>
+          <div class="gc-back">Countries with tools negotiate from a position of strength. Poor countries often accept unfair deals just to participate. This mirrors real-world trade negotiations.</div>
+        </div>
+        <div class="game-card" onclick="this.classList.toggle('revealed')">
+          <div class="gc-front">🎯 Specialisation pays off<div class="reveal-hint">tap to reveal</div></div>
+          <div class="gc-back">Countries that focus on making one product efficiently outperform those who try to do everything. This is comparative advantage in action.</div>
+        </div>
+        <div class="game-card" onclick="this.classList.toggle('revealed')">
+          <div class="gc-front">🌐 Trade beats isolation<div class="reveal-hint">tap to reveal</div></div>
+          <div class="gc-back">Countries that refuse to trade fall behind. Openness to exchange — even imperfect exchange — leads to more growth than going it alone.</div>
+        </div>
+        <div class="game-card" onclick="this.classList.toggle('revealed')">
+          <div class="gc-front">⚖️ Trade is not automatically fair<div class="reveal-hint">tap to reveal</div></div>
+          <div class="gc-back">Starting conditions, rules, and bargaining power all shape who wins. This is the key lesson: free trade and fair trade are not the same thing.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>📊 Terms of Trade</h2>
+      <p>The <strong>terms of trade</strong> is the ratio of export prices to import prices. If your export prices rise while import prices stay the same, your terms of trade <em>improve</em> — you get more for what you sell.</p>
+      <p style="margin-top:10px;">This is why Indonesia aims to move from exporting raw commodities (low value) to exporting manufactured goods and services (higher value).</p>
+    </div>
+  </div>
+
+  <!-- ─────────────── PANEL 3: SPICED & WPIDEC ─────────────── -->
+  <div class="panel" id="t3">
+    <div class="card">
+      <h2>🔤 SPICED & WPIDEC</h2>
+      <p>Two mnemonics to organise the <strong>advantages</strong> and <strong>disadvantages / threats</strong> of international trade. Click any letter to expand its meaning.</p>
+      <div class="sw-toggle" style="margin-top:16px;">
+        <button class="sw-btn spiced active" onclick="switchSW('spiced')">✅ SPICED — Advantages</button>
+        <button class="sw-btn wpidec" onclick="switchSW('wpidec')">⚠️ WPIDEC — Threats</button>
+      </div>
+
+      <div class="sw-panel spiced-active active" id="sw-spiced">
+        <div class="sw-item" onclick="this.classList.toggle('open')">
+          <div class="sw-item-head"><span class="letter">S</span> Specialisation</div>
+          <div class="sw-item-body">Countries focus on what they produce most efficiently. Productivity and quality rise for everyone involved in trade.<div class="sw-example">🇮🇩 Indonesian batik artisans have centuries of skill — exporting this earns more than competing in industries Indonesia has no advantage in.</div></div>
+        </div>
+        <div class="sw-item" onclick="this.classList.toggle('open')">
+          <div class="sw-item-head"><span class="letter">P</span> Price</div>
+          <div class="sw-item-body">Global competition pushes prices down for consumers. More supplier countries = more competition = cheaper goods.<div class="sw-example">📱 Smartphones are affordable partly because global competition among manufacturers drives down prices.</div></div>
+        </div>
+        <div class="sw-item" onclick="this.classList.toggle('open')">
+          <div class="sw-item-head"><span class="letter">I</span> Income & Innovation</div>
+          <div class="sw-item-body">Export revenues generate income for businesses, workers, and governments. Exposure to global competition drives companies to innovate.<div class="sw-example">🇮🇩 Indonesia earns billions in foreign exchange from coal and palm oil, funding schools and infrastructure.</div></div>
+        </div>
+        <div class="sw-item" onclick="this.classList.toggle('open')">
+          <div class="sw-item-head"><span class="letter">C</span> Choice</div>
+          <div class="sw-item-body">Consumers gain access to a far wider range of goods than any single country could produce alone.<div class="sw-example">🛒 Without trade, Indonesians couldn't easily access Japanese electronics, Australian beef, or French cosmetics.</div></div>
+        </div>
+        <div class="sw-item" onclick="this.classList.toggle('open')">
+          <div class="sw-item-head"><span class="letter">E</span> Employment</div>
+          <div class="sw-item-body">Export industries create jobs. When a country sells more abroad, factories and farms hire more workers.<div class="sw-example">👗 Indonesia's textile and garment industry employs millions producing clothing for global brands.</div></div>
+        </div>
+        <div class="sw-item" onclick="this.classList.toggle('open')">
+          <div class="sw-item-head"><span class="letter">D</span> Development</div>
+          <div class="sw-item-body">Trade allows developing countries to grow their economies, raise living standards, and access new technologies and skills.<div class="sw-example">📈 Export-led growth lifted hundreds of millions out of poverty in East and Southeast Asia over the past 50 years.</div></div>
+        </div>
+      </div>
+
+      <div class="sw-panel wpidec-active" id="sw-wpidec">
+        <div class="sw-item" onclick="this.classList.toggle('open')">
+          <div class="sw-item-head"><span class="letter">W</span> Workers' Exploitation</div>
+          <div class="sw-item-body">In the race to keep export prices competitive, some countries suppress wages or allow poor working conditions. Workers earn very little while goods sell for much more overseas.<div class="sw-example">👕 Garment workers in some countries earn a fraction of what a finished piece of clothing sells for in European stores.</div></div>
+        </div>
+        <div class="sw-item" onclick="this.classList.toggle('open')">
+          <div class="sw-item-head"><span class="letter">P</span> Political Dependency</div>
+          <div class="sw-item-body">Heavy reliance on one trading partner creates political vulnerability. If that partner imposes sanctions or withdraws investment, the dependent country suffers badly.<div class="sw-example">⚠️ A country that exports 70% of its goods to one nation can have its economy used as a political bargaining chip.</div></div>
+        </div>
+        <div class="sw-item" onclick="this.classList.toggle('open')">
+          <div class="sw-item-head"><span class="letter">I</span> Industry Destruction</div>
+          <div class="sw-item-body">Cheap imports can wipe out local industries that can't compete on price. Jobs are lost and skills disappear — sometimes permanently (de-industrialisation).<div class="sw-example">🏭 Cheap imported textiles have threatened traditional Indonesian weaving industries in some regions.</div></div>
+        </div>
+        <div class="sw-item" onclick="this.classList.toggle('open')">
+          <div class="sw-item-head"><span class="letter">D</span> Dependency on Commodities</div>
+          <div class="sw-item-body">Countries relying heavily on raw material exports are vulnerable to price volatility. When commodity prices crash, the whole economy suffers.<div class="sw-example">⛏️ Indonesia is a major coal exporter. When global coal prices fall sharply, government revenue and growth take a hit.</div></div>
+        </div>
+        <div class="sw-item" onclick="this.classList.toggle('open')">
+          <div class="sw-item-head"><span class="letter">E</span> Environmental Damage</div>
+          <div class="sw-item-body">The pressure to produce more for export — especially in agriculture and mining — can cause deforestation, pollution, and habitat loss.<div class="sw-example">🌳 Expanding palm oil plantations for export has contributed to deforestation and loss of orangutan habitat in Borneo and Sumatra.</div></div>
+        </div>
+        <div class="sw-item" onclick="this.classList.toggle('open')">
+          <div class="sw-item-head"><span class="letter">C</span> Cultural Erosion</div>
+          <div class="sw-item-body">A flood of foreign brands, media, and products can overwhelm local culture. Small local businesses struggle to survive against powerful multinationals.<div class="sw-example">🍔 Global fast-food chains and streaming services can displace local food culture, entertainment, and traditions.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────────────── PANEL 4: MNCs ─────────────── -->
+  <div class="panel" id="t4">
+    <div class="card">
+      <h2>🏭 Multinational Companies (MNCs)</h2>
+      <p>A <strong>multinational company (MNC)</strong> is a business that operates in more than one country — headquartered in one nation but with factories, offices, or stores in many others.</p>
+      <table class="glass-table" style="margin-top:14px;">
+        <tr><th>MNC</th><th>Home Country</th><th>Presence in Indonesia</th></tr>
+        <tr><td>Unilever</td><td>🇬🇧🇳🇱 UK / Netherlands</td><td>Manufacturing (Lifebuoy, Sunsilk, Wall's)</td></tr>
+        <tr><td>Toyota</td><td>🇯🇵 Japan</td><td>Car assembly plants in Karawang, West Java</td></tr>
+        <tr><td>Freeport-McMoRan</td><td>🇺🇸 USA</td><td>Grasberg copper & gold mine, Papua</td></tr>
+        <tr><td>Nestlé</td><td>🇨🇭 Switzerland</td><td>Food manufacturing & distribution</td></tr>
+        <tr><td>Nike</td><td>🇺🇸 USA</td><td>Manufacturing via contracted factories</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>⚖️ Impacts on Indonesia</h2>
+      <div class="mnc-toggle">
+        <button class="mnc-btn pos active" onclick="switchMNC('pos')">✅ Positive Impacts</button>
+        <button class="mnc-btn neg" onclick="switchMNC('neg')">❌ Negative Impacts</button>
+      </div>
+      <div class="mnc-panel pos-panel active" id="mnc-pos">
+        <div class="mnc-point"><strong>💼 Job Creation</strong>Factories and offices employ millions of local workers. West Java and Banten are major hubs for MNC-linked manufacturing jobs.</div>
+        <div class="mnc-point"><strong>💰 Foreign Direct Investment (FDI)</strong>Capital flows in to build factories, pay wages, and fund infrastructure. This money circulates through the broader Indonesian economy.</div>
+        <div class="mnc-point"><strong>🔧 Technology & Skills Transfer</strong>MNCs bring modern equipment and management practices. Local workers gain new skills; local suppliers are pushed to upgrade their standards.</div>
+        <div class="mnc-point"><strong>📈 Government Tax Revenue</strong>Corporate taxes paid by MNCs contribute to the national budget — funding schools, hospitals, and roads.</div>
+      </div>
+      <div class="mnc-panel neg-panel" id="mnc-neg">
+        <div class="mnc-point"><strong>📤 Profit Repatriation</strong>MNCs send profits back to their home country. The jobs are local, but the wealth ultimately flows out of Indonesia.</div>
+        <div class="mnc-point"><strong>🏪 Displacing Local Businesses</strong>Large MNCs with global supply chains and marketing budgets can drive local <em>warung</em> and Indonesian brands out of the market.</div>
+        <div class="mnc-point"><strong>⚖️ Labour Concerns</strong>Some MNCs or their local contractors pay low wages and impose difficult working conditions to keep costs competitive.</div>
+        <div class="mnc-point"><strong>🌿 Environmental Exploitation</strong>Resource-extraction MNCs have been associated with deforestation, river pollution, and land conflicts. The Grasberg mine in Papua is one high-profile example.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>🏛️ Indonesia's Policy Response</h2>
+      <ul style="margin-top:8px;">
+        <li><strong>Local content requirements</strong> — MNCs must source a % of inputs from Indonesian suppliers</li>
+        <li><strong>Divestment rules</strong> — foreign mining companies must gradually sell majority ownership to Indonesian entities</li>
+        <li><strong>Investment negative list</strong> — certain sectors are restricted or closed to foreign ownership (e.g. traditional markets, some media)</li>
+        <li><strong>BKPIM</strong> — the national investment board screens and approves all foreign investment proposals</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ─────────────── PANEL 5: EU ─────────────── -->
+  <div class="panel" id="t5">
+    <div class="card">
+      <h2>🇪🇺 The European Union</h2>
+      <p>After two World Wars fought on European soil, nations made a radical decision: tie your economies together so tightly that war with your neighbour becomes unthinkable. The result is the <strong>European Union</strong> — a political and economic union of <strong>27 member states</strong>, formed from a 1957 treaty between 6 founding nations.</p>
+      <div class="highlight"><strong>Note:</strong> The United Kingdom left the EU in January 2020 in a process known as <strong>Brexit</strong>, causing significant economic disruption and illustrating how deeply integrated the bloc had become.</div>
+    </div>
+
+    <div class="card">
+      <h2>🔓 The Four Freedoms of the Single Market</h2>
+      <p style="margin-bottom:14px;">The <strong>European Single Market</strong> treats all 27 member nations as one economy. Its foundation is four freedoms — <strong>click each</strong> to learn more.</p>
+      <div class="freedoms">
+        <div class="freedom-card" onclick="this.classList.toggle('open')">
+          <div class="fc-icon">📦</div>
+          <div class="fc-title">Free Movement of Goods</div>
+          <div class="fc-desc">No tariffs or customs checks between member states. A French cheese company can sell to Poland with no import tax, as if selling to a city in the next region.</div>
+        </div>
+        <div class="freedom-card" onclick="this.classList.toggle('open')">
+          <div class="fc-icon">🏦</div>
+          <div class="fc-title">Free Movement of Services</div>
+          <div class="fc-desc">A company in one EU country can offer services in any other. A Spanish bank can open branches in Germany without special permits.</div>
+        </div>
+        <div class="freedom-card" onclick="this.classList.toggle('open')">
+          <div class="fc-icon">💶</div>
+          <div class="fc-title">Free Movement of Capital</div>
+          <div class="fc-desc">Money and investments can flow freely across borders. A Dutch investor can buy shares in an Italian company with no extra restrictions or exchange controls.</div>
+        </div>
+        <div class="freedom-card" onclick="this.classList.toggle('open')">
+          <div class="fc-icon">🧳</div>
+          <div class="fc-title">Free Movement of People</div>
+          <div class="fc-desc">EU citizens can live, work, and study in any member state. A Romanian nurse can work in Sweden; a German student can study in Spain — no visa required.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>🇮🇩 The EU and Indonesia</h2>
+      <table class="glass-table">
+        <tr><th>Area</th><th>Detail</th></tr>
+        <tr><td>🛳️ Trade</td><td>EU is one of Indonesia's top 5 export destinations</td></tr>
+        <tr><td>🌿 Key Indonesian exports</td><td>Palm oil, rubber, coffee, cocoa, textiles, footwear</td></tr>
+        <tr><td>✈️ Key EU exports</td><td>Machinery, aircraft, chemicals, pharmaceuticals</td></tr>
+        <tr><td>🤝 EU-Indonesia CEPA</td><td>A free trade agreement under negotiation — aims to cut tariffs and open markets further</td></tr>
+        <tr><td>⚠️ Palm oil dispute</td><td>EU restrictions on palm oil biofuels are a major tension — directly hurts Indonesian exporters</td></tr>
+      </table>
+      <div class="highlight" style="margin-top:14px;"><strong>The big tension:</strong> The EU has strict food safety, environmental, and labour standards. Indonesian exporters must meet all these rules to sell into the EU — which can be costly. EU companies inside the Single Market face no such extra burden when selling to each other.</div>
+    </div>
+  </div>
+
+  <!-- ─────────────── PANEL 6: Quiz ─────────────── -->
+  <div class="panel" id="t6">
+    <div class="card">
+      <h2>✏️ Quick Quiz — Test Yourself!</h2>
+      <p style="margin-bottom:18px;">5 questions covering all sections. Select your answer for each one.</p>
+
+      <div id="quizContainer">
+        <div class="quiz-q" id="q0">
+          <div class="q-text">1. Indonesia sells palm oil to India. This is an example of:</div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="answer(0,0,1)">An import for Indonesia</button>
+            <button class="quiz-opt" onclick="answer(0,1,1)">An export for Indonesia ✓</button>
+            <button class="quiz-opt" onclick="answer(0,2,1)">A tariff</button>
+            <button class="quiz-opt" onclick="answer(0,3,1)">A quota</button>
+          </div>
+          <div class="quiz-feedback" id="fb0"></div>
+        </div>
+
+        <div class="quiz-q" id="q1">
+          <div class="q-text">2. In the Trade Game, "rich" countries accumulate points faster. What real-world concept does this demonstrate?</div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="answer(1,0,2)">Total internal reflection</button>
+            <button class="quiz-opt" onclick="answer(1,1,2)">Free trade always benefits everyone equally</button>
+            <button class="quiz-opt" onclick="answer(1,2,2)">Starting conditions and bargaining power shape who benefits from trade ✓</button>
+            <button class="quiz-opt" onclick="answer(1,3,2)">Comparative advantage eliminates all inequality</button>
+          </div>
+          <div class="quiz-feedback" id="fb1"></div>
+        </div>
+
+        <div class="quiz-q" id="q2">
+          <div class="q-text">3. Which letter of WPIDEC refers to local businesses being wiped out by foreign competition?</div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="answer(2,0,3)">W — Workers' Exploitation</button>
+            <button class="quiz-opt" onclick="answer(2,1,3)">P — Political Dependency</button>
+            <button class="quiz-opt" onclick="answer(2,2,3)">I — Industry Destruction ✓</button>
+            <button class="quiz-opt" onclick="answer(2,3,3)">D — Dependency on Commodities</button>
+          </div>
+          <div class="quiz-feedback" id="fb2"></div>
+        </div>
+
+        <div class="quiz-q" id="q3">
+          <div class="q-text">4. A Japanese car company builds a factory in Karawang, West Java. This is an example of:</div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="answer(3,0,1)">A trade quota</button>
+            <button class="quiz-opt" onclick="answer(3,1,1)">Foreign Direct Investment (FDI) by an MNC ✓</button>
+            <button class="quiz-opt" onclick="answer(3,2,1)">Profit repatriation</button>
+            <button class="quiz-opt" onclick="answer(3,3,1)">A tariff barrier</button>
+          </div>
+          <div class="quiz-feedback" id="fb3"></div>
+        </div>
+
+        <div class="quiz-q" id="q4">
+          <div class="q-text">5. The European Single Market is built on "Four Freedoms." Which of the following is NOT one of them?</div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="answer(4,0,2)">Free movement of goods</button>
+            <button class="quiz-opt" onclick="answer(4,1,2)">Free movement of military forces ✓</button>
+            <button class="quiz-opt" onclick="answer(4,2,2)">Free movement of capital</button>
+            <button class="quiz-opt" onclick="answer(4,3,2)">Free movement of people</button>
+          </div>
+          <div class="quiz-feedback" id="fb4"></div>
+        </div>
+      </div>
+
+      <div id="quiz-score"></div>
+      <button id="restart-btn" onclick="restartQuiz()">🔁 Try Again</button>
+    </div>
+  </div>
+</div><!-- /wrap -->
+
+<script>
+// ── Tabs ──
+const tabBtns = document.querySelectorAll('.tab-btn');
+const panels  = document.querySelectorAll('.panel');
+const dotsEl  = document.getElementById('dots');
+
+tabBtns.forEach((btn,i) => {
+  const dot = document.createElement('div');
+  dot.className = 'dot' + (i===0?' active':'');
+  dot.onclick = () => switchTab(i);
+  dotsEl.appendChild(dot);
+});
+
+function switchTab(idx) {
+  tabBtns.forEach((b,i)=>{ b.classList.toggle('active',i===idx); });
+  panels.forEach((p,i)=>{ p.classList.toggle('active',i===idx); });
+  document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
+}
+tabBtns.forEach((btn,i) => btn.addEventListener('click',()=>switchTab(i)));
+
+// ── Terms accordion ──
+document.querySelectorAll('.term').forEach(t => {
+  t.querySelector('.term-head').addEventListener('click', () => t.classList.toggle('open'));
+});
+
+// ── SPICED / WPIDEC switch ──
+function switchSW(mode) {
+  document.querySelector('.sw-btn.spiced').classList.toggle('active', mode==='spiced');
+  document.querySelector('.sw-btn.wpidec').classList.toggle('active', mode==='wpidec');
+  document.getElementById('sw-spiced').classList.toggle('active', mode==='spiced');
+  document.getElementById('sw-wpidec').classList.toggle('active', mode==='wpidec');
+}
+
+// ── MNC toggle ──
+function switchMNC(mode) {
+  document.querySelector('.mnc-btn.pos').classList.toggle('active', mode==='pos');
+  document.querySelector('.mnc-btn.neg').classList.toggle('active', mode==='neg');
+  document.getElementById('mnc-pos').classList.toggle('active', mode==='pos');
+  document.getElementById('mnc-neg').classList.toggle('active', mode==='neg');
+}
+
+// ── Quiz ──
+const answers = { 0:1, 1:2, 2:2, 3:1, 4:1 };
+const explanations = {
+  0: "Correct! Indonesia is the seller — that makes palm oil an export.",
+  1: "Correct! The game shows that starting conditions and bargaining power shape outcomes, just like real-world trade.",
+  2: "Correct! 'I' in WPIDEC stands for Industry Destruction — cheap imports can wipe out local producers.",
+  3: "Correct! When a foreign company builds production facilities in another country, that's FDI by an MNC.",
+  4: "Correct! The Four Freedoms are: goods, services, capital, and people. There is no military freedom."
+};
+const wrong_exp = {
+  0: "Not quite. Indonesia is selling here, not buying — that makes it an export.",
+  1: "Not quite. The game shows trade is NOT automatically fair — starting resources and power matter greatly.",
+  2: "Not quite. Review WPIDEC: W = Workers, P = Politics, I = Industry Destruction, D = Dependency, E = Environment, C = Culture.",
+  3: "Not quite. When a foreign company builds in Indonesia, it's Foreign Direct Investment by a Multinational.",
+  4: "Not quite. Military forces are not one of the Four Freedoms. The four are: goods, services, capital, and people."
+};
+let answered = [false,false,false,false,false];
+let score = 0;
+
+function answer(qIdx, optIdx, correctIdx) {
+  if (answered[qIdx]) return;
+  answered[qIdx] = true;
+  const q = document.getElementById('q'+qIdx);
+  const opts = q.querySelectorAll('.quiz-opt');
+  const fb = document.getElementById('fb'+qIdx);
+  const isCorrect = optIdx === correctIdx;
+  opts.forEach((o,i) => {
+    o.disabled = true;
+    if(i === correctIdx) o.classList.add('correct');
+    if(i === optIdx && !isCorrect) o.classList.add('wrong');
+  });
+  if(isCorrect){ score++; fb.textContent='✅ '+explanations[qIdx]; fb.className='quiz-feedback ok'; }
+  else { fb.textContent='❌ '+wrong_exp[qIdx]; fb.className='quiz-feedback no'; }
+  if(answered.every(Boolean)) showScore();
+}
+
+function showScore() {
+  const el = document.getElementById('quiz-score');
+  const msgs = ['Keep reviewing — you\'ll get there! 💪','Good effort — review the sections again 📖','Not bad! A bit more study and you\'ll nail it 🌟','Great job! Almost perfect 🎉','Perfect score! You\'ve mastered this topic! 🏆'];
+  el.textContent = `You scored ${score}/5 — ${msgs[score]}`;
+  el.style.display='block';
+  document.getElementById('restart-btn').style.display='block';
+}
+
+function restartQuiz() {
+  answered=[false,false,false,false,false]; score=0;
+  document.getElementById('quiz-score').style.display='none';
+  document.getElementById('restart-btn').style.display='none';
+  document.querySelectorAll('.quiz-opt').forEach(o=>{ o.disabled=false; o.className='quiz-opt'; });
+  document.querySelectorAll('.quiz-feedback').forEach(f=>{ f.textContent=''; f.className='quiz-feedback'; });
+}
+</script>
+</body>
+</html>
