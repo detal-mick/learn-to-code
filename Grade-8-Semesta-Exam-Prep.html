@@ -389,7 +389,10 @@ body{font-family:'Lato',sans-serif;background:var(--bg);color:var(--text);font-s
   <div class="btn-row">
     <button
       class="btn btn-blue"
-      onclick="document.getElementById('wordCount').textContent = document.getElementById('essayText').value.split(/\s+/).filter(w => w.length > 0).length"
+      onclick="document.getElementById('wordCount').textContent =
+      document.getElementById('essayText').value
+      .split(/\s+/)
+      .filter(w => w.length > 0).length"
     >
       Update count
     </button>
@@ -402,8 +405,6 @@ body{font-family:'Lato',sans-serif;background:var(--bg);color:var(--text);font-s
     </button>
   </div>
 </div>
-</div>
-</div>
 
 <!-- .page-content -->
 
@@ -414,7 +415,6 @@ body{font-family:'Lato',sans-serif;background:var(--bg);color:var(--text);font-s
 </div>
 
 <script>
-  // Placeholder for the interactive exam logic
   console.log('EASE 4 Exam Prep loaded');
 </script>
 
