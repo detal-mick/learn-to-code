@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Latihan Soal Bahasa Inggris Kelas 8</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --glass-bg: rgba(255,255,255,0.18);
+    --glass-border: rgba(255,255,255,0.38);
+    --glass-shadow: rgba(80,120,255,0.13);
+    --blur: blur(18px);
+    --teal: #19c4c4;
+    --orange: #ff7c43;
+    --navy: #1a2a5e;
+    --purple: #7c5cfc;
+    --pink: #ff6fcf;
+    --green: #3dd6a3;
+    --yellow: #ffd452;
+    --text: #1a2340;
+    --subtext: #4a5580;
+    --correct: #22c55e;
+    --wrong: #ef4444;
+    --neutral: #6366f1;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f1640 0%, #1a3a6e 30%, #0d5c7a 60%, #1a4040 100%);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* Animated background blobs */
+  .bg-blobs {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+  }
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.35;
+    animation: blobFloat 8s ease-in-out infinite alternate;
+  }
+  .blob-1 { width: 500px; height: 500px; background: radial-gradient(circle, #7c5cfc, #19c4c4); top: -100px; left: -100px; animation-delay: 0s; }
+  .blob-2 { width: 400px; height: 400px; background: radial-gradient(circle, #ff6fcf, #ff7c43); bottom: -80px; right: -80px; animation-delay: 3s; }
+  .blob-3 { width: 300px; height: 300px; background: radial-gradient(circle, #3dd6a3, #19c4c4); top: 40%; left: 50%; animation-delay: 1.5s; }
+  @keyframes blobFloat { from { transform: translate(0,0) scale(1); } to { transform: translate(30px,30px) scale(1.08); } }
+
+  .wrapper { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 24px 16px 60px; }
+
+  /* Header */
+  .header-card {
+    background: rgba(255,255,255,0.13);
+    backdrop-filter: var(--blur);
+    -webkit-backdrop-filter: var(--blur);
+    border: 1.5px solid rgba(255,255,255,0.32);
+    border-radius: 28px;
+    padding: 32px 36px 28px;
+    margin-bottom: 24px;
+    box-shadow: 0 8px 40px rgba(80,120,255,0.18), inset 0 1px 0 rgba(255,255,255,0.3);
+    text-align: center;
+    animation: slideDown 0.6s ease both;
+  }
+  @keyframes slideDown { from { opacity:0; transform:translateY(-24px); } to { opacity:1; transform:translateY(0); } }
+
+  .header-badge {
+    display: inline-block;
+    background: linear-gradient(90deg, var(--teal), var(--purple));
+    color: #fff;
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 18px;
+    border-radius: 30px;
+    margin-bottom: 12px;
+  }
+  .header-title {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 2.1rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 12px rgba(80,80,200,0.3);
+  }
+  .header-sub {
+    color: rgba(255,255,255,0.75);
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  /* Stats bar */
+  .stats-bar {
+    display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px;
+    animation: slideDown 0.7s 0.1s ease both;
+  }
+  .stat-chip {
+    flex: 1; min-width: 120px;
+    background: rgba(255,255,255,0.13);
+    backdrop-filter: var(--blur);
+    -webkit-backdrop-filter: var(--blur);
+    border: 1.5px solid rgba(255,255,255,0.28);
+    border-radius: 18px;
+    padding: 14px 20px;
+    text-align: center;
+    box-shadow: 0 4px 20px var(--glass-shadow);
+    color: #fff;
+  }
+  .stat-num { font-family: 'Baloo 2', sans-serif; font-size: 1.8rem; font-weight: 800; display: block; }
+  .stat-label { font-size: 0.78rem; font-weight: 600; opacity: 0.78; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* Section navigation */
+  .section-nav {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px;
+    animation: slideDown 0.7s 0.2s ease both;
+  }
+  .nav-btn {
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: var(--blur);
+    -webkit-backdrop-filter: var(--blur);
+    border: 1.5px solid rgba(255,255,255,0.25);
+    border-radius: 30px;
+    color: rgba(255,255,255,0.85);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 0.82rem;
+    padding: 7px 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .nav-btn:hover, .nav-btn.active {
+    background: rgba(255,255,255,0.28);
+    border-color: rgba(255,255,255,0.6);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(120,180,255,0.25);
+    transform: translateY(-1px);
+  }
+  .nav-btn.done { background: rgba(61,214,163,0.22); border-color: var(--green); color: var(--green); }
+
+  /* Section */
+  .section { display: none; animation: fadeIn 0.4s ease both; }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+  .section-header {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 20px;
+  }
+  .section-icon {
+    width: 48px; height: 48px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+  .section-title-wrap {}
+  .section-label {
+    font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
+    color: rgba(255,255,255,0.6); margin-bottom: 2px;
+  }
+  .section-title {
+    font-family: 'Baloo 2', sans-serif; font-size: 1.35rem; font-weight: 800; color: #fff;
+  }
+
+  /* Passage card */
+  .passage-card {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: var(--blur);
+    -webkit-backdrop-filter: var(--blur);
+    border: 1.5px solid rgba(255,255,255,0.22);
+    border-radius: 20px;
+    padding: 22px 26px;
+    margin-bottom: 22px;
+    box-shadow: 0 4px 24px rgba(40,80,200,0.1);
+    color: rgba(255,255,255,0.9);
+    line-height: 1.8;
+    font-size: 0.95rem;
+  }
+  .passage-title {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800; font-size: 1rem; color: var(--yellow);
+    margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;
+  }
+
+  /* Question card */
+  .q-card {
+    background: rgba(255,255,255,0.13);
+    backdrop-filter: var(--blur);
+    -webkit-backdrop-filter: var(--blur);
+    border: 1.5px solid rgba(255,255,255,0.28);
+    border-radius: 22px;
+    padding: 24px 28px;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 24px rgba(40,80,200,0.12);
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+  .q-card:hover { box-shadow: 0 8px 32px rgba(80,140,255,0.2); border-color: rgba(255,255,255,0.42); }
+  .q-card.answered-correct { border-color: var(--correct); background: rgba(34,197,94,0.1); }
+  .q-card.answered-wrong { border-color: var(--wrong); background: rgba(239,68,68,0.08); }
+
+  .q-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 32px; height: 32px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--teal), var(--purple));
+    color: #fff; font-weight: 800; font-size: 0.88rem;
+    margin-bottom: 12px; flex-shrink: 0;
+  }
+  .q-text {
+    color: rgba(255,255,255,0.95); font-size: 0.97rem; font-weight: 600;
+    line-height: 1.6; margin-bottom: 16px;
+  }
+  .q-text em { font-style: italic; color: var(--yellow); }
+  .q-text strong { color: var(--teal); }
+
+  /* Options */
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  .option {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: rgba(255,255,255,0.08);
+    border: 1.5px solid rgba(255,255,255,0.18);
+    border-radius: 14px;
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: rgba(255,255,255,0.88);
+    font-size: 0.92rem;
+    font-weight: 600;
+    user-select: none;
+  }
+  .option:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.38); transform: translateX(4px); }
+  .option.selected { background: rgba(124,92,252,0.22); border-color: var(--purple); }
+  .option.correct { background: rgba(34,197,94,0.2); border-color: var(--correct); color: #fff; }
+  .option.wrong { background: rgba(239,68,68,0.18); border-color: var(--wrong); color: #fff; }
+  .option.reveal-correct { background: rgba(34,197,94,0.15); border-color: var(--correct); }
+
+  .opt-letter {
+    width: 26px; height: 26px; border-radius: 8px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 0.8rem;
+    background: rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.9);
+    transition: all 0.2s;
+  }
+  .option.selected .opt-letter { background: var(--purple); color: #fff; }
+  .option.correct .opt-letter { background: var(--correct); color: #fff; }
+  .option.wrong .opt-letter { background: var(--wrong); color: #fff; }
+  .option.reveal-correct .opt-letter { background: var(--correct); color: #fff; }
+
+  .feedback {
+    margin-top: 12px; padding: 10px 14px; border-radius: 12px;
+    font-size: 0.88rem; font-weight: 700; display: none;
+  }
+  .feedback.show { display: block; }
+  .feedback.correct { background: rgba(34,197,94,0.18); color: #6ee7b7; border: 1px solid rgba(34,197,94,0.3); }
+  .feedback.wrong { background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
+
+  /* Essay section */
+  .essay-card {
+    background: rgba(255,255,255,0.13);
+    backdrop-filter: var(--blur);
+    -webkit-backdrop-filter: var(--blur);
+    border: 1.5px solid rgba(255,255,255,0.28);
+    border-radius: 22px;
+    padding: 26px 28px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 24px rgba(40,80,200,0.12);
+  }
+  .essay-prompt {
+    color: rgba(255,255,255,0.92); font-size: 0.96rem; font-weight: 600;
+    line-height: 1.65; margin-bottom: 16px;
+  }
+  .essay-prompt .passage-inset {
+    background: rgba(255,255,255,0.08); border-radius: 12px;
+    padding: 14px 18px; margin: 12px 0; font-style: italic;
+    color: rgba(255,255,255,0.82); border-left: 3px solid var(--teal);
+  }
+  .essay-area {
+    width: 100%; min-height: 130px;
+    background: rgba(255,255,255,0.08);
+    border: 1.5px solid rgba(255,255,255,0.25);
+    border-radius: 14px;
+    padding: 14px 16px;
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.93rem;
+    font-weight: 600;
+    line-height: 1.6;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .essay-area:focus { border-color: var(--teal); background: rgba(255,255,255,0.13); }
+  .essay-area::placeholder { color: rgba(255,255,255,0.35); }
+  .essay-label { color: rgba(255,255,255,0.55); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-top: 10px; margin-bottom: 5px; }
+
+  /* Check button */
+  .check-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: linear-gradient(135deg, var(--teal), var(--purple));
+    color: #fff; font-family: 'Baloo 2', sans-serif; font-weight: 700;
+    font-size: 1rem; padding: 12px 28px; border-radius: 30px;
+    border: none; cursor: pointer;
+    box-shadow: 0 4px 18px rgba(124,92,252,0.35);
+    transition: all 0.2s;
+    margin-top: 6px;
+  }
+  .check-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(124,92,252,0.45); }
+  .check-btn:active { transform: translateY(0); }
+
+  /* Score panel */
+  .score-panel {
+    background: rgba(255,255,255,0.13);
+    backdrop-filter: var(--blur);
+    -webkit-backdrop-filter: var(--blur);
+    border: 1.5px solid rgba(255,255,255,0.28);
+    border-radius: 26px;
+    padding: 32px 36px;
+    text-align: center;
+    margin-top: 28px;
+    box-shadow: 0 8px 40px rgba(80,120,255,0.18);
+    display: none;
+    animation: fadeIn 0.5s ease both;
+  }
+  .score-panel.show { display: block; }
+  .score-big {
+    font-family: 'Baloo 2', sans-serif; font-size: 4rem; font-weight: 900;
+    background: linear-gradient(90deg, var(--teal), var(--yellow), var(--orange));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    line-height: 1;
+  }
+  .score-msg { color: rgba(255,255,255,0.85); font-size: 1.1rem; font-weight: 700; margin-top: 8px; }
+
+  /* Submit all btn */
+  .submit-all-btn {
+    display: block; width: 100%; max-width: 360px; margin: 32px auto 0;
+    background: linear-gradient(135deg, var(--orange), var(--pink));
+    color: #fff; font-family: 'Baloo 2', sans-serif; font-weight: 800;
+    font-size: 1.1rem; padding: 15px 28px; border-radius: 30px;
+    border: none; cursor: pointer;
+    box-shadow: 0 6px 24px rgba(255,124,67,0.35);
+    transition: all 0.2s;
+  }
+  .submit-all-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(255,124,67,0.45); }
+
+  /* Progress bar */
+  .progress-wrap {
+    background: rgba(255,255,255,0.1); border-radius: 30px; height: 8px;
+    margin-bottom: 8px; overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%; background: linear-gradient(90deg, var(--teal), var(--purple));
+    border-radius: 30px; transition: width 0.4s ease;
+  }
+  .progress-text { color: rgba(255,255,255,0.6); font-size: 0.8rem; font-weight: 700; text-align: right; }
+
+  /* Divider */
+  .divider { border: none; border-top: 1px solid rgba(255,255,255,0.12); margin: 24px 0; }
+
+  /* Underline highlight */
+  u { text-decoration-color: var(--yellow); text-underline-offset: 2px; }
+
+  /* Mobile */
+  @media(max-width: 600px) {
+    .header-title { font-size: 1.55rem; }
+    .q-card, .essay-card, .passage-card { padding: 18px 16px; }
+    .stats-bar { gap: 8px; }
+    .stat-chip { min-width: 80px; padding: 10px 12px; }
+    .stat-num { font-size: 1.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-blobs">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header-card">
+    <div class="header-badge">🎓 Kelas 8 · Bahasa Inggris</div>
+    <div class="header-title">📘 Soal Latihan Ujian</div>
+    <div class="header-sub">40 Pilihan Ganda &nbsp;+&nbsp; 5 Essay &nbsp;·&nbsp; Kurikulum SMP Reguler</div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-bar">
+    <div class="stat-chip">
+      <span class="stat-num" id="answered-count">0</span>
+      <span class="stat-label">Dijawab</span>
+    </div>
+    <div class="stat-chip">
+      <span class="stat-num" id="correct-count" style="color:var(--green)">0</span>
+      <span class="stat-label">Benar</span>
+    </div>
+    <div class="stat-chip">
+      <span class="stat-num" id="wrong-count" style="color:#f87171">0</span>
+      <span class="stat-label">Salah</span>
+    </div>
+    <div class="stat-chip">
+      <span class="stat-num" id="score-display" style="color:var(--yellow)">0</span>
+      <span class="stat-label">Nilai</span>
+    </div>
+  </div>
+
+  <!-- Progress -->
+  <div class="progress-wrap"><div class="progress-bar" id="progress-bar" style="width:0%"></div></div>
+  <div class="progress-text" id="progress-text">0 / 40 soal PG</div>
+
+  <!-- Section Navigation -->
+  <div class="section-nav">
+    <button class="nav-btn active" onclick="showSection('recount')">📖 Recount Text</button>
+    <button class="nav-btn" onclick="showSection('present')">⏰ Present Continuous</button>
+    <button class="nav-btn" onclick="showSection('dialog')">💬 Dialog</button>
+    <button class="nav-btn" onclick="showSection('daily')">🌅 Daily Activity</button>
+    <button class="nav-btn" onclick="showSection('shortmsg')">📱 Short Message</button>
+    <button class="nav-btn" onclick="showSection('greeting')">🎉 Greeting Card</button>
+    <button class="nav-btn" onclick="showSection('chores')">🧹 House Chores</button>
+    <button class="nav-btn" onclick="showSection('essay')">✍️ Essay</button>
+  </div>
+
+  <!-- ==================== SECTION: RECOUNT TEXT ==================== -->
+  <div id="sec-recount" class="section active">
+    <div class="section-header">
+      <div class="section-icon" style="background:linear-gradient(135deg,#19c4c4,#7c5cfc)">📖</div>
+      <div class="section-title-wrap">
+        <div class="section-label">Soal 1 – 7</div>
+        <div class="section-title">Recount Text</div>
+      </div>
+    </div>
+
+    <div class="passage-card">
+      <div class="passage-title">📄 Bacalah teks berikut!</div>
+      Last Sunday, I went to the beach with my family. We woke up early in the morning and prepared everything we needed. My mother packed some food and drinks, while my father loaded the car. We arrived at the beach at about 9 o'clock. The beach was beautiful and not too crowded. My brother and I played in the sand and swam in the sea. We also built sandcastles and collected shells. In the afternoon, we had a picnic on the beach. We ate the food my mother had prepared. Before going home, we watched the sunset together. It was a <u>wonderful</u> day that I will never forget.
+    </div>
+
+    <!-- Q1 -->
+    <div class="q-card" id="q1">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">1</span>
+        <p class="q-text">What is the <strong>purpose</strong> of the text above?</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(1,'A','B')"><span class="opt-letter">A</span> To describe a beautiful beach.</div>
+        <div class="option" onclick="answer(1,'B','B')"><span class="opt-letter">B</span> To tell about a past experience at the beach.</div>
+        <div class="option" onclick="answer(1,'C','B')"><span class="opt-letter">C</span> To explain how to have a picnic.</div>
+        <div class="option" onclick="answer(1,'D','B')"><span class="opt-letter">D</span> To invite someone to go to the beach.</div>
+      </div>
+      <div class="feedback" id="fb1"></div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="q-card" id="q2">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">2</span>
+        <p class="q-text">What did the writer's <strong>mother</strong> do before going to the beach?</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(2,'A','C')"><span class="opt-letter">A</span> She swam in the sea.</div>
+        <div class="option" onclick="answer(2,'B','C')"><span class="opt-letter">B</span> She built sandcastles.</div>
+        <div class="option" onclick="answer(2,'C','C')"><span class="opt-letter">C</span> She packed food and drinks.</div>
+        <div class="option" onclick="answer(2,'D','C')"><span class="opt-letter">D</span> She watched the sunset.</div>
+      </div>
+      <div class="feedback" id="fb2"></div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="q-card" id="q3">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">3</span>
+        <p class="q-text">What did the writer and his brother do at the beach?</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(3,'A','B')"><span class="opt-letter">A</span> They cooked food on the beach.</div>
+        <div class="option" onclick="answer(3,'B','B')"><span class="opt-letter">B</span> They played in the sand and swam in the sea.</div>
+        <div class="option" onclick="answer(3,'C','B')"><span class="opt-letter">C</span> They watched a movie together.</div>
+        <div class="option" onclick="answer(3,'D','B')"><span class="opt-letter">D</span> They collected fish from the sea.</div>
+      </div>
+      <div class="feedback" id="fb3"></div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="q-card" id="q4">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">4</span>
+        <p class="q-text">When did they arrive at the beach?</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(4,'A','C')"><span class="opt-letter">A</span> At 7 o'clock.</div>
+        <div class="option" onclick="answer(4,'B','C')"><span class="opt-letter">B</span> At 8 o'clock.</div>
+        <div class="option" onclick="answer(4,'C','C')"><span class="opt-letter">C</span> At 9 o'clock.</div>
+        <div class="option" onclick="answer(4,'D','C')"><span class="opt-letter">D</span> At 10 o'clock.</div>
+      </div>
+      <div class="feedback" id="fb4"></div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="q-card" id="q5">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">5</span>
+        <p class="q-text"><em>"It was a <u>wonderful</u> day."</em> The underlined word means…</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(5,'A','C')"><span class="opt-letter">A</span> Terrible.</div>
+        <div class="option" onclick="answer(5,'B','C')"><span class="opt-letter">B</span> Boring.</div>
+        <div class="option" onclick="answer(5,'C','C')"><span class="opt-letter">C</span> Amazing / very enjoyable.</div>
+        <div class="option" onclick="answer(5,'D','C')"><span class="opt-letter">D</span> Exhausting.</div>
+      </div>
+      <div class="feedback" id="fb5"></div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="q-card" id="q6">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">6</span>
+        <p class="q-text">What is the <strong>generic structure</strong> of the text above?</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(6,'A','B')"><span class="opt-letter">A</span> Identification → Description → Conclusion.</div>
+        <div class="option" onclick="answer(6,'B','B')"><span class="opt-letter">B</span> Orientation → Events → Re-orientation.</div>
+        <div class="option" onclick="answer(6,'C','B')"><span class="opt-letter">C</span> Goal → Steps → Result.</div>
+        <div class="option" onclick="answer(6,'D','B')"><span class="opt-letter">D</span> Issue → Arguments → Recommendation.</div>
+      </div>
+      <div class="feedback" id="fb6"></div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="q-card" id="q7">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">7</span>
+        <p class="q-text">What activity did the family do <strong>before going home</strong>?</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(7,'A','D')"><span class="opt-letter">A</span> They built sandcastles.</div>
+        <div class="option" onclick="answer(7,'B','D')"><span class="opt-letter">B</span> They had a picnic.</div>
+        <div class="option" onclick="answer(7,'C','D')"><span class="opt-letter">C</span> They collected shells.</div>
+        <div class="option" onclick="answer(7,'D','D')"><span class="opt-letter">D</span> They watched the sunset.</div>
+      </div>
+      <div class="feedback" id="fb7"></div>
+    </div>
+
+    <div style="text-align:right">
+      <button class="check-btn" onclick="showSection('present')">Lanjut → Present Continuous</button>
+    </div>
+  </div>
+
+  <!-- ==================== SECTION: PRESENT CONTINUOUS ==================== -->
+  <div id="sec-present" class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:linear-gradient(135deg,#ff7c43,#ffd452)">⏰</div>
+      <div class="section-title-wrap">
+        <div class="section-label">Soal 8 – 14</div>
+        <div class="section-title">Present Continuous Tense</div>
+      </div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="q-card" id="q8">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">8</span>
+        <p class="q-text">Choose the <strong>correct</strong> Present Continuous sentence.</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(8,'A','C')"><span class="opt-letter">A</span> She study English every day.</div>
+        <div class="option" onclick="answer(8,'B','C')"><span class="opt-letter">B</span> They are played football in the field.</div>
+        <div class="option" onclick="answer(8,'C','C')"><span class="opt-letter">C</span> My sister is reading a book right now.</div>
+        <div class="option" onclick="answer(8,'D','C')"><span class="opt-letter">D</span> We are go to school by bus.</div>
+      </div>
+      <div class="feedback" id="fb8"></div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="q-card" id="q9">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">9</span>
+        <p class="q-text"><em>"The children ______ in the park at the moment."</em> Fill in the blank correctly.</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(9,'A','C')"><span class="opt-letter">A</span> play</div>
+        <div class="option" onclick="answer(9,'B','C')"><span class="opt-letter">B</span> played</div>
+        <div class="option" onclick="answer(9,'C','C')"><span class="opt-letter">C</span> are playing</div>
+        <div class="option" onclick="answer(9,'D','C')"><span class="opt-letter">D</span> will play</div>
+      </div>
+      <div class="feedback" id="fb9"></div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="q-card" id="q10">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">10</span>
+        <p class="q-text"><em>"Look! The baby ______ (sleep) in the bedroom."</em> The correct form is…</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(10,'A','D')"><span class="opt-letter">A</span> sleep</div>
+        <div class="option" onclick="answer(10,'B','D')"><span class="opt-letter">B</span> slept</div>
+        <div class="option" onclick="answer(10,'C','D')"><span class="opt-letter">C</span> sleeps</div>
+        <div class="option" onclick="answer(10,'D','D')"><span class="opt-letter">D</span> is sleeping</div>
+      </div>
+      <div class="feedback" id="fb10"></div>
+    </div>
+
+    <!-- Q11 -->
+    <div class="q-card" id="q11">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">11</span>
+        <p class="q-text">Which sentence uses Present Continuous correctly?</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(11,'A','B')"><span class="opt-letter">A</span> He is go to the market.</div>
+        <div class="option" onclick="answer(11,'B','B')"><span class="opt-letter">B</span> She is writing a letter to her friend.</div>
+        <div class="option" onclick="answer(11,'C','B')"><span class="opt-letter">C</span> They is watching television.</div>
+        <div class="option" onclick="answer(11,'D','B')"><span class="opt-letter">D</span> I am goes to school.</div>
+      </div>
+      <div class="feedback" id="fb11"></div>
+    </div>
+
+    <!-- Q12 -->
+    <div class="q-card" id="q12">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">12</span>
+        <p class="q-text"><em>"Rani and her friends ______ (practice) their dance moves right now."</em></p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(12,'A','C')"><span class="opt-letter">A</span> practice</div>
+        <div class="option" onclick="answer(12,'B','C')"><span class="opt-letter">B</span> practices</div>
+        <div class="option" onclick="answer(12,'C','C')"><span class="opt-letter">C</span> are practicing</div>
+        <div class="option" onclick="answer(12,'D','C')"><span class="opt-letter">D</span> practiced</div>
+      </div>
+      <div class="feedback" id="fb12"></div>
+    </div>
+
+    <!-- Q13 -->
+    <div class="q-card" id="q13">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">13</span>
+        <p class="q-text">The Present Continuous Tense is used to describe actions that…</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(13,'A','B')"><span class="opt-letter">A</span> Happened in the past and are finished.</div>
+        <div class="option" onclick="answer(13,'B','B')"><span class="opt-letter">B</span> Are happening at the moment of speaking.</div>
+        <div class="option" onclick="answer(13,'C','B')"><span class="opt-letter">C</span> Will happen in the future.</div>
+        <div class="option" onclick="answer(13,'D','B')"><span class="opt-letter">D</span> Happen every day as a habit.</div>
+      </div>
+      <div class="feedback" id="fb13"></div>
+    </div>
+
+    <!-- Q14 -->
+    <div class="q-card" id="q14">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">14</span>
+        <p class="q-text">Make the sentence <strong>negative</strong>: <em>"He is eating breakfast."</em></p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(14,'A','B')"><span class="opt-letter">A</span> He not is eating breakfast.</div>
+        <div class="option" onclick="answer(14,'B','B')"><span class="opt-letter">B</span> He is not eating breakfast.</div>
+        <div class="option" onclick="answer(14,'C','B')"><span class="opt-letter">C</span> He does not eating breakfast.</div>
+        <div class="option" onclick="answer(14,'D','B')"><span class="opt-letter">D</span> He isn't ate breakfast.</div>
+      </div>
+      <div class="feedback" id="fb14"></div>
+    </div>
+
+    <div style="text-align:right">
+      <button class="check-btn" onclick="showSection('dialog')">Lanjut → Dialog</button>
+    </div>
+  </div>
+
+  <!-- ==================== SECTION: DIALOG ==================== -->
+  <div id="sec-dialog" class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:linear-gradient(135deg,#3dd6a3,#19c4c4)">💬</div>
+      <div class="section-title-wrap">
+        <div class="section-label">Soal 15 – 21</div>
+        <div class="section-title">Percakapan / Dialog</div>
+      </div>
+    </div>
+
+    <div class="passage-card">
+      <div class="passage-title">💬 Bacalah percakapan berikut!</div>
+      <strong style="color:var(--teal)">Reza:</strong> Hi, Dina! You look happy today. What happened?<br>
+      <strong style="color:var(--yellow)">Dina:</strong> Hi, Reza! I just got back from Yogyakarta last week. It was so much fun!<br>
+      <strong style="color:var(--teal)">Reza:</strong> Really? What did you do there?<br>
+      <strong style="color:var(--yellow)">Dina:</strong> I visited the Prambanan Temple and the Kraton Palace. I also tried some delicious gudeg there.<br>
+      <strong style="color:var(--teal)">Reza:</strong> Wow, that sounds amazing! How long did you stay?<br>
+      <strong style="color:var(--yellow)">Dina:</strong> I stayed for three days with my family. We also went to Malioboro Street for shopping.<br>
+      <strong style="color:var(--teal)">Reza:</strong> I've always wanted to go there. Did you take any pictures?<br>
+      <strong style="color:var(--yellow)">Dina:</strong> Yes, I took hundreds of pictures! I felt so <u>thrilled</u> visiting those beautiful places.
+    </div>
+
+    <!-- Q15 -->
+    <div class="q-card" id="q15">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">15</span>
+        <p class="q-text">Where did Dina go last week?</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(15,'A','C')"><span class="opt-letter">A</span> Bali</div>
+        <div class="option" onclick="answer(15,'B','C')"><span class="opt-letter">B</span> Bandung</div>
+        <div class="option" onclick="answer(15,'C','C')"><span class="opt-letter">C</span> Yogyakarta</div>
+        <div class="option" onclick="answer(15,'D','C')"><span class="opt-letter">D</span> Surabaya</div>
+      </div>
+      <div class="feedback" id="fb15"></div>
+    </div>
+
+    <!-- Q16 -->
+    <div class="q-card" id="q16">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">16</span>
+        <p class="q-text">Which places did Dina visit?</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(16,'A','B')"><span class="opt-letter">A</span> Prambanan Temple and Borobudur.</div>
+        <div class="option" onclick="answer(16,'B','B')"><span class="opt-letter">B</span> Prambanan Temple and Kraton Palace.</div>
+        <div class="option" onclick="answer(16,'C','B')"><span class="opt-letter">C</span> Kraton Palace and Bromo Mountain.</div>
+        <div class="option" onclick="answer(16,'D','B')"><span class="opt-letter">D</span> Malioboro Street and Tanah Lot.</div>
+      </div>
+      <div class="feedback" id="fb16"></div>
+    </div>
+
+    <!-- Q17 -->
+    <div class="q-card" id="q17">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">17</span>
+        <p class="q-text">How long did Dina stay in Yogyakarta?</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(17,'A','C')"><span class="opt-letter">A</span> One day.</div>
+        <div class="option" onclick="answer(17,'B','C')"><span class="opt-letter">B</span> Two days.</div>
+        <div class="option" onclick="answer(17,'C','C')"><span class="opt-letter">C</span> Three days.</div>
+        <div class="option" onclick="answer(17,'D','C')"><span class="opt-letter">D</span> Four days.</div>
+      </div>
+      <div class="feedback" id="fb17"></div>
+    </div>
+
+    <!-- Q18 -->
+    <div class="q-card" id="q18">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">18</span>
+        <p class="q-text">How did Dina <strong>feel</strong> about her trip?</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(18,'A','D')"><span class="opt-letter">A</span> Bored and tired.</div>
+        <div class="option" onclick="answer(18,'B','D')"><span class="opt-letter">B</span> Disappointed and sad.</div>
+        <div class="option" onclick="answer(18,'C','D')"><span class="opt-letter">C</span> Scared and nervous.</div>
+        <div class="option" onclick="answer(18,'D','D')"><span class="opt-letter">D</span> Happy and excited.</div>
+      </div>
+      <div class="feedback" id="fb18"></div>
+    </div>
+
+    <!-- Q19 -->
+    <div class="q-card" id="q19">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">19</span>
+        <p class="q-text">What did Dina do on Malioboro Street?</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(19,'A','C')"><span class="opt-letter">A</span> Ate gudeg.</div>
+        <div class="option" onclick="answer(19,'B','C')"><span class="opt-letter">B</span> Visited a temple.</div>
+        <div class="option" onclick="answer(19,'C','C')"><span class="opt-letter">C</span> Went shopping.</div>
+        <div class="option" onclick="answer(19,'D','C')"><span class="opt-letter">D</span> Took pictures of a palace.</div>
+      </div>
+      <div class="feedback" id="fb19"></div>
+    </div>
+
+    <!-- Q20 -->
+    <div class="q-card" id="q20">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">20</span>
+        <p class="q-text"><em>"I felt so <u>thrilled</u> visiting those beautiful places."</em> The underlined word means…</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(20,'A','B')"><span class="opt-letter">A</span> Very sad and disappointed.</div>
+        <div class="option" onclick="answer(20,'B','B')"><span class="opt-letter">B</span> Very excited and happy.</div>
+        <div class="option" onclick="answer(20,'C','B')"><span class="opt-letter">C</span> Very tired and sleepy.</div>
+        <div class="option" onclick="answer(20,'D','B')"><span class="opt-letter">D</span> Very scared and worried.</div>
+      </div>
+      <div class="feedback" id="fb20"></div>
+    </div>
+
+    <!-- Q21 -->
+    <div class="q-card" id="q21">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">21</span>
+        <p class="q-text">Where did the conversation most likely take place?</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(21,'A','B')"><span class="opt-letter">A</span> At Prambanan Temple.</div>
+        <div class="option" onclick="answer(21,'B','B')"><span class="opt-letter">B</span> At school or a casual meeting place.</div>
+        <div class="option" onclick="answer(21,'C','B')"><span class="opt-letter">C</span> At Malioboro Street.</div>
+        <div class="option" onclick="answer(21,'D','B')"><span class="opt-letter">D</span> At a shopping mall in Yogyakarta.</div>
+      </div>
+      <div class="feedback" id="fb21"></div>
+    </div>
+
+    <div style="text-align:right">
+      <button class="check-btn" onclick="showSection('daily')">Lanjut → Daily Activity</button>
+    </div>
+  </div>
+
+  <!-- ==================== SECTION: DAILY ACTIVITY ==================== -->
+  <div id="sec-daily" class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:linear-gradient(135deg,#ffd452,#ff7c43)">🌅</div>
+      <div class="section-title-wrap">
+        <div class="section-label">Soal 22 – 30</div>
+        <div class="section-title">Daily Activity</div>
+      </div>
+    </div>
+
+    <div class="passage-card">
+      <div class="passage-title">📄 Bacalah teks berikut!</div>
+      My name is Anisa. I am a student at SMP Harapan Bangsa. I have a very busy daily <u>routine</u>. I wake up at 5 o'clock every morning. After waking up, I pray and then take a shower. Then, I have breakfast with my family. I usually eat rice and vegetables for breakfast. I go to school at 6:30 in the morning by bicycle. I arrive at school at 7 o'clock.<br><br>
+      At school, I study many subjects like Mathematics, Science, Indonesian, and English. School finishes at 2 o'clock in the afternoon. After school, I usually go to the library to study or return books. I get home at about 3 o'clock. When I get home, I change my clothes and have lunch. Then, I help my mother clean the house. In the evening, I study and do my homework. I go to bed at 9 o'clock at night.
+    </div>
+
+    <!-- Q22 -->
+    <div class="q-card" id="q22">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">22</span>
+        <p class="q-text">What time does Anisa wake up every morning?</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(22,'A','B')"><span class="opt-letter">A</span> At 4 o'clock.</div>
+        <div class="option" onclick="answer(22,'B','B')"><span class="opt-letter">B</span> At 5 o'clock.</div>
+        <div class="option" onclick="answer(22,'C','B')"><span class="opt-letter">C</span> At 6 o'clock.</div>
+        <div class="option" onclick="answer(22,'D','B')"><span class="opt-letter">D</span> At 7 o'clock.</div>
+      </div>
+      <div class="feedback" id="fb22"></div>
+    </div>
+
+    <!-- Q23 -->
+    <div class="q-card" id="q23">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">23</span>
+        <p class="q-text">How does Anisa go to school?</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(23,'A','C')"><span class="opt-letter">A</span> By car.</div>
+        <div class="option" onclick="answer(23,'B','C')"><span class="opt-letter">B</span> By motorcycle.</div>
+        <div class="option" onclick="answer(23,'C','C')"><span class="opt-letter">C</span> By bicycle.</div>
+        <div class="option" onclick="answer(23,'D','C')"><span class="opt-letter">D</span> On foot.</div>
+      </div>
+      <div class="feedback" id="fb23"></div>
+    </div>
+
+    <!-- Q24 -->
+    <div class="q-card" id="q24">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">24</span>
+        <p class="q-text">What does Anisa usually do <strong>after school</strong>?</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(24,'A','C')"><span class="opt-letter">A</span> She goes to the market.</div>
+        <div class="option" onclick="answer(24,'B','C')"><span class="opt-letter">B</span> She plays with her friends.</div>
+        <div class="option" onclick="answer(24,'C','C')"><span class="opt-letter">C</span> She goes to the library.</div>
+        <div class="option" onclick="answer(24,'D','C')"><span class="opt-letter">D</span> She takes a nap.</div>
+      </div>
+      <div class="feedback" id="fb24"></div>
+    </div>
+
+    <!-- Q25 -->
+    <div class="q-card" id="q25">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">25</span>
+        <p class="q-text">What time does Anisa go to bed?</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(25,'A','B')"><span class="opt-letter">A</span> At 8 o'clock.</div>
+        <div class="option" onclick="answer(25,'B','B')"><span class="opt-letter">B</span> At 9 o'clock.</div>
+        <div class="option" onclick="answer(25,'C','B')"><span class="opt-letter">C</span> At 10 o'clock.</div>
+        <div class="option" onclick="answer(25,'D','B')"><span class="opt-letter">D</span> At 11 o'clock.</div>
+      </div>
+      <div class="feedback" id="fb25"></div>
+    </div>
+
+    <!-- Q26 -->
+    <div class="q-card" id="q26">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">26</span>
+        <p class="q-text"><em>"I have a very busy daily <u>routine</u>."</em> The underlined word means…</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(26,'A','C')"><span class="opt-letter">A</span> A special holiday activity.</div>
+        <div class="option" onclick="answer(26,'B','C')"><span class="opt-letter">B</span> Activities done only on weekends.</div>
+        <div class="option" onclick="answer(26,'C','C')"><span class="opt-letter">C</span> Activities done regularly every day.</div>
+        <div class="option" onclick="answer(26,'D','C')"><span class="opt-letter">D</span> A very difficult and stressful task.</div>
+      </div>
+      <div class="feedback" id="fb26"></div>
+    </div>
+
+    <!-- Q27 -->
+    <div class="q-card" id="q27">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">27</span>
+        <p class="q-text">What does Anisa do to help at home?</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(27,'A','C')"><span class="opt-letter">A</span> She cooks dinner.</div>
+        <div class="option" onclick="answer(27,'B','C')"><span class="opt-letter">B</span> She washes dishes.</div>
+        <div class="option" onclick="answer(27,'C','C')"><span class="opt-letter">C</span> She helps clean the house.</div>
+        <div class="option" onclick="answer(27,'D','C')"><span class="opt-letter">D</span> She waters the plants.</div>
+      </div>
+      <div class="feedback" id="fb27"></div>
+    </div>
+
+    <!-- Q28 -->
+    <div class="q-card" id="q28">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">28</span>
+        <p class="q-text">What is Anisa's first activity after waking up?</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(28,'A','B')"><span class="opt-letter">A</span> She eats breakfast.</div>
+        <div class="option" onclick="answer(28,'B','B')"><span class="opt-letter">B</span> She prays and takes a shower.</div>
+        <div class="option" onclick="answer(28,'C','B')"><span class="opt-letter">C</span> She watches television.</div>
+        <div class="option" onclick="answer(28,'D','B')"><span class="opt-letter">D</span> She goes to school.</div>
+      </div>
+      <div class="feedback" id="fb28"></div>
+    </div>
+
+    <!-- Q29 -->
+    <div class="q-card" id="q29">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">29</span>
+        <p class="q-text">When does Anisa do her homework?</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(29,'A','D')"><span class="opt-letter">A</span> In the morning before school.</div>
+        <div class="option" onclick="answer(29,'B','D')"><span class="opt-letter">B</span> During lunch time.</div>
+        <div class="option" onclick="answer(29,'C','D')"><span class="opt-letter">C</span> At the library after school.</div>
+        <div class="option" onclick="answer(29,'D','D')"><span class="opt-letter">D</span> In the evening at home.</div>
+      </div>
+      <div class="feedback" id="fb29"></div>
+    </div>
+
+    <!-- Q30 -->
+    <div class="q-card" id="q30">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">30</span>
+        <p class="q-text">Based on the text, which statement is <strong>TRUE</strong>?</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(30,'A','D')"><span class="opt-letter">A</span> Anisa goes to school at 7 o'clock.</div>
+        <div class="option" onclick="answer(30,'B','D')"><span class="opt-letter">B</span> Anisa eats bread for breakfast.</div>
+        <div class="option" onclick="answer(30,'C','D')"><span class="opt-letter">C</span> Anisa gets home from school at 2 o'clock.</div>
+        <div class="option" onclick="answer(30,'D','D')"><span class="opt-letter">D</span> Anisa goes to the library after school.</div>
+      </div>
+      <div class="feedback" id="fb30"></div>
+    </div>
+
+    <div style="text-align:right">
+      <button class="check-btn" onclick="showSection('shortmsg')">Lanjut → Short Message</button>
+    </div>
+  </div>
+
+  <!-- ==================== SECTION: SHORT MESSAGE ==================== -->
+  <div id="sec-shortmsg" class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:linear-gradient(135deg,#7c5cfc,#ff6fcf)">📱</div>
+      <div class="section-title-wrap">
+        <div class="section-label">Soal 31 – 34</div>
+        <div class="section-title">Short Message (Pesan Singkat)</div>
+      </div>
+    </div>
+
+    <div class="passage-card">
+      <div class="passage-title">📱 Bacalah pesan singkat berikut!</div>
+      <div style="background:rgba(255,255,255,0.08);border-radius:14px;padding:16px;font-style:italic;">
+        Hi Sari,<br><br>
+        I'm so sorry I can't come to your birthday party tonight. My little sister suddenly got sick and I have to take care of her at home. I hope you have a <u>wonderful</u> birthday and enjoy your party. I will give you your present tomorrow at school.<br><br>
+        Happy Birthday! 🎂<br>
+        — Mira
+      </div>
+    </div>
+
+    <!-- Q31 -->
+    <div class="q-card" id="q31">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">31</span>
+        <p class="q-text">Who sent the message?</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(31,'A','B')"><span class="opt-letter">A</span> Sari</div>
+        <div class="option" onclick="answer(31,'B','B')"><span class="opt-letter">B</span> Mira</div>
+        <div class="option" onclick="answer(31,'C','B')"><span class="opt-letter">C</span> Sari's mother</div>
+        <div class="option" onclick="answer(31,'D','B')"><span class="opt-letter">D</span> Mira's little sister</div>
+      </div>
+      <div class="feedback" id="fb31"></div>
+    </div>
+
+    <!-- Q32 -->
+    <div class="q-card" id="q32">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">32</span>
+        <p class="q-text">Why can't Mira come to the party?</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(32,'A','C')"><span class="opt-letter">A</span> She is sick.</div>
+        <div class="option" onclick="answer(32,'B','C')"><span class="opt-letter">B</span> She has to study for an exam.</div>
+        <div class="option" onclick="answer(32,'C','C')"><span class="opt-letter">C</span> She has to take care of her sick sister.</div>
+        <div class="option" onclick="answer(32,'D','C')"><span class="opt-letter">D</span> She is going out with her family.</div>
+      </div>
+      <div class="feedback" id="fb32"></div>
+    </div>
+
+    <!-- Q33 -->
+    <div class="q-card" id="q33">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">33</span>
+        <p class="q-text">What is the <strong>purpose</strong> of the message?</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(33,'A','B')"><span class="opt-letter">A</span> To invite Sari to a birthday party.</div>
+        <div class="option" onclick="answer(33,'B','B')"><span class="opt-letter">B</span> To apologize for not coming to a party.</div>
+        <div class="option" onclick="answer(33,'C','B')"><span class="opt-letter">C</span> To ask for directions to Sari's house.</div>
+        <div class="option" onclick="answer(33,'D','B')"><span class="opt-letter">D</span> To thank Sari for a birthday present.</div>
+      </div>
+      <div class="feedback" id="fb33"></div>
+    </div>
+
+    <!-- Q34 -->
+    <div class="q-card" id="q34">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">34</span>
+        <p class="q-text">When will Mira give the birthday present to Sari?</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(34,'A','C')"><span class="opt-letter">A</span> Tonight at the party.</div>
+        <div class="option" onclick="answer(34,'B','C')"><span class="opt-letter">B</span> The day after tomorrow.</div>
+        <div class="option" onclick="answer(34,'C','C')"><span class="opt-letter">C</span> Tomorrow at school.</div>
+        <div class="option" onclick="answer(34,'D','C')"><span class="opt-letter">D</span> Next week on the weekend.</div>
+      </div>
+      <div class="feedback" id="fb34"></div>
+    </div>
+
+    <div style="text-align:right">
+      <button class="check-btn" onclick="showSection('greeting')">Lanjut → Greeting Card</button>
+    </div>
+  </div>
+
+  <!-- ==================== SECTION: GREETING CARD ==================== -->
+  <div id="sec-greeting" class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:linear-gradient(135deg,#ff6fcf,#ffd452)">🎉</div>
+      <div class="section-title-wrap">
+        <div class="section-label">Soal 35 – 38</div>
+        <div class="section-title">Greeting Card</div>
+      </div>
+    </div>
+
+    <div class="passage-card">
+      <div class="passage-title">🎉 Bacalah greeting card berikut!</div>
+      <div style="background:rgba(255,255,255,0.08);border-radius:14px;padding:20px;text-align:center;font-style:italic;">
+        🏆 <strong style="color:var(--yellow)">Dear Raka,</strong><br><br>
+        Congratulations on winning the Science Olympiad Competition! You have worked so hard and you <u>deserve</u> this achievement. We are all very proud of you.<br><br>
+        Keep up the great work and continue to inspire others with your brilliance. May you achieve even greater success in the future!<br><br>
+        With love and pride,<br>
+        <strong>Your Family 💛</strong>
+      </div>
+    </div>
+
+    <!-- Q35 -->
+    <div class="q-card" id="q35">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">35</span>
+        <p class="q-text">What is the greeting card about?</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(35,'A','C')"><span class="opt-letter">A</span> Raka's birthday celebration.</div>
+        <div class="option" onclick="answer(35,'B','C')"><span class="opt-letter">B</span> Raka's graduation from school.</div>
+        <div class="option" onclick="answer(35,'C','C')"><span class="opt-letter">C</span> Raka's achievement in a science competition.</div>
+        <div class="option" onclick="answer(35,'D','C')"><span class="opt-letter">D</span> Raka's recovery from illness.</div>
+      </div>
+      <div class="feedback" id="fb35"></div>
+    </div>
+
+    <!-- Q36 -->
+    <div class="q-card" id="q36">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">36</span>
+        <p class="q-text">What is the <strong>purpose</strong> of this greeting card?</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(36,'A','C')"><span class="opt-letter">A</span> To invite Raka to a competition.</div>
+        <div class="option" onclick="answer(36,'B','C')"><span class="opt-letter">B</span> To apologize to Raka.</div>
+        <div class="option" onclick="answer(36,'C','C')"><span class="opt-letter">C</span> To congratulate Raka on his achievement.</div>
+        <div class="option" onclick="answer(36,'D','C')"><span class="opt-letter">D</span> To warn Raka about competition rules.</div>
+      </div>
+      <div class="feedback" id="fb36"></div>
+    </div>
+
+    <!-- Q37 -->
+    <div class="q-card" id="q37">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">37</span>
+        <p class="q-text"><em>"You have worked so hard and you <u>deserve</u> this achievement."</em> The underlined word means…</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(37,'A','B')"><span class="opt-letter">A</span> Not qualified to receive something.</div>
+        <div class="option" onclick="answer(37,'B','B')"><span class="opt-letter">B</span> Worthy of receiving something.</div>
+        <div class="option" onclick="answer(37,'C','B')"><span class="opt-letter">C</span> Surprised about receiving something.</div>
+        <div class="option" onclick="answer(37,'D','B')"><span class="opt-letter">D</span> Disappointed with receiving something.</div>
+      </div>
+      <div class="feedback" id="fb37"></div>
+    </div>
+
+    <!-- Q38 -->
+    <div class="q-card" id="q38">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">38</span>
+        <p class="q-text">Who sent the greeting card to Raka?</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(38,'A','D')"><span class="opt-letter">A</span> Raka's teachers.</div>
+        <div class="option" onclick="answer(38,'B','D')"><span class="opt-letter">B</span> Raka's friends.</div>
+        <div class="option" onclick="answer(38,'C','D')"><span class="opt-letter">C</span> Raka's classmates.</div>
+        <div class="option" onclick="answer(38,'D','D')"><span class="opt-letter">D</span> Raka's family.</div>
+      </div>
+      <div class="feedback" id="fb38"></div>
+    </div>
+
+    <div style="text-align:right">
+      <button class="check-btn" onclick="showSection('chores')">Lanjut → House Chores</button>
+    </div>
+  </div>
+
+  <!-- ==================== SECTION: HOUSE CHORES ==================== -->
+  <div id="sec-chores" class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:linear-gradient(135deg,#3dd6a3,#19c4c4)">🧹</div>
+      <div class="section-title-wrap">
+        <div class="section-label">Soal 39 – 40</div>
+        <div class="section-title">House Chores (Pekerjaan Rumah)</div>
+      </div>
+    </div>
+
+    <!-- Q39 -->
+    <div class="q-card" id="q39">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">39</span>
+        <p class="q-text">Which of the following is a <strong>house chore</strong>?</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(39,'A','B')"><span class="opt-letter">A</span> Playing video games in the living room.</div>
+        <div class="option" onclick="answer(39,'B','B')"><span class="opt-letter">B</span> Sweeping the floor after dinner.</div>
+        <div class="option" onclick="answer(39,'C','B')"><span class="opt-letter">C</span> Watching television until midnight.</div>
+        <div class="option" onclick="answer(39,'D','B')"><span class="opt-letter">D</span> Reading a comic book in the bedroom.</div>
+      </div>
+      <div class="feedback" id="fb39"></div>
+    </div>
+
+    <!-- Q40 -->
+    <div class="q-card" id="q40">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span class="q-num">40</span>
+        <p class="q-text"><em>"My mother always ______ the floor every morning after breakfast."</em> Fill in the blank correctly.</p>
+      </div>
+      <div class="options">
+        <div class="option" onclick="answer(40,'A','B')"><span class="opt-letter">A</span> mop</div>
+        <div class="option" onclick="answer(40,'B','B')"><span class="opt-letter">B</span> mops</div>
+        <div class="option" onclick="answer(40,'C','B')"><span class="opt-letter">C</span> mopping</div>
+        <div class="option" onclick="answer(40,'D','B')"><span class="opt-letter">D</span> mopped</div>
+      </div>
+      <div class="feedback" id="fb40"></div>
+    </div>
+
+    <div style="text-align:center;margin-top:24px">
+      <button class="submit-all-btn" onclick="submitPG()">🎯 Lihat Nilai PG Saya!</button>
+    </div>
+
+    <!-- Score Panel -->
+    <div class="score-panel" id="score-panel">
+      <div style="font-size:3rem;margin-bottom:8px">🏆</div>
+      <div class="score-big" id="final-score">0</div>
+      <div class="score-msg" id="score-msg">Nilai PG kamu</div>
+      <div style="margin-top:16px">
+        <button class="check-btn" onclick="showSection('essay')">✍️ Lanjut ke Soal Essay</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ==================== SECTION: ESSAY ==================== -->
+  <div id="sec-essay" class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:linear-gradient(135deg,#ff6fcf,#7c5cfc)">✍️</div>
+      <div class="section-title-wrap">
+        <div class="section-label">Soal 41 – 45</div>
+        <div class="section-title">Uraian / Essay</div>
+      </div>
+    </div>
+
+    <!-- Essay 41 -->
+    <div class="essay-card">
+      <div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:14px">
+        <span class="q-num" style="background:linear-gradient(135deg,var(--orange),var(--pink))">41</span>
+        <p style="color:rgba(255,255,255,0.95);font-weight:700;font-size:1rem">Menulis Pesan Singkat</p>
+      </div>
+      <div class="essay-prompt">
+        Tulislah sebuah <strong style="color:var(--teal)">pesan singkat (short message)</strong> kepada temanmu bernama <strong>Ria</strong>. Isi pesannya adalah kamu akan <strong>terlambat datang ke sekolah besok</strong> karena ada janji dengan dokter gigi.<br><br>
+        Sertakan: (1) sapaan kepada Ria, (2) alasan keterlambatan, (3) perkiraan jam datang ke sekolah, (4) penutup/tanda tangan.
+      </div>
+      <div class="essay-label">Jawaban kamu 👇</div>
+      <textarea class="essay-area" placeholder="Tulis pesanmu di sini...&#10;&#10;Contoh awalan: Hi Ria, I'm sorry..."></textarea>
+    </div>
+
+    <!-- Essay 42 -->
+    <div class="essay-card">
+      <div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:14px">
+        <span class="q-num" style="background:linear-gradient(135deg,var(--teal),var(--green))">42</span>
+        <p style="color:rgba(255,255,255,0.95);font-weight:700;font-size:1rem">Recount Text – Kosa Kata</p>
+      </div>
+      <div class="essay-prompt">
+        <div class="passage-inset">
+          Last month, I participated in an English speech contest at the district level. I spent weeks preparing my speech about environmental awareness. On the day of the contest, I felt nervous but I tried to stay calm. I spoke clearly and confidently in front of the judges and audience. After all participants finished, the judges announced the results. I was <strong style="color:var(--yellow)">thrilled</strong> to find out that I won second place.
+        </div>
+        Berdasarkan teks di atas, jelaskan arti kata <strong style="color:var(--yellow)">"thrilled"</strong> berdasarkan konteks teks tersebut! Gunakan bahasa Indonesia atau Inggris.
+      </div>
+      <div class="essay-label">Jawaban kamu 👇</div>
+      <textarea class="essay-area" placeholder="Tuliskan arti kata 'thrilled' beserta alasannya berdasarkan konteks..."></textarea>
+    </div>
+
+    <!-- Essay 43 -->
+    <div class="essay-card">
+      <div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:14px">
+        <span class="q-num" style="background:linear-gradient(135deg,var(--purple),var(--teal))">43</span>
+        <p style="color:rgba(255,255,255,0.95);font-weight:700;font-size:1rem">Recount Text – Isi Teks</p>
+      </div>
+      <div class="essay-prompt">
+        Berdasarkan teks yang sama pada soal nomor 42, jawablah pertanyaan-pertanyaan berikut dengan kalimat lengkap!
+      </div>
+      <div class="essay-label">a. What was the topic of the speech?</div>
+      <textarea class="essay-area" style="min-height:70px" placeholder="The topic of the speech was..."></textarea>
+      <div class="essay-label">b. How did the writer feel before the contest? Why?</div>
+      <textarea class="essay-area" style="min-height:70px" placeholder="The writer felt..."></textarea>
+      <div class="essay-label">c. What place did the writer win?</div>
+      <textarea class="essay-area" style="min-height:70px" placeholder="The writer won..."></textarea>
+    </div>
+
+    <!-- Essay 44 -->
+    <div class="essay-card">
+      <div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:14px">
+        <span class="q-num" style="background:linear-gradient(135deg,var(--orange),var(--yellow))">44</span>
+        <p style="color:rgba(255,255,255,0.95);font-weight:700;font-size:1rem">Mencari Amanat / Moral Message</p>
+      </div>
+      <div class="essay-prompt">
+        <div class="passage-inset">
+          Andi always studied hard and never gave up even when he failed. After trying many times, he finally won the National Science Competition. His teachers and friends were very proud of him.
+        </div>
+        Apa <strong style="color:var(--pink)">amanat (moral message)</strong> yang dapat kita pelajari dari cerita pendek di atas? Jelaskan jawabanmu!
+      </div>
+      <div class="essay-label">Jawaban kamu 👇</div>
+      <textarea class="essay-area" placeholder="Amanat dari cerita tersebut adalah..."></textarea>
+    </div>
+
+    <!-- Essay 45 -->
+    <div class="essay-card">
+      <div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:14px">
+        <span class="q-num" style="background:linear-gradient(135deg,var(--teal),var(--purple))">45</span>
+        <p style="color:rgba(255,255,255,0.95);font-weight:700;font-size:1rem">Present Continuous – Melengkapi Kalimat</p>
+      </div>
+      <div class="essay-prompt">
+        Lengkapi kalimat-kalimat berikut dengan bentuk <strong style="color:var(--teal)">Present Continuous Tense</strong> yang tepat dari kata kerja dalam kurung!
+      </div>
+      <div class="essay-label">a. "Look! The birds ______ (fly) over the garden right now."</div>
+      <textarea class="essay-area" style="min-height:60px" placeholder="Jawaban: The birds are..."></textarea>
+      <div class="essay-label">b. "My brother ______ (not/study) in his room; he ______ (watch) TV."</div>
+      <textarea class="essay-area" style="min-height:60px" placeholder="Jawaban: My brother is not..."></textarea>
+      <div class="essay-label">c. "What ______ you ______ (do) at the moment? I ______ (read) an interesting book."</div>
+      <textarea class="essay-area" style="min-height:60px" placeholder="Jawaban: What are you..."></textarea>
+
+      <div style="margin-top:20px;padding:16px;background:rgba(25,196,196,0.12);border-radius:14px;border:1px solid rgba(25,196,196,0.3)">
+        <div style="color:var(--teal);font-weight:800;font-size:0.9rem;margin-bottom:8px">💡 Kunci Jawaban Essay No. 45:</div>
+        <div style="color:rgba(255,255,255,0.8);font-size:0.88rem;line-height:1.8">
+          a. <strong>are flying</strong><br>
+          b. <strong>is not studying</strong> / <strong>is watching</strong><br>
+          c. <strong>are</strong> you <strong>doing</strong> / <strong>am reading</strong>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:rgba(255,255,255,0.08);border-radius:18px;padding:20px 24px;text-align:center;border:1px solid rgba(255,255,255,0.18)">
+      <div style="font-size:2rem;margin-bottom:8px">🎓</div>
+      <div style="color:#fff;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:1.1rem;margin-bottom:6px">Selesai! Semangat belajar ya!</div>
+      <div style="color:rgba(255,255,255,0.65);font-size:0.88rem;font-weight:600">Kerjakan dengan teliti dan percaya diri. Good luck! 🍀</div>
+    </div>
+  </div>
+
+</div><!-- /wrapper -->
+
+<script>
+  // State
+  const answers = {};
+  const totalPG = 40;
+
+  function answer(qNum, chosen, correct) {
+    const card = document.getElementById('q' + qNum);
+    const feedback = document.getElementById('fb' + qNum);
+    if (card.classList.contains('answered-correct') || card.classList.contains('answered-wrong')) return;
+
+    const opts = card.querySelectorAll('.option');
+    const letters = ['A','B','C','D'];
+
+    opts.forEach((opt, i) => {
+      opt.style.pointerEvents = 'none';
+      if (letters[i] === chosen) {
+        opt.classList.add(chosen === correct ? 'correct' : 'wrong');
+      }
+      if (letters[i] === correct && chosen !== correct) {
+        opt.classList.add('reveal-correct');
+      }
+    });
+
+    const isCorrect = chosen === correct;
+    answers[qNum] = isCorrect;
+
+    feedback.textContent = isCorrect
+      ? '✅ Benar! Jawaban yang tepat adalah ' + correct + '.'
+      : '❌ Kurang tepat. Jawaban yang benar adalah ' + correct + '.';
+    feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'wrong');
+    card.classList.add(isCorrect ? 'answered-correct' : 'answered-wrong');
+
+    updateStats();
+  }
+
+  function updateStats() {
+    const total = Object.keys(answers).length;
+    const correct = Object.values(answers).filter(Boolean).length;
+    const wrong = total - correct;
+    const score = Math.round((correct / totalPG) * 100);
+
+    document.getElementById('answered-count').textContent = total;
+    document.getElementById('correct-count').textContent = correct;
+    document.getElementById('wrong-count').textContent = wrong;
+    document.getElementById('score-display').textContent = score;
+
+    const pct = (total / totalPG) * 100;
+    document.getElementById('progress-bar').style.width = pct + '%';
+    document.getElementById('progress-text').textContent = total + ' / ' + totalPG + ' soal PG';
+  }
+
+  function submitPG() {
+    const correct = Object.values(answers).filter(Boolean).length;
+    const score = Math.round((correct / totalPG) * 100);
+    const panel = document.getElementById('score-panel');
+    panel.classList.add('show');
+    document.getElementById('final-score').textContent = score;
+
+    let msg = '';
+    if (score >= 90) msg = '🌟 Luar biasa! Kamu sangat siap ujian!';
+    else if (score >= 75) msg = '👏 Bagus sekali! Terus semangat ya!';
+    else if (score >= 60) msg = '💪 Cukup baik! Yuk ulangi materi yang salah.';
+    else msg = '📚 Jangan menyerah! Belajar lagi dan pasti bisa!';
+
+    document.getElementById('score-msg').textContent = msg + ' (' + correct + '/' + totalPG + ' benar)';
+    panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  const sections = ['recount','present','dialog','daily','shortmsg','greeting','chores','essay'];
+
+  function showSection(id) {
+    sections.forEach(s => {
+      document.getElementById('sec-' + s).classList.remove('active');
+    });
+    document.getElementById('sec-' + id).classList.add('active');
+
+    document.querySelectorAll('.nav-btn').forEach((btn, i) => {
+      btn.classList.remove('active');
+      if (sections[i] === id) btn.classList.add('active');
+    });
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
