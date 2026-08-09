@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 1: The Business Profile</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+            --bg-color: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--secondary-color);
+        }
+
+        h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+
+        .reading-box {
+            background-color: #eef2f5;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .grammar-box {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .teacher-note {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 0.9em;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .matching-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .matching-verb {
+            font-weight: bold;
+            width: 120px;
+        }
+
+        select, input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        select {
+            flex-grow: 1;
+            max-width: 300px;
+        }
+
+        .mcq-sentence {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .choice-btn {
+            background-color: #e0e0e0;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: 0.3s;
+            margin: 0 5px;
+        }
+
+        .choice-btn:hover {
+            background-color: #d0d0d0;
+        }
+
+        .choice-btn.selected {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .gap-fill-text {
+            font-size: 1.1em;
+            line-height: 2;
+        }
+
+        .gap-input {
+            width: 100px;
+            text-align: center;
+            border: none;
+            border-bottom: 2px solid var(--primary-color);
+            border-radius: 0;
+            background: transparent;
+            outline: none;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        .draft-input {
+            width: 100%;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        .check-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+
+        .check-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .result {
+            font-weight: bold;
+            margin-left: 15px;
+        }
+        
+        .correct { background-color: #d4edda !important; border-color: #c3e6cb !important; }
+        .wrong { background-color: #f8d7da !important; border-color: #f5c6cb !important; }
+        .correct-text { color: var(--success-color); }
+        .wrong-text { color: var(--error-color); }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Module 1: The Business Profile</h1>
+        <p><strong>Meeting 1: The Daily Grind (Interactive Student Workspace)</strong></p>
+    </header>
+
+    <!-- PART 2 -->
+    <div class="card">
+        <h3>Part 2: Reading & Grammar Focus</h3>
+        <p><em>Read the text about a young CEO’s daily routine.</em></p>
+        
+        <div class="reading-box">
+            Meet Alex. He is the CEO of a young tech startup. Every morning, he <strong>wakes up</strong> at 6:00 AM and <strong>checks</strong> his emails. He <strong>manages</strong> a team of 20 people. They <strong>operate</strong> from a modern office in the city. At 10:00 AM, Alex usually <strong>attends</strong> important meetings with investors. He <strong>doesn't eat</strong> a big lunch because he is busy. In the afternoon, he <strong>negotiates</strong> contracts with other companies.
+        </div>
+
+        <div class="grammar-box">
+            <strong>Grammar Spotlight: Present Simple</strong><br>
+            We use Present Simple to talk about facts, habits, and daily routines.<br>
+            <ul>
+                <li><strong>I / You / They / We:</strong> manage, operate, check <em>(Don't)</em></li>
+                <li><strong>He / She / It:</strong> manage<strong>s</strong>, operate<strong>s</strong>, check<strong>s</strong> <em>(Doesn't)</em></li>
+            </ul>
+        </div>
+        
+        <div class="teacher-note">
+            [ Teacher's Note: Cambridge Book check time. Let's see your textbook! ]
+        </div>
+    </div>
+
+    <!-- PART 3 -->
+    <div class="card">
+        <h3>Part 3: Controlled Practice 1 (Matching)</h3>
+        <p><em>Match the business verbs with the correct objects.</em></p>
+        
+        <div id="part3-container">
+            <div class="matching-row">
+                <span class="matching-verb">1. Manage</span>
+                <select id="m1" data-answer="team">
+                    <option value="">-- Select an object --</option>
+                    <option value="contract">a contract</option>
+                    <option value="email">an email</option>
+                    <option value="team">a team of workers</option>
+                    <option value="product">a new product</option>
+                    <option value="meeting">a business meeting</option>
+                </select>
+            </div>
+            <div class="matching-row">
+                <span class="matching-verb">2. Attend</span>
+                <select id="m2" data-answer="meeting">
+                    <option value="">-- Select an object --</option>
+                    <option value="contract">a contract</option>
+                    <option value="email">an email</option>
+                    <option value="team">a team of workers</option>
+                    <option value="product">a new product</option>
+                    <option value="meeting">a business meeting</option>
+                </select>
+            </div>
+            <div class="matching-row">
+                <span class="matching-verb">3. Negotiate</span>
+                <select id="m3" data-answer="contract">
+                    <option value="">-- Select an object --</option>
+                    <option value="contract">a contract</option>
+                    <option value="email">an email</option>
+                    <option value="team">a team of workers</option>
+                    <option value="product">a new product</option>
+                    <option value="meeting">a business meeting</option>
+                </select>
+            </div>
+            <div class="matching-row">
+                <span class="matching-verb">4. Check</span>
+                <select id="m4" data-answer="email">
+                    <option value="">-- Select an object --</option>
+                    <option value="contract">a contract</option>
+                    <option value="email">an email</option>
+                    <option value="team">a team of workers</option>
+                    <option value="product">a new product</option>
+                    <option value="meeting">a business meeting</option>
+                </select>
+            </div>
+            <div class="matching-row">
+                <span class="matching-verb">5. Sell</span>
+                <select id="m5" data-answer="product">
+                    <option value="">-- Select an object --</option>
+                    <option value="contract">a contract</option>
+                    <option value="email">an email</option>
+                    <option value="team">a team of workers</option>
+                    <option value="product">a new product</option>
+                    <option value="meeting">a business meeting</option>
+                </select>
+            </div>
+        </div>
+        <button class="check-btn" onclick="checkPart3()">Check Answers</button>
+        <span id="res-part3" class="result"></span>
+    </div>
+
+    <!-- PART 4 -->
+    <div class="card">
+        <h3>Part 4: Controlled Practice 2 (Choose the Correct Word)</h3>
+        <p><em>Click on the correct verb to complete the sentence.</em></p>
+        
+        <div id="part4-container">
+            <div class="mcq-sentence" id="q1">
+                1. The manager 
+                <button class="choice-btn" onclick="selectChoice(this)" data-correct="false">work</button> 
+                <button class="choice-btn" onclick="selectChoice(this)" data-correct="true">works</button> 
+                late every Friday.
+            </div>
+            <div class="mcq-sentence" id="q2">
+                2. We 
+                <button class="choice-btn" onclick="selectChoice(this)" data-correct="true">don't</button> 
+                <button class="choice-btn" onclick="selectChoice(this)" data-correct="false">doesn't</button> 
+                open the store on Sundays.
+            </div>
+            <div class="mcq-sentence" id="q3">
+                3. I 
+                <button class="choice-btn" onclick="selectChoice(this)" data-correct="true">study</button> 
+                <button class="choice-btn" onclick="selectChoice(this)" data-correct="false">studies</button> 
+                business management at school.
+            </div>
+            <div class="mcq-sentence" id="q4">
+                4. She usually 
+                <button class="choice-btn" onclick="selectChoice(this)" data-correct="false">read</button> 
+                <button class="choice-btn" onclick="selectChoice(this)" data-correct="true">reads</button> 
+                financial reports in the morning.
+            </div>
+            <div class="mcq-sentence" id="q5">
+                5. Good leaders always 
+                <button class="choice-btn" onclick="selectChoice(this)" data-correct="true">listen</button> 
+                <button class="choice-btn" onclick="selectChoice(this)" data-correct="false">listens</button> 
+                to their employees.
+            </div>
+        </div>
+        <button class="check-btn" onclick="checkPart4()">Check Answers</button>
+        <span id="res-part4" class="result"></span>
+    </div>
+
+    <!-- PART 5 -->
+    <div class="card">
+        <h3>Part 5: Free Practice 1 (Fill in the Blank)</h3>
+        <p><em>Read the schedule below. Type a logical verb to complete the text. Remember to check the subject!</em></p>
+        
+        <div class="gap-fill-text">
+            My name is Sarah, and I am an entrepreneur. I <input type="text" class="gap-input" data-answers="wake,get"> up at 5:00 AM every day. 
+            I <input type="text" class="gap-input" data-answers="check,read,review,see,open"> my schedule on my phone before breakfast. 
+            At 9:00 AM, my team <input type="text" class="gap-input" data-answers="has,have,holds,attends,starts"> meetings to discuss our goals. 
+            We <input type="text" class="gap-input" data-answers="drink,have,make,buy,get"> coffee and talk about new ideas. 
+            In the evening, I <input type="text" class="gap-input" data-answers="read,study,open,review"> a book about business to learn new things.
+        </div>
+        <button class="check-btn" onclick="checkPart5()">Check Answers</button>
+        <span id="res-part5" class="result"></span>
+    </div>
+
+    <!-- PART 6 -->
+    <div class="card">
+        <h3>Part 6: Free Practice 2 (Drafting Your Routine)</h3>
+        <p><em>Write 4 sentences about your real daily routine as a business student. Use words like: <strong>always, usually, sometimes, never</strong>.</em></p>
+        
+        <input type="text" class="draft-input" placeholder="1. I usually...">
+        <input type="text" class="draft-input" placeholder="2. ...">
+        <input type="text" class="draft-input" placeholder="3. ...">
+        <input type="text" class="draft-input" placeholder="4. ...">
+        
+        <button class="check-btn" style="background-color: var(--secondary-color);" onclick="alert('Great job! Get ready to use these sentences for your storyboard production.')">Save Drafts</button>
+    </div>
+
+</div>
+
+<script>
+    // Logic for Part 3: Matching
+    function checkPart3() {
+        let score = 0;
+        let selects = document.querySelectorAll('#part3-container select');
+        
+        selects.forEach(sel => {
+            sel.classList.remove('correct', 'wrong');
+            if(sel.value === sel.getAttribute('data-answer')) {
+                sel.classList.add('correct');
+                score++;
+            } else if (sel.value !== "") {
+                sel.classList.add('wrong');
+            }
+        });
+
+        let resBox = document.getElementById('res-part3');
+        resBox.textContent = `Score: ${score} / 5`;
+        resBox.className = "result " + (score === 5 ? "correct-text" : (score > 0 ? "" : "wrong-text"));
+    }
+
+    // Logic for Part 4: Selection mechanism
+    function selectChoice(btn) {
+        let parent = btn.parentElement;
+        let buttons = parent.querySelectorAll('.choice-btn');
+        buttons.forEach(b => b.classList.remove('selected', 'correct', 'wrong'));
+        btn.classList.add('selected');
+    }
+
+    // Logic for Part 4: Checking answers
+    function checkPart4() {
+        let score = 0;
+        let questions = document.querySelectorAll('.mcq-sentence');
+        let answeredCount = 0;
+
+        questions.forEach(q => {
+            let selectedBtn = q.querySelector('.choice-btn.selected');
+            if (selectedBtn) {
+                answeredCount++;
+                if (selectedBtn.getAttribute('data-correct') === "true") {
+                    selectedBtn.classList.add('correct');
+                    score++;
+                } else {
+                    selectedBtn.classList.add('wrong');
+                }
+            }
+        });
+
+        let resBox = document.getElementById('res-part4');
+        if (answeredCount < 5) {
+            resBox.textContent = "Please answer all questions.";
+            resBox.className = "result wrong-text";
+        } else {
+            resBox.textContent = `Score: ${score} / 5`;
+            resBox.className = "result " + (score === 5 ? "correct-text" : "wrong-text");
+        }
+    }
+
+    // Logic for Part 5: Fill in the Blank
+    function checkPart5() {
+        let score = 0;
+        let inputs = document.querySelectorAll('.gap-input');
+        
+        inputs.forEach(input => {
+            input.classList.remove('correct', 'wrong');
+            let studentAnswer = input.value.trim().toLowerCase();
+            let acceptableAnswers = input.getAttribute('data-answers').split(',');
+
+            if (studentAnswer === "") {
+                // do nothing if empty
+            } else if (acceptableAnswers.includes(studentAnswer)) {
+                input.classList.add('correct');
+                score++;
+            } else {
+                input.classList.add('wrong');
+            }
+        });
+
+        let resBox = document.getElementById('res-part5');
+        resBox.textContent = `Score: ${score} / 5`;
+        resBox.className = "result " + (score === 5 ? "correct-text" : (score > 0 ? "" : "wrong-text"));
+    }
+</script>
+
+</body>
+</html>
