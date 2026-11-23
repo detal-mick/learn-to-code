@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 7 · Around the World — B1 English</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbf7ef; --ink:#2e3440; --muted:#667085; --card:#ffffff; --line:#e9e2d4;
+  --teal:#2f8f8a; --teal-l:#e3f2f0;
+  --coral:#d9765b; --coral-l:#fbebe5;
+  --mustard:#d39b2c; --mustard-l:#fcf2dd;
+  --plum:#7b6ba8; --plum-l:#eeeaf7;
+  --sky:#3d85b8; --sky-l:#e3eef7;
+  --leaf:#5a9a69; --leaf-l:#e5f1e8;
+  --rose:#c0607c; --rose-l:#f8e7ed;
+  --ok:#3f8f5a; --ok-l:#e3f3e8; --no:#c4534a; --no-l:#fbe7e5;
+  --radius:20px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Nunito',system-ui,sans-serif;color:var(--ink);background:var(--bg);
+  background-image:radial-gradient(circle at 1px 1px,#efe7d6 1px,transparent 0);background-size:22px 22px;line-height:1.6;font-size:17px}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:1.2;margin:0}
+p{margin:.4em 0 .8em}
+button{font-family:inherit}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;background:linear-gradient(120deg,#2f8f8a 0%,#3d85b8 60%,#7b6ba8 100%);color:#fff;padding:54px 24px 64px}
+.hero::before,.hero::after{content:"";position:absolute;border-radius:50%;opacity:.14;background:#fff}
+.hero::before{width:380px;height:380px;right:-90px;top:-120px}
+.hero::after{width:220px;height:220px;left:-60px;bottom:-110px}
+.hero-inner{max-width:1000px;margin:0 auto;position:relative;z-index:1}
+.unit-label{display:inline-block;background:var(--mustard);color:#fff;font-weight:900;letter-spacing:.08em;text-transform:uppercase;font-size:.8rem;padding:6px 14px;border-radius:999px}
+.hero h1{font-size:clamp(2.2rem,5vw,3.6rem);margin:14px 0 8px}
+.hero p{font-size:1.15rem;max-width:640px;opacity:.95}
+.goals{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.goals span{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);padding:6px 14px;border-radius:999px;font-weight:700;font-size:.92rem}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);box-shadow:0 2px 10px rgba(0,0,0,.04)}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:10px 16px}
+.nav-links{display:flex;gap:6px;overflow-x:auto;flex:1;scrollbar-width:thin}
+.nav-links a{white-space:nowrap;text-decoration:none;color:var(--ink);font-weight:700;font-size:.88rem;padding:6px 12px;border-radius:999px;background:#f4efe4;transition:.2s}
+.nav-links a:hover,.nav-links a.active{background:var(--teal);color:#fff}
+.score-pill{white-space:nowrap;background:var(--mustard-l);border:2px solid var(--mustard);color:#7a5510;font-weight:900;padding:5px 14px;border-radius:999px;font-size:.92rem}
+
+/* SECTIONS */
+main{padding:10px 16px 60px}
+.sec{max-width:1000px;margin:34px auto;background:var(--card);border-radius:var(--radius);box-shadow:0 6px 24px rgba(60,50,30,.07);overflow:hidden;border-top:8px solid var(--c);scroll-margin-top:70px}
+.sec-head{display:flex;align-items:center;gap:16px;padding:22px 28px;background:var(--cl);flex-wrap:wrap}
+.num{width:50px;height:50px;border-radius:50%;background:var(--c);color:#fff;font-weight:900;display:grid;place-items:center;font-size:1.35rem;flex-shrink:0;box-shadow:0 3px 0 rgba(0,0,0,.12)}
+.sec-head h2{font-size:1.7rem;color:var(--ink)}
+.sec-head .sub{color:var(--muted);font-weight:600;font-size:.95rem}
+.skills{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+.skill{font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:4px 10px;border-radius:999px;background:#fff;color:var(--c);border:2px solid var(--c)}
+.sec-body{padding:24px 28px 30px}
+
+.task{margin:10px 0 30px}
+.task:last-child{margin-bottom:0}
+.task-title{display:flex;gap:10px;align-items:center;font-weight:800;font-size:1.1rem;margin-bottom:6px}
+.letter{background:var(--c);color:#fff;border-radius:8px;padding:1px 10px;font-weight:900}
+.instr{color:var(--muted);margin:0 0 14px;font-weight:600}
+
+.btn{cursor:pointer;border:none;border-radius:12px;padding:10px 18px;font-weight:800;font-size:.95rem;background:var(--c,var(--teal));color:#fff;box-shadow:0 3px 0 rgba(0,0,0,.15);transition:transform .1s,filter .2s}
+.btn:hover{filter:brightness(1.07)}
+.btn:active{transform:translateY(2px);box-shadow:0 1px 0 rgba(0,0,0,.15)}
+.btn.ghost{background:#fff;color:var(--c,var(--teal));border:2px solid var(--c,var(--teal));box-shadow:none}
+.btn.small{padding:6px 12px;font-size:.85rem;border-radius:10px}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center}
+
+.box{background:var(--cl);border-radius:16px;padding:16px 20px;margin:14px 0}
+.tip{border-left:6px solid var(--mustard);background:var(--mustard-l);border-radius:12px;padding:12px 16px;margin:14px 0}
+.tip b{color:#7a5510}
+.feedback{font-weight:800;margin-top:10px;min-height:1.4em}
+.feedback.ok{color:var(--ok)} .feedback.no{color:var(--no)}
+
+/* WARMER */
+.mystery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.mystery{background:#fff;border:2px dashed var(--c);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.mystery h3{font-size:1.1rem;font-family:'Nunito';font-weight:900;color:var(--c)}
+.mystery ol{margin:0;padding-left:20px;min-height:84px}
+.mystery li{animation:pop .3s ease}
+.mystery input{padding:8px 10px;border-radius:10px;border:2px solid var(--line);font:inherit;font-size:.95rem}
+.mystery .reveal{display:flex;align-items:center;gap:8px;font-weight:800}
+.mystery .reveal img{width:40px;border-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+@keyframes pop{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.spinner{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.spin-q{flex:1;min-width:240px;background:#fff;border-radius:14px;padding:16px 20px;font-weight:800;font-size:1.15rem;border:2px solid var(--line)}
+
+/* VOCAB */
+.group-title{font-weight:900;margin:18px 0 8px;display:flex;align-items:center;gap:8px}
+.group-title .suf{background:var(--c);color:#fff;border-radius:8px;padding:0 10px}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px}
+.vcard{perspective:800px;height:150px;cursor:pointer}
+.vcard-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.vcard.flipped .vcard-inner{transform:rotateY(180deg)}
+.vface{position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:10px;text-align:center;border:2px solid var(--line);background:#fff}
+.vface img{width:54px;height:36px;object-fit:cover;border-radius:4px;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.vface .country{font-weight:900;font-size:1.05rem}
+.vback{transform:rotateY(180deg);background:var(--cl);border-color:var(--c)}
+.vback .city{font-size:.9rem;color:var(--muted);font-weight:700}
+.vback .nat{font-weight:900;font-size:1.15rem;color:var(--c)}
+.say{border:none;background:#fff;border-radius:50%;width:30px;height:30px;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.15);font-size:.9rem}
+
+/* MATCHING */
+.match{display:grid;grid-template-columns:1fr 1fr;gap:10px 30px}
+.match .col{display:flex;flex-direction:column;gap:8px}
+.mitem{cursor:pointer;border:2px solid var(--line);background:#fff;border-radius:12px;padding:10px 14px;font-weight:700;text-align:left;font-size:1rem;transition:.15s}
+.mitem:hover{border-color:var(--c)}
+.mitem.sel{border-color:var(--c);background:var(--cl)}
+.mitem.done{cursor:default;color:#fff;border-color:transparent}
+.mitem.wrong{animation:shake .35s;border-color:var(--no);background:var(--no-l)}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+/* MCQ */
+.q{background:#fff;border:2px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:12px}
+.q-text{font-weight:800;margin-bottom:10px}
+.q-text .n{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--cl);color:var(--c);font-size:.85rem;margin-right:6px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{cursor:pointer;border:2px solid var(--line);background:#fafafa;border-radius:10px;padding:8px 14px;font-weight:700;font-size:.95rem;text-align:left}
+.opt:hover:not(:disabled){border-color:var(--c);background:var(--cl)}
+.opt:disabled{cursor:default}
+.opt.right{background:var(--ok-l);border-color:var(--ok);color:var(--ok)}
+.opt.bad{background:var(--no-l);border-color:var(--no);color:var(--no);text-decoration:line-through}
+.opts.stack{flex-direction:column}
+
+/* GAP / SELECT */
+.gap-item{background:#fff;border:2px solid var(--line);border-radius:14px;padding:12px 16px;margin-bottom:10px;font-weight:700;display:flex;align-items:center;flex-wrap:wrap;gap:6px}
+.gap-item .n{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--cl);color:var(--c);font-size:.85rem}
+.gap-item input,.gap-item select{font:inherit;font-weight:800;padding:5px 10px;border-radius:10px;border:2px dashed var(--c);background:var(--cl);color:var(--ink);min-width:120px}
+.gap-item input.right,.gap-item select.right{border:2px solid var(--ok);background:var(--ok-l)}
+.gap-item input.bad,.gap-item select.bad{border:2px solid var(--no);background:var(--no-l)}
+.gap-item .ans{color:var(--ok);font-size:.9rem;font-weight:800}
+
+/* GRAMMAR */
+.gram-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.gcard{background:#fff;border:2px solid var(--line);border-radius:16px;padding:16px 18px}
+.gcard h3{font-family:'Nunito';font-weight:900;font-size:1.05rem;color:var(--c);margin-bottom:8px}
+table.form{width:100%;border-collapse:separate;border-spacing:0;border-radius:12px;overflow:hidden;font-size:.98rem}
+table.form th{background:var(--c);color:#fff;text-align:left;padding:8px 12px}
+table.form td{padding:8px 12px;border-bottom:1px solid var(--line);background:#fff}
+table.form tr:nth-child(even) td{background:#fcfaf5}
+.hl{background:var(--mustard-l);color:#7a5510;border-radius:6px;padding:0 4px;font-weight:800}
+.hl2{background:var(--sky-l);color:#25628f;border-radius:6px;padding:0 4px;font-weight:800}
+.xx{color:var(--no);font-weight:800} .vv{color:var(--ok);font-weight:800}
+.tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.tab{cursor:pointer;border:2px solid var(--c);background:#fff;color:var(--c);font-weight:900;padding:8px 18px;border-radius:999px}
+.tab.on{background:var(--c);color:#fff}
+.tabpane{display:none}.tabpane.on{display:block;animation:pop .3s}
+.intonation{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.into{border-radius:14px;padding:14px;background:#fff;border:2px solid var(--line)}
+.into .arrow{font-size:1.6rem;font-weight:900}
+.reveal-line{cursor:pointer;background:#fff;border:2px dashed var(--line);border-radius:12px;padding:10px 14px;margin-bottom:8px}
+.reveal-line .fix{display:none;margin-top:4px}
+.reveal-line.open .fix{display:block}
+.reveal-line.open{border-style:solid;border-color:var(--c)}
+
+/* FREE PRACTICE */
+table.fsw{width:100%;border-collapse:collapse;font-size:.95rem}
+table.fsw th{background:var(--c);color:#fff;padding:8px;text-align:left}
+table.fsw td{border-bottom:1px solid var(--line);padding:8px;vertical-align:top}
+table.fsw input{width:100%;font:inherit;padding:6px 8px;border:2px solid var(--line);border-radius:8px}
+table.fsw input:focus,.guess input:focus,textarea:focus,.mystery input:focus{outline:none;border-color:var(--c)}
+.hint-line{font-size:.82rem;font-weight:800;margin-top:3px;min-height:1.1em}
+.hint-line.ok{color:var(--ok)}.hint-line.no{color:var(--no)}
+.guess{display:grid;grid-template-columns:30px 1fr auto;gap:8px;align-items:start;margin-bottom:10px}
+.guess .n{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--c);color:#fff;font-weight:900;margin-top:6px}
+.guess input{width:100%;font:inherit;padding:8px 10px;border:2px solid var(--line);border-radius:10px}
+.toggle-yn{display:flex;gap:4px}
+.toggle-yn button{border:2px solid var(--line);background:#fff;border-radius:8px;padding:6px 10px;font-weight:800;cursor:pointer}
+.toggle-yn button.on-y{background:var(--ok-l);border-color:var(--ok);color:var(--ok)}
+.toggle-yn button.on-n{background:var(--no-l);border-color:var(--no);color:var(--no)}
+
+/* READING */
+.reading-wrap{display:grid;grid-template-columns:1.25fr 1fr;gap:22px;align-items:start}
+.article{background:#fffdf8;border:2px solid var(--line);border-radius:18px;padding:22px 24px;position:sticky;top:76px;max-height:calc(100vh - 96px);overflow:auto}
+.article .blog-top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--coral),var(--mustard));display:grid;place-items:center;color:#fff;font-weight:900;font-size:1.3rem}
+.article h3{font-size:1.45rem;color:var(--c)}
+.article .meta{color:var(--muted);font-size:.85rem;font-weight:700}
+.article p{font-size:1.02rem}
+.tag-target{cursor:pointer;border-radius:6px;transition:.2s}
+.tag-target.found{background:var(--ok-l);color:var(--ok);font-weight:800;box-shadow:0 0 0 2px var(--ok)}
+.article.show-pp .pp{background:var(--mustard-l);border-bottom:2px solid var(--mustard)}
+.article.show-nat .nat{background:var(--sky-l);border-bottom:2px solid var(--sky)}
+.counter{font-weight:900;color:var(--c)}
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+
+/* SPEAKING */
+.cuecard{position:relative;background:#fff;border-radius:16px;padding:22px 26px;border:2px solid var(--c);box-shadow:8px 8px 0 var(--cl);max-width:560px}
+.cuecard .label{position:absolute;top:-14px;left:20px;background:var(--c);color:#fff;font-weight:900;padding:2px 12px;border-radius:8px;font-size:.8rem;letter-spacing:.05em;text-transform:uppercase}
+.cuecard h3{font-family:'Nunito';font-weight:900;font-size:1.2rem;margin-bottom:8px}
+.cuecard ul{margin:4px 0 10px;padding-left:22px}
+.speak-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+.timer-box{background:#fff;border:2px solid var(--line);border-radius:16px;padding:16px;text-align:center}
+.timer{font-size:3rem;font-weight:900;font-variant-numeric:tabular-nums;color:var(--c);line-height:1.1}
+.tstate{font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-size:.8rem}
+.bar{height:10px;border-radius:999px;background:#eee;overflow:hidden;margin:10px 0}
+.bar > div{height:100%;width:0;background:var(--c);transition:width .9s linear}
+.phrases{display:flex;flex-wrap:wrap;gap:8px}
+.phrase{background:#fff;border:2px solid var(--line);border-radius:999px;padding:6px 12px;font-weight:700;font-size:.9rem;cursor:pointer}
+.phrase.used{background:var(--ok-l);border-color:var(--ok);color:var(--ok)}
+textarea{width:100%;font:inherit;font-size:1rem;border:2px solid var(--line);border-radius:14px;padding:12px 14px;resize:vertical;background:#fff;line-height:1.6}
+.rec-dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--no);margin-right:6px;animation:blink 1s infinite}
+@keyframes blink{50%{opacity:.2}}
+.checklist label{display:flex;gap:10px;align-items:flex-start;padding:6px 0;font-weight:700;cursor:pointer}
+.checklist input{width:20px;height:20px;accent-color:var(--c);margin-top:3px}
+
+/* WRITING */
+.plan-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.plan{background:#fff;border:2px solid var(--line);border-radius:14px;padding:12px}
+.plan label{font-weight:900;color:var(--c);font-size:.92rem;display:block;margin-bottom:4px}
+.plan textarea{min-height:80px;font-size:.92rem;padding:8px 10px;border-radius:10px}
+.write-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:20px;align-items:start}
+.wc{display:flex;justify-content:space-between;font-weight:800;font-size:.9rem;margin-top:6px;color:var(--muted)}
+.auto-check{background:#fff;border:2px solid var(--line);border-radius:16px;padding:14px 16px;position:sticky;top:76px}
+.auto-check h3{font-family:'Nunito';font-weight:900;font-size:1rem;margin-bottom:8px}
+.ac{display:flex;gap:10px;align-items:flex-start;padding:6px 0;font-weight:700;font-size:.93rem;border-bottom:1px dashed var(--line)}
+.ac:last-child{border:none}
+.ac .dot{flex-shrink:0;width:22px;height:22px;border-radius:50%;border:2px solid #ccc;display:grid;place-items:center;font-size:.75rem;color:#fff;margin-top:2px}
+.ac.on .dot{background:var(--ok);border-color:var(--ok)}
+.ac .why{display:block;font-weight:600;color:var(--muted);font-size:.82rem}
+.warn{color:var(--no);font-weight:800;font-size:.88rem;margin-top:8px}
+.model{display:none;background:#fffdf8;border:2px dashed var(--c);border-radius:16px;padding:16px 20px;margin-top:14px}
+.model.on{display:block;animation:pop .3s}
+
+.cando label{display:flex;gap:10px;align-items:center;padding:8px 12px;background:#fff;border-radius:12px;margin-bottom:8px;border:2px solid var(--line);font-weight:700;cursor:pointer}
+.cando input{width:22px;height:22px;accent-color:var(--c)}
+footer{text-align:center;color:var(--muted);font-weight:700;padding:20px;font-size:.9rem}
+
+@media (max-width:820px){
+  .reading-wrap,.speak-grid,.write-grid{grid-template-columns:1fr}
+  .article,.auto-check{position:static;max-height:none}
+  .match{gap:8px 12px}
+  .intonation{grid-template-columns:1fr}
+  .sec-body{padding:20px 18px}
+  .sec-head{padding:18px}
+  .skills{margin-left:0}
+  table.fsw{font-size:.85rem}
+}
+@media print{nav{display:none}.sec{break-inside:avoid;box-shadow:none}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <span class="unit-label">Unit 7 · B1 Intermediate</span>
+    <h1>Around the World</h1>
+    <p>Talk about the countries and cities you know, the places you've been to, and check information with question tags.</p>
+    <div class="goals">
+      <span>🌍 Countries, cities &amp; nationalities</span>
+      <span>✈️ Have you ever been to…?</span>
+      <span>❓ Question tags</span>
+      <span>📖 Reading · 🗣️ Speaking · ✍️ Writing</span>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-links" id="navLinks">
+      <a href="#warmer">1 Warmer</a>
+      <a href="#vocab">2 Vocabulary</a>
+      <a href="#vpractice">3 Vocab practice</a>
+      <a href="#grammar">4 Grammar</a>
+      <a href="#gp1">5 Practice 1</a>
+      <a href="#gp2">6 Practice 2</a>
+      <a href="#reading">7 Reading</a>
+      <a href="#speaking">8 Speaking</a>
+      <a href="#writing">9 Writing</a>
+    </div>
+    <div class="score-pill" id="scorePill">⭐ 0 / 0</div>
+  </div>
+</nav>
+
+<main>
+
+<!-- 1 WARMER -->
+<section class="sec" id="warmer" style="--c:var(--coral);--cl:var(--coral-l)">
+  <div class="sec-head">
+    <div class="num">1</div>
+    <div><h2>Warmer</h2><div class="sub">Mystery countries</div></div>
+    <div class="skills"><span class="skill">Speaking</span></div>
+  </div>
+  <div class="sec-body">
+    <div class="task">
+      <div class="task-title"><span class="letter">A</span> Guess the country</div>
+      <p class="instr">Read the first clue and guess. If you need help, open another clue. The fewer clues you use, the more points you get: 3, 2 or 1.</p>
+      <div class="mystery-grid" id="mysteryGrid"></div>
+    </div>
+    <div class="task">
+      <div class="task-title"><span class="letter">B</span> Talk with a partner</div>
+      <p class="instr">Spin for a question. Talk about it with your partner for one minute, then spin again.</p>
+      <div class="spinner">
+        <div class="spin-q" id="spinQ">Press “Spin” to get a question!</div>
+        <button class="btn" id="spinBtn">🎲 Spin</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 VOCAB -->
+<section class="sec" id="vocab" style="--c:var(--teal);--cl:var(--teal-l)">
+  <div class="sec-head">
+    <div class="num">2</div>
+    <div><h2>Vocabulary</h2><div class="sub">Country · City · Nationality</div></div>
+    <div class="skills"><span class="skill">Vocabulary</span><span class="skill">Pronunciation</span></div>
+  </div>
+  <div class="sec-body">
+    <p class="instr">Click a card to see a famous city and the nationality. Click 🔊 to hear it. Look at the word endings. Can you see the patterns?</p>
+    <div class="btn-row" style="margin-top:0;margin-bottom:6px">
+      <button class="btn ghost small" id="flipAll">Flip all cards</button>
+    </div>
+    <div id="vocabGroups"></div>
+    <div class="tip"><b>Watch out!</b>
+      <ul style="margin:6px 0 0;padding-left:20px">
+        <li>Nationalities always start with a <b>capital letter</b>: <span class="vv">Japanese</span> food, not <span class="xx">japanese</span> food.</li>
+        <li>The <b>stress</b> often moves: <b>JA</b>pan → japa<b>NESE</b> · <b>I</b>taly → i<b>TA</b>lian · <b>E</b>gypt → e<b>GYP</b>tian</li>
+        <li>Use <b>the</b> with some countries: <b>the</b> UK, <b>the</b> Netherlands, <b>the</b> USA, <b>the</b> Philippines.</li>
+        <li>A <b>nationality</b> word can be an adjective (<i>Thai food</i>) and often the name of a language too (<i>She speaks Thai</i>).</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 3 VOCAB PRACTICE -->
+<section class="sec" id="vpractice" style="--c:var(--sky);--cl:var(--sky-l)">
+  <div class="sec-head">
+    <div class="num">3</div>
+    <div><h2>Vocabulary practice</h2><div class="sub">Matching &amp; context</div></div>
+    <div class="skills"><span class="skill">Vocabulary</span><span class="skill">Reading</span></div>
+  </div>
+  <div class="sec-body">
+    <div class="task">
+      <div class="task-title"><span class="letter">A</span> Match the city to the country</div>
+      <p class="instr">Click a city, then click its country.</p>
+      <div id="match1"></div>
+      <div class="feedback" id="match1fb"></div>
+      <div class="btn-row"><button class="btn ghost small" data-reset="match1">↻ Try again</button></div>
+    </div>
+    <div class="task">
+      <div class="task-title"><span class="letter">B</span> What's the nationality?</div>
+      <p class="instr">Type the nationality. Remember the capital letter!</p>
+      <div id="natGaps"></div>
+      <div class="btn-row"><button class="btn" id="natCheck">Check</button><button class="btn ghost" id="natShow">Show answers</button></div>
+      <div class="feedback" id="natFb"></div>
+    </div>
+    <div class="task">
+      <div class="task-title"><span class="letter">C</span> What comes next?</div>
+      <p class="instr">Choose the most logical way to continue each sentence.</p>
+      <div id="logicQ"></div>
+      <div class="feedback" id="logicFb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 GRAMMAR -->
+<section class="sec" id="grammar" style="--c:var(--plum);--cl:var(--plum-l)">
+  <div class="sec-head">
+    <div class="num">4</div>
+    <div><h2>Grammar</h2><div class="sub">Present perfect for experiences · Question tags</div></div>
+    <div class="skills"><span class="skill">Grammar</span></div>
+  </div>
+  <div class="sec-body">
+    <div class="tabs">
+      <button class="tab on" data-tab="g1">1 · Have you ever been to…?</button>
+      <button class="tab" data-tab="g2">2 · Question tags</button>
+    </div>
+
+    <div class="tabpane on" id="g1">
+      <div class="box">
+        <p style="margin:0">We use the <b>present perfect</b> (<i>have/has + past participle</i>) to talk about <b>life experiences</b>. These are things that happened at some time in our lives. <b>We don't say when.</b></p>
+      </div>
+      <div class="gram-grid">
+        <div class="gcard">
+          <h3>➕ Positive</h3>
+          <table class="form">
+            <tr><th>Subject</th><th>have / has</th><th></th></tr>
+            <tr><td>I / You / We / They</td><td><span class="hl">have ('ve)</span></td><td>been to Japan.</td></tr>
+            <tr><td>He / She / It</td><td><span class="hl">has ('s)</span></td><td>been to Japan.</td></tr>
+          </table>
+        </div>
+        <div class="gcard">
+          <h3>➖ Negative</h3>
+          <p style="margin:0">I <span class="hl">haven't</span> been to Brazil.<br>She <span class="hl">hasn't</span> been to Brazil.<br>I've <span class="hl">never</span> been to Brazil.</p>
+          <p style="font-size:.9rem;color:var(--muted);margin-top:6px"><b>never</b> = not at any time in my life. Don't use it with <i>haven't</i>: <span class="xx">I haven't never…</span></p>
+        </div>
+        <div class="gcard">
+          <h3>❓ Questions &amp; short answers</h3>
+          <p style="margin:0"><span class="hl">Have</span> you <span class="hl">ever</span> been to Egypt?<br>→ Yes, I <b>have</b>. / No, I <b>haven't</b>.<br><span class="hl">Has</span> he <span class="hl">ever</span> been to Spain?<br>→ Yes, he <b>has</b>. / No, he <b>hasn't</b>.</p>
+          <p style="font-size:.9rem;color:var(--muted);margin-top:6px"><b>ever</b> = at any time in your life (only in questions)</p>
+        </div>
+        <div class="gcard">
+          <h3>🔀 Present perfect → past simple</h3>
+          <p style="margin:0">Start with the <b>experience</b>, then give <b>details</b> with the past simple:</p>
+          <p style="margin:6px 0 0">A: <i>Have you ever been to Bali?</i><br>B: <i>Yes, I have. I <span class="hl2">went</span> there in 2023.</i><br>A: <i>Who <span class="hl2">did</span> you go with?</i></p>
+          <p style="margin:8px 0 0"><span class="xx">✗ I've been to Paris last year.</span><br><span class="vv">✓ I went to Paris last year.</span></p>
+        </div>
+        <div class="gcard">
+          <h3>✈️ been to vs gone to</h3>
+          <p style="margin:0">She's <span class="hl">been to</span> Italy. → She went and <b>came back</b>. 🏠</p>
+          <p style="margin:6px 0 0">She's <span class="hl">gone to</span> Italy. → She is <b>in Italy now</b>. 🇮🇹</p>
+        </div>
+        <div class="gcard">
+          <h3>📍 Small words</h3>
+          <p style="margin:0">been <b>to</b> + place: <i>been to London</i><br>but <b>no</b> <i>to</i> with <b>there / here / abroad</b>:<br><span class="vv">✓ I've been there.</span> <span class="xx">✗ I've been to there.</span><br><span class="vv">✓ Have you ever been abroad?</span></p>
+        </div>
+      </div>
+      <h3 style="font-family:Nunito;font-weight:900;margin:22px 0 8px;color:var(--plum)">🔍 Spot the mistake (click to check)</h3>
+      <div id="spot1"></div>
+    </div>
+
+    <div class="tabpane" id="g2">
+      <div class="box">
+        <p style="margin:0">A <b>question tag</b> is a short question at the end of a sentence. We use it to <b>check information</b> we think is true, or to <b>ask someone to agree</b> with us.<br><i>You've been to Japan, <b>haven't you?</b></i></p>
+      </div>
+      <div class="gram-grid">
+        <div class="gcard">
+          <h3>⚖️ The golden rule</h3>
+          <p style="margin:0"><b>Positive</b> sentence → <b>negative</b> tag<br><i>You're Indonesian, <span class="hl">aren't you?</span></i></p>
+          <p style="margin:8px 0 0"><b>Negative</b> sentence → <b>positive</b> tag<br><i>You aren't French, <span class="hl">are you?</span></i></p>
+          <p style="font-size:.9rem;color:var(--muted);margin-top:8px">Tag = <b>auxiliary verb</b> + <b>pronoun</b> (not a name!)<br><i>Tom is Australian, isn't <b>he</b>?</i> <span class="xx">✗ isn't Tom?</span></p>
+        </div>
+        <div class="gcard" style="grid-column:span 2;min-width:0">
+          <h3>🧩 Which auxiliary? Use the verb from the sentence.</h3>
+          <table class="form">
+            <tr><th>Tense / verb</th><th>Example</th></tr>
+            <tr><td><b>be</b></td><td>Thai food is spicy, <span class="hl">isn't it?</span></td></tr>
+            <tr><td>Present simple</td><td>You live in Jakarta, <span class="hl">don't you?</span> · She speaks Thai, <span class="hl">doesn't she?</span></td></tr>
+            <tr><td>Past simple</td><td>They went to Rome, <span class="hl">didn't they?</span></td></tr>
+            <tr><td>Present perfect</td><td>You've been to Japan, <span class="hl">haven't you?</span> · He hasn't been to Egypt, <span class="hl">has he?</span></td></tr>
+            <tr><td>can / will</td><td>You can speak Spanish, <span class="hl">can't you?</span> · It will be hot, <span class="hl">won't it?</span></td></tr>
+          </table>
+        </div>
+        <div class="gcard">
+          <h3>⭐ Special cases</h3>
+          <p style="margin:0">I'm right, <span class="hl">aren't I?</span> <span style="color:var(--muted)">(not <s>amn't I</s>)</span></p>
+          <p style="margin:6px 0 0">Let's go to Spain, <span class="hl">shall we?</span></p>
+          <p style="margin:6px 0 0"><b>never</b> is negative →<br>You've never been to Paris, <span class="hl">have you?</span></p>
+        </div>
+      </div>
+      <h3 style="font-family:Nunito;font-weight:900;margin:22px 0 8px;color:var(--plum)">🎵 Intonation changes the meaning</h3>
+      <div class="intonation">
+        <div class="into"><div class="arrow" style="color:var(--coral)">↘ Falling</div><p style="margin:4px 0 0"><i>It's beautiful, isn't it?</i> ↘</p><p style="margin:4px 0 0;color:var(--muted);font-size:.92rem">I'm <b>sure</b>. I just want you to agree. (= chatting)</p></div>
+        <div class="into"><div class="arrow" style="color:var(--sky)">↗ Rising</div><p style="margin:4px 0 0"><i>You've been to Kyoto, haven't you?</i> ↗</p><p style="margin:4px 0 0;color:var(--muted);font-size:.92rem">I'm <b>not sure</b>. It's a real question.</p></div>
+      </div>
+      <h3 style="font-family:Nunito;font-weight:900;margin:22px 0 8px;color:var(--plum)">🔍 Spot the mistake (click to check)</h3>
+      <div id="spot2"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 CONTROLLED PRACTICE -->
+<section class="sec" id="gp1" style="--c:var(--leaf);--cl:var(--leaf-l)">
+  <div class="sec-head">
+    <div class="num">5</div>
+    <div><h2>Grammar practice 1</h2><div class="sub">Controlled practice</div></div>
+    <div class="skills"><span class="skill">Grammar</span><span class="skill">Writing</span></div>
+  </div>
+  <div class="sec-body">
+    <div class="task">
+      <div class="task-title"><span class="letter">A</span> Choose the correct word</div>
+      <p class="instr">Choose the correct option for each sentence, then press Check.</p>
+      <div id="selA"></div>
+      <div class="btn-row"><button class="btn" id="selACheck">Check</button><button class="btn ghost" id="selAShow">Show answers</button></div>
+      <div class="feedback" id="selAFb"></div>
+    </div>
+    <div class="task">
+      <div class="task-title"><span class="letter">B</span> Add the question tag</div>
+      <p class="instr">Write the correct tag (e.g. <i>haven't you</i>). Use short forms (contractions).</p>
+      <div id="tagB"></div>
+      <div class="btn-row"><button class="btn" id="tagBCheck">Check</button><button class="btn ghost" id="tagBShow">Show answers</button></div>
+      <div class="feedback" id="tagBFb"></div>
+    </div>
+    <div class="task">
+      <div class="task-title"><span class="letter">C</span> Put the dialogue in order</div>
+      <p class="instr">Click the lines in the correct order to build the conversation.</p>
+      <div id="orderC"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 FREE PRACTICE -->
+<section class="sec" id="gp2" style="--c:var(--mustard);--cl:var(--mustard-l)">
+  <div class="sec-head">
+    <div class="num">6</div>
+    <div><h2>Grammar practice 2</h2><div class="sub">Free practice · class mingle</div></div>
+    <div class="skills"><span class="skill">Speaking</span><span class="skill">Writing</span></div>
+  </div>
+  <div class="sec-body">
+    <div class="task">
+      <div class="task-title"><span class="letter">A</span> Find someone who…</div>
+      <p class="instr">1) Write the question you will ask. 2) Walk around the class and ask. When someone says “Yes, I have!”, write their name. 3) Ask a follow-up question in the past simple (<i>When did you go? Who did you go with? What did you do?</i>).</p>
+      <div style="overflow-x:auto"><table class="fsw" id="fswTable">
+        <tr><th style="width:28%">Find someone who…</th><th style="width:34%">Your question</th><th style="width:14%">Name</th><th>Follow-up information</th></tr>
+      </table></div>
+    </div>
+    <div class="task">
+      <div class="task-title"><span class="letter">B</span> Guess and check</div>
+      <p class="instr">Work with a new partner. Before you talk, write <b>four things you think are true</b> about your partner, with question tags. Then say them to your partner. Your partner answers, and you mark your guess ✓ or ✗.</p>
+      <div class="box" style="font-size:.95rem;margin-top:0">Ideas: <i>You've been to Bali, haven't you? · You haven't been to Europe, have you? · You like Korean food, don't you? · You went abroad last year, didn't you? · You can speak a little Japanese, can't you?</i></div>
+      <div id="guesses"></div>
+      <div class="feedback" id="guessFb"></div>
+    </div>
+    <div class="task">
+      <div class="task-title"><span class="letter">C</span> Report back</div>
+      <p class="instr">Tell the class two interesting things you found out. <i>“Rina has been to Turkey! She went there with her family in 2022 and she loved the Turkish breakfast.”</i></p>
+    </div>
+  </div>
+</section>
+
+<!-- 7 READING -->
+<section class="sec" id="reading" style="--c:var(--rose);--cl:var(--rose-l)">
+  <div class="sec-head">
+    <div class="num">7</div>
+    <div><h2>Reading</h2><div class="sub">A travel blog</div></div>
+    <div class="skills"><span class="skill">Reading</span></div>
+  </div>
+  <div class="sec-body">
+    <p class="instr">Before you read: look at the title. Which five countries do you think Lina visited? Read quickly and check. Then read again carefully and do tasks A–C.</p>
+    <div class="reading-wrap">
+      <article class="article" id="article">
+        <div class="blog-top"><div class="avatar">L</div><div><div style="font-weight:900">Lina's Travel Diary</div><div class="meta">Posted 14 November · 4 min read</div></div></div>
+        <h3>One Backpack, Five Countries</h3>
+        <p><span class="pp">Have you ever been to</span> a country where you can't read a single sign? This year I <span class="pp">have</span> – five times! My name is Lina. I'm <span class="nat">Indonesian</span> and I live in Yogyakarta, but in January I packed one small backpack and started the biggest adventure of my life.</p>
+        <p>My first stop was Japan. I spent two weeks in Kyoto, visiting temples and eating more ramen than I want to admit. One evening an old <span class="nat">Japanese</span> woman sat next to me on the bus. “<span class="tag-target" data-tag="1">You're not from here, are you?</span>” she asked with a smile. “No, I'm from Indonesia,” I said. “Ah! <span class="pp">I've been to</span> Bali twice. <span class="tag-target" data-tag="2">It's beautiful, isn't it?</span>” We talked all the way to the station.</p>
+        <p>After Japan, I flew to Hanoi. <span class="nat">Vietnamese</span> coffee is strong and sweet, and I drank it every morning while I watched thousands of motorbikes go past. Then I went to Istanbul, a city that is half in Europe and half in Asia. The <span class="nat">Turkish</span> breakfast was my favourite meal of the whole trip: bread, cheese, olives, eggs, honey and endless glasses of tea.</p>
+        <p>In Italy I travelled by train from Rome to Florence. <span class="nat">Italian</span> is a bit like <span class="nat">Spanish</span>, so I could understand a few words, but people spoke very fast! My last country was Portugal. In Lisbon, I met two <span class="nat">Australian</span> girls in my hostel. “<span class="tag-target" data-tag="3"><span class="pp">You've been to</span> Indonesia, haven't you?</span>” I asked one of them, because she had a T-shirt from Bali. “Not yet!” she laughed. “My sister <span class="pp">has</span>, though. She bought me this shirt.”</p>
+        <p>Now I'm home again, and everyone asks me, “Which country was the best?” Honestly, I can't choose. My best friend Dewi <span class="pp">has never been</span> abroad, but next month she's going to visit Thailand with me. And my brother? He <span class="pp">has gone to</span> Australia to study, so he's in Melbourne right now and won't be back until December.</p>
+        <p>If you <span class="pp">have never travelled</span> alone, try it at least once. You will meet amazing people and learn a lot about yourself. <span class="tag-target" data-tag="4">The world is a big classroom, isn't it?</span></p>
+      </article>
+      <div>
+        <div class="legend">
+          <button class="btn small ghost" id="togglePP">🟨 Show present perfect</button>
+          <button class="btn small ghost" id="toggleNat">🟦 Show nationalities</button>
+        </div>
+        <div class="task">
+          <div class="task-title"><span class="letter">A</span> True, False or Not Given?</div>
+          <p class="instr"><b>Not Given</b> = the text doesn't tell us.</p>
+          <div id="tfng"></div>
+          <div class="feedback" id="tfngFb"></div>
+        </div>
+        <div class="task">
+          <div class="task-title"><span class="letter">B</span> Choose the best answer</div>
+          <div id="readMcq"></div>
+          <div class="feedback" id="readMcqFb"></div>
+        </div>
+        <div class="task">
+          <div class="task-title"><span class="letter">C</span> Tag hunt 🔎</div>
+          <p class="instr">There are <b>four</b> sentences with question tags in the text. Click on each one.</p>
+          <p class="counter" id="tagCounter">Found: 0 / 4</p>
+          <p class="instr" style="margin-top:6px">Which ones use falling intonation (the speaker is sure)? Which uses rising intonation (a real question)? Discuss with a partner.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 SPEAKING -->
+<section class="sec" id="speaking" style="--c:var(--coral);--cl:var(--coral-l)">
+  <div class="sec-head">
+    <div class="num">8</div>
+    <div><h2>Speaking</h2><div class="sub">Monologue with a cue card · IELTS Part 2 style</div></div>
+    <div class="skills"><span class="skill">Speaking</span></div>
+  </div>
+  <div class="sec-body">
+    <div class="speak-grid">
+      <div>
+        <div class="cuecard">
+          <span class="label">Cue card</span>
+          <h3>Describe a country or city you have visited that you would like to visit again.</h3>
+          <div style="font-weight:800">You should say:</div>
+          <ul>
+            <li>where it is</li>
+            <li>when you went there and who you went with</li>
+            <li>what you did and saw there</li>
+          </ul>
+          <div style="font-weight:800">and explain why you would like to go back.</div>
+        </div>
+        <p class="instr" style="margin-top:18px">You have <b>1 minute</b> to prepare. You can make notes. Then talk for <b>1–2 minutes</b>. Haven't travelled abroad? Talk about a city in your own country.</p>
+        <label style="font-weight:900;color:var(--coral)">📝 My notes (key words only)</label>
+        <textarea id="speakNotes" rows="5" placeholder="e.g. Bandung – 2024 – family – tea plantation – Sundanese food – cool weather…"></textarea>
+      </div>
+      <div>
+        <div class="timer-box">
+          <div class="tstate" id="tState">Ready</div>
+          <div class="timer" id="tDisplay">1:00</div>
+          <div class="bar"><div id="tBar"></div></div>
+          <div class="btn-row" style="justify-content:center;margin-top:8px">
+            <button class="btn small" id="tPrep">⏱ Prepare (1 min)</button>
+            <button class="btn small" id="tTalk" style="--c:var(--teal)">🗣 Talk (2 min)</button>
+            <button class="btn small ghost" id="tStop">■ Stop</button>
+          </div>
+        </div>
+        <div class="timer-box" style="margin-top:14px">
+          <div class="tstate">Record yourself (optional)</div>
+          <div class="btn-row" style="justify-content:center">
+            <button class="btn small" id="recBtn" style="--c:var(--rose)">● Record</button>
+          </div>
+          <div id="recStatus" style="font-weight:800;margin-top:8px;font-size:.9rem;color:var(--muted)"></div>
+          <audio id="recAudio" controls style="width:100%;margin-top:8px;display:none"></audio>
+        </div>
+      </div>
+    </div>
+
+    <div class="task" style="margin-top:24px">
+      <div class="task-title"><span class="letter">💬</span> Useful language</div>
+      <p class="instr">Click a phrase after you use it in your talk.</p>
+      <div class="phrases" id="phrases"></div>
+    </div>
+
+    <div class="task">
+      <div class="task-title"><span class="letter">👂</span> Listener's job</div>
+      <p class="instr">When your partner finishes, check two details with question tags. Then ask one follow-up question.</p>
+      <div class="box" style="margin-top:0"><i>You went there with your family, didn't you? · The food was really spicy, wasn't it? · You haven't been back since then, have you?</i></div>
+    </div>
+
+    <div class="task">
+      <div class="task-title"><span class="letter">✅</span> Self-check</div>
+      <div class="checklist">
+        <label><input type="checkbox"> I spoke for at least one minute without stopping for a long time.</label>
+        <label><input type="checkbox"> I answered all the points on the cue card.</label>
+        <label><input type="checkbox"> I used the present perfect for experience (<i>I've been to…</i>).</label>
+        <label><input type="checkbox"> I used the past simple for details (<i>I went… I saw…</i>).</label>
+        <label><input type="checkbox"> I used at least two nationality words (<i>Thai food, Japanese people</i>).</label>
+        <label><input type="checkbox"> I used linking words (<i>first, then, after that, because, so</i>).</label>
+      </div>
+    </div>
+
+    <div class="task">
+      <div class="task-title"><span class="letter">+</span> Follow-up discussion (Part 3 style)</div>
+      <ul style="margin:0;padding-left:22px;font-weight:700">
+        <li>Why do you think some people prefer to travel abroad rather than in their own country?</li>
+        <li>Is it better to travel alone or with friends? Why?</li>
+        <li>How can tourists show respect for the local culture when they visit another country?</li>
+        <li>Do you think people will travel more or less in the future? Why?</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 9 WRITING -->
+<section class="sec" id="writing" style="--c:var(--teal);--cl:var(--teal-l)">
+  <div class="sec-head">
+    <div class="num">9</div>
+    <div><h2>Writing</h2><div class="sub">A blog post about your favourite place</div></div>
+    <div class="skills"><span class="skill">Writing</span></div>
+  </div>
+  <div class="sec-body">
+    <div class="box" style="margin-top:0">
+      <p style="margin:0"><b>Task:</b> Write a blog post (<b>120–180 words</b>) called <i>“The best place I've ever been to”</i>. Write about your favourite country, city or place you have visited. Include:</p>
+      <ul style="margin:6px 0 0;padding-left:22px">
+        <li>other places you have been to (present perfect)</li>
+        <li>when you went, who with, and what you did (past simple)</li>
+        <li>at least two nationality words</li>
+        <li>one question tag to talk to your reader</li>
+        <li>why it's your favourite, and whether you recommend it</li>
+      </ul>
+    </div>
+
+    <div class="task">
+      <div class="task-title"><span class="letter">1</span> Plan</div>
+      <div class="plan-grid">
+        <div class="plan"><label>Paragraph 1 · Introduction</label><textarea id="p1" placeholder="Places I've been to… The best one is…"></textarea></div>
+        <div class="plan"><label>Paragraph 2 · The visit</label><textarea id="p2" placeholder="When? Who with? Where did you stay?"></textarea></div>
+        <div class="plan"><label>Paragraph 3 · What you did</label><textarea id="p3" placeholder="Saw… ate… visited… met…"></textarea></div>
+        <div class="plan"><label>Paragraph 4 · Why + recommendation</label><textarea id="p4" placeholder="Why it's special… Should readers go?"></textarea></div>
+      </div>
+      <div class="btn-row"><button class="btn ghost small" id="planToText">↓ Copy my plan into the writing box</button></div>
+    </div>
+
+    <div class="task">
+      <div class="task-title"><span class="letter">2</span> Write</div>
+      <div class="write-grid">
+        <div>
+          <textarea id="essay" rows="16" placeholder="The best place I've ever been to&#10;&#10;I've been to a few countries, but…"></textarea>
+          <div class="bar" style="margin-top:8px"><div id="wcBar" style="transition:width .2s"></div></div>
+          <div class="wc"><span id="wcText">0 words</span><span id="wcHint">Target: 120–180</span></div>
+          <div class="btn-row">
+            <button class="btn small" id="dlBtn">⬇ Download .txt</button>
+            <button class="btn small ghost" id="copyBtn">Copy text</button>
+            <button class="btn small ghost" id="modelBtn">👀 Show model answer</button>
+            <button class="btn small ghost" id="clearBtn" style="--c:var(--no)">Clear</button>
+          </div>
+          <div class="model" id="modelText">
+            <h3 style="color:var(--teal);margin-bottom:8px">Model: The best place I've ever been to</h3>
+            <p>I've been to quite a few places in Asia, like Singapore and Malaysia, but the best place I've ever been to is Chiang Mai in the north of Thailand.</p>
+            <p>I went there last December with my two best friends. We stayed in a small guesthouse in the old city, and the owner was a really friendly Thai woman called Malee.</p>
+            <p>Every evening we walked around the night markets and tried different dishes. The khao soi was amazing! We also visited old temples and took a cooking class with a Canadian couple and two German students. It was so much fun.</p>
+            <p>Why is it my favourite? The people were kind, the food was cheap and delicious, and the city felt calm, not crowded like Bangkok. You love trying new food, don't you? Then you should definitely go. I've never felt so relaxed on holiday!</p>
+            <p style="color:var(--muted);font-size:.85rem;margin:0">(151 words)</p>
+          </div>
+        </div>
+        <div class="auto-check">
+          <h3>🤖 Live checklist</h3>
+          <div class="ac" id="ac-pp"><span class="dot">✓</span><span>Present perfect for experience<span class="why">e.g. I've been to… / I've never…</span></span></div>
+          <div class="ac" id="ac-ps"><span class="dot">✓</span><span>Past simple for details<span class="why">e.g. went, saw, ate, stayed</span></span></div>
+          <div class="ac" id="ac-nat"><span class="dot">✓</span><span>Two nationality words <b id="natCount">(0)</b><span class="why">e.g. Thai food, Japanese people</span></span></div>
+          <div class="ac" id="ac-tag"><span class="dot">✓</span><span>A question tag<span class="why">e.g. …, don't you? / …, isn't it?</span></span></div>
+          <div class="ac" id="ac-para"><span class="dot">✓</span><span>3+ paragraphs<span class="why">Leave an empty line between paragraphs</span></span></div>
+          <div class="ac" id="ac-len"><span class="dot">✓</span><span>120–180 words</span></div>
+          <div class="warn" id="capWarn"></div>
+          <p style="font-size:.8rem;color:var(--muted);margin:10px 0 0">The checklist only looks for patterns. Ask your teacher to check your grammar. Your text is saved in this browser automatically.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="task">
+      <div class="task-title"><span class="letter">3</span> Peer review</div>
+      <p class="instr">Swap texts with a partner. Find one sentence you like and one mistake to fix. Then answer your partner's question tag!</p>
+    </div>
+  </div>
+</section>
+
+<!-- CAN DO -->
+<section class="sec" id="cando" style="--c:var(--plum);--cl:var(--plum-l)">
+  <div class="sec-head">
+    <div class="num">★</div>
+    <div><h2>What can you do now?</h2><div class="sub">Tick what you feel confident about</div></div>
+  </div>
+  <div class="sec-body cando">
+    <label><input type="checkbox"> I can name countries, famous cities and nationalities, and spell them with capital letters.</label>
+    <label><input type="checkbox"> I can ask and answer <i>Have you ever been to…?</i> and give details with the past simple.</label>
+    <label><input type="checkbox"> I know the difference between <i>been to</i> and <i>gone to</i>.</label>
+    <label><input type="checkbox"> I can use question tags to check information and ask people to agree.</label>
+    <label><input type="checkbox"> I can talk about a place I've visited for 1–2 minutes.</label>
+    <label><input type="checkbox"> I can write a short blog post about my favourite place.</label>
+    <div class="feedback ok" id="finalScore" style="font-size:1.1rem"></div>
+  </div>
+</section>
+
+</main>
+<footer>Unit 7 · Around the World · B1 Interactive Lesson</footer>
+
+<script>
+/* ---------- helpers ---------- */
+const $ = s => document.querySelector(s);
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const norm = s => (s || '').toLowerCase().replace(/[’‘`]/g, "'").replace(/[?.!,]/g, '').replace(/\s+/g, ' ').trim();
+const flag = code => `https://flagcdn.com/w80/${code}.png`;
+
+const scores = {};
+function setScore(id, got, total) { scores[id] = { got, total }; updateScore(); }
+function updateScore() {
+  let g = 0, t = 0; Object.values(scores).forEach(s => { g += s.got; t += s.total; });
+  $('#scorePill').textContent = `⭐ ${g} / ${t}`;
+  const f = $('#finalScore'); if (f && t) f.textContent = `Your score in the auto-checked tasks: ${g} / ${t} ⭐`;
+}
+
+let voice = null;
+function pickVoice() {
+  if (!('speechSynthesis' in window)) return;
+  const vs = speechSynthesis.getVoices();
+  voice = vs.find(v => v.lang === 'en-GB') || vs.find(v => v.lang && v.lang.startsWith('en')) || null;
+}
+if ('speechSynthesis' in window) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+function speak(t) {
+  if (!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(t); u.rate = .9; if (voice) u.voice = voice; u.lang = 'en-GB';
+  speechSynthesis.speak(u);
+}
+
+/* ---------- 1 WARMER ---------- */
+const mysteries = [
+  { code: 'br', name: 'Brazil', accept: ['brazil'], clues: ['It is the biggest country in South America.', 'People there speak Portuguese, not Spanish.', 'It is famous for Carnival and football.'] },
+  { code: 'jp', name: 'Japan', accept: ['japan'], clues: ['It is an island country in East Asia.', 'It has a very famous mountain called Fuji.', 'People there eat sushi and ramen.'] },
+  { code: 'nl', name: 'the Netherlands', accept: ['netherlands', 'the netherlands', 'holland'], clues: ['It is a small country in Western Europe.', 'Much of the land is below sea level.', 'It is famous for windmills, tulips and bicycles.'] },
+  { code: 'eg', name: 'Egypt', accept: ['egypt'], clues: ['It is in North Africa.', 'The River Nile goes through it.', 'You can see the pyramids there.'] }
+];
+const myGrid = $('#mysteryGrid');
+mysteries.forEach((m, i) => {
+  const el = document.createElement('div'); el.className = 'mystery';
+  el.innerHTML = `<h3>Mystery country ${i + 1}</h3><ol></ol>
+    <input type="text" placeholder="Your guess…" aria-label="Guess">
+    <div class="btn-row" style="margin-top:0"><button class="btn small">Guess</button><button class="btn small ghost">Next clue</button></div>
+    <div class="feedback"></div>`;
+  myGrid.appendChild(el);
+  const ol = el.querySelector('ol'), inp = el.querySelector('input'), [gBtn, nBtn] = el.querySelectorAll('button'), fb = el.querySelector('.feedback');
+  let shown = 0, done = false;
+  const addClue = () => { if (shown < 3) { const li = document.createElement('li'); li.textContent = m.clues[shown++]; ol.appendChild(li); } if (shown >= 3) nBtn.disabled = true; };
+  addClue();
+  const finish = (pts) => {
+    done = true; inp.disabled = true; gBtn.disabled = true; nBtn.disabled = true;
+    while (shown < 3) addClue();
+    fb.className = 'feedback ' + (pts ? 'ok' : 'no');
+    fb.innerHTML = `<span class="reveal"><img src="${flag(m.code)}" alt="">${pts ? `Yes! It's ${m.name}. +${pts}` : `It's ${m.name}.`}</span>`;
+    setScore('mys' + i, pts, 3);
+  };
+  nBtn.onclick = () => { if (!done) addClue(); };
+  const guess = () => {
+    if (done || !inp.value.trim()) return;
+    if (m.accept.includes(norm(inp.value))) finish(4 - shown);
+    else if (shown < 3) { fb.className = 'feedback no'; fb.textContent = 'Not quite. Here\'s another clue!'; addClue(); inp.select(); }
+    else finish(0);
+  };
+  gBtn.onclick = guess; inp.addEventListener('keydown', e => { if (e.key === 'Enter') guess(); });
+  setScore('mys' + i, 0, 3);
+});
+const warmQs = [
+  'Which country would you most like to visit? Why?',
+  'What is the most beautiful place in your country?',
+  'Do you prefer beach holidays or city holidays?',
+  'What food from another country do you love?',
+  'Which city in the world would you like to live in?',
+  'What do tourists usually do when they visit your city?',
+  'Would you prefer to travel alone or with friends?',
+  'Which country do you know a lot about, but have never visited?'
+];
+let wqIdx = -1;
+$('#spinBtn').onclick = () => {
+  let n; do { n = Math.floor(Math.random() * warmQs.length); } while (n === wqIdx && warmQs.length > 1);
+  wqIdx = n; const q = $('#spinQ'); q.style.animation = 'none'; q.offsetHeight; q.style.animation = 'pop .35s'; q.textContent = warmQs[n];
+};
+
+/* ---------- 2 VOCAB ---------- */
+const vocab = [
+  { group: '-an / -ian', items: [
+    ['it', 'Italy', 'Rome', 'Italian'], ['br', 'Brazil', 'Rio de Janeiro', 'Brazilian'], ['eg', 'Egypt', 'Cairo', 'Egyptian'],
+    ['mx', 'Mexico', 'Mexico City', 'Mexican'], ['au', 'Australia', 'Sydney', 'Australian'], ['id', 'Indonesia', 'Jakarta', 'Indonesian'], ['kr', 'South Korea', 'Seoul', 'South Korean']] },
+  { group: '-ish', items: [
+    ['es', 'Spain', 'Barcelona', 'Spanish'], ['tr', 'Turkey', 'Istanbul', 'Turkish'], ['gb', 'the UK', 'London', 'British'], ['ie', 'Ireland', 'Dublin', 'Irish']] },
+  { group: '-ese', items: [
+    ['jp', 'Japan', 'Kyoto', 'Japanese'], ['cn', 'China', 'Beijing', 'Chinese'], ['vn', 'Vietnam', 'Hanoi', 'Vietnamese'], ['pt', 'Portugal', 'Lisbon', 'Portuguese']] },
+  { group: 'Different!', items: [
+    ['fr', 'France', 'Paris', 'French'], ['nl', 'the Netherlands', 'Amsterdam', 'Dutch'], ['th', 'Thailand', 'Bangkok', 'Thai'], ['gr', 'Greece', 'Athens', 'Greek'], ['ch', 'Switzerland', 'Zurich', 'Swiss']] }
+];
+const vg = $('#vocabGroups');
+vocab.forEach(g => {
+  const t = document.createElement('div'); t.className = 'group-title'; t.innerHTML = `<span class="suf">${g.group}</span>`; vg.appendChild(t);
+  const grid = document.createElement('div'); grid.className = 'vgrid'; vg.appendChild(grid);
+  g.items.forEach(([code, c, city, nat]) => {
+    const card = document.createElement('div'); card.className = 'vcard'; card.tabIndex = 0;
+    card.innerHTML = `<div class="vcard-inner">
+      <div class="vface"><img src="${flag(code)}" alt="" loading="lazy"><div class="country">${c}</div><button class="say" aria-label="Listen">🔊</button></div>
+      <div class="vface vback"><div class="city">📍 ${city}</div><div class="nat">${nat}</div><button class="say" aria-label="Listen">🔊</button></div></div>`;
+    card.addEventListener('click', e => { if (e.target.classList.contains('say')) { e.stopPropagation(); speak(`${c}. ${nat}.`); return; } card.classList.toggle('flipped'); });
+    card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.classList.toggle('flipped'); } });
+    grid.appendChild(card);
+  });
+});
+let allFlipped = false;
+$('#flipAll').onclick = () => { allFlipped = !allFlipped; document.querySelectorAll('.vcard').forEach(c => c.classList.toggle('flipped', allFlipped)); $('#flipAll').textContent = allFlipped ? 'Show countries' : 'Flip all cards'; };
+
+/* ---------- 3 VOCAB PRACTICE ---------- */
+const pairColors = ['#2f8f8a', '#d9765b', '#7b6ba8', '#d39b2c', '#3d85b8', '#5a9a69', '#c0607c', '#8a6d4b'];
+function buildMatch(id, pairs, fbId) {
+  const box = $('#' + id); box.innerHTML = '';
+  const wrap = document.createElement('div'); wrap.className = 'match';
+  const L = document.createElement('div'), R = document.createElement('div'); L.className = R.className = 'col';
+  wrap.append(L, R); box.appendChild(wrap);
+  let sel = null, matched = 0, firstTry = 0; const missed = new Set();
+  shuffle(pairs.map((p, i) => [p[0], i])).forEach(([t, i]) => { const b = document.createElement('button'); b.className = 'mitem'; b.textContent = t; b.dataset.i = i; L.appendChild(b); });
+  shuffle(pairs.map((p, i) => [p[1], i])).forEach(([t, i]) => { const b = document.createElement('button'); b.className = 'mitem'; b.textContent = t; b.dataset.i = i; R.appendChild(b); });
+  setScore(id, 0, pairs.length); $('#' + fbId).textContent = '';
+  L.addEventListener('click', e => {
+    const b = e.target.closest('.mitem'); if (!b || b.classList.contains('done')) return;
+    L.querySelectorAll('.sel').forEach(x => x.classList.remove('sel')); b.classList.add('sel'); sel = b;
+  });
+  R.addEventListener('click', e => {
+    const b = e.target.closest('.mitem'); if (!b || b.classList.contains('done')) return;
+    if (!sel) { b.classList.add('wrong'); setTimeout(() => b.classList.remove('wrong'), 400); return; }
+    if (b.dataset.i === sel.dataset.i) {
+      const col = pairColors[matched % pairColors.length];
+      [b, sel].forEach(x => { x.classList.remove('sel'); x.classList.add('done'); x.style.background = col; });
+      if (!missed.has(sel.dataset.i)) firstTry++;
+      matched++; sel = null; setScore(id, firstTry, pairs.length);
+      if (matched === pairs.length) { const fb = $('#' + fbId); fb.className = 'feedback ok'; fb.textContent = `Well done! ${firstTry}/${pairs.length} correct on the first try.`; }
+    } else {
+      missed.add(sel.dataset.i); b.classList.add('wrong'); setTimeout(() => b.classList.remove('wrong'), 400);
+    }
+  });
+}
+const cityPairs = [['Kyoto', 'Japan'], ['Istanbul', 'Turkey'], ['Lisbon', 'Portugal'], ['Amsterdam', 'the Netherlands'], ['Hanoi', 'Vietnam'], ['Cairo', 'Egypt'], ['Sydney', 'Australia'], ['Barcelona', 'Spain']];
+buildMatch('match1', cityPairs, 'match1fb');
+document.querySelector('[data-reset="match1"]').onclick = () => buildMatch('match1', cityPairs, 'match1fb');
+
+function buildGaps(boxId, items, scoreId) {
+  const box = $('#' + boxId); box.innerHTML = '';
+  items.forEach((it, i) => {
+    const d = document.createElement('div'); d.className = 'gap-item';
+    const [a, b] = it.q.split('___');
+    d.innerHTML = `<span class="n">${i + 1}</span><span>${a}</span><input type="text" autocomplete="off" spellcheck="false" style="width:${it.w || 150}px"><span>${b || ''}</span><span class="ans"></span>`;
+    box.appendChild(d);
+  });
+  setScore(scoreId, 0, items.length);
+  return {
+    check(fbId, caseSensitive) {
+      let c = 0;
+      box.querySelectorAll('.gap-item').forEach((d, i) => {
+        const inp = d.querySelector('input'); const v = inp.value.trim().replace(/[’]/g, "'").replace(/\?$/, '').replace(/\s+/g, ' ');
+        const ok = items[i].a.some(ans => caseSensitive ? v === ans : norm(v) === norm(ans));
+        inp.classList.toggle('right', ok); inp.classList.toggle('bad', !ok && v !== '');
+        if (ok) c++;
+        if (caseSensitive && !ok && items[i].a.some(ans => norm(v) === norm(ans))) d.querySelector('.ans').textContent = 'Capital letter!';
+        else d.querySelector('.ans').textContent = '';
+      });
+      setScore(scoreId, c, items.length);
+      const fb = $('#' + fbId); fb.className = 'feedback ' + (c === items.length ? 'ok' : 'no');
+      fb.textContent = c === items.length ? `Perfect! ${c}/${items.length} 🎉` : `${c}/${items.length} correct. Fix the red ones and check again.`;
+    },
+    show() { box.querySelectorAll('.gap-item').forEach((d, i) => { d.querySelector('.ans').textContent = '→ ' + items[i].a[0]; }); }
+  };
+}
+const natItems = [
+  { q: 'People from Portugal are ___.', a: ['Portuguese'] },
+  { q: 'Pad thai is a ___ dish.', a: ['Thai'] },
+  { q: 'Tulips are a famous ___ flower.', a: ['Dutch'] },
+  { q: 'My friend was born in Athens. She\'s ___.', a: ['Greek'] },
+  { q: 'Chocolate from Switzerland is ___ chocolate.', a: ['Swiss'] },
+  { q: 'Hanoi has great ___ coffee.', a: ['Vietnamese'] },
+  { q: 'People in Dublin are ___.', a: ['Irish'] },
+  { q: 'The pyramids are ___.', a: ['Egyptian'] }
+];
+const natG = buildGaps('natGaps', natItems, 'nat');
+$('#natCheck').onclick = () => natG.check('natFb', true);
+$('#natShow').onclick = () => natG.show();
+
+function buildMCQ(boxId, items, scoreId, fbId, opts = {}) {
+  const box = $('#' + boxId); let answered = 0, correct = 0;
+  setScore(scoreId, 0, items.length);
+  items.forEach((it, i) => {
+    const d = document.createElement('div'); d.className = 'q';
+    d.innerHTML = `<div class="q-text"><span class="n">${i + 1}</span>${it.q}</div><div class="opts ${opts.stack ? 'stack' : ''}"></div>`;
+    const o = d.querySelector('.opts');
+    const order = opts.noShuffle ? it.o.map((t, k) => [t, k]) : shuffle(it.o.map((t, k) => [t, k]));
+    order.forEach(([t, k]) => {
+      const b = document.createElement('button'); b.className = 'opt'; b.textContent = t;
+      b.onclick = () => {
+        o.querySelectorAll('.opt').forEach(x => x.disabled = true);
+        if (k === it.c) { b.classList.add('right'); correct++; }
+        else { b.classList.add('bad'); o.querySelectorAll('.opt').forEach(x => { if (x.textContent === it.o[it.c]) x.classList.add('right'); }); }
+        answered++; setScore(scoreId, correct, items.length);
+        if (answered === items.length) { const fb = $('#' + fbId); fb.className = 'feedback ' + (correct === items.length ? 'ok' : 'no'); fb.textContent = `You got ${correct} / ${items.length}.`; }
+      };
+      o.appendChild(b);
+    });
+    box.appendChild(d);
+  });
+}
+const logicItems = [
+  { q: 'Marco was born and grew up in Rome, so…', o: ['he speaks Italian as his first language.', 'he has never been to Italy.', 'he is Spanish.'], c: 0 },
+  { q: 'We spent a week in Bangkok last summer, and…', o: ['we loved the Thai street food.', 'we visited the Eiffel Tower.', 'we spoke Dutch every day.'], c: 0 },
+  { q: 'Amsterdam is famous for its canals, so…', o: ['many tourists take boat tours there.', 'it is the capital of Germany.', 'it is in the middle of a desert.'], c: 0 },
+  { q: 'Lucía is Mexican, but…', o: ['she\'s living in Madrid this year.', 'she was born in Mexico City.', 'she speaks Spanish.'], c: 0 },
+  { q: 'I\'ve never been to Egypt, but…', o: ['I\'d love to see the pyramids one day.', 'I visited Cairo last year.', 'I know the city really well.'], c: 0 },
+  { q: 'Kyoto has hundreds of old temples, so…', o: ['it\'s perfect if you love Japanese history.', 'it\'s a great place for surfing.', 'it\'s the capital of China.'], c: 0 },
+  { q: 'My cousin has lived in Lisbon for ten years, so…', o: ['he can speak Portuguese quite well.', 'he has never been to Portugal.', 'everyone there speaks Greek.'], c: 0 },
+  { q: 'Sydney is on the coast, so…', o: ['you can go to the beach after work.', 'it has no beaches.', 'it is very far from the sea.'], c: 0 }
+];
+buildMCQ('logicQ', logicItems, 'logic', 'logicFb', { stack: true });
+
+/* ---------- 4 GRAMMAR ---------- */
+document.querySelectorAll('.tab').forEach(t => t.onclick = () => {
+  document.querySelectorAll('.tab').forEach(x => x.classList.remove('on')); t.classList.add('on');
+  document.querySelectorAll('.tabpane').forEach(p => p.classList.toggle('on', p.id === t.dataset.tab));
+});
+function spot(boxId, items) {
+  const box = $('#' + boxId);
+  items.forEach(([wrong, right, why]) => {
+    const d = document.createElement('div'); d.className = 'reveal-line';
+    d.innerHTML = `<span class="xx">✗</span> ${wrong}<div class="fix"><span class="vv">✓ ${right}</span> <span style="color:var(--muted);font-size:.9rem">— ${why}</span></div>`;
+    d.onclick = () => d.classList.toggle('open'); box.appendChild(d);
+  });
+}
+spot('spot1', [
+  ['Have you ever went to Spain?', 'Have you ever been to Spain?', 'have + past participle (been)'],
+  ['I\'ve been to Japan in 2022.', 'I went to Japan in 2022.', 'a finished time → past simple'],
+  ['She has ever been to Thailand.', 'She has been to Thailand.', '“ever” is only for questions'],
+  ['I haven\'t never been abroad.', 'I\'ve never been abroad. / I haven\'t been abroad.', 'only one negative'],
+  ['Have you been to there?', 'Have you been there?', 'no “to” before there']
+]);
+spot('spot2', [
+  ['You\'re Brazilian, are you?', 'You\'re Brazilian, aren\'t you?', 'positive sentence → negative tag'],
+  ['She lives in Paris, isn\'t she?', 'She lives in Paris, doesn\'t she?', 'present simple → do/does'],
+  ['You\'ve been to Rome, didn\'t you?', 'You\'ve been to Rome, haven\'t you?', 'present perfect → have/has'],
+  ['Anna has been to Cairo, hasn\'t Anna?', 'Anna has been to Cairo, hasn\'t she?', 'use a pronoun in the tag'],
+  ['You\'ve never been to Seoul, haven\'t you?', 'You\'ve never been to Seoul, have you?', '“never” is negative → positive tag']
+]);
+
+/* ---------- 5 CONTROLLED ---------- */
+const selItems = [
+  { q: '___ you ever been to Turkey?', o: ['Have', 'Has', 'Did'], a: 'Have' },
+  { q: 'My brother ___ been to Australia twice.', o: ['has', 'have', 'is'], a: 'has' },
+  { q: 'I\'ve never ___ to Greece.', o: ['been', 'gone', 'went'], a: 'been' },
+  { q: '“Where\'s Anna?” “She\'s ___ to Vietnam. She\'s back next month.”', o: ['gone', 'been'], a: 'gone' },
+  { q: 'We ___ to Barcelona in 2022.', o: ['went', 'have been', 'have gone'], a: 'went' },
+  { q: 'Have you ever been ___ Ireland?', o: ['to', 'at', 'on'], a: 'to' },
+  { q: '“Has he ever been to Cairo?” “No, he ___.”', o: ['hasn\'t', 'didn\'t', 'isn\'t'], a: 'hasn\'t' },
+  { q: 'I\'ve ___ been to the Netherlands, but I\'d love to go.', o: ['never', 'ever', 'yet'], a: 'never' }
+];
+(function () {
+  const box = $('#selA');
+  selItems.forEach((it, i) => {
+    const d = document.createElement('div'); d.className = 'gap-item';
+    const [a, b] = it.q.split('___');
+    const sel = `<select><option value="">—</option>${shuffle(it.o).map(o => `<option>${o}</option>`).join('')}</select>`;
+    d.innerHTML = `<span class="n">${i + 1}</span><span>${a}</span>${sel}<span>${b}</span><span class="ans"></span>`;
+    box.appendChild(d);
+  });
+  setScore('selA', 0, selItems.length);
+  $('#selACheck').onclick = () => {
+    let c = 0;
+    box.querySelectorAll('.gap-item').forEach((d, i) => {
+      const s = d.querySelector('select'); const ok = s.value === selItems[i].a;
+      s.classList.toggle('right', ok); s.classList.toggle('bad', !ok && s.value !== ''); if (ok) c++;
+    });
+    setScore('selA', c, selItems.length);
+    const fb = $('#selAFb'); fb.className = 'feedback ' + (c === selItems.length ? 'ok' : 'no');
+    fb.textContent = c === selItems.length ? `Excellent! ${c}/${selItems.length} 🎉` : `${c}/${selItems.length} correct. Try the red ones again.`;
+  };
+  $('#selAShow').onclick = () => box.querySelectorAll('.gap-item').forEach((d, i) => d.querySelector('.ans').textContent = '→ ' + selItems[i].a);
+})();
+
+const tagItems = [
+  { q: 'You\'ve been to Japan, ___?', a: ['haven\'t you'] },
+  { q: 'Thai food is quite spicy, ___?', a: ['isn\'t it'] },
+  { q: 'She hasn\'t been to Brazil, ___?', a: ['has she'] },
+  { q: 'They went to Paris last summer, ___?', a: ['didn\'t they'] },
+  { q: 'You can speak a little Spanish, ___?', a: ['can\'t you'] },
+  { q: 'Your parents live in Lisbon, ___?', a: ['don\'t they'] },
+  { q: 'I\'m on the list for the school trip, ___?', a: ['aren\'t I', 'aren\'t i'] },
+  { q: 'Let\'s visit Kyoto next year, ___?', a: ['shall we'] },
+  { q: 'He\'s never been to Egypt, ___?', a: ['has he'] },
+  { q: 'Tom is Australian, ___?', a: ['isn\'t he'] }
+];
+const tagG = buildGaps('tagB', tagItems, 'tagB');
+$('#tagBCheck').onclick = () => tagG.check('tagBFb', false);
+$('#tagBShow').onclick = () => tagG.show();
+
+// Dialogue ordering
+const dialogue = [
+  'A: Have you ever been to Istanbul?',
+  'B: Yes, I have! I went there two years ago.',
+  'A: Really? Who did you go with?',
+  'B: With my sister. You\'ve been to Turkey too, haven\'t you?',
+  'A: No, I haven\'t. But I\'d love to go one day.'
+];
+function buildOrder() {
+  const box = $('#orderC'); box.innerHTML = '';
+  const target = document.createElement('div'); const pool = document.createElement('div');
+  pool.className = 'opts stack'; target.style.marginBottom = '12px';
+  const fb = document.createElement('div'); fb.className = 'feedback';
+  let step = 0, mistakes = 0;
+  setScore('order', 0, 1);
+  shuffle(dialogue.map((t, i) => [t, i])).forEach(([t, i]) => {
+    const b = document.createElement('button'); b.className = 'opt'; b.textContent = t;
+    b.onclick = () => {
+      if (i === step) {
+        const line = document.createElement('div'); line.className = 'gap-item'; line.style.borderColor = 'var(--ok)'; line.style.background = 'var(--ok-l)';
+        line.innerHTML = `<span class="n">${step + 1}</span>${t}`; target.appendChild(line); b.remove(); step++;
+        if (step === dialogue.length) { setScore('order', mistakes === 0 ? 1 : 0, 1); fb.className = 'feedback ok'; fb.textContent = mistakes ? `Done! (${mistakes} wrong click${mistakes > 1 ? 's' : ''}) Now read it aloud with a partner.` : 'Perfect order! Now read it aloud with a partner. 🎉'; }
+      } else { mistakes++; b.classList.add('bad'); setTimeout(() => b.classList.remove('bad'), 500); }
+    };
+    pool.appendChild(b);
+  });
+  const rb = document.createElement('button'); rb.className = 'btn ghost small'; rb.textContent = '↻ Start again'; rb.onclick = buildOrder;
+  const row = document.createElement('div'); row.className = 'btn-row'; row.appendChild(rb);
+  box.append(target, pool, fb, row);
+}
+buildOrder();
+
+/* ---------- 6 FREE PRACTICE ---------- */
+const fswRows = [
+  ['…has been to another country.', 'Have you ever been to another country?'],
+  ['…has been to a famous museum.', ''],
+  ['…has been to a capital city in Asia.', ''],
+  ['…has been to a music festival or big concert.', ''],
+  ['…has been to a country where people speak Spanish.', ''],
+  ['…has never been to the beach at night.', ''],
+  ['…has been to a theme park abroad.', '']
+];
+const fsw = $('#fswTable');
+fswRows.forEach(([p, ex]) => {
+  const tr = document.createElement('tr');
+  tr.innerHTML = `<td style="font-weight:700">${p}</td><td><input type="text" value="${ex}" placeholder="Write your question…"><div class="hint-line"></div></td><td><input type="text" placeholder="Name"></td><td><input type="text" placeholder="When? Who with? What…?"></td>`;
+  fsw.appendChild(tr);
+  const inp = tr.querySelector('input'), h = tr.querySelector('.hint-line');
+  const chk = () => {
+    const v = inp.value.trim().replace(/[’]/g, "'");
+    if (!v) { h.textContent = ''; h.className = 'hint-line'; return; }
+    if (/^(have|has)\s+(you|he|she|they)\s+(ever\s+)?been\s+(to\s+)?\S.*\?$/i.test(v)) { h.textContent = '✓ Good question!'; h.className = 'hint-line ok'; }
+    else if (/^did you/i.test(v)) { h.textContent = 'For experiences, use “Have you ever been to…?”'; h.className = 'hint-line no'; }
+    else if (!/\?$/.test(v)) { h.textContent = 'Don\'t forget the question mark (?)'; h.className = 'hint-line no'; }
+    else { h.textContent = 'Try: Have you ever been to + place?'; h.className = 'hint-line no'; }
+  };
+  inp.addEventListener('input', chk); chk();
+});
+
+function analyseTag(raw) {
+  const s = raw.trim().replace(/[’‘]/g, "'");
+  if (!s) return null;
+  const m = s.match(/^(.*\S)\s*,\s*([a-z]+(?:n't)?)\s+(i|you|he|she|it|we|they|there)\s*\?$/i);
+  if (!m) return { ok: false, msg: 'Pattern: sentence + comma + tag + ? (e.g. You\'ve been to Bali, haven\'t you?)' };
+  const main = m[1].toLowerCase(), aux = m[2].toLowerCase(), pro = m[3].toLowerCase();
+  const map = { "won't": 'will', "can't": 'can', "shan't": 'shall' };
+  const base = map[aux] || aux.replace(/n't$/, '');
+  const auxes = ['am', 'is', 'are', 'was', 'were', 'have', 'has', 'had', 'do', 'does', 'did', 'can', 'could', 'will', 'would', 'shall', 'should'];
+  if (!auxes.includes(base)) return { ok: false, msg: 'The tag needs an auxiliary verb (is, do, have, did, can…).' };
+  const mainNeg = /\b(not|never|no|nobody|nothing)\b|n't\b/.test(main);
+  const tagNeg = /n't$/.test(aux);
+  if (/^let's/.test(main)) return base === 'shall' && pro === 'we' ? { ok: true, msg: '✓ Nice! Let\'s…, shall we?' } : { ok: false, msg: 'After Let\'s… use “shall we?”' };
+  if (mainNeg === tagNeg) return { ok: false, msg: mainNeg ? 'Negative sentence → positive tag (…, have you?)' : 'Positive sentence → negative tag (…, haven\'t you?)' };
+  if (/\b(i've|you've|we've|they've|have|has|hasn't|haven't)\b|\b(he|she|it)'s\s+(been|never|ever|visited|seen|tried|eaten|lived)\b/.test(main) && !['have', 'has'].includes(base))
+    return { ok: false, msg: 'Present perfect → use have/has in the tag.' };
+  if (/\b(went|visited|saw|ate|bought|lived|liked|travelled|traveled|tried|stayed)\b/.test(main) && !/\b(have|has|'ve|'s)\b/.test(main) && base !== 'did')
+    return { ok: false, msg: 'Past simple → use did/didn\'t in the tag.' };
+  return { ok: true, msg: '✓ The tag looks good! Now say it to your partner.' };
+}
+(function () {
+  const box = $('#guesses');
+  for (let i = 1; i <= 4; i++) {
+    const d = document.createElement('div'); d.className = 'guess';
+    d.innerHTML = `<span class="n">${i}</span><div><input type="text" placeholder="${i === 1 ? 'You\'ve been to Bali, haven\'t you?' : 'Your guess…'}"><div class="hint-line"></div></div>
+      <div class="toggle-yn"><button data-v="y" title="Correct guess">✓</button><button data-v="n" title="Wrong guess">✗</button></div>`;
+    box.appendChild(d);
+    const inp = d.querySelector('input'), h = d.querySelector('.hint-line');
+    inp.addEventListener('input', () => { const r = analyseTag(inp.value); if (!r) { h.textContent = ''; h.className = 'hint-line'; return; } h.textContent = r.msg; h.className = 'hint-line ' + (r.ok ? 'ok' : 'no'); });
+    d.querySelectorAll('.toggle-yn button').forEach(b => b.onclick = () => {
+      d.querySelectorAll('.toggle-yn button').forEach(x => x.className = '');
+      b.className = b.dataset.v === 'y' ? 'on-y' : 'on-n';
+      const y = box.querySelectorAll('.on-y').length, n = box.querySelectorAll('.on-n').length;
+      const fb = $('#guessFb'); fb.className = 'feedback ok'; fb.textContent = `Correct guesses: ${y} / ${y + n}. ${y >= 3 ? 'You know your partner well! 🤝' : ''}`;
+    });
+  }
+})();
+
+/* ---------- 7 READING ---------- */
+$('#togglePP').onclick = () => { $('#article').classList.toggle('show-pp'); };
+$('#toggleNat').onclick = () => { $('#article').classList.toggle('show-nat'); };
+const TF = ['True', 'False', 'Not Given'];
+const tfItems = [
+  { q: 'Lina travelled with a large suitcase.', c: 1 },
+  { q: 'The Japanese woman on the bus has visited Indonesia.', c: 0 },
+  { q: 'Lina drank Vietnamese coffee every day she was in Hanoi.', c: 0 },
+  { q: 'Istanbul is in two continents.', c: 0 },
+  { q: 'Lina speaks Italian very well.', c: 1 },
+  { q: 'The Australian girl with the Bali T-shirt has been to Indonesia.', c: 1 },
+  { q: 'Dewi has travelled to other countries before.', c: 1 },
+  { q: 'Lina\'s brother enjoys his course in Melbourne.', c: 2 }
+].map(x => ({ q: x.q, o: TF, c: x.c }));
+buildMCQ('tfng', tfItems, 'tfng', 'tfngFb', { noShuffle: true });
+buildMCQ('readMcq', [
+  { q: 'Why did Lina think the Australian girl had been to Indonesia?', o: ['Because of her T-shirt.', 'Because of her accent.', 'Because she said so.'], c: 0 },
+  { q: '“He has gone to Australia” means…', o: ['he is in Australia now.', 'he visited Australia and came back.', 'he wants to go to Australia.'], c: 0 },
+  { q: 'What was Lina\'s favourite meal of the trip?', o: ['A Turkish breakfast', 'Ramen in Kyoto', 'Vietnamese coffee'], c: 0 }
+], 'readMcq', 'readMcqFb', { stack: true });
+(function () {
+  let found = 0; setScore('tags', 0, 4);
+  document.querySelectorAll('.tag-target').forEach(el => el.addEventListener('click', () => {
+    if (el.classList.contains('found')) return;
+    el.classList.add('found'); found++; setScore('tags', found, 4);
+    $('#tagCounter').textContent = `Found: ${found} / 4` + (found === 4 ? ' 🎉 All found!' : '');
+  }));
+})();
+
+/* ---------- 8 SPEAKING ---------- */
+let tInt = null;
+function fmt(s) { return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; }
+function runTimer(total, label, color) {
+  clearInterval(tInt); let left = total;
+  const disp = $('#tDisplay'), bar = $('#tBar'), st = $('#tState');
+  st.textContent = label; disp.textContent = fmt(left); disp.style.color = color; bar.style.background = color; bar.style.width = '0%';
+  tInt = setInterval(() => {
+    left--; disp.textContent = fmt(Math.max(left, 0)); bar.style.width = ((total - left) / total * 100) + '%';
+    if (label === 'Talking' && total - left === 60) st.textContent = 'Talking · 1 minute done 👍';
+    if (left <= 0) { clearInterval(tInt); st.textContent = label === 'Preparing' ? 'Time to talk! Press “Talk”' : 'Time\'s up! Well done 🎉'; }
+  }, 1000);
+}
+$('#tPrep').onclick = () => runTimer(60, 'Preparing', 'var(--coral)');
+$('#tTalk').onclick = () => runTimer(120, 'Talking', 'var(--teal)');
+$('#tStop').onclick = () => { clearInterval(tInt); $('#tState').textContent = 'Stopped'; };
+
+(function () {
+  let rec = null, chunks = [], stream = null;
+  const btn = $('#recBtn'), st = $('#recStatus'), au = $('#recAudio');
+  btn.onclick = async () => {
+    if (rec && rec.state === 'recording') { rec.stop(); return; }
+    if (!navigator.mediaDevices || !window.MediaRecorder) { st.textContent = 'Recording is not supported in this browser.'; return; }
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      rec = new MediaRecorder(stream); chunks = [];
+      rec.ondataavailable = e => chunks.push(e.data);
+      rec.onstop = () => {
+        const blob = new Blob(chunks, { type: rec.mimeType || 'audio/webm' });
+        au.src = URL.createObjectURL(blob); au.style.display = 'block';
+        st.textContent = 'Listen to your talk. What can you improve?'; btn.textContent = '● Record again';
+        stream.getTracks().forEach(t => t.stop());
+      };
+      rec.start(); btn.textContent = '■ Stop recording'; st.innerHTML = '<span class="rec-dot"></span>Recording…';
+    } catch (e) { st.textContent = 'Microphone not available. Check permissions (the page must use https).'; }
+  };
+})();
+const phrases = [
+  'I\'ve been to quite a few places, but…', 'The place I\'d love to go back to is…', 'It\'s in the north/south of…',
+  'I went there in… with…', 'First, we… Then…', 'What I loved most was…', 'The local people were really…',
+  'The food was amazing, especially…', 'I\'ve never seen anything like…', 'I\'d like to go back because…', 'If I go again, I\'ll…'
+];
+phrases.forEach(p => { const b = document.createElement('button'); b.className = 'phrase'; b.textContent = p; b.onclick = () => b.classList.toggle('used'); $('#phrases').appendChild(b); });
+
+/* ---------- 9 WRITING ---------- */
+const natWords = ['Italian', 'Brazilian', 'Egyptian', 'Mexican', 'Australian', 'Indonesian', 'Korean', 'Spanish', 'Turkish', 'British', 'English', 'Irish', 'Scottish', 'Japanese', 'Chinese', 'Vietnamese', 'Portuguese', 'French', 'Dutch', 'Thai', 'Greek', 'Swiss', 'German', 'American', 'Canadian', 'Malaysian', 'Singaporean', 'Filipino', 'Indian', 'Russian', 'Polish', 'Swedish', 'Norwegian', 'Danish', 'Balinese', 'Javanese', 'Sundanese', 'Argentinian', 'Peruvian', 'Moroccan', 'Saudi', 'Emirati', 'Taiwanese', 'Cambodian', 'Laotian', 'Burmese', 'Austrian', 'Belgian', 'Hungarian', 'Czech', 'Croatian', 'Icelandic', 'Finnish', 'Colombian', 'Chilean', 'Cuban', 'Kenyan', 'South African', 'Nepalese', 'Pakistani', 'Bangladeshi', 'Sri Lankan', 'Mongolian', 'Lebanese', 'Iranian', 'Jordanian', 'Maltese', 'Welsh', 'Scandinavian', 'European', 'Asian', 'African'];
+const natRe = new RegExp('\\b(' + natWords.join('|') + ')\\b', 'gi');
+const essay = $('#essay');
+const STORE = 'unit7-writing';
+const store = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
+function setAC(id, on) { $('#' + id).classList.toggle('on', !!on); }
+function analyseEssay() {
+  const t = essay.value.replace(/[’‘]/g, "'");
+  const words = (t.match(/[A-Za-z']+/g) || []).length;
+  $('#wcText').textContent = `${words} word${words === 1 ? '' : 's'}`;
+  const bar = $('#wcBar'); bar.style.width = Math.min(words / 180 * 100, 100) + '%';
+  bar.style.background = words < 120 ? 'var(--mustard)' : words <= 180 ? 'var(--ok)' : 'var(--no)';
+  $('#wcHint').textContent = words < 120 ? `${120 - words} more to go` : words <= 180 ? 'Great length ✓' : 'A bit too long';
+  setAC('ac-pp', /\b(i've|we've|you've|they've|he's|she's|have|has)\s+(never\s+|ever\s+|already\s+|just\s+)?(been|visited|seen|tried|eaten|travelled|traveled|met|felt|stayed|gone)\b/i.test(t));
+  setAC('ac-ps', /\b(went|saw|ate|stayed|travelled|traveled|tried|bought|met|took|spent|was|were|loved|enjoyed|walked|swam|flew|drove|did)\b/i.test(t));
+  const nats = new Set((t.match(natRe) || []).map(x => x.toLowerCase()));
+  const natTotal = (t.match(natRe) || []).length;
+  $('#natCount').textContent = `(${natTotal})`; setAC('ac-nat', natTotal >= 2);
+  const sentences = t.split(/(?<=[?])/);
+  setAC('ac-tag', sentences.some(s => { const r = analyseTag(s.replace(/^[\s\S]*[.!]\s*/, '')); return r && r.ok; }));
+  const paras = t.split(/\n\s*\n/).filter(p => p.trim().length > 10).length;
+  setAC('ac-para', paras >= 3);
+  setAC('ac-len', words >= 120 && words <= 180);
+  const lower = (t.match(natRe) || []).filter(w => w[0] === w[0].toLowerCase());
+  $('#capWarn').textContent = lower.length ? `⚠ Capital letter needed: ${[...new Set(lower)].join(', ')}` : '';
+  store.set(STORE, essay.value);
+}
+essay.addEventListener('input', analyseEssay);
+['p1', 'p2', 'p3', 'p4'].forEach(id => {
+  const el = $('#' + id); const v = store.get(STORE + '-' + id); if (v) el.value = v;
+  el.addEventListener('input', () => store.set(STORE + '-' + id, el.value));
+});
+const saved = store.get(STORE); if (saved) essay.value = saved;
+analyseEssay();
+$('#planToText').onclick = () => {
+  const parts = ['p1', 'p2', 'p3', 'p4'].map(id => $('#' + id).value.trim()).filter(Boolean);
+  if (!parts.length) return;
+  essay.value = (essay.value.trim() ? essay.value.trim() + '\n\n' : 'The best place I\'ve ever been to\n\n') + parts.join('\n\n');
+  analyseEssay(); essay.focus();
+};
+$('#dlBtn').onclick = () => {
+  const blob = new Blob([essay.value], { type: 'text/plain' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'my-favourite-place.txt'; a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+};
+$('#copyBtn').onclick = async () => {
+  try { await navigator.clipboard.writeText(essay.value); $('#copyBtn').textContent = 'Copied ✓'; }
+  catch (e) { essay.select(); $('#copyBtn').textContent = 'Press Ctrl+C'; }
+  setTimeout(() => $('#copyBtn').textContent = 'Copy text', 1500);
+};
+$('#modelBtn').onclick = () => { const m = $('#modelText'); m.classList.toggle('on'); $('#modelBtn').textContent = m.classList.contains('on') ? '🙈 Hide model answer' : '👀 Show model answer'; };
+let clearArmed = false;
+$('#clearBtn').onclick = () => {
+  if (!clearArmed) { clearArmed = true; $('#clearBtn').textContent = 'Click again to clear'; setTimeout(() => { clearArmed = false; $('#clearBtn').textContent = 'Clear'; }, 2500); return; }
+  essay.value = ''; analyseEssay(); clearArmed = false; $('#clearBtn').textContent = 'Clear';
+};
+
+/* ---------- nav highlight ---------- */
+const links = [...document.querySelectorAll('#navLinks a')];
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id)); }
+}), { rootMargin: '-40% 0px -55% 0px' });
+document.querySelectorAll('.sec').forEach(s => io.observe(s));
+updateScore();
+</script>
+</body>
+</html> 
